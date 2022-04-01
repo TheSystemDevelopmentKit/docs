@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rtl.testbench &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../rtl.html">rtl</a> &raquo;</li>
+      <li>rtl.testbench</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for rtl.testbench</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">=========</span>
+<span class="sd">Testbench</span>
+<span class="sd">=========</span>
+
+<span class="sd">Verilog testbench utility mmodule for TheSyDeKick. Contains attributes annd methods to import DUT as `verilog_module` </span>
+<span class="sd">instance, parse its IO and parameter definitions and construct a structured testbench with clock and file IO.</span>
+
+<span class="sd">Utilizes logging method from thesdk.</span>
+<span class="sd">Extendsd `verilog_module` with additional properties.</span>
+
+<span class="sd">Initially written by Marko Kosunen 20190108, marko.kosunen@aalto.fi</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">shlex</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">verilog_connector</span>
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">verilog_connector_bundle</span>
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">intend</span> 
+<span class="kn">from</span> <span class="nn">rtl.module</span> <span class="kn">import</span> <span class="n">verilog_module</span>
+<span class="kn">from</span> <span class="nn">rtl.entity</span> <span class="kn">import</span> <span class="n">vhdl_entity</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="c1">## Code injection should be possible</span>
+<span class="c1">## at least between blocks</span>
+<span class="c1">## Default structure during initialization?</span>
+
+<div class="viewcode-block" id="testbench"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench">[docs]</a><span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">verilog_module</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Testbench class. Extends `verilog_module`</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Parameters</span>
+<span class="sd">           ----------</span>
+<span class="sd">           parent: object, None (mandatory to define). TheSyDeKick parent entity object for this testbench.</span>
+<span class="sd">           **kwargs :</span>
+<span class="sd">              None</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of Verilog testbench not given&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span>
+        <span class="k">try</span><span class="p">:</span>  
+            <span class="c1"># The proper files are determined in rtl based on simulation model</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simtb</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simdut</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Verilog Testbench file definition failed&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#The methods for these are derived from verilog_module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">=</span><span class="n">verilog_connector_bundle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c_Ts&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span><span class="s1">&#39;1/(g_Rs*1e-12)&#39;</span><span class="p">)}</span> <span class="c1"># Dict of name: (type,value)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assignment_matchlist</span><span class="o">=</span><span class="p">[]</span>
+        
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Path to the testbench file</span>
+
+<span class="sd">        Default: `self.parent.vlogsrcpath + &#39;/tb_&#39; + self.parent.name + &#39;.sv&#39;`</span>
+
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_file&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">=</span><span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span>
+
+    <span class="nd">@file</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;RTL module parsed from the verilog or VHDL file of the parent depending on `parent.model`</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dut_instance&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">verilog_module</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">vhdl_entity</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span>
+
+    
+    <span class="c1">#We should not need this, but it is wise to enable override</span>
+    <span class="nd">@dut_instance</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">verilog_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Verilog instances Bundle to be added to tesbench</span>
+<span class="sd">        </span>
+<span class="sd">        Todo </span>
+<span class="sd">        Need to handle VHDL instance too.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_instances&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_instances</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_instances</span>
+
+<div class="viewcode-block" id="testbench.verilog_instance_add"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.verilog_instance_add">[docs]</a>    <span class="k">def</span> <span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Add verilog instance to the Bundle fro a file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs:</span>
+<span class="sd">           name : str</span>
+<span class="sd">             name of the module</span>
+<span class="sd">           file :</span>
+<span class="sd">               File defining the module</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># TODO: need to handle vhdl instances too</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verilog_instances</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">verilog_module</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span><span class="n">instname</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Addc connectors from the imported instance </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bundle</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_instances</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">io_signals</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span></div>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Parameter  and variable definition strins of the testbench</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">definitions</span><span class="o">=</span><span class="s1">&#39;//Parameter definitions</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">definitions</span><span class="o">+=</span><span class="s1">&#39;parameter &#39;</span><span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;=&#39;</span><span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">definitions</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">connector_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Verilog register and wire definition strings</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Registers first</span>
+        <span class="n">definitions</span><span class="o">=</span><span class="s1">&#39;//Register definitions</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;reg&#39;</span><span class="p">:</span>
+                <span class="n">definitions</span><span class="o">=</span><span class="n">definitions</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">definition</span>
+
+        <span class="n">definitions</span><span class="o">=</span><span class="n">definitions</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">//Wire definitions</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;wire&#39;</span><span class="p">:</span>
+                <span class="n">definitions</span><span class="o">=</span><span class="n">definitions</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">definition</span>
+        <span class="k">return</span> <span class="n">definitions</span>
+
+<div class="viewcode-block" id="testbench.assignments"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.assignments">[docs]</a>    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Wire assingment strings</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">matchlist</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;matchlist&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">assignment_matchlist</span><span class="p">)</span>
+        <span class="n">assigns</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">//Assignments</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matchlist</span><span class="p">:</span>
+            <span class="n">assigns</span><span class="o">=</span><span class="n">assigns</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">match</span><span class="o">=</span><span class="n">match</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">intend</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">assigns</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div>
+     
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;IOfile definition strings</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iofile_defs</span><span class="o">=</span><span class="s1">&#39;//Variables for the io_files</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">verilog_statdef</span>
+            <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">verilog_fopen</span>
+        <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">iofile_defs</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">clock_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Clock definition string</span>
+
+<span class="sd">        Todo</span>
+<span class="sd">        Create append mechanism to add more clocks.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">clockdef</span><span class="o">=</span><span class="s1">&#39;//Master clock is omnipresent</span><span class="se">\n</span><span class="s1">always #(c_Ts/2.0) clock = !clock;&#39;</span>
+        <span class="k">return</span> <span class="n">clockdef</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">iofile_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;File close procedure for all IO files.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iofile_close</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">//Close the io_files</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">verilog_fclose</span>
+        <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">iofile_close</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="sd">        </span>
+<span class="sd">        Miscellaneous command string corresponding to self.rtlmisc -list in</span>
+<span class="sd">        the parent entity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_misccmd&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="s2">&quot;// Manual commands</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">mcmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtlmisc</span>
+            <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">mcmd</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span> <span class="o">+=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span>
+    
+    <span class="nd">@misccmd</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@misccmd</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
+   
+    <span class="c1"># This method </span>
+<div class="viewcode-block" id="testbench.define_testbench"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.define_testbench">[docs]</a>    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Dut is creted automaticaly, if verilog file for it exists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bundle</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">io_signals</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span>
+        <span class="c1">#Assign verilog simulation parameters to testbench</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtlparameters</span>
+
+        <span class="c1"># Create clock if nonexistent and reset it</span>
+        <span class="k">if</span> <span class="s1">&#39;clock&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;clock&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">verilog_connector</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;clock&#39;</span><span class="p">,</span><span class="bp">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;clock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">init</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;clock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span>
+
+        <span class="c1"># Create reset if nonexistent and reset it</span>
+        <span class="k">if</span> <span class="s1">&#39;reset&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;reset&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">verilog_connector</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;reset&#39;</span><span class="p">,</span><span class="bp">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;reset&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">init</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;reset&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span>
+
+        <span class="c1">## Start initializations</span>
+        <span class="c1">#Init the signals connected to the dut input to zero</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
+                <span class="n">val</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span></div>
+    
+    <span class="c1"># Automate this bsed in dir</span>
+<div class="viewcode-block" id="testbench.connect_inputs"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Define connections to DUT inputs.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Create TB connectors from the control file</span>
+        <span class="c1"># See controller.py</span>
+        <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">iotype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="o">=</span>\
+                        <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span> 
+                    <span class="c1"># Data must be properly shaped</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span>
+            <span class="k">elif</span> <span class="n">val</span><span class="o">.</span><span class="n">iotype</span> <span class="ow">is</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="c1">#If the type is file, the Data is a bundle</span>
+                <span class="k">for</span> <span class="n">bname</span><span class="p">,</span><span class="n">bval</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span> 
+                        <span class="c1"># Adoption transfers parenthood of the files to this instance</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">bname</span><span class="p">]</span><span class="o">.</span><span class="n">adopt</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">bval</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">connector</span>
+                        <span class="c1"># Connect them to DUT</span>
+                        <span class="k">try</span><span class="p">:</span> 
+                            <span class="bp">self</span><span class="o">.</span><span class="n">dut</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">connector</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="k">pass</span>
+        <span class="c1"># Copy iofile simulation parameters to testbench</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)</span>
+        <span class="c1"># Define the iofiles of the testbench. &#39;</span>
+        <span class="c1"># Needed for creating file io routines </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
+
+<div class="viewcode-block" id="testbench.generate_contents"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; This is the method to generate testbench contents. Override if needed</span>
+<span class="sd">            Contents of the testbench is constructed from attributes in the </span>
+<span class="sd">            following order ::</span>
+<span class="sd">            </span>
+<span class="sd">                self.parameter_definitions</span>
+<span class="sd">                self.connector_definitions</span>
+<span class="sd">                self.assignments()</span>
+<span class="sd">                self.iofile_definitions</span>
+<span class="sd">                sefl.misccmd</span>
+<span class="sd">                self.dut_instance.instance</span>
+<span class="sd">                self.verilog_instance_members.items().instance (for all members)</span>
+<span class="sd">                self.connectors.verilog_inits()</span>
+<span class="sd">                self.iofiles.Members.items().verilog_io (for all members)</span>
+<span class="sd">                self.iofile.close (for all members)</span>
+
+<span class="sd">             Addtional code may be currently injected by appending desired </span>
+<span class="sd">             strings (Verilog sytax) to the relevant string attributes.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+    <span class="c1"># Start the testbench contents</span>
+        <span class="n">contents</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">//timescale 1ps this should probably be a global model parameter</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_definitions</span><span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">connector_definitions</span><span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">assignments</span><span class="p">()</span> <span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">iofile_definitions</span><span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">misccmd</span><span class="o">+</span>\
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">//DUT definition</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">instance</span>
+
+        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_instances</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">contents</span><span class="o">+=</span><span class="n">module</span><span class="o">.</span><span class="n">instance</span>
+
+        <span class="n">contents</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">clock_definition</span>
+        <span class="n">contents</span><span class="o">+=</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">//io_out</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                <span class="n">contents</span><span class="o">+=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span>
+        <span class="n">contents</span><span class="o">+=</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">//Execution with parallel fork-join and sequential begin-end sections</span>
+<span class="s2">initial #0 begin</span>
+<span class="s2">fork</span>
+<span class="s2">&quot;&quot;&quot;</span> <span class="o">+</span> \
+<span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">verilog_inits</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span>\
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    // Sequences enabled by initdone</span>
+<span class="sd">    $display(&quot;Ready to read&quot;); </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
+                <span class="n">contents</span><span class="o">+=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span>
+
+        <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">join</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">$finish;</span><span class="se">\n</span><span class="s1">end</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="o">=</span><span class="n">contents</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

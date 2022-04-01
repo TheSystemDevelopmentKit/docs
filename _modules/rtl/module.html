@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rtl.module &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../rtl.html">rtl</a> &raquo;</li>
+      <li>rtl.module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for rtl.module</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">===========</span>
+<span class="sd">Module</span>
+<span class="sd">===========</span>
+<span class="sd">Verilog module import features for RTL simulation package of </span>
+<span class="sd">The System Development Kit.</span>
+
+<span class="sd">Provides utilities to import Verilog modules to </span>
+<span class="sd">python environment.</span>
+
+<span class="sd">Initially written by Marko Kosunen, 2017</span>
+<span class="sd">Last modification by Okko Järvinen, 28.10.2021 07:55</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">verilog_connector</span>
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">verilog_connector_bundle</span>
+
+<div class="viewcode-block" id="verilog_module"><a class="viewcode-back" href="../../index.html#rtl.module.verilog_module">[docs]</a><span class="k">class</span> <span class="nc">verilog_module</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Objective:</span>
+
+<span class="sd">        1) </span>
+<span class="sd">           a) Collect IO&#39;s to database</span>
+<span class="sd">           b) collect parameters to dict</span>
+
+<span class="sd">        2) Reconstruct the module definition</span>
+
+<span class="sd">        3) </span>
+<span class="sd">           a) Implement methods provide sinal connections</span>
+<span class="sd">           b) Implement methods to provide parameter assingments   </span>
+<span class="sd">              </span>
+<span class="sd">        4) Create a method to create assigned module \</span>
+<span class="sd">           definition, where signals are \</span>
+<span class="sd">           </span>
+<span class="sd">           a) assigned by name</span>
+<span class="sd">           b) to arbitrary name vector.</span>
+
+<span class="sd">        5) Add contents, if required, and include that to definition</span>
+<span class="sd">            </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Mandatory because nheriting thesdk class</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Parameters</span>
+<span class="sd">           ----------</span>
+<span class="sd">              **kwargs :</span>
+<span class="sd">                 file: str</span>
+<span class="sd">                    Verilog file containing the module</span>
+<span class="sd">                 name: str</span>
+<span class="sd">                    Name of the module</span>
+<span class="sd">                 instname: str, self.name</span>
+<span class="sd">                    Name of the instance</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># No need to propertize these yet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instname</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;instname&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Either name or file must be defined&#39;</span><span class="p">)</span>
+    
+    <span class="c1">#Name derived from the file</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Name of the module. Derived from the file name.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">instname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Name of the instance, when instantiated inside other module.</span>
+
+<span class="sd">        Default: `self.name_DUT`</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_instname&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_DUT&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instname</span>
+    <span class="nd">@instname</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">instname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instname</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Verilog connector bundle containing connectors for all module IOS.</span>
+<span class="sd">           All the IOs are connected to signal connectors that </span>
+<span class="sd">           have the same name than the IOs. This is due to fact the we have decided </span>
+<span class="sd">           that all signals are connectors. </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_ios&#39;</span><span class="p">):</span>
+            <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module *(?=&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;)\s*&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;.*.+$&quot;</span><span class="p">)</span>
+            <span class="n">iomatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*(?&lt;!#)\(.*$&quot;</span><span class="p">)</span>
+            <span class="n">parammatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*#\(.*$&quot;</span><span class="p">)</span>
+            <span class="n">iostopmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.*\);.*$&#39;</span><span class="p">)</span>
+            <span class="n">dut</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+            <span class="c1"># Extract the module definition</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span><span class="o">=</span><span class="n">verilog_connector_bundle</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+                    <span class="n">wholefile</span><span class="o">=</span><span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                    <span class="n">modfind</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="n">paramfind</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="n">iofind</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wholefile</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">startmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                            <span class="n">modfind</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">parammatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                                <span class="n">paramfind</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">iomatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                                <span class="n">iofind</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="k">if</span> <span class="p">(</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="p">(</span><span class="n">iofind</span> <span class="ow">or</span> <span class="n">paramfind</span><span class="p">)</span> <span class="ow">and</span> <span class="n">iostopmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                            <span class="n">modfind</span><span class="o">=</span><span class="kc">False</span>
+                            <span class="n">iofind</span><span class="o">=</span><span class="kc">False</span>
+                            <span class="n">paramfind</span><span class="o">=</span><span class="kc">False</span>
+                            <span class="c1">#Inclusive</span>
+                            <span class="n">dut</span><span class="o">=</span><span class="n">dut</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;//.*;.*$&quot;</span><span class="p">,</span><span class="s2">&quot;\);&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                        <span class="k">elif</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">iofind</span><span class="p">:</span>
+                            <span class="n">dut</span><span class="o">=</span><span class="n">dut</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;//.*$&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+                    <span class="c1">#Remove the scala comments</span>
+                    <span class="n">dut</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,.*$&quot;</span><span class="p">,</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">dut</span><span class="p">)</span>
+                    <span class="n">dut</span><span class="o">=</span><span class="n">dut</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="c1">#Generate lambda functions for pattern filtering</span>
+                    <span class="n">fils</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module\s*&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s*&quot;</span><span class="p">),</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(&quot;</span><span class="p">),</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\)&quot;</span><span class="p">),</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*&quot;</span><span class="p">),</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*(?=&gt; )&quot;</span><span class="p">),</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;////.*$&quot;</span><span class="p">),</span>
+                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;;.*&quot;</span><span class="p">)</span>
+                      <span class="p">]</span>
+                    <span class="n">func_list</span><span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">s</span><span class="p">,</span><span class="n">fil</span><span class="o">=</span><span class="n">x</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fils</span><span class="p">]</span>
+                    <span class="n">dut</span><span class="o">=</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">func_list</span><span class="p">,</span> <span class="n">dut</span><span class="p">)</span>
+                    <span class="n">dut</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,\s*&quot;</span><span class="p">,</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">dut</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">dut</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">ioline</span> <span class="ow">in</span> <span class="n">dut</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+                            <span class="n">extr</span><span class="o">=</span><span class="n">ioline</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                            <span class="n">signal</span><span class="o">=</span><span class="n">verilog_connector</span><span class="p">()</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extr</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">extr</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                                <span class="n">busdef</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^.*\[(\d+):(\d+)\]&quot;</span><span class="p">,</span><span class="n">extr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">ll</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">busdef</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">rl</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">busdef</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+                            <span class="c1">#By default, we create a connector that is cross connected to the input</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span>
+                            <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;output&#39;</span><span class="p">:</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="s1">&#39;wire&#39;</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">signal</span>
+
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">signal</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;File does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span>
+
+    <span class="c1"># Setting principle, assign a dict</span>
+    <span class="c1"># individual parameters can be set externally</span>
+    <span class="nd">@ios</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ios</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Parameters of the verilog module. Bundle of values of type string.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_parameters&#39;</span><span class="p">):</span>
+            <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module *(?=&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;)\s*&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;.*.+$&quot;</span><span class="p">)</span>
+            <span class="n">iomatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*(?&lt;!#)\(.*$&quot;</span><span class="p">)</span>
+            <span class="n">parammatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*(?&lt;=#)\(.*$&quot;</span><span class="p">)</span>
+            <span class="n">paramstopmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*\).*$&quot;</span><span class="p">)</span>
+            <span class="n">parablock</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
+            <span class="c1"># Extract the module definition</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+                    <span class="n">wholefile</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                    <span class="n">modfind</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">iofind</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">parafind</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wholefile</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">startmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                            <span class="n">modfind</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">iofind</span><span class="p">)</span> <span class="ow">and</span> <span class="n">iomatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                            <span class="n">iofind</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">iofind</span><span class="p">)</span> <span class="ow">and</span> <span class="n">parammatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                                <span class="n">parafind</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">if</span> <span class="p">(</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">iofind</span><span class="p">)</span> <span class="ow">and</span> <span class="n">parafind</span> <span class="ow">and</span> <span class="n">paramstopmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                            <span class="n">modfind</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="n">parafind</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="n">line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\).*$&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+                            <span class="n">line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;//.*$&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+                            <span class="c1">#Inclusive</span>
+                            <span class="n">parablock</span> <span class="o">=</span> <span class="n">parablock</span><span class="o">+</span><span class="n">line</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                        <span class="k">elif</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">parafind</span><span class="p">:</span>
+                            <span class="n">line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;//.*$&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+                            <span class="n">parablock</span> <span class="o">=</span> <span class="n">parablock</span><span class="o">+</span><span class="n">line</span>
+                    <span class="k">if</span> <span class="n">parablock</span><span class="p">:</span>
+                        <span class="c1">#Generate lambda functions for pattern filtering</span>
+                        <span class="n">parablock</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                        <span class="n">fils</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module\s*&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s*&quot;</span><span class="p">),</span>
+                            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;#&quot;</span><span class="p">),</span>
+                            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(*&quot;</span><span class="p">),</span>
+                            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\)*&quot;</span><span class="p">),</span>
+                            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*&quot;</span><span class="p">),</span>
+                            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;;*&quot;</span><span class="p">)</span>
+                          <span class="p">]</span>
+                        <span class="n">func_list</span><span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">s</span><span class="p">,</span><span class="n">fil</span><span class="o">=</span><span class="n">x</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fils</span><span class="p">]</span>
+                        <span class="n">parablock</span><span class="o">=</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">func_list</span><span class="p">,</span> <span class="n">parablock</span><span class="p">)</span>
+                        <span class="n">parablock</span><span class="o">=</span><span class="n">parablock</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">parablock</span><span class="p">:</span>
+                                <span class="n">extr</span><span class="o">=</span><span class="n">param</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">extr</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span>
+
+    <span class="c1"># Setting principle, assign a dict</span>
+    <span class="c1"># individual parameters can be set externally</span>
+    <span class="nd">@parameters</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Contents of the module. String containing the Verilog code after </span>
+<span class="sd">        the module definition.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_contents&#39;</span><span class="p">):</span>
+            <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module *(?=&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;)\s*&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;.*.+$&quot;</span><span class="p">)</span>
+            <span class="n">headerstopmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*\);.*$&quot;</span><span class="p">)</span>
+            <span class="n">modulestopmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*endmodule\s*$&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="c1"># Extract the module definition</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+                    <span class="n">wholefile</span><span class="o">=</span><span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                    <span class="n">modfind</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="n">headers</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wholefile</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">startmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                            <span class="n">modfind</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">headerstopmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                                <span class="n">headers</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="k">elif</span> <span class="p">(</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">headers</span> <span class="ow">and</span> <span class="n">modulestopmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                            <span class="n">modfind</span><span class="o">=</span><span class="kc">False</span>
+                            <span class="n">headers</span><span class="o">=</span><span class="kc">False</span>
+                            <span class="c1">#exclusive</span>
+                        <span class="k">elif</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">headers</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="o">+</span><span class="n">line</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span>
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">io_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Bundle containing the signal connectors for IO connections.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_io_signals&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_io_signals</span><span class="o">=</span><span class="n">verilog_connector_bundle</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span> <span class="n">io</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c1"># Connectior is created already in io definitio</span>
+                <span class="c1"># just point to it  </span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_io_signals</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">=</span><span class="n">io</span><span class="o">.</span><span class="n">connect</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_io_signals</span>
+
+    <span class="nd">@io_signals</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">io_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">Members</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_io_signals</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">conn</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">conn</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_io_signals</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Module definition part extracted for the file. Contains parameters and </span>
+<span class="sd">        IO definitions.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_definition&#39;</span><span class="p">):</span>
+            <span class="c1">#First we print the parameter section</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+                <span class="n">parameters</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+                <span class="n">first</span><span class="o">=</span><span class="kc">True</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                        <span class="n">parameters</span><span class="o">=</span><span class="s1">&#39;#(</span><span class="se">\n</span><span class="s1">    </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+                        <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">    </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">)&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="s1">&#39;module </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="s1">&#39;module </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">first</span><span class="o">=</span><span class="kc">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span> <span class="n">io</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span><span class="s1">&#39;(</span><span class="se">\n</span><span class="s1">&#39;</span>
+                        <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">cls</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;inout&#39;</span> <span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">width</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span>
+                                    <span class="p">(</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">cls</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">name</span><span class="p">)))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span>
+                                    <span class="p">(</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">] </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">cls</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">ll</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">rl</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">name</span><span class="p">)))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Assigning signal direction </span><span class="si">%s</span><span class="s1"> to verilog module IO.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">cls</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">)&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span><span class="s1">&#39;;&#39;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">endmodule&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span>
+
+    <span class="c1"># Instance is defined through the io_signals</span>
+    <span class="c1"># Therefore it is always regenerated</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Instantioation string of the module. Can be used inside of the other modules.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1">#First we write the parameter section</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+            <span class="n">first</span><span class="o">=</span><span class="kc">True</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                    <span class="n">parameters</span><span class="o">=</span><span class="s1">&#39;#(</span><span class="se">\n</span><span class="s1">    .</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">    .</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">)&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">  </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instname</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instname</span><span class="p">)</span>
+        <span class="n">first</span><span class="o">=</span><span class="kc">True</span>
+        <span class="c1"># Then we write the IOs</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span> <span class="n">io</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">+</span><span class="s1">&#39;(</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">cls</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;inout&#39;</span> <span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">+</span>
+                                <span class="p">(</span><span class="s1">&#39;    .</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">name</span><span class="p">)))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Assigning signal direction </span><span class="si">%s</span><span class="s1"> to verilog module IO.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">cls</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">+</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">)&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">+</span><span class="p">(</span><span class="s1">&#39;;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span>
+
+    <span class="c1">#Methods</span>
+<div class="viewcode-block" id="verilog_module.export"><a class="viewcode-back" href="../../index.html#rtl.module.verilog_module.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Method to export the module to a given file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">           **kwargs :</span>
+
+<span class="sd">               force: Bool</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Exporting verilog_module to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">module_file</span><span class="p">:</span>
+                <span class="n">module_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Export target file </span><span class="si">%s</span><span class="s1"> exists.</span><span class="se">\n</span><span class="s1"> Force overwrite with force=True.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)))</span>
+
+        <span class="k">elif</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Forcing overwrite of verilog_module to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">module_file</span><span class="p">:</span>
+                <span class="n">module_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

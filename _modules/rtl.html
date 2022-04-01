@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rtl &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>rtl</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for rtl</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">===========</span>
+<span class="sd">RTL package</span>
+<span class="sd">===========</span>
+<span class="sd">Simulation interface package for The System Development Kit </span>
+
+<span class="sd">Provides utilities to import verilog modules and VHDL entities to </span>
+<span class="sd">python environment and sutomatically generate testbenches for the </span>
+<span class="sd">most common simulation cases.</span>
+
+<span class="sd">Initially written by Marko Kosunen, 2017</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">shlex</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">intend</span>
+<span class="kn">from</span> <span class="nn">rtl.testbench</span> <span class="kn">import</span> <span class="n">testbench</span> <span class="k">as</span> <span class="n">vtb</span>
+<span class="kn">from</span> <span class="nn">rtl.rtl_iofile</span> <span class="kn">import</span> <span class="n">rtl_iofile</span> <span class="k">as</span> <span class="n">rtl_iofile</span>
+
+<div class="viewcode-block" id="rtl"><a class="viewcode-back" href="../index.html#rtl.rtl">[docs]</a><span class="k">class</span> <span class="nc">rtl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Adding this class as a superclass enforces the definitions </span>
+<span class="sd">    for rtl simulations in the subclasses.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># These need to be converted to abstact properties</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">preserve_rtlfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+
+<span class="sd">        If True, do not delete testbench and copy of DUT after simulations. Useful for</span>
+<span class="sd">        debugging testbench generation.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_preserve_rtlfiles&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rtlfiles</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rtlfiles</span>
+    <span class="nd">@preserve_rtlfiles</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">preserve_rtlfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rtlfiles</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interactive_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+<span class="sd">        </span>
+<span class="sd">        Launch simulator in local machine with GUI.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_interactive_rtl&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_rtl</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_rtl</span>
+    <span class="nd">@interactive_rtl</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">interactive_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_rtl</span><span class="o">=</span><span class="n">value</span>
+    
+    <span class="nd">@property</span> 
+    <span class="k">def</span> <span class="nf">verilog_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines verilog submission prefix from thesdk.GLOBALS[&#39;LSFSUBMISSION&#39;]</span>
+
+<span class="sd">        Usually something like &#39;bsub -K&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_verilog_submission&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_lsf</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_submission</span><span class="o">=</span><span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;LSFSUBMISSION&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39; &#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_submission</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_submission</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the rtl timescale. Default &#39;1ps&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtl_timescale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span> <span class="o">=</span> <span class="s1">&#39;1ps&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span>
+    <span class="nd">@rtl_timescale</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Name of the entity</span>
+<span class="sd">            Extracted from the _classfile attribute</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
+            <span class="c1">#_classfile is an abstract property that must be defined in the class.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classfile</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtlmisc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="sd">&quot;&quot;&quot;List&lt;String&gt;</span>
+
+<span class="sd">        List of manual commands to be pasted to the testbench. The strings are</span>
+<span class="sd">        pasted to their own lines (no linebreaks needed), and the syntax is</span>
+<span class="sd">        unchanged.</span>
+
+<span class="sd">        Example: creating a custm clock::</span>
+
+<span class="sd">            self.rtlmisc = []</span>
+<span class="sd">            self.rtlmisc.append(&#39;reg clock2;&#39;)</span>
+<span class="sd">            self.rtlmisc.append(&#39;initial clock2=\&#39;b0;&#39;)</span>
+<span class="sd">            self.rtlmisc.append(&#39;always #(c_Ts2/2.0) clock2 = !clock2;&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtlmisc&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlmisc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlmisc</span>
+    <span class="nd">@rtlmisc</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtlmisc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlmisc</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Search path for the verilogfiles</span>
+<span class="sd">            self.entitypath/sv</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">                self.entitypath/sv</span>
+
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogsrcpath&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogsrcpath</span>  <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span> <span class="o">+</span> <span class="s1">&#39;/sv&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlogsrcpath</span>
+    <span class="c1">#No setter, no deleter.</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Verilog source file</span>
+<span class="sd">           self.vlogsrcpath/self.name.sv</span>
+
+<span class="sd">           Returns</span>
+<span class="sd">           -------</span>
+<span class="sd">               self.vlogsrcpath + &#39;/&#39; + self.name + self.vlogext</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogsrc&#39;</span><span class="p">):</span>
+            <span class="c1">#_classfile is an abstract property that must be defined in the class.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogsrc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrcpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogext</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlogsrc</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; VHDL search path</span>
+<span class="sd">            self.entitypath/vhdl</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">                self.entitypath/vhdl</span>
+
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlsrcpath&#39;</span><span class="p">):</span>
+            <span class="c1">#_classfile is an abstract property that must be defined in the class.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrcpath</span>  <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span> <span class="o">+</span> <span class="s1">&#39;/vhdl&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrcpath</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
+
+<span class="sd">            Default is &#39;.sv&#39;, but this can be overridden to support, e.g.</span>
+<span class="sd">            generators like Chisel that always use the &#39;.v&#39; prefix.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogext&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogext</span> <span class="o">=</span> <span class="s1">&#39;.sv&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlogext</span>
+    <span class="nd">@vlogext</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vlogext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vlogext</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;VHDL source file</span>
+<span class="sd">           self.vhdlsrcpath/self.name.sv&#39;</span>
+
+<span class="sd">           Returns</span>
+<span class="sd">           -------</span>
+<span class="sd">               self.vhdlsrcpath + &#39;/&#39; + self.name + &#39;.vhd&#39;</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlsrc&#39;</span><span class="p">):</span>
+            <span class="c1">#_classfile is an abstract property that must be defined in the class.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrcpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.vhd&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrc</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;HDL source directory for rtl simulations</span>
+<span class="sd">           self.simpath + &#39;/rtl&#39;</span>
+
+<span class="sd">           Returns</span>
+<span class="sd">           -------</span>
+<span class="sd">               self.simpath + &#39;/rtl&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtlsimpath&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simpath</span><span class="p">,</span> <span class="s1">&#39;rtl&#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span><span class="p">)</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed to create </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span>
+
+<div class="viewcode-block" id="rtl.delete_rtlsimpath"><a class="viewcode-back" href="../index.html#rtl.rtl.delete_rtlsimpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Deletes all files in rtlsimpath</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">):</span>
+                    <span class="n">targetpath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve_rtlfiles</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Preserving </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">targetpath</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">targetpath</span><span class="p">):</span>
+                            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">targetpath</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">targetpath</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Removing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">targetpath</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not remove </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">targetpath</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve_rtlfiles</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Removing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not remove </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">simdut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Source file for Device Under Test in simulations directory</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">                self.rtlsimpath + self.name + self.vlogext for &#39;sv&#39; model</span>
+<span class="sd">                self.rtlsimpath + self.name + &#39;.vhd&#39; for &#39;vhdl&#39; model</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_simdut&#39;</span><span class="p">):</span>
+            <span class="n">extension</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+                <span class="n">extension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogext</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
+                <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;.vhd&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported model </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simdut</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="n">extension</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simdut</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">simtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Verilog testbench source file in simulations directory</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_simtb&#39;</span><span class="p">):</span>
+            <span class="c1">#_classfile is an abstract property that must be defined in the class.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simtb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.sv&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simtb</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Work library directory for rtl compilations</span>
+<span class="sd">           self.simpath +&#39;/work&#39;</span>
+
+<span class="sd">           Returns</span>
+<span class="sd">           -------</span>
+<span class="sd">               self.simpath +&#39;/work&#39;</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtlworkpath&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlworkpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span> <span class="o">+</span><span class="s1">&#39;/work&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlworkpath</span>
+
+<div class="viewcode-block" id="rtl.delete_rtlworkpath"><a class="viewcode-back" href="../index.html#rtl.rtl.delete_rtlworkpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Deletes compilation directory</span>
+<span class="sd">            Not a deleter decorator, because does not delete</span>
+<span class="sd">            the property.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Removing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not remove </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtlparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="sd">&#39;&#39;&#39;Dictionary of parameters passed to the simulator </span>
+<span class="sd">        during the simulation invocation</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtlparameters&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparameters</span>
+    <span class="nd">@rtlparameters</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtlparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparameters</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@rtlparameters</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">rtlparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparameters</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;List of verilog modules to be compiled in addition of DUT</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogmodulefiles&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span> <span class="o">=</span><span class="nb">list</span><span class="p">([])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span>
+    <span class="nd">@vlogmodulefiles</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@vlogmodulefiles</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span> <span class="o">=</span> <span class="kc">None</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;List of VHDL entity files to be compiled in addition to DUT</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlentityfiles&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span><span class="nb">list</span><span class="p">([])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span>
+    <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="kc">None</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interactive_control_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Content of the interactive rtl control file (.do -file).</span>
+
+<span class="sd">        If this property is set, a new dofile gets written to the simulation</span>
+<span class="sd">        path. This takes precedence over the file pointed by</span>
+<span class="sd">        `interactive_controlfile`.</span>
+
+<span class="sd">        For example, the contents can be defined in the top testbench as::</span>
+
+<span class="sd">            self.interactive_control_contents=&quot;&quot;&quot;</span>
+<span class="sd">                add wave -position insertpoint \\</span>
+<span class="sd">                sim/:tb_inverter:A \\</span>
+<span class="sd">                sim/:tb_inverter:clock \\</span>
+<span class="sd">                sim/:tb_inverter:Z</span>
+<span class="sd">                run -all</span>
+<span class="sd">                wave zoom full</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_interactive_control_contents&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_control_contents</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_control_contents</span>
+    <span class="nd">@interactive_control_contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">interactive_control_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_control_contents</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interactive_controlfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Path to interactive rtl control file (.do -file).</span>
+
+<span class="sd">        The content of the file can be defined in `interactive_control`. If the</span>
+<span class="sd">        content is not set in `interactive_control` -property, the do-file is</span>
+<span class="sd">        read from this file path. Default path is</span>
+<span class="sd">        `./interactive_control_files/modelsim/dofile.do`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">dofiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/modelsim&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
+        <span class="n">dofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span>
+        <span class="n">obsoletepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/Simulations/rtlsim/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
+        <span class="n">newdofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dofiledir</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dofiledir</span><span class="p">)</span>
+        <span class="c1"># Property interactive_control_contents already given and new temporary</span>
+        <span class="c1"># file not yet created -&gt; create new file and use that</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_control_contents</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">newdofilepath</span><span class="p">):</span>
+            <span class="c1"># Check if a custom file path was given</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_interactive_controlfile&#39;</span><span class="p">):</span>
+                <span class="n">dofilepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span>
+            <span class="c1"># Give a warning if default/custom path contains a do-file already</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dofilepath</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Interactive control file </span><span class="si">%s</span><span class="s1"> ignored and interactive_control_contents used instead.&#39;</span> <span class="o">%</span> <span class="n">dofilepath</span><span class="p">)</span>
+            <span class="c1"># Write interactive_control_contents to a temporary file</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Writing interactive_control_contents to file </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">newdofilepath</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">newdofilepath</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dofile</span><span class="p">:</span>
+                <span class="n">dofile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interactive_control_contents</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="n">newdofilepath</span>
+        <span class="c1"># No contents or path given -&gt; use default path (or obsolete path)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_interactive_controlfile&#39;</span><span class="p">):</span>
+            <span class="c1"># Nag about obsolete stuff</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">obsoletepath</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Found obsoleted do-file in </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">obsoletepath</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;To fix the obsolete warning:&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Move the obsoleted file </span><span class="si">%s</span><span class="s1"> to the default path </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">obsoletepath</span><span class="p">,</span><span class="n">dofilepath</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Or, set a custom do-file path to self.interactive_controlfile.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Or, define the do-file contents in self.interactive_control_contents in your testbench.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Using the obsoleted file for now.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="n">obsoletepath</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Use default do-file location</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="n">dofilepath</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span>
+    <span class="nd">@interactive_controlfile</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">interactive_controlfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Command used for simulation invocation</span>
+<span class="sd">           Compiled from various parameters. See source for details.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">submission</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_submission</span>
+        <span class="n">rtllibcmd</span> <span class="o">=</span>  <span class="s1">&#39;vlib &#39;</span> <span class="o">+</span>  <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
+        <span class="n">rtllibmapcmd</span> <span class="o">=</span> <span class="s1">&#39;vmap work &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
+
+        <span class="n">vlogmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span><span class="p">])</span>
+
+        <span class="c1"># TODO: use source copied to simulation dir</span>
+        <span class="n">vhdlmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrcpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlentityfiles</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
+            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
+
+        <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vcom -work work &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
+                       <span class="n">vhdlmodulesstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrc</span> <span class="p">)</span>
+        
+        <span class="n">gstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;-g &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;=&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> 
+            <span class="k">for</span> <span class="n">param</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlparameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="p">])</span>
+
+        <span class="n">fileparams</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">fileparams</span><span class="o">+=</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">simparam</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
+            <span class="n">dostring</span><span class="o">=</span><span class="s1">&#39; -do &quot;run -all; quit;&quot;&#39;</span>
+            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -voptargs=+acc &#39;</span> 
+                    <span class="o">+</span> <span class="n">fileparams</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span>
+                    <span class="o">+</span><span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  
+                    <span class="o">+</span> <span class="n">dostring</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dofile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">interactive_controlfile</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dofile</span><span class="p">):</span>
+                <span class="n">dostring</span><span class="o">=</span><span class="s1">&#39; -do &quot;&#39;</span><span class="o">+</span><span class="n">dofile</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Using interactive control file </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dofile</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dostring</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;No interactive control file set.&#39;</span><span class="p">)</span>
+            <span class="n">submission</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="c1">#Local execution</span>
+            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -novopt &#39;</span> <span class="o">+</span> <span class="n">fileparams</span> 
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span> <span class="o">+</span><span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">dostring</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">=</span>  <span class="n">rtllibcmd</span>  <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">rtllibmapcmd</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vlogcompcmd</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; sync &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">submission</span> <span class="o">+</span>\
+                    <span class="n">rtlsimcmd</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">=</span>  <span class="n">rtllibcmd</span>  <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">rtllibmapcmd</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vhdlcompcmd</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vlogcompcmd</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; sync &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">submission</span> <span class="o">+</span>\
+                    <span class="n">rtlsimcmd</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span>
+
+    <span class="c1"># Just to give the freedom to set this if needed</span>
+    <span class="nd">@rtlcmd</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@rtlcmd</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span><span class="o">=</span><span class="kc">None</span>
+    
+<div class="viewcode-block" id="rtl.create_connectors"><a class="viewcode-back" href="../index.html#rtl.rtl.create_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">create_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Cretes verilog connector definitions from </span>
+<span class="sd">           1) From a iofile that is provided in the Data </span>
+<span class="sd">           attribute of an IO.</span>
+<span class="sd">           2) IOS of the verilog DUT</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Create TB connectors from the control file</span>
+        <span class="c1"># See controller.py</span>
+        <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span><span class="n">io</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># If input is a file, adopt it</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="p">,</span><span class="n">rtl_iofile</span><span class="p">):</span> 
+                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">ioname</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> 
+                            <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unifying file </span><span class="si">%s</span><span class="s1"> name to ioname </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">ioname</span><span class="p">))</span>
+                    <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">ioname</span>
+                <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">adopt</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">connector</span>
+                    <span class="c1"># Connect them to DUT</span>
+                    <span class="k">try</span><span class="p">:</span> 
+                        <span class="bp">self</span><span class="o">.</span><span class="n">dut</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">connector</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">pass</span>
+            <span class="c1"># If input is not a file, look for corresponding file definition</span>
+            <span class="k">elif</span> <span class="n">ioname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+                <span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">:</span>
+                    <span class="c1"># [TODO] Sanity check, only floating inputs make sense.</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> 
+                                <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating non-existent IO connector </span><span class="si">%s</span><span class="s1"> for testbench&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="o">=</span>\
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)</span>
+        <span class="c1"># Define the iofiles of the testbench. &#39;</span>
+        <span class="c1"># Needed for creating file io routines </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
+               
+<div class="viewcode-block" id="rtl.connect_inputs"><a class="viewcode-back" href="../index.html#rtl.rtl.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Assigns all IOS.Members[name].Data to</span>
+<span class="sd">           self.iofile_bundle.Members[ioname].Data</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span><span class="n">io</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">ioname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">:</span>
+                <span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span>
+                <span class="c1"># File type inputs are driven by the file.Data, not the input field</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="p">,</span><span class="n">rtl_iofile</span><span class="p">)</span> \
+                        <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span>
+                    <span class="c1"># Data must be properly shaped</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span></div>
+
+    <span class="c1"># Define if the signals are signed or not</span>
+    <span class="c1"># Can these be deducted?</span>
+<div class="viewcode-block" id="rtl.format_ios"><a class="viewcode-back" href="../index.html#rtl.rtl.format_ios">[docs]</a>    <span class="k">def</span> <span class="nf">format_ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Verilog module does not contain information if </span>
+<span class="sd">        the bus is signed or not.</span>
+<span class="sd">        Prior to writing output file, the type of the </span>
+<span class="sd">        connecting wire defines how the bus values are interpreted.</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">assocname</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">((</span><span class="n">val</span><span class="o">.</span><span class="n">datatype</span> <span class="ow">is</span> <span class="s1">&#39;sint&#39;</span> <span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">datatype</span> <span class="ow">is</span> <span class="s1">&#39;scomplex&#39;</span><span class="p">)):</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">assocname</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="s1">&#39;signed&#39;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">assocname</span><span class="p">]</span><span class="o">.</span><span class="n">ioformat</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">ioformat</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> 
+                    <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;List of associated ionames not defined for IO </span><span class="si">%s</span><span class="se">\n</span><span class="s1">. Provide it as list of strings&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">ioname</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="rtl.copy_rtl_sources"><a class="viewcode-back" href="../index.html#rtl.rtl.copy_rtl_sources">[docs]</a>    <span class="k">def</span> <span class="nf">copy_rtl_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Copy rtl sources to self.rtlsimpath</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Copying rtl sources to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="c1"># copy dut source</span>
+            <span class="n">vlogsrc_exists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">)</span>   <span class="c1"># verilog source present in self.entitypath/sv</span>
+            <span class="n">simdut_exists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">)</span>     <span class="c1"># verilog source generated to self.rtlsimpath</span>
+            <span class="c1"># if neither exist throw an fatal error (missing dut source)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">vlogsrc_exists</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">simdut_exists</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Missing verilog source for &#39;sv&#39; model at: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">)</span>
+            <span class="c1"># vlogsrc exists, simdut doesn&#39;t exist =&gt; copy vlogsrc to simdut</span>
+            <span class="k">elif</span> <span class="n">vlogsrc_exists</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">simdut_exists</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Copying </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">)</span>
+            <span class="c1"># vlogsrc doesn&#39;t exist, simdut exists (externally generated) =&gt; use externally generated simdut</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">vlogsrc_exists</span> <span class="ow">and</span> <span class="n">simdut_exists</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Using externally generated source for DUT: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">)</span>
+            <span class="c1"># if both sources are present throw a fatal error (multiple conflicting source files)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Both model &#39;sv&#39; source </span><span class="si">%s</span><span class="s2"> and generated source </span><span class="si">%s</span><span class="s2"> exist. Using </span><span class="si">%s</span><span class="s2">.&quot;</span>
+                        <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">))</span>
+
+            <span class="c1"># copy other verilog files</span>
+            <span class="k">for</span> <span class="n">modfile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span><span class="p">:</span>
+                <span class="n">srcfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrcpath</span><span class="p">,</span> <span class="n">modfile</span><span class="p">)</span>
+                <span class="n">dstfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span> <span class="n">modfile</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Copying </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">srcfile</span><span class="p">,</span> <span class="n">dstfile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">srcfile</span><span class="p">,</span> <span class="n">dstfile</span><span class="p">)</span>
+
+        <span class="c1"># nothing generates vhdl so simply copy all files to rtlsimpath</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">entfile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlentityfiles</span><span class="p">:</span>
+                <span class="n">srcfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrcpath</span><span class="p">,</span> <span class="n">entfile</span><span class="p">)</span>
+                <span class="n">dstfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span> <span class="n">entfile</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Copying </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">srcfile</span><span class="p">,</span> <span class="n">dstfile</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">srcfile</span><span class="p">,</span> <span class="n">dstfile</span><span class="p">)</span>
+
+        <span class="c1"># flush cached writes to disk</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s2">&quot;sync </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="rtl.execute_rtl_sim"><a class="viewcode-back" href="../index.html#rtl.rtl.execute_rtl_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_rtl_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Runs the rtl simulation in external simulator</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">filetimeout</span><span class="o">=</span><span class="mi">60</span> <span class="c1">#File appearance timeout in seconds</span>
+        <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">files_ok</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">files_ok</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span><span class="n">filetimeout</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Verilog infile writing timeout&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
+                    <span class="n">files_ok</span><span class="o">=</span><span class="kc">True</span>
+                    <span class="n">files_ok</span><span class="o">=</span><span class="n">files_ok</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1">#Wait for one second</span>
+
+        <span class="c1">#Remove existing output files before execution</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1">#Still keep the file in the infiles list</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Running external command </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlcmd</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                Running RTL simulation in interactive mode.</span>
+<span class="s2">                Add the probes in the simulation as you wish.</span>
+<span class="s2">                To finish the simulation, run the simulation to end and exit.&quot;&quot;&quot;</span><span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Simulator output:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+        <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">files_ok</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">files_ok</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span><span class="n">filetimeout</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Verilog outfile timeout&quot;</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                    <span class="n">files_ok</span><span class="o">=</span><span class="kc">True</span>
+                    <span class="n">files_ok</span><span class="o">=</span><span class="n">files_ok</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="rtl.run_rtl"><a class="viewcode-back" href="../index.html#rtl.rtl.run_rtl">[docs]</a>    <span class="k">def</span> <span class="nf">run_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;1) Copies rtl sources to a temporary simulation directory</span>
+<span class="sd">           2) Creates a testbench</span>
+<span class="sd">           3) Defines the contens of the testbench</span>
+<span class="sd">           4) Creates connectors</span>
+<span class="sd">           5) Connects inputs</span>
+<span class="sd">           6) Defines IO conditions</span>
+<span class="sd">           7) Defines IO formats in testbench</span>
+<span class="sd">           8) Generates testbench contents</span>
+<span class="sd">           9) Exports the testbench to file</span>
+<span class="sd">           10) Writes input files</span>
+<span class="sd">           11) Executes the simulation</span>
+<span class="sd">           12) Read outputfiles </span>
+<span class="sd">           13) Connects the outputs</span>
+<span class="sd">           14) Cleans up the intermediate files</span>
+
+<span class="sd">           You should overload this method while creating the simulation </span>
+<span class="sd">           and debugging the testbench.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> 
+            <span class="c1"># Loading a previously stored state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_state</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_rtl_sources</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">=</span><span class="n">vtb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>             
+            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">define_testbench</span><span class="p">()</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_connectors</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connect_inputs</span><span class="p">()</span>         
+
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;define_io_conditions&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">define_io_conditions</span><span class="p">()</span>   <span class="c1"># Local, this is dependent on how you</span>
+                                              <span class="c1"># control the simulation</span>
+                                              <span class="c1"># i.e. when you want to read an write your IO&#39;s</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format_ios</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">generate_contents</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_infile</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute_rtl_sim</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_outfile</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connect_outputs</span><span class="p">()</span>
+            <span class="c1"># Save entity state</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_state</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_state</span><span class="p">()</span>
+            <span class="c1"># Clean simulation results</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_iofile_bundle</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_rtlworkpath</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_rtlsimpath</span><span class="p">()</span></div>
+
+
+    <span class="c1">#This writes all infile</span>
+<div class="viewcode-block" id="rtl.write_infile"><a class="viewcode-back" href="../index.html#rtl.rtl.write_infile">[docs]</a>    <span class="k">def</span> <span class="nf">write_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Writes the input files</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">()</span></div>
+    
+    <span class="c1">#This reads all outfiles</span>
+<div class="viewcode-block" id="rtl.read_outfile"><a class="viewcode-back" href="../index.html#rtl.rtl.read_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">read_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Reads the oputput files</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="rtl.connect_outputs"><a class="viewcode-back" href="../index.html#rtl.rtl.connect_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Connects the ouput data from files to corresponding output IOs</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span></div></div>
+              
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thesdk.iofile &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../thesdk.html">thesdk</a> &raquo;</li>
+      <li>thesdk.iofile</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for thesdk.iofile</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">==============</span>
+<span class="sd">Iofile package</span>
+<span class="sd">==============</span>
+
+<span class="sd">Provides Common file-io related attributes and methods </span>
+<span class="sd">for TheSyDeKinck</span>
+
+<span class="sd">This package defines the CSF IO-file format and methods for all supported simulators.</span>
+<span class="sd">Intention is to keep as much of the file io as general adn common as possible.</span>
+<span class="sd">The simulator specific file-io functions should be written in simulator specific file-io</span>
+<span class="sd">packages.</span>
+
+<span class="sd">Initially written for Verilog file-io by Marko Kosunen, marko.kosunen@aalto.fi,</span>
+<span class="sd">Yue Dai, 2018</span>
+
+<span class="sd">Generalized for common file-io by Marko Kosunen, marko.kosunen@aalto.fi,</span>
+<span class="sd">2019.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<div class="viewcode-block" id="iofile"><a class="viewcode-back" href="../../index.html#thesdk.iofile.iofile">[docs]</a><span class="k">class</span> <span class="nc">iofile</span><span class="p">(</span><span class="n">IO</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">     Class to provide file IO for external simulators. </span>
+<span class="sd">     </span>
+<span class="sd">     When created, adds an iofile object to the parents iofile_bundle attribute.</span>
+<span class="sd">     Accessible as iofile_bundle.Members[&#39;name&#39;].</span>
+<span class="sd"> </span>
+<span class="sd">     Example</span>
+<span class="sd">     -------</span>
+<span class="sd">     Initiated in parent as: </span>
+<span class="sd">         _=iofile(self,name=&#39;foobar&#39;)</span>
+<span class="sd">     </span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Parameters</span>
+<span class="sd">         -----------</span>
+<span class="sd">         parent: object, None </span>
+<span class="sd">             The parent object initializing the iofile instance. Default None</span>
+<span class="sd">         </span>
+<span class="sd">         **kwargs:  </span>
+<span class="sd">                 name: str  </span>
+<span class="sd">                     Name of the file. Appended with </span>
+<span class="sd">                     random string during the simulation.</span>
+<span class="sd">                 param: str,  -g g_file</span>
+<span class="sd">                     The string defining the testbench parameter to be be </span>
+<span class="sd">                     passed to the simulator at command line.</span>
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of Verilog input file not given&quot;</span><span class="p">)</span>
+         <span class="k">try</span><span class="p">:</span>  
+             <span class="nb">super</span><span class="p">(</span><span class="n">iofile</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">rndpart</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> 
+ 
+             <span class="c1"># IO&#39;s are output by default</span>
+             <span class="c1"># Currently less needed for Python, but used in Verilog</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dir&#39;</span><span class="p">,</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_datatype</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+ 
+             <span class="bp">self</span><span class="o">.</span><span class="n">_iotype</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;iotype&#39;</span><span class="p">,</span><span class="s1">&#39;sample&#39;</span><span class="p">)</span> <span class="c1"># The file is a data file by default </span>
+                                                   <span class="c1"># Option: sample, event. file </span>
+                                                   <span class="c1"># Events are presented in time-value combinatios </span>
+                                                   <span class="c1"># time in the column 0</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_ionames</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ionames&#39;</span><span class="p">,[])</span> <span class="c1">#list of signal names associated with this io</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_ioformat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ioformat&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#by default, the io values are decimal integer numbers</span>
+ 
+             <span class="bp">self</span><span class="o">.</span><span class="n">hasheader</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hasheader&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Headers False by default. </span>
+                                                          <span class="c1"># Do not generate things just </span>
+                                                          <span class="c1"># to remove them in the next step</span>
+
+             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;preserve_iofiles&#39;</span><span class="p">):</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">preserve</span><span class="o">=</span><span class="n">parent</span><span class="o">.</span><span class="n">preserve_iofiles</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">preserve</span><span class="o">=</span><span class="kc">False</span>
+         <span class="k">except</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;IO-file definition failed&quot;</span><span class="p">)</span>
+ 
+         <span class="c1">#TODO: Needs a check to eliminate duplicate entries to iofiles</span>
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;iofiles&#39;</span><span class="p">):</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Attribute iofiles has been replaced by iofile_bundle&quot;</span><span class="p">)</span>
+ 
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;iofile_bundle&#39;</span><span class="p">):</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+ 
+     <span class="c1"># These propertios &quot;extend&quot; IO class, but do not need ot be member of it,</span>
+     <span class="c1"># Furthermore IO._Data _must_ me bidirectional. Otherwise driver and target </span>
+     <span class="c1"># Must be defined separately</span>
+     <span class="nd">@property</span> 
+     <span class="k">def</span> <span class="nf">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39; Direction of the iofile, in | out</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dir&#39;</span><span class="p">):</span>
+             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="o">=</span><span class="kc">None</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span>
+ 
+     <span class="nd">@dir</span><span class="o">.</span><span class="n">setter</span>
+     <span class="k">def</span> <span class="nf">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="o">=</span><span class="n">value</span>
+ 
+     <span class="nd">@property</span>
+     <span class="k">def</span> <span class="nf">iotype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># sample | event</span>
+         <span class="sd">&#39;&#39;&#39; Type of the IO: sample | event</span>
+
+<span class="sd">             sample</span>
+<span class="sd">                 IO is synchronized with a sampling clock. Each of the rows represents the data valua at known sample insatnce</span>
+
+<span class="sd">             event</span>
+<span class="sd">                 IO is asynchronous. The first colums of the file should be the time of the event</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_iotype&#39;</span><span class="p">):</span>
+             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iotype</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_iotype</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iotype</span>
+ 
+     <span class="nd">@property</span>
+     <span class="k">def</span> <span class="nf">datatype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1">#          </span>
+         <span class="sd">&#39;&#39;&#39; Type of the data. Controls the reading and writing of the data</span>
+<span class="sd">              &#39;complex&#39; | &#39;int&#39; | &#39;scomplex&#39; | &#39;sint&#39; | object</span>
+
+<span class="sd">              int | sint:</span>
+<span class="sd">                  Values of the data are handled as unsigned or signed integers</span>
+
+<span class="sd">              complex | scomplex: </span>
+<span class="sd">                  It is assumed that each column of the Data represents a complex number with</span>
+<span class="sd">                  integer real and imaginary parts.  This is typical for RTL simulations.</span>
+<span class="sd">                  when the data is read or written, the columns are treated as Real Imag pairs. </span>
+<span class="sd">                  When writing, columns are split to two, when reading, adjacent colums are merged</span>
+
+<span class="sd">              object:</span>
+<span class="sd">                  Values are read and written as defined by the &#39;dtype&#39; parameter </span>
+<span class="sd">                  of the read method. Default is object. </span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_datatype&#39;</span><span class="p">):</span>
+             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_datatype</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_datatype</span><span class="o">=</span><span class="kc">None</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_datatype</span>
+ 
+     <span class="nd">@datatype</span><span class="o">.</span><span class="n">setter</span>
+     <span class="k">def</span> <span class="nf">datatype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">_datatype</span><span class="o">=</span><span class="n">value</span>
+ 
+     <span class="nd">@property</span>
+     <span class="k">def</span> <span class="nf">ionames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># list of associated ionames</span>
+         <span class="sd">&#39;&#39;&#39; Names of the DUT signals represented by the colums of the data. </span>
+<span class="sd">             Two elements per colums should be given, if the type is complex or scomplex.</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_ionames&#39;</span><span class="p">):</span>
+             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ionames</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_ionames</span><span class="o">=</span><span class="p">[]</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ionames</span>
+ 
+     <span class="nd">@ionames</span><span class="o">.</span><span class="n">setter</span>
+     <span class="k">def</span> <span class="nf">ionames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">_ionames</span><span class="o">=</span><span class="n">value</span>
+ 
+ 
+     <span class="nd">@property</span>
+     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39; Name of the IO file to be read or written.</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_file&#39;</span><span class="p">):</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simpath</span> <span class="o">+</span><span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> \
+                     <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rndpart</span> <span class="o">+</span><span class="s1">&#39;.txt&#39;</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span>
+     <span class="nd">@file</span><span class="o">.</span><span class="n">setter</span>
+     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">=</span><span class="n">val</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span>
+ 
+ 
+ 
+     <span class="c1"># Relocate i.e. change parent. </span>
+     <span class="c1"># probably this could be automated</span>
+     <span class="c1"># by using properties</span>
+<div class="viewcode-block" id="iofile.adopt"><a class="viewcode-back" href="../../index.html#thesdk.iofile.iofile.adopt">[docs]</a>     <span class="k">def</span> <span class="nf">adopt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39;Redefine the parent entity of the file. Afrects where the file is written during the simulation</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Parent must be given for relocation&#39;</span><span class="p">)</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span>
+         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;iofile_bundle&#39;</span><span class="p">):</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+ 
+     <span class="c1"># File writing</span>
+<div class="viewcode-block" id="iofile.write"><a class="viewcode-back" href="../../index.html#thesdk.iofile.iofile.write">[docs]</a>     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39;Method to write the file</span>
+
+<span class="sd">         Sets the &#39;dir&#39; attribute to &#39;in&#39;, because only input files are written.</span>
+<span class="sd">         </span>
+<span class="sd">         Parameters</span>
+<span class="sd">         ----------</span>
+<span class="sd">         </span>
+<span class="sd">         **kwargs:</span>
+<span class="sd">             data: numpy_array, self.Data</span>
+<span class="sd">                Data to be written.       </span>
+<span class="sd">             datatype: str, self.Datatype</span>
+<span class="sd">                Datatype of the data.</span>
+<span class="sd">             iotype: str, self.iotype</span>
+<span class="sd">                IO type of the IO file.</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">=</span><span class="s1">&#39;in&#39;</span>  <span class="c1"># Only input files are written</span>
+         <span class="c1">#Parse the rows to split complex numbers</span>
+         <span class="n">data</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Data</span><span class="p">)</span>
+         <span class="n">datatype</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="p">)</span>
+         <span class="n">iotype</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;iotype&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="p">)</span>
+         <span class="n">header_line</span> <span class="o">=</span> <span class="p">[]</span>
+         <span class="n">parsed</span><span class="o">=</span><span class="p">[]</span>
+         <span class="c1"># Default is the data file</span>
+         <span class="k">if</span> <span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                 <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_Real&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_Imag&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                 <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">parsed</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_Real&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_Imag&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">parsed</span><span class="p">,</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+ 
+             <span class="c1"># Numbers are printed as intergers</span>
+             <span class="c1"># These are verilog related, do not belong here</span>
+             <span class="k">if</span> <span class="n">datatype</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;sint&#39;</span><span class="p">,</span> <span class="s1">&#39;complex&#39;</span><span class="p">,</span> <span class="s1">&#39;scomplex&#39;</span> <span class="p">]:</span>
+                 <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">datatype</span><span class="p">)</span>
+ 
+             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasheader</span><span class="p">:</span>
+                 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
+                         <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="n">header_line</span><span class="p">)</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
+                         <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+         <span class="c1"># Control file is a different thing</span>
+         <span class="k">elif</span> <span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;event&#39;</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                 <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Timestamp can not be complex.&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">)</span>
+                 <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">parsed</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_Real&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_Imag&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">parsed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">parsed</span><span class="p">,</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+                        <span class="n">header_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+ 
+             <span class="k">if</span> <span class="n">datatype</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;sint&#39;</span><span class="p">,</span> <span class="s1">&#39;complex&#39;</span><span class="p">,</span> <span class="s1">&#39;scomplex&#39;</span> <span class="p">]:</span>
+                 <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">datatype</span><span class="p">)</span>
+
+             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasheader</span><span class="p">:</span>
+                 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="n">header_line</span><span class="p">)</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+         <span class="c1"># Flush cached file system writes</span>
+         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+             <span class="n">os</span><span class="o">.</span><span class="n">fsync</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span></div>
+         
+     <span class="c1"># Reading</span>
+<div class="viewcode-block" id="iofile.read"><a class="viewcode-back" href="../../index.html#thesdk.iofile.iofile.read">[docs]</a>     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39; Method to read the file</span>
+
+<span class="sd">         Parameters</span>
+<span class="sd">         ----------</span>
+
+<span class="sd">         **kwargs:</span>
+<span class="sd">            datatype: str, self.datatype</span>
+<span class="sd">                Controls if the data is read in as complex or real</span>
+<span class="sd">            dtype: str, &#39;object&#39;</span>
+<span class="sd">                The datatype of the actual file. Default is object, </span>
+<span class="sd">                i.e data is first read to internal variable as string. </span>
+<span class="sd">                This is a help parameter to give more control over reading.</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="n">fid</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="p">)</span>
+         <span class="n">dtype</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dtype&#39;</span><span class="p">,</span><span class="nb">object</span><span class="p">)</span>
+         <span class="n">readd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+         <span class="c1">#read method for complex signal matrix</span>
+         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="ow">is</span> <span class="s1">&#39;complex&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="ow">is</span> <span class="s1">&#39;scomplex&#39;</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Reading complex&quot;</span><span class="p">)</span>
+             <span class="n">rows</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+             <span class="n">cols</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+                 <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">Data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>\
+                             <span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+                 <span class="k">else</span><span class="p">:</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">Data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>\
+                             <span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+ 
+         <span class="k">else</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="n">readd</span><span class="o">.</span><span class="n">values</span>
+         <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+ 
+     <span class="c1"># Remove the file when no longer needed</span>
+<div class="viewcode-block" id="iofile.remove"><a class="viewcode-back" href="../../index.html#thesdk.iofile.iofile.remove">[docs]</a>     <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="sd">&#39;&#39;&#39;Remove the file</span>
+
+<span class="sd">         &#39;&#39;&#39;</span>
+         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Preserve_value is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preserve</span><span class="p">))</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Preserving file </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="k">try</span><span class="p">:</span>
+                 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+             <span class="k">except</span><span class="p">:</span>
+                 <span class="k">pass</span></div></div>
+ 
+ 
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
