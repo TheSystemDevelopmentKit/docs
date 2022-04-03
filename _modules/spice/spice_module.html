@@ -259,7 +259,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_subckt</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="spice_module.subinst_constructor"><a class="viewcode-back" href="../../index.html#spice.spice_module.spice_module.subinst_constructor">[docs]</a>    <span class="k">def</span> <span class="nf">subinst_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Method that parses the subcircuit definition and </span>
+        <span class="sd">&#39;&#39;&#39; Method that parses the subcircuit definition and </span>
 <span class="sd">            constructs a subcircuit instance out of it</span>
 
 <span class="sd">        Parameters :</span>
@@ -267,7 +267,7 @@
 <span class="sd">        **kwargs:  </span>
 <span class="sd">            subckt : string</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">subckt</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subckt&#39;</span><span class="p">)</span>
         <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">syntaxdict</span><span class="p">[</span><span class="s2">&quot;subckt&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
                 <span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
