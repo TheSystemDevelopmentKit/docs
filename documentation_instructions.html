@@ -44,7 +44,10 @@
 <li class="toctree-l1"><a class="reference internal" href="rtl/sections.html">RTL interface classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spice/sections.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#continuous-implementation-build-process-for-documentation">Continuous implementation-build process for documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documenation-strucure">Documenation Strucure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#continuous-implementation-build-process-for-documentation">Continuous implementation-build process for documentation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="indices_and_tables.html">Indices and tables</a></li>
@@ -76,10 +79,25 @@
              
   <section id="documentation-instructions">
 <h1>Documentation instructions<a class="headerlink" href="#documentation-instructions" title="Permalink to this headline"></a></h1>
+<p>TheSyDeKick is documented with Sphinx automated docsring documentation using ReStructuredText.
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html</a></p>
 <p>Current docstring documentation style is Numpy
 <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a></p>
+<section id="documenation-strucure">
+<h2>Documenation Strucure<a class="headerlink" href="#documenation-strucure" title="Permalink to this headline"></a></h2>
+<p>Documentation of an Entity is defined in <cite>&lt;Entity&gt;/doc</cite>. You can use any of the core entities
+(thesdk, rtl, spice) as an example.</p>
+<p>The idea of the documenation is the following:</p>
+<ul class="simple">
+<li><p>doc/sources/conf.py defines the dependencies of the documenation Sphinx build.</p></li>
+<li><p>doc/sources/index.rst defines the title and the structure of the Entity documenation</p></li>
+<li><p>doc/sources/sections.rst defines the contents of the documentation so that it can be included <cite>as is</cite>
+to compilation performed at another location. This documentaion is an example of that.</p></li>
+<li><p>doc/sources/indices_and_tables.rst is a definition of automated glossary. It is separated from sections and index.rst in order not to repeat the glossaries in compilations at another location.</p></li>
+<li><p>documentation is build in <cite>&lt;Entity&gt;/doc</cite> with <cite>make html</cite> . Under <cite>&lt;Entity&gt;</cite> the configure script should generate a Makefile with a recipe <cite>doc</cite> that executes <cite>cd doc &amp;&amp; make html</cite>.</p></li>
+</ul>
 <section id="continuous-implementation-build-process-for-documentation">
-<h2>Continuous implementation-build process for documentation<a class="headerlink" href="#continuous-implementation-build-process-for-documentation" title="Permalink to this headline"></a></h2>
+<h3>Continuous implementation-build process for documentation<a class="headerlink" href="#continuous-implementation-build-process-for-documentation" title="Permalink to this headline"></a></h3>
 <p>Documentation build environment for Sphinx-docstrings build are located in <cite>$THESDKHOME/docs</cite></p>
 <p>CI documentation build process uses a docker configuration
 <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdktestimage">https://github.com/TheSystemDevelopmentKit/thesdktestimage</a> that has an automated relelease to registry.
@@ -91,11 +109,12 @@ which defines the branch to which the pushes launces execution of a script <cite
 <p>Conlusion:</p>
 <ul class="simple">
 <li><p>To edit the contents of the documenation, edit the docstrings of the entity python files,
-the files doc/sources of corresponding entities, and the files under THESDKHOME/dosc/sources.</p></li>
+the files doc/sources of corresponding entities, and the files under <cite>THESDKHOME/dosc/sources</cite>.</p></li>
 <li><p>To reconfigure the build environment, modify <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdktestimage">https://github.com/TheSystemDevelopmentKit/thesdktestimage</a>.</p></li>
 <li><p>To configure on which branches the build process is launced, edit <cite>$THESDKHOME/.github/workflows/main.yaml</cite></p></li>
 <li><p>To control the build process, edit <cite>$THESDKHOME/CI-helpers/build_docs.sh</cite></p></li>
 </ul>
+</section>
 </section>
 </section>
 
