@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spice &mdash; TheSyDeKick 1.8_RC documentation</title>
+  <title>Spice simulator interface classess &mdash; TheSyDeKick 1.8_RC documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Documentation instructions" href="../documentation_instructions.html" />
-    <link rel="prev" title="RTL package" href="../rtl/sections.html" /> 
+    <link rel="prev" title="RTL interface classes" href="../rtl/sections.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,17 +41,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#rtl-iofile-module">RTL IOfile module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#testbench">Testbench</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#module">Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#entity">Entity</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Spice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#spice-io-file">Spice IO-file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#spice-simulation-command">Spice Simulation Command</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#spice-dc-source">Spice DC Source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#spice-testbench">Spice Testbench</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#spice-module">Spice Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spice simulator interface classess</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#spice">Spice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice-module">Spice Module</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
 </ul>
@@ -70,7 +69,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Spice</li>
+      <li>Spice simulator interface classess</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/spice/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -80,8 +79,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="module-spice"></span><section id="spice">
-<h1>Spice<a class="headerlink" href="#spice" title="Permalink to this headline"></a></h1>
+  <section id="module-spice">
+<span id="spice-simulator-interface-classess"></span><h1>Spice simulator interface classess<a class="headerlink" href="#module-spice" title="Permalink to this headline"></a></h1>
+<section id="spice">
+<h2>Spice<a class="headerlink" href="#spice" title="Permalink to this headline"></a></h2>
 <p>Analog simulation interface package for TheSyDeKick.</p>
 <p>Provides utilities to import spice-like modules to Python environment and
 generate testbenches for the various simulation cases.</p>
@@ -530,7 +531,7 @@ iofile with direction ‘input’.</p>
 
 </section>
 <span class="target" id="module-spice.spice_iofile"></span><section id="spice-io-file">
-<h1>Spice IO-file<a class="headerlink" href="#spice-io-file" title="Permalink to this headline"></a></h1>
+<h2>Spice IO-file<a class="headerlink" href="#spice-io-file" title="Permalink to this headline"></a></h2>
 <p>Provides spice file IO related attributes and methods
 for TheSDK spice.</p>
 <p>Initially written by Okko Järvinen, 2020</p>
@@ -921,7 +922,7 @@ threshold crossing as possible.</p></li>
 
 </section>
 <span class="target" id="module-spice.spice_simcmd"></span><section id="spice-simulation-command">
-<h1>Spice Simulation Command<a class="headerlink" href="#spice-simulation-command" title="Permalink to this headline"></a></h1>
+<h2>Spice Simulation Command<a class="headerlink" href="#spice-simulation-command" title="Permalink to this headline"></a></h2>
 <p>Class for spice simulation commands.</p>
 <p>Initially written by Okko Järvinen, 9.1.2020</p>
 <dl class="py class">
@@ -1310,7 +1311,7 @@ post-processing results in Python.</p>
 
 </section>
 <span class="target" id="module-spice.spice_dcsource"></span><section id="spice-dc-source">
-<h1>Spice DC Source<a class="headerlink" href="#spice-dc-source" title="Permalink to this headline"></a></h1>
+<h2>Spice DC Source<a class="headerlink" href="#spice-dc-source" title="Permalink to this headline"></a></h2>
 <p>Class for generating DC voltage/current sources in the Spectre or Eldo
 testbench.</p>
 <p>Initially written by Okko Järvinen, 9.1.2020</p>
@@ -1485,7 +1486,7 @@ self.extract=True.</p>
 
 </section>
 <span class="target" id="module-spice.testbench"></span><section id="spice-testbench">
-<h1>Spice Testbench<a class="headerlink" href="#spice-testbench" title="Permalink to this headline"></a></h1>
+<h2>Spice Testbench<a class="headerlink" href="#spice-testbench" title="Permalink to this headline"></a></h2>
 <p>Testbench generation class for spice simulations.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.testbench.testbench">
@@ -1612,7 +1613,7 @@ instantiated in the parent entity.</p>
 
 </section>
 <span class="target" id="module-spice.spice_module"></span><section id="spice-module">
-<h1>Spice Module<a class="headerlink" href="#spice-module" title="Permalink to this headline"></a></h1>
+<h2>Spice Module<a class="headerlink" href="#spice-module" title="Permalink to this headline"></a></h2>
 <p>Class for Spice netlist parsing.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.spice_module.spice_module">
@@ -1677,12 +1678,13 @@ constructs a subcircuit instance out of it.</p>
 </dd></dl>
 
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../rtl/sections.html" class="btn btn-neutral float-left" title="RTL package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rtl/sections.html" class="btn btn-neutral float-left" title="RTL interface classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../documentation_instructions.html" class="btn btn-neutral float-right" title="Documentation instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
