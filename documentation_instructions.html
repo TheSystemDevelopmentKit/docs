@@ -43,7 +43,10 @@
 <li class="toctree-l1"><a class="reference internal" href="thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rtl/sections.html">RTL interface classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spice/sections.html">Spice simulator interface classess</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-implementation-build-process-for-documentation">Continuous implementation-build process for documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="indices_and_tables.html">Indices and tables</a></li>
 </ul>
 
@@ -75,6 +78,25 @@
 <h1>Documentation instructions<a class="headerlink" href="#documentation-instructions" title="Permalink to this headline"></a></h1>
 <p>Current docstring documentation style is Numpy
 <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a></p>
+<section id="continuous-implementation-build-process-for-documentation">
+<h2>Continuous implementation-build process for documentation<a class="headerlink" href="#continuous-implementation-build-process-for-documentation" title="Permalink to this headline"></a></h2>
+<p>Documentation build environment for Sphinx-docstrings build are located in <cite>$THESDKHOME/docs</cite></p>
+<p>CI documentation build process uses a docker configuration
+<a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdktestimage">https://github.com/TheSystemDevelopmentKit/thesdktestimage</a> that has an automated relelease to registry.
+The image is currently a fedora34 image with installed software for building the docs, and there should
+not be need to edit that unless the build process fails due to a missing software. Python dependencies are
+installed during the build by pip3userinstall.sh script.</p>
+<p>Aforementioned image is used in the workflow definition file <cite>$THESDKHOME.github/workflows/main.yaml</cite>
+which defines the branch to which the pushes launces execution of a script <cite>$THESDKHOME/CI-helpers/build_docs.sh</cite>.</p>
+<p>Conlusion:</p>
+<ul class="simple">
+<li><p>To edit the contents of the documenation, edit the docstrings of the entity python files,
+the files doc/sources of corresponding entities, and the files under THESDKHOME/dosc/sources.</p></li>
+<li><p>To reconfigure the build environment, modify <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdktestimage">https://github.com/TheSystemDevelopmentKit/thesdktestimage</a>.</p></li>
+<li><p>To configure on which branches the build process is launced, edit <cite>$THESDKHOME/.github/workflows/main.yaml</cite></p></li>
+<li><p>To control the build process, edit <cite>$THESDKHOME/CI-helpers/build_docs.sh</cite></p></li>
+</ul>
+</section>
 </section>
 
 
