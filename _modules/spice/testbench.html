@@ -34,8 +34,25 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html">RTL package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#rtl-iofile-module">RTL IOfile module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#testbench">Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#module">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#entity">Entity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html">Spice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-module">Spice Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -87,7 +104,7 @@
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<div class="viewcode-block" id="testbench"><a class="viewcode-back" href="../../index.html#spice.testbench.testbench">[docs]</a><span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">spice_module</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench">[docs]</a><span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">spice_module</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class generates all testbench contents.</span>
 <span class="sd">    This class is utilized by the main spice class.</span>
@@ -209,7 +226,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">=</span> <span class="s2">&quot;*** Eldo device models</span><span class="se">\n</span><span class="s2">&quot;</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;.lib &quot;</span> <span class="o">+</span> <span class="n">libfile</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">corner</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable ELDOLIBPATH not set.&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable ELDOLIBFILE not set.&#39;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">=</span> <span class="s2">&quot;*** Eldo device models (undefined)</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;*.lib &quot;</span> <span class="o">+</span> <span class="n">libfile</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">corner</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;.temp &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -222,7 +239,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">=</span> <span class="s2">&quot;// Spectre device models</span><span class="se">\n</span><span class="s2">&quot;</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s1">&#39;include &quot;</span><span class="si">%s</span><span class="s1">&quot; section=</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">libfile</span><span class="p">,</span><span class="n">corner</span><span class="p">)</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable SPECTRELIBPATH not set.&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable SPECTRELIBFILE not set.&#39;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">=</span> <span class="s2">&quot;// Spectre device models (undefined)</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;//include &quot;</span> <span class="o">+</span> <span class="n">libfile</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">corner</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s1">&#39;tempOption options temp=</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
@@ -235,7 +252,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">=</span> <span class="s2">&quot;*** Ngspice device models</span><span class="se">\n</span><span class="s2">&quot;</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;.lib &quot;</span> <span class="o">+</span> <span class="n">libfile</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">corner</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable ELDOLIBPATH not set.&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable ELDOLIBFILE not set.&#39;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">=</span> <span class="s2">&quot;*** Eldo device models (undefined)</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;*.lib &quot;</span> <span class="o">+</span> <span class="n">libfile</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">corner</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_libcmd</span> <span class="o">+=</span> <span class="s2">&quot;.temp &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -698,7 +715,7 @@
     <span class="k">def</span> <span class="nf">simcmdstr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simcmdstr</span><span class="o">=</span><span class="kc">None</span>
     
-<div class="viewcode-block" id="testbench.esc_bus"><a class="viewcode-back" href="../../index.html#spice.testbench.testbench.esc_bus">[docs]</a>    <span class="k">def</span> <span class="nf">esc_bus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">esc_colon</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.esc_bus"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.esc_bus">[docs]</a>    <span class="k">def</span> <span class="nf">esc_bus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">esc_colon</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper function to escape bus characters for Spectre simulations::</span>
 
@@ -935,7 +952,7 @@
     <span class="k">def</span> <span class="nf">plotcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span><span class="o">=</span><span class="kc">None</span>
 
-<div class="viewcode-block" id="testbench.export"><a class="viewcode-back" href="../../index.html#spice.testbench.testbench.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.export"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to write the testbench to a file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -952,7 +969,7 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">module_file</span><span class="p">:</span>
                 <span class="n">module_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="testbench.export_subckt"><a class="viewcode-back" href="../../index.html#spice.testbench.testbench.export_subckt">[docs]</a>    <span class="k">def</span> <span class="nf">export_subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.export_subckt"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.export_subckt">[docs]</a>    <span class="k">def</span> <span class="nf">export_subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to write the parsed subcircuit definitions</span>
 <span class="sd">        to a file.</span>
@@ -972,7 +989,7 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesubcktsrc</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">module_file</span><span class="p">:</span>
                 <span class="n">module_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subckt</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="testbench.generate_contents"><a class="viewcode-back" href="../../index.html#spice.testbench.testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.generate_contents"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to generate testbench contents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

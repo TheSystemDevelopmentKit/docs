@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thesdk core classes &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RTL package" href="../rtl/sections.html" />
+    <link rel="prev" title="Introduction to TheSyDeKick template" href="../introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Thesdk core classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#thesdk">Thesdk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iofile-package">Iofile package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#rtl-iofile-module">RTL IOfile module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#testbench">Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#module">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#entity">Entity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-module">Spice Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Thesdk core classes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/thesdk/sections.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-thesdk">
+<span id="thesdk-core-classes"></span><h1>Thesdk core classes<a class="headerlink" href="#module-thesdk" title="Permalink to this headline"></a></h1>
+<section id="thesdk">
+<h2>Thesdk<a class="headerlink" href="#thesdk" title="Permalink to this headline"></a></h2>
+<p>Superclass class of TheSyDeKick - universal System Development Kit. Provides
+commmon methods and utility classes for other classes in TheSyDeKick.</p>
+<p>Created by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 2017.</p>
+<p>Documentation instructions</p>
+<p>Current docstring documentation style is Numpy
+<a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a></p>
+<p>This text here is to remind you that documentation is important.
+However, you may find out that even the documentation of this
+entity may be outdated and incomplete. Regardless of that, every day
+and in every way we are getting better and better :).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="thesdk.thesdk">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">thesdk</span></span><a class="reference internal" href="../_modules/thesdk.html#thesdk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk" title="Permalink to this definition"></a></dt>
+<dd><p>Following class attributes are set when this class imported</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="thesdk.thesdk.HOME">
+<span class="sig-name descname"><span class="pre">HOME</span></span><a class="headerlink" href="#thesdk.thesdk.HOME" title="Permalink to this definition"></a></dt>
+<dd><p>Directory ../../../ counting from location __init__.py file of
+thesdkclass. Used as a reference point for other locations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="thesdk.thesdk.CONFIGFILE">
+<span class="sig-name descname"><span class="pre">CONFIGFILE</span></span><a class="headerlink" href="#thesdk.thesdk.CONFIGFILE" title="Permalink to this definition"></a></dt>
+<dd><p>HOME/TheSDK.config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="thesdk.thesdk.MODULEPATHS">
+<span class="sig-name descname"><span class="pre">MODULEPATHS</span></span><a class="headerlink" href="#thesdk.thesdk.MODULEPATHS" title="Permalink to this definition"></a></dt>
+<dd><p>List of directories under HOME/Entities  that contain __init__.py file.
+Appended to sys.path to locate TheSyDeKick system modules</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="thesdk.thesdk.logfile">
+<span class="sig-name descname"><span class="pre">logfile</span></span><a class="headerlink" href="#thesdk.thesdk.logfile" title="Permalink to this definition"></a></dt>
+<dd><p>Default logfile:  /tmp/TheSDK_randomstr_uname_YYYYMMDDHHMM.log
+Override with initlog if you want something else</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="thesdk.thesdk.global_parameters">
+<span class="sig-name descname"><span class="pre">global_parameters</span></span><a class="headerlink" href="#thesdk.thesdk.global_parameters" title="Permalink to this definition"></a></dt>
+<dd><p>List of global parameters to be read to GLOBALS dictionary from CONFIGFILE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="thesdk.thesdk.GLOBALS">
+<span class="sig-name descname"><span class="pre">GLOBALS</span></span><a class="headerlink" href="#thesdk.thesdk.GLOBALS" title="Permalink to this definition"></a></dt>
+<dd><p>Dictionary of global parameters, keys defined by global_parameters,
+values defined in CONFIGFILE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.initlog">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.initlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.initlog" title="Permalink to this definition"></a></dt>
+<dd><p>Initializes logging. logfile passed as a parameter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.DEBUG">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DEBUG</span></span><a class="headerlink" href="#thesdk.thesdk.DEBUG" title="Permalink to this definition"></a></dt>
+<dd><p>Set this to True if you want the debug messages printed</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.print_relative_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_relative_path</span></span><a class="headerlink" href="#thesdk.thesdk.print_relative_path" title="Permalink to this definition"></a></dt>
+<dd><p>True (default) | False</p>
+<p>If True, print all paths relative to the entity path. If False, paths
+are printed as is (typically absolute paths).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk._classfile">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.thesdk._classfile" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract property of thesdk class. Defines the location of the
+classfile.</p>
+<p>Define in every child class of thesdk as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.entitypath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entitypath</span></span><a class="headerlink" href="#thesdk.thesdk.entitypath" title="Permalink to this definition"></a></dt>
+<dd><p>Path to entity. Extracted from the location of __init__.py file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#thesdk.thesdk.model" title="Permalink to this definition"></a></dt>
+<dd><p>Simulation model to be used</p>
+<p>‘py’ |  ‘sv’ |  ‘vhdl’ |  ‘eldo’ |  ‘spectre’ | ‘ngspice’ | ‘hw’</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.simpath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simpath</span></span><a class="headerlink" href="#thesdk.thesdk.simpath" title="Permalink to this definition"></a></dt>
+<dd><p>String</p>
+<p>Simulation path. (./simulations/&lt;model&gt;/&lt;runname&gt;)
+This is not meant to be set manually.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.has_lsf">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_lsf</span></span><a class="headerlink" href="#thesdk.thesdk.has_lsf" title="Permalink to this definition"></a></dt>
+<dd><p>True | False (default)</p>
+<p>True if LSFINTERACTIVE and LSFSUBMISSION global veriables are defined
+in TheSDK.config.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.preserve_iofiles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preserve_iofiles</span></span><a class="headerlink" href="#thesdk.thesdk.preserve_iofiles" title="Permalink to this definition"></a></dt>
+<dd><p>True | False (default)</p>
+<p>If True, do not delete IO files after
+simulations. Useful for debugging the file IO</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.copy_propval">
+<span class="sig-name descname"><span class="pre">copy_propval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.copy_propval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.copy_propval" title="Permalink to this definition"></a></dt>
+<dd><p>Method to copy attributes form parent.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">some_thesdk_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Attributes listed in proplist attribute of ‘some_thesdkclass’ are copied from
+self to a. Impemented by including following code at the end of __init__ method
+of every entity:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">parent</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">copy_propval</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span><span class="n">parent</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.print_log">
+<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.print_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.print_log" title="Permalink to this definition"></a></dt>
+<dd><p>Method to print messages to ‘logfile’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
+<dt>type: str</dt><dd><p>’I’ = Information
+‘D’ = Debug. Enabled by setting the Debug-attribute of an instance to true
+‘W’ = Warning
+‘E’ = Error
+‘F’ = Fatal, quits the execution
+‘O’ = Obsolete, used for obsolition warnings.</p>
+</dd>
+<dt>msg: str</dt><dd><p>The messge to be printed</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.timer">
+<span class="sig-name descname"><span class="pre">timer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.timer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.timer" title="Permalink to this definition"></a></dt>
+<dd><p>Timer decorator</p>
+<p>Print execution time of member functions of classes inheriting
+thesdk to the logfile.</p>
+<p>The timer is applied by decorating the function to be timed with
+&#64;thesdk.timer. For example, calling a function
+calculate_something() belonging to an example class
+calculator(thesdk), would print the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">calculator</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+
+    <span class="nd">@thesdk</span><span class="o">.</span><span class="n">timer</span>
+    <span class="k">def</span> <span class="nf">calculate_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Time-consuming calculations here</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="o">&gt;&gt;</span> <span class="n">calc</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">()</span>
+<span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">calculate_something</span><span class="p">()</span>
+<span class="mi">42</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">at</span> <span class="n">calculator</span><span class="p">:</span> <span class="n">Finished</span> <span class="s1">&#39;calculate_something&#39;</span> <span class="ow">in</span> <span class="mf">0.758</span> <span class="n">s</span><span class="o">.</span>
+<span class="o">&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="mi">42</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.silence">
+<span class="sig-name descname"><span class="pre">silence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.silence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.silence" title="Permalink to this definition"></a></dt>
+<dd><p>Context manager to redirect stdout (and optional errors) to /dev/null.
+Useful for cleaning up verbose function outputs. The silencing can be
+bypassed by setting debug=True. Errors are let through by default, but
+error messages can be silenced also by setting show_error=False.
+Silences only Python outputs (external commands such as spectre can
+still write to stdout).</p>
+<p>To silence (prevent printing to stdout) of a section of code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is printed normally&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">silence</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This will not be printed&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is again printed normally&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.par">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">par</span></span><a class="headerlink" href="#thesdk.thesdk.par" title="Permalink to this definition"></a></dt>
+<dd><p>True | False (default)</p>
+<p>Property defines whether parallel run is intended or not</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.queue">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">queue</span></span><a class="headerlink" href="#thesdk.thesdk.queue" title="Permalink to this definition"></a></dt>
+<dd><p>Property holding the queue for parallel run result</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.run_parallel">
+<span class="sig-name descname"><span class="pre">run_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.run_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.run_parallel" title="Permalink to this definition"></a></dt>
+<dd><p>Run instances in parallel and collect results</p>
+<p>Usage: Takes in a set of instances, runs a given method for them, and
+saves result data to the original instances.</p>
+<p>Results are returned as a dictionary. The dictionary can include IOS,
+which are saved to IOS of the original instance. Otherwise non-IO
+key-value pairs are saved as members of self.extracts.Members for the
+original instance. This is an example of returning both IOS and other
+data (place at the end of your simulation method, e.g. run()):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">:</span>
+    <span class="n">ret_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NF&#39;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+    <span class="n">ret_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span> <span class="c1">#Adds IOS to return dictionary</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">ret_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some simulator modules can populate the extracts-bundle with generic
+extracted parameters. To pass this dictionary to the original instance,
+following example can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">:</span>
+    <span class="c1"># Combine IOS and extracts into one dictionary</span>
+    <span class="n">ret_dict</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">,</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">ret_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
+<dt>duts: list</dt><dd><p>List of instances you want to simulate</p>
+</dd>
+<dt>method: str</dt><dd><p>Method called for each instance (default: run)</p>
+</dd>
+<dt>max_jobs: int</dt><dd><p>Maximum number of concurrent jobs. Unlimited by default.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.IOS">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IOS</span></span><a class="headerlink" href="#thesdk.thesdk.IOS" title="Permalink to this definition"></a></dt>
+<dd><p>Bundle of IO’s</p>
+<p>Property holding the IOS</p>
+<p class="rubric">Example</p>
+<p>self.IOS.Members[‘input_A’]=IO()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.extracts">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extracts</span></span><a class="headerlink" href="#thesdk.thesdk.extracts" title="Permalink to this definition"></a></dt>
+<dd><p>Bundle</p>
+<p>Bundle for holding the returned results from simulations that are
+not attributes or IOs.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;sndr&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">60</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.print_colors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_colors</span></span><a class="headerlink" href="#thesdk.thesdk.print_colors" title="Permalink to this definition"></a></dt>
+<dd><p>True (default) | False</p>
+<p>Enable color tags in log print messages.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.runname">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runname</span></span><a class="headerlink" href="#thesdk.thesdk.runname" title="Permalink to this definition"></a></dt>
+<dd><p>String</p>
+<p>Automatically generated name for the simulation.</p>
+<p>Formatted as timestamp_randomtag, i.e. ‘20201002103638_tmpdbw11nr4’.
+Can be overridden by assigning self.runname = ‘myname’.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">runname</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+</pre></div>
+</div>
+<p>would generate the simulation files in <cite>simulations/&lt;model&gt;/test/</cite>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.statepath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statepath</span></span><a class="headerlink" href="#thesdk.thesdk.statepath" title="Permalink to this definition"></a></dt>
+<dd><p>String</p>
+<p>Path where the entity state is stored and where existing states are
+loaded from.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.statedir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statedir</span></span><a class="headerlink" href="#thesdk.thesdk.statedir" title="Permalink to this definition"></a></dt>
+<dd><p>String</p>
+<p>Path to the most recently stored state.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.save_state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_state</span></span><a class="headerlink" href="#thesdk.thesdk.save_state" title="Permalink to this definition"></a></dt>
+<dd><p>True | False (default)</p>
+<p>Save the entity state after simulation (including output data). Any
+stored state can be loaded using the matching state name passed to the
+<cite>load_state</cite> property. The state is saved to <cite>savestatepath</cite> by default.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.load_state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state</span></span><a class="headerlink" href="#thesdk.thesdk.load_state" title="Permalink to this definition"></a></dt>
+<dd><p>String (default ‘’)</p>
+<p>Feature for loading results of previous simulation. When calling run()
+with this property set, the simulation is not re-executed, but the
+entity state and output data will be read from the saved state. The
+string value should be the <cite>runname</cite> of the desired simulation.</p>
+<p>Loading the most recent result automatically:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">=</span> <span class="s1">&#39;last&#39;</span>
+<span class="c1"># or</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">=</span> <span class="s1">&#39;latest&#39;</span>
+</pre></div>
+</div>
+<p>Loading a specific past result using the <cite>runname</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">=</span> <span class="s1">&#39;20201002103638_tmpdbw11nr4&#39;</span>
+</pre></div>
+</div>
+<p>List available results by providing any non-existent <cite>runname</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">=</span> <span class="s1">&#39;this_does_not_exist&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.load_state_full">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state_full</span></span><a class="headerlink" href="#thesdk.thesdk.load_state_full" title="Permalink to this definition"></a></dt>
+<dd><p>True (default) | False</p>
+<p>Whether to load the full entity state or not. If False, only IOs are
+loaded in order to not override the entity state otherwise. In that
+case, bundles <cite>IOS</cite> and <cite>extracts</cite> are updated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk._write_state">
+<span class="sig-name descname"><span class="pre">_write_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk._write_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk._write_state" title="Permalink to this definition"></a></dt>
+<dd><p>Write the entity state to a binary file.</p>
+<p>This should be called after the simulation has finished.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk._read_state">
+<span class="sig-name descname"><span class="pre">_read_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk._read_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk._read_state" title="Permalink to this definition"></a></dt>
+<dd><p>Read the entity state from a binary file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.iofile_bundle">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofile_bundle</span></span><a class="headerlink" href="#thesdk.thesdk.iofile_bundle" title="Permalink to this definition"></a></dt>
+<dd><p>Bundle</p>
+<p>A thesdk.Bundle containing <cite>iofile</cite> objects. The <cite>iofile</cite>
+objects are automatically added to this Bundle, nothing should be
+manually added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.thesdk.delete_iofile_bundle">
+<span class="sig-name descname"><span class="pre">delete_iofile_bundle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.delete_iofile_bundle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.delete_iofile_bundle" title="Permalink to this definition"></a></dt>
+<dd><p>Method to delete all files in iofile bundle</p>
+<p>For each of the member of the bundle of type iofile, it calls ‘remove’ method.
+In case modifications are needed, define class for desired iofile type with remove method.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="thesdk.IO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">IO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#IO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.IO" title="Permalink to this definition"></a></dt>
+<dd><p>TheSyDeKick IO class. Child of thesdk to utilize logging method.</p>
+<p>The IOs of an entity must be defined as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">IO</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and referred to as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
+<dt>Data: numpy_array, None</dt><dd><p>Sets the Data attribute during the initialization</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.IO._classfile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.IO._classfile" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract property of thesdk class. Defines the location of the
+classfile.</p>
+<p>Define in every child class of thesdk as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.IO.Data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#thesdk.IO.Data" title="Permalink to this definition"></a></dt>
+<dd><p>Data value of this IO</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<span class="target" id="module-thesdk.iofile"></span><section id="iofile-package">
+<h2>Iofile package<a class="headerlink" href="#iofile-package" title="Permalink to this headline"></a></h2>
+<p>Provides Common file-io related attributes and methods
+for TheSyDeKinck</p>
+<p>This package defines the CSF IO-file format and methods for all supported simulators.
+Intention is to keep as much of the file io as general adn common as possible.
+The simulator specific file-io functions should be written in simulator specific file-io
+packages.</p>
+<p>Initially written for Verilog file-io by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>,
+Yue Dai, 2018</p>
+<p>Generalized for common file-io by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>,
+2019.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.iofile.</span></span><span class="sig-name descname"><span class="pre">iofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile" title="Permalink to this definition"></a></dt>
+<dd><p>Class to provide file IO for external simulators.</p>
+<p>When created, adds an iofile object to the parents iofile_bundle attribute.
+Accessible as iofile_bundle.Members[‘name’].</p>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>Initiated in parent as:</dt><dd><p>_=iofile(self,name=’foobar’)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
+<li><p><strong>**kwargs</strong> – <dl class="simple">
+<dt>name: str</dt><dd><p>Name of the file. Appended with
+random string during the simulation.</p>
+</dd>
+<dt>param: str,  -g g_file</dt><dd><p>The string defining the testbench parameter to be be
+passed to the simulator at command line.</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.adopt">
+<span class="sig-name descname"><span class="pre">adopt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.adopt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.adopt" title="Permalink to this definition"></a></dt>
+<dd><p>Redefine the parent entity of the file. Afrects where the file is written during the simulation</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.datatype">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">datatype</span></span><a class="headerlink" href="#thesdk.iofile.iofile.datatype" title="Permalink to this definition"></a></dt>
+<dd><p>Type of the data. Controls the reading and writing of the data
+‘complex’ | ‘int’ | ‘scomplex’ | ‘sint’ | object</p>
+<dl class="simple">
+<dt>int | sint:</dt><dd><p>Values of the data are handled as unsigned or signed integers</p>
+</dd>
+<dt>complex | scomplex:</dt><dd><p>It is assumed that each column of the Data represents a complex number with
+integer real and imaginary parts.  This is typical for RTL simulations.
+when the data is read or written, the columns are treated as Real Imag pairs.
+When writing, columns are split to two, when reading, adjacent colums are merged</p>
+</dd>
+<dt>object:</dt><dd><p>Values are read and written as defined by the ‘dtype’ parameter
+of the read method. Default is object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#thesdk.iofile.iofile.dir" title="Permalink to this definition"></a></dt>
+<dd><p>Direction of the iofile, in | out</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.file">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#thesdk.iofile.iofile.file" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the IO file to be read or written.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.ionames">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ionames</span></span><a class="headerlink" href="#thesdk.iofile.iofile.ionames" title="Permalink to this definition"></a></dt>
+<dd><p>Names of the DUT signals represented by the colums of the data.
+Two elements per colums should be given, if the type is complex or scomplex.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.iotype">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iotype</span></span><a class="headerlink" href="#thesdk.iofile.iofile.iotype" title="Permalink to this definition"></a></dt>
+<dd><p>sample | event</p>
+<dl class="simple">
+<dt>sample</dt><dd><p>IO is synchronized with a sampling clock. Each of the rows represents the data valua at known sample insatnce</p>
+</dd>
+<dt>event</dt><dd><p>IO is asynchronous. The first colums of the file should be the time of the event</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Type of the IO</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.read" title="Permalink to this definition"></a></dt>
+<dd><p>Method to read the file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
+<dt>datatype: str, self.datatype</dt><dd><p>Controls if the data is read in as complex or real</p>
+</dd>
+<dt>dtype: str, ‘object’</dt><dd><p>The datatype of the actual file. Default is object,
+i.e data is first read to internal variable as string.
+This is a help parameter to give more control over reading.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.remove" title="Permalink to this definition"></a></dt>
+<dd><p>Remove the file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thesdk.iofile.iofile.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.write" title="Permalink to this definition"></a></dt>
+<dd><p>Method to write the file</p>
+<p>Sets the ‘dir’ attribute to ‘in’, because only input files are written.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
+<dt>data: numpy_array, self.Data</dt><dd><p>Data to be written.</p>
+</dd>
+<dt>datatype: str, self.Datatype</dt><dd><p>Datatype of the data.</p>
+</dd>
+<dt>iotype: str, self.iotype</dt><dd><p>IO type of the IO file.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../introduction.html" class="btn btn-neutral float-left" title="Introduction to TheSyDeKick template" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rtl/sections.html" class="btn btn-neutral float-right" title="RTL package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

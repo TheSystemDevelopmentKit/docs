@@ -2,73 +2,24 @@
    You can adapt this file completely to your liking, 
    but it should at least contain the root `toctree` directive.
 
+   
+========================================================
+TheSyDeKick - Complete kit for Sytem-on-Chip development
+========================================================
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
-   
-TheSyDeKick
-===========
-.. automodule:: thesdk
-   :members:
-   :private-members:
-   :special-members: __getattr__
-   :member-order: bysource
 
-.. automodule:: thesdk.iofile
-   :members:
-   :undoc-members:
+   introduction
 
-RTL
-===
-.. automodule:: rtl
-   :members:
-   :undoc-members:
+   thesdk/sections
 
-.. automodule:: rtl.rtl_iofile
-   :members:
-   :undoc-members:
+   rtl/sections
 
-.. automodule:: rtl.testbench
-   :members:
-   :undoc-members:
+   spice/sections
 
-.. automodule:: rtl.module
-   :members:
-   :undoc-members:
+   documentation_instructions
 
-.. automodule:: rtl.entity
-   :members:
-   :undoc-members:
+   indices_and_tables
 
-Spice
-=====
-.. automodule:: spice
-   :members:
-   :undoc-members:
-
-.. automodule:: spice.spice_iofile
-   :members:
-   :undoc-members:
-
-.. automodule:: spice.spice_simcmd
-   :members:
-   :undoc-members:
-
-.. automodule:: spice.spice_dcsource
-   :members:
-   :undoc-members:
-
-.. automodule:: spice.testbench
-   :members:
-   :undoc-members:
-
-.. automodule:: spice.spice_module
-   :members:
-   :undoc-members:
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

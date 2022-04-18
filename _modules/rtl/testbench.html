@@ -34,8 +34,25 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html">RTL package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#rtl-iofile-module">RTL IOfile module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#testbench">Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#module">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html#entity">Entity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html">Spice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html#spice-module">Spice Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -97,7 +114,7 @@
 <span class="c1">## at least between blocks</span>
 <span class="c1">## Default structure during initialization?</span>
 
-<div class="viewcode-block" id="testbench"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench">[docs]</a><span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">verilog_module</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench">[docs]</a><span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">verilog_module</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; Testbench class. Extends `verilog_module`</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -180,7 +197,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_instances</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_instances</span>
 
-<div class="viewcode-block" id="testbench.verilog_instance_add"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.verilog_instance_add">[docs]</a>    <span class="k">def</span> <span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.verilog_instance_add"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.verilog_instance_add">[docs]</a>    <span class="k">def</span> <span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Add verilog instance to the Bundle fro a file</span>
 
 <span class="sd">        Parameters</span>
@@ -226,7 +243,7 @@
                 <span class="n">definitions</span><span class="o">=</span><span class="n">definitions</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">definition</span>
         <span class="k">return</span> <span class="n">definitions</span>
 
-<div class="viewcode-block" id="testbench.assignments"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.assignments">[docs]</a>    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.assignments"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.assignments">[docs]</a>    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Wire assingment strings</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -292,7 +309,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
    
     <span class="c1"># This method </span>
-<div class="viewcode-block" id="testbench.define_testbench"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.define_testbench">[docs]</a>    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.define_testbench"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.define_testbench">[docs]</a>    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -322,7 +339,7 @@
                 <span class="n">val</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span></div>
     
     <span class="c1"># Automate this bsed in dir</span>
-<div class="viewcode-block" id="testbench.connect_inputs"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.connect_inputs"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Define connections to DUT inputs.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -354,7 +371,7 @@
         <span class="c1"># Needed for creating file io routines </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
 
-<div class="viewcode-block" id="testbench.generate_contents"><a class="viewcode-back" href="../../index.html#rtl.testbench.testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="testbench.generate_contents"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; This is the method to generate testbench contents. Override if needed</span>
 <span class="sd">            Contents of the testbench is constructed from attributes in the </span>
 <span class="sd">            following order ::</span>

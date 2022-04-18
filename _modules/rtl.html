@@ -34,8 +34,25 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#rtl-iofile-module">RTL IOfile module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#testbench">Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#module">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#entity">Entity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-module">Spice Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -89,7 +106,7 @@
 <span class="kn">from</span> <span class="nn">rtl.testbench</span> <span class="kn">import</span> <span class="n">testbench</span> <span class="k">as</span> <span class="n">vtb</span>
 <span class="kn">from</span> <span class="nn">rtl.rtl_iofile</span> <span class="kn">import</span> <span class="n">rtl_iofile</span> <span class="k">as</span> <span class="n">rtl_iofile</span>
 
-<div class="viewcode-block" id="rtl"><a class="viewcode-back" href="../index.html#rtl.rtl">[docs]</a><span class="k">class</span> <span class="nc">rtl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl">[docs]</a><span class="k">class</span> <span class="nc">rtl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Adding this class as a superclass enforces the definitions </span>
 <span class="sd">    for rtl simulations in the subclasses.</span>
 <span class="sd">    </span>
@@ -283,7 +300,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed to create </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span>
 
-<div class="viewcode-block" id="rtl.delete_rtlsimpath"><a class="viewcode-back" href="../index.html#rtl.rtl.delete_rtlsimpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.delete_rtlsimpath"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.delete_rtlsimpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Deletes all files in rtlsimpath</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -353,7 +370,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_rtlworkpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span> <span class="o">+</span><span class="s1">&#39;/work&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlworkpath</span>
 
-<div class="viewcode-block" id="rtl.delete_rtlworkpath"><a class="viewcode-back" href="../index.html#rtl.rtl.delete_rtlworkpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.delete_rtlworkpath"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.delete_rtlworkpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Deletes compilation directory</span>
 <span class="sd">            Not a deleter decorator, because does not delete</span>
 <span class="sd">            the property.</span>
@@ -566,7 +583,7 @@
     <span class="k">def</span> <span class="nf">rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span><span class="o">=</span><span class="kc">None</span>
     
-<div class="viewcode-block" id="rtl.create_connectors"><a class="viewcode-back" href="../index.html#rtl.rtl.create_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">create_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.create_connectors"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.create_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">create_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Cretes verilog connector definitions from </span>
 <span class="sd">           1) From a iofile that is provided in the Data </span>
 <span class="sd">           attribute of an IO.</span>
@@ -608,7 +625,7 @@
         <span class="c1"># Needed for creating file io routines </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
                
-<div class="viewcode-block" id="rtl.connect_inputs"><a class="viewcode-back" href="../index.html#rtl.rtl.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.connect_inputs"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Assigns all IOS.Members[name].Data to</span>
 <span class="sd">           self.iofile_bundle.Members[ioname].Data</span>
 
@@ -624,7 +641,7 @@
 
     <span class="c1"># Define if the signals are signed or not</span>
     <span class="c1"># Can these be deducted?</span>
-<div class="viewcode-block" id="rtl.format_ios"><a class="viewcode-back" href="../index.html#rtl.rtl.format_ios">[docs]</a>    <span class="k">def</span> <span class="nf">format_ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.format_ios"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.format_ios">[docs]</a>    <span class="k">def</span> <span class="nf">format_ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog module does not contain information if </span>
 <span class="sd">        the bus is signed or not.</span>
 <span class="sd">        Prior to writing output file, the type of the </span>
@@ -642,7 +659,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> 
                     <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;List of associated ionames not defined for IO </span><span class="si">%s</span><span class="se">\n</span><span class="s1">. Provide it as list of strings&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">ioname</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="rtl.copy_rtl_sources"><a class="viewcode-back" href="../index.html#rtl.rtl.copy_rtl_sources">[docs]</a>    <span class="k">def</span> <span class="nf">copy_rtl_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.copy_rtl_sources"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.copy_rtl_sources">[docs]</a>    <span class="k">def</span> <span class="nf">copy_rtl_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Copy rtl sources to self.rtlsimpath</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -688,7 +705,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="rtl.execute_rtl_sim"><a class="viewcode-back" href="../index.html#rtl.rtl.execute_rtl_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_rtl_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.execute_rtl_sim"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.execute_rtl_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_rtl_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Runs the rtl simulation in external simulator</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -737,7 +754,7 @@
                     <span class="n">files_ok</span><span class="o">=</span><span class="kc">True</span>
                     <span class="n">files_ok</span><span class="o">=</span><span class="n">files_ok</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">)</span></div>
     
-<div class="viewcode-block" id="rtl.run_rtl"><a class="viewcode-back" href="../index.html#rtl.rtl.run_rtl">[docs]</a>    <span class="k">def</span> <span class="nf">run_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.run_rtl"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.run_rtl">[docs]</a>    <span class="k">def</span> <span class="nf">run_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;1) Copies rtl sources to a temporary simulation directory</span>
 <span class="sd">           2) Creates a testbench</span>
 <span class="sd">           3) Defines the contens of the testbench</span>
@@ -788,7 +805,7 @@
 
 
     <span class="c1">#This writes all infile</span>
-<div class="viewcode-block" id="rtl.write_infile"><a class="viewcode-back" href="../index.html#rtl.rtl.write_infile">[docs]</a>    <span class="k">def</span> <span class="nf">write_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.write_infile"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.write_infile">[docs]</a>    <span class="k">def</span> <span class="nf">write_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Writes the input files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -797,7 +814,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">()</span></div>
     
     <span class="c1">#This reads all outfiles</span>
-<div class="viewcode-block" id="rtl.read_outfile"><a class="viewcode-back" href="../index.html#rtl.rtl.read_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">read_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.read_outfile"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.read_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">read_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Reads the oputput files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -805,7 +822,7 @@
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
                  <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="rtl.connect_outputs"><a class="viewcode-back" href="../index.html#rtl.rtl.connect_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl.connect_outputs"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.connect_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Connects the ouput data from files to corresponding output IOs</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>

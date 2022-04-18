@@ -34,8 +34,25 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#rtl-iofile-module">RTL IOfile module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#testbench">Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#module">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html#entity">Entity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html#spice-module">Spice Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -109,7 +126,7 @@
 <span class="c1">#derived from it. A class that has a metaclass derived from ABCMeta cannot </span>
 <span class="c1">#be instantiated unless all of its abstract methods and properties are overridden.</span>
 <span class="kn">from</span> <span class="nn">thesdk.bundle</span> <span class="kn">import</span> <span class="n">Bundle</span>
-<div class="viewcode-block" id="thesdk"><a class="viewcode-back" href="../index.html#thesdk.thesdk">[docs]</a><span class="k">class</span> <span class="nc">thesdk</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk">[docs]</a><span class="k">class</span> <span class="nc">thesdk</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Following class attributes are set when this class imported</span>
 
@@ -192,7 +209,7 @@
     <span class="k">del</span> <span class="n">name</span>
     <span class="c1">#----Global parameter stuff ends here</span>
 
-<div class="viewcode-block" id="thesdk.initlog"><a class="viewcode-back" href="../index.html#thesdk.thesdk.initlog">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="thesdk.initlog"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.initlog">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">initlog</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Initializes logging. logfile passed as a parameter</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -328,7 +345,7 @@
 
 
     <span class="c1">#Common method to propagate system parameters</span>
-<div class="viewcode-block" id="thesdk.copy_propval"><a class="viewcode-back" href="../index.html#thesdk.thesdk.copy_propval">[docs]</a>    <span class="k">def</span> <span class="nf">copy_propval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk.copy_propval"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.copy_propval">[docs]</a>    <span class="k">def</span> <span class="nf">copy_propval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Method to copy attributes form parent. </span>
 <span class="sd">        </span>
 <span class="sd">        Example::</span>
@@ -359,7 +376,7 @@
 
     <span class="c1">#Method for logging</span>
     <span class="c1">#This is a method because it uses the logfile property</span>
-<div class="viewcode-block" id="thesdk.print_log"><a class="viewcode-back" href="../index.html#thesdk.thesdk.print_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk.print_log"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.print_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Method to print messages to &#39;logfile&#39;</span>
 
 <span class="sd">        Parameters</span>
@@ -458,7 +475,7 @@
                 <span class="n">typestr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span> 
             <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="thesdk.timer"><a class="viewcode-back" href="../index.html#thesdk.thesdk.timer">[docs]</a>    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk.timer"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.timer">[docs]</a>    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Timer decorator</span>
 
 <span class="sd">        Print execution time of member functions of classes inheriting</span>
@@ -495,7 +512,7 @@
             <span class="k">return</span> <span class="n">retval</span>
         <span class="k">return</span> <span class="n">wrapper_timer</span></div>
 
-<div class="viewcode-block" id="thesdk.silence"><a class="viewcode-back" href="../index.html#thesdk.thesdk.silence">[docs]</a>    <span class="nd">@cl</span><span class="o">.</span><span class="n">contextmanager</span>
+<div class="viewcode-block" id="thesdk.silence"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.silence">[docs]</a>    <span class="nd">@cl</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">silence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">show_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Context manager to redirect stdout (and optional errors) to /dev/null.</span>
@@ -553,7 +570,7 @@
     <span class="k">def</span> <span class="nf">queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="thesdk.run_parallel"><a class="viewcode-back" href="../index.html#thesdk.thesdk.run_parallel">[docs]</a>    <span class="k">def</span> <span class="nf">run_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk.run_parallel"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.run_parallel">[docs]</a>    <span class="k">def</span> <span class="nf">run_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Run instances in parallel and collect results</span>
 
 <span class="sd">        Usage: Takes in a set of instances, runs a given method for them, and</span>
@@ -792,7 +809,7 @@
     <span class="k">def</span> <span class="nf">load_state_full</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_load_state_full</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="thesdk._write_state"><a class="viewcode-back" href="../index.html#thesdk.thesdk._write_state">[docs]</a>    <span class="k">def</span> <span class="nf">_write_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk._write_state"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk._write_state">[docs]</a>    <span class="k">def</span> <span class="nf">_write_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Write the entity state to a binary file.</span>
 
 <span class="sd">        This should be called after the simulation has finished.</span>
@@ -811,7 +828,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed saving state to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">statedir</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="thesdk._read_state"><a class="viewcode-back" href="../index.html#thesdk.thesdk._read_state">[docs]</a>    <span class="k">def</span> <span class="nf">_read_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk._read_state"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk._read_state">[docs]</a>    <span class="k">def</span> <span class="nf">_read_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Read the entity state from a binary file.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -874,7 +891,7 @@
     <span class="k">def</span> <span class="nf">iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_iofile_bundle</span><span class="o">=</span><span class="n">value</span>
 
-<div class="viewcode-block" id="thesdk.delete_iofile_bundle"><a class="viewcode-back" href="../index.html#thesdk.thesdk.delete_iofile_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">delete_iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="thesdk.delete_iofile_bundle"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.delete_iofile_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">delete_iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Method to delete all files in iofile bundle</span>
 
 <span class="sd">        For each of the member of the bundle of type iofile, it calls &#39;remove&#39; method.</span>
@@ -891,7 +908,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">val</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span></div></div>
 
-<div class="viewcode-block" id="IO"><a class="viewcode-back" href="../index.html#thesdk.IO">[docs]</a><span class="k">class</span> <span class="nc">IO</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+<div class="viewcode-block" id="IO"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.IO">[docs]</a><span class="k">class</span> <span class="nc">IO</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; TheSyDeKick IO class. Child of thesdk to utilize logging method.</span>
 
 <span class="sd">    The IOs of an entity must be defined as:: </span>
