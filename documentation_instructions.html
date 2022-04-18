@@ -44,10 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="rtl/sections.html">RTL interface classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spice/sections.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#documenation-strucure">Documenation Strucure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#continuous-implementation-build-process-for-documentation">Continuous implementation-build process for documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#strucure">Strucure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-implementation-build-process-for-documentation">Continuous implementation-build process for documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="indices_and_tables.html">Indices and tables</a></li>
@@ -83,8 +81,8 @@
 <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html</a></p>
 <p>Current docstring documentation style is Numpy
 <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a></p>
-<section id="documenation-strucure">
-<h2>Documenation Strucure<a class="headerlink" href="#documenation-strucure" title="Permalink to this headline"></a></h2>
+<section id="strucure">
+<h2>Strucure<a class="headerlink" href="#strucure" title="Permalink to this headline"></a></h2>
 <p>Documentation of an Entity is defined in <cite>&lt;Entity&gt;/doc</cite>. You can use any of the core entities
 (thesdk, rtl, spice) as an example.</p>
 <p>The idea of the documenation is the following:</p>
@@ -98,8 +96,9 @@ index.rst in order not to repeat the glossaries in compilations at another locat
 <li><p>documentation is build in <cite>&lt;Entity&gt;/doc</cite> with <cite>make html</cite> . Under <cite>&lt;Entity&gt;</cite> the configure script should
 generate a Makefile with a recipe <cite>doc</cite> that executes <cite>cd doc &amp;&amp; make html</cite>.</p></li>
 </ul>
+</section>
 <section id="continuous-implementation-build-process-for-documentation">
-<h3>Continuous implementation-build process for documentation<a class="headerlink" href="#continuous-implementation-build-process-for-documentation" title="Permalink to this headline"></a></h3>
+<h2>Continuous implementation-build process for documentation<a class="headerlink" href="#continuous-implementation-build-process-for-documentation" title="Permalink to this headline"></a></h2>
 <p>Documentation build environment for Sphinx-docstrings build are located in <cite>$THESDKHOME/docs</cite></p>
 <p>CI documentation build process uses a docker configuration
 <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdktestimage">https://github.com/TheSystemDevelopmentKit/thesdktestimage</a> that has an automated relelease to registry.
@@ -116,7 +115,6 @@ the files doc/sources of corresponding entities, and the files under <cite>THESD
 <li><p>To configure on which branches the build process is launced, edit <cite>$THESDKHOME/.github/workflows/main.yaml</cite></p></li>
 <li><p>To control the build process, edit <cite>$THESDKHOME/CI-helpers/build_docs.sh</cite></p></li>
 </ul>
-</section>
 </section>
 </section>
 
