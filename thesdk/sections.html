@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,9 +78,9 @@
            <div itemprop="articleBody">
              
   <section id="module-thesdk">
-<span id="thesdk-core-classes"></span><h1>Thesdk core classes<a class="headerlink" href="#module-thesdk" title="Permalink to this headline"></a></h1>
+<span id="thesdk-core-classes"></span><h1>Thesdk core classes<a class="headerlink" href="#module-thesdk" title="Permalink to this heading"></a></h1>
 <section id="thesdk">
-<h2>Thesdk<a class="headerlink" href="#thesdk" title="Permalink to this headline"></a></h2>
+<h2>Thesdk<a class="headerlink" href="#thesdk" title="Permalink to this heading"></a></h2>
 <p>Superclass class of TheSyDeKick - universal System Development Kit. Provides
 commmon methods and utility classes for other classes in TheSyDeKick.</p>
 <p>Created by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 2017.</p>
@@ -401,6 +402,14 @@ not attributes or IOs.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.netlist_params">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">netlist_params</span></span><a class="headerlink" href="#thesdk.thesdk.netlist_params" title="Permalink to this definition"></a></dt>
+<dd><p>List[string]</p>
+<p>List of strings containing the parameters of a netlist. List is populated by calling
+ecd_methods.get_params(). Empty if no parameters were found in the netlist.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.print_colors">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_colors</span></span><a class="headerlink" href="#thesdk.thesdk.print_colors" title="Permalink to this definition"></a></dt>
 <dd><p>True (default) | False</p>
@@ -554,7 +563,7 @@ classfile.</p>
 
 </section>
 <span class="target" id="module-thesdk.iofile"></span><section id="iofile-package">
-<h2>Iofile package<a class="headerlink" href="#iofile-package" title="Permalink to this headline"></a></h2>
+<h2>Iofile package<a class="headerlink" href="#iofile-package" title="Permalink to this heading"></a></h2>
 <p>Provides Common file-io related attributes and methods
 for TheSyDeKinck</p>
 <p>This package defines the CSF IO-file format and methods for all supported simulators.
