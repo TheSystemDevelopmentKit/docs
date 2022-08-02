@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter_tests class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
 </ul>
@@ -117,12 +118,12 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="inverter"><a class="viewcode-back" href="../inverter/sections.html#inverter.inverter">[docs]</a><span class="k">class</span> <span class="nc">inverter</span><span class="p">(</span><span class="n">rtl</span><span class="p">,</span><span class="n">spice</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
+<div class="viewcode-block" id="inverter"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter">[docs]</a><span class="k">class</span> <span class="nc">inverter</span><span class="p">(</span><span class="n">rtl</span><span class="p">,</span><span class="n">spice</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
 
-<div class="viewcode-block" id="inverter.__init__"><a class="viewcode-back" href="../inverter/sections.html#inverter.inverter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
+<div class="viewcode-block" id="inverter.__init__"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
         <span class="sd">&quot;&quot;&quot; Inverter parameters and attributes</span>
 <span class="sd">            Parameters</span>
 <span class="sd">            ----------</span>
@@ -180,13 +181,13 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="inverter.init"><a class="viewcode-back" href="../inverter/sections.html#inverter.inverter.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="inverter.init"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Method to re-initialize the structure if the attribute values are changed after creation.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span> <span class="c1">#Currently nothing to add</span></div>
 
-<div class="viewcode-block" id="inverter.main"><a class="viewcode-back" href="../inverter/sections.html#inverter.inverter.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="inverter.main"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; The main python description of the operation. Contents fully up to designer, however, the </span>
 <span class="sd">        IO&#39;s should be handled bu following this guideline:</span>
 <span class="sd">        </span>
@@ -203,7 +204,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="n">out</span></div>
 
-<div class="viewcode-block" id="inverter.run"><a class="viewcode-back" href="../inverter/sections.html#inverter.inverter.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+<div class="viewcode-block" id="inverter.run"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; The default name of the method to be executed. This means: parameters and attributes </span>
 <span class="sd">            control what is executed if run method is executed. By this we aim to avoid the need of </span>
 <span class="sd">            documenting what is the execution method. It is always self.run. </span>
@@ -323,7 +324,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="inverter.define_io_conditions"><a class="viewcode-back" href="../inverter/sections.html#inverter.inverter.define_io_conditions">[docs]</a>    <span class="k">def</span> <span class="nf">define_io_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="inverter.define_io_conditions"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.define_io_conditions">[docs]</a>    <span class="k">def</span> <span class="nf">define_io_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;This overloads the method called by run_rtl method. It defines the read/write conditions for the files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
