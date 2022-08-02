@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inverter_testbench &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>inverter_testbench</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for inverter_testbench</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">==================</span>
+<span class="sd">Inverter testbench</span>
+<span class="sd">==================</span>
+
+<span class="sd">This class demonstrates how you can construct testbeches for your model</span>
+<span class="sd">Entities to gain more versatilyty that can be provided by self tests in the </span>
+<span class="sd">mainguard.</span>
+
+<span class="sd">Initially written by Marko Kosunen, marko.kosunen@aalto.fi, 2022.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">))</span>
+
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">inverter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">inverter.controller</span> <span class="kn">import</span> <span class="n">controller</span> <span class="k">as</span> <span class="n">inverter_controller</span>
+<span class="kn">from</span> <span class="nn">inverter.signal_source</span> <span class="kn">import</span> <span class="n">signal_source</span>
+<span class="kn">from</span> <span class="nn">inverter.signal_plotter</span> <span class="kn">import</span> <span class="n">signal_plotter</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="inverter_testbench"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench">[docs]</a><span class="k">class</span> <span class="nc">inverter_testbench</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+
+<div class="viewcode-block" id="inverter_testbench.__init__"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Inititalizing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="vm">__name__</span><span class="p">))</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">proplist</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;Rs&#39;</span> <span class="p">];</span>    <span class="c1"># Properties that can be propagated from parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Rs</span> <span class="o">=</span>  <span class="mf">100e6</span><span class="p">;</span>            <span class="c1"># Sampling frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vdd</span> <span class="o">=</span> <span class="mf">1.0</span>               <span class="c1"># Suplly voltage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;py&#39;</span><span class="p">;</span>             <span class="c1"># Can be set externally, but is not propagated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span><span class="s1">&#39;vhdl&#39;</span><span class="p">,</span><span class="s1">&#39;eldo&#39;</span><span class="p">,</span><span class="s1">&#39;spectre&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="o">=</span><span class="s1">&#39;parallel&#39;</span>
+        <span class="c1">#self.models=[&#39;ngspice&#39;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="o">=</span> <span class="kc">False</span>              <span class="c1"># By default, no parallel processing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">=</span> <span class="p">[]</span>               <span class="c1"># By default, no parallel processing</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">parent</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_propval</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span><span class="n">parent</span><span class="p">;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="inverter_testbench.init"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span> <span class="c1">#Currently nohing to add</span></div>
+
+<div class="viewcode-block" id="inverter_testbench.parallel"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.parallel">[docs]</a>    <span class="k">def</span> <span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Implements a configuration with a signal source, parallel inverters and plotters</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">8</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">inverter_controller</span><span class="p">()</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">Rs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Rs</span>
+        <span class="c1">#controller.reset()</span>
+        <span class="c1">#controller.step_time()</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">start_datafeed</span><span class="p">()</span>
+
+        <span class="c1"># Here we instantiate the signal source</span>
+        <span class="n">duts</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">plotters</span><span class="o">=</span><span class="p">[]</span>
+        <span class="c1">#Here we construct the &#39;testbench&#39;</span>
+        <span class="n">s_source</span><span class="o">=</span><span class="n">signal_source</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">:</span>
+            <span class="c1"># Create an inverter</span>
+            <span class="n">d</span><span class="o">=</span><span class="n">inverter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># this is self is the parent</span>
+            <span class="n">duts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> 
+            <span class="n">d</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="n">model</span>
+            <span class="c1"># Enable debug messages</span>
+            <span class="c1">#d.DEBUG = True</span>
+            <span class="c1"># Run simulations in interactive modes to monitor progress/results</span>
+            <span class="c1">#d.interactive_spice=True</span>
+            <span class="c1">#d.interactive_rtl=True</span>
+            <span class="c1"># Preserve the IO files or simulator files for debugging purposes</span>
+            <span class="c1"># d.preserve_iofiles = True</span>
+            <span class="c1"># d.preserve_spicefiles = True</span>
+            <span class="c1"># Save the entity state after simulation</span>
+            <span class="c1">#d.save_state = True</span>
+            <span class="c1">#d.save_database = True</span>
+            <span class="c1"># Optionally load the state of the most recent simulation</span>
+            <span class="c1">#d.load_state = &#39;latest&#39;</span>
+            <span class="c1"># This connects the input to the output of the signal source</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">s_source</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+            <span class="c1"># This connects the clock to the output of the signal source</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;CLK&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">s_source</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;clk&#39;</span><span class="p">]</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;control_write&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;control_write&#39;</span><span class="p">]</span>
+            <span class="c1">## Add plotters</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">signal_plotter</span><span class="p">()</span>
+            <span class="n">plotters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> 
+            <span class="n">p</span><span class="o">.</span><span class="n">plotmodel</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">model</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">plotprefix</span><span class="o">=</span><span class="s1">&#39;parallel&#39;</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">plotvdd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vdd</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">Rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Rs</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_OUT&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_OUT&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_DIG&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_DIG&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_ANA&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_ANA&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_RISE&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_RISE&#39;</span><span class="p">]</span>
+        
+
+        <span class="c1"># Here we run the instances</span>
+        <span class="n">s_source</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># Creates the data to the output</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">duts</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plotters</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="inverter_testbench.serial"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.serial">[docs]</a>    <span class="k">def</span> <span class="nf">serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Configuration for inverter chain according to self.models</span>
+<span class="sd">        Plots from intermediate outputs</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Construct first</span>
+        <span class="n">controller</span><span class="o">=</span><span class="n">inverter_controller</span><span class="p">()</span>
+        <span class="n">s_source</span><span class="o">=</span><span class="n">signal_source</span><span class="p">()</span>
+        <span class="n">duts</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">plotters</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">)):</span>
+            <span class="n">d</span><span class="o">=</span><span class="n">inverter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">duts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">s_source</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+               <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">duts</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+
+            <span class="n">d</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;control_write&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;control_write&#39;</span><span class="p">]</span>
+            <span class="c1"># Passing the same clock to all inverters (used in spice simulations)</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;CLK&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">s_source</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;clk&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">signal_plotter</span><span class="p">()</span>
+            <span class="n">plotters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> 
+            <span class="n">p</span><span class="o">.</span><span class="n">plotmodel</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">model</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">plotprefix</span><span class="o">=</span><span class="s1">&#39;serial&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">plotmodel</span><span class="p">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">plotvdd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vdd</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">Rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Rs</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_OUT&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_OUT&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_DIG&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A_DIG&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_ANA&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_ANA&#39;</span><span class="p">]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_RISE&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z_RISE&#39;</span><span class="p">]</span>
+
+        <span class="n">s_source</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># Creates the data to the output</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">start_datafeed</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">duts</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plotters</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="inverter_testbench.main"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Chooses the model to construct</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">==</span> <span class="s1">&#39;parallel&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">==</span> <span class="s1">&#39;serial&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span> <span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Test </span><span class="si">%s</span><span class="s1"> not implemented&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="inverter_testbench.run"><a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Guideline: Define model depencies of executions in `run` method.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;py&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">:</span>
+                <span class="c1"># Return empty dict not to block the execution</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">({})</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">from</span>  <span class="nn">inverter_testbench</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">import</span> <span class="nn">pdb</span>
+    <span class="n">tb</span><span class="o">=</span><span class="n">inverter_testbench</span><span class="p">()</span>
+    <span class="n">tb</span><span class="o">.</span><span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span><span class="s1">&#39;vhdl&#39;</span><span class="p">,</span><span class="s1">&#39;eldo&#39;</span><span class="p">,</span><span class="s1">&#39;spectre&#39;</span><span class="p">]</span>
+    <span class="c1">#tb.configuration=&#39;parallel&#39;</span>
+    <span class="n">tb</span><span class="o">.</span><span class="n">configuration</span><span class="o">=</span><span class="s1">&#39;serial&#39;</span>
+    <span class="n">tb</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="c1">#This is here to keep the images visible</span>
+    <span class="c1">#For batch execution, you should comment the following line </span>
+    <span class="nb">input</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

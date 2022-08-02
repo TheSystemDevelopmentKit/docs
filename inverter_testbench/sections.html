@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inverter testbench class &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Documentation instructions" href="../documentation_instructions.html" />
+    <link rel="prev" title="Inverter class" href="../inverter/sections.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Inverter testbench class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#inverter-testbench">Inverter testbench</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Inverter testbench class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/inverter_testbench/sections.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="inverter-testbench-class">
+<h1>Inverter testbench class<a class="headerlink" href="#inverter-testbench-class" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-inverter_testbench"></span><section id="inverter-testbench">
+<h2>Inverter testbench<a class="headerlink" href="#inverter-testbench" title="Permalink to this heading"></a></h2>
+<p>This class demonstrates how you can construct testbeches for your model
+Entities to gain more versatilyty that can be provided by self tests in the
+mainguard.</p>
+<p>Initially written by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 2022.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">inverter_testbench.</span></span><span class="sig-name descname"><span class="pre">inverter_testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench.init" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench.main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench.main" title="Permalink to this definition"></a></dt>
+<dd><p>Chooses the model to construct</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench.parallel">
+<span class="sig-name descname"><span class="pre">parallel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench.parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench.parallel" title="Permalink to this definition"></a></dt>
+<dd><p>Implements a configuration with a signal source, parallel inverters and plotters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench.run" title="Permalink to this definition"></a></dt>
+<dd><p>Guideline: Define model depencies of executions in <cite>run</cite> method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="inverter_testbench.inverter_testbench.serial">
+<span class="sig-name descname"><span class="pre">serial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench.serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench.serial" title="Permalink to this definition"></a></dt>
+<dd><p>Configuration for inverter chain according to self.models
+Plots from intermediate outputs</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../inverter/sections.html" class="btn btn-neutral float-left" title="Inverter class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../documentation_instructions.html" class="btn btn-neutral float-right" title="Documentation instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
