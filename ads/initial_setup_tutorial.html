@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Initial setup tutorial &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ADS template class" href="../ads_template/sections.html" />
+    <link rel="prev" title="ADS" href="sections.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter_tests class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Initial setup tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections.html">ADS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections.html#citi-to-touchstone">Citi to Touchstone</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="sections.html">ADS</a> &raquo;</li>
+      <li>Initial setup tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/ads/initial_setup_tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="initial-setup-tutorial">
+<h1>Initial setup tutorial<a class="headerlink" href="#initial-setup-tutorial" title="Permalink to this heading"></a></h1>
+<p>Tutorial for initially setting up the simulation interface.
+This has to be done once for the process node, in order to get
+all the correct configurations done.</p>
+<p>Initially written by Veeti Lahtinen 2022.</p>
+<p>The emStateFile.xml required for the simulations and setting the simulation settings
+is a process dependent file, which is difficult to manually change.
+Therefore the following steps are introduced with figures to set the default values
+such that the implemented script may easily set the stateFile to correspond to correct values.
+It is very important that the names and values are set to the ones given below, as these are used
+to change the simulation settings.</p>
+<ol class="arabic">
+<li><p>Open GUI, create a new workspace called “WORKSPACE_placeholder”</p></li>
+<li><p>Name the library to “WORKSPACE_placeholder_lib” (this should be default from workspace name)</p></li>
+<li><p>Create a new layout in the workspace, and name it “CELL_placeholder”,
+and select your process dependent substrate. This may require adding some technology files to
+the workspace, similar to normally setting up a library in ADS. This step may also be performed
+in Virtuoso, by naming the workspace, library and cell as instructed earlier and adding the library
+in ADS GUI.</p></li>
+<li><p>Open the emSetup view from the layout view.</p></li>
+<li><p>In the first view (“MOM uW” or “MOM RF”), change EM Simulator option
+to “Momentum RF” and change “Generate:” (in bottom right corner)
+to “Simulation input files” as shown in below</p>
+<img alt="../_images/gui_view1.png" src="../_images/gui_view1.png" />
+</li>
+<li><p>In “Substrate view”, select your process’ substrate</p></li>
+<li><p>In “Frequency plan” view, set Type: “Linear”, Fstart: “0 Hz”, Fstop: “22222 Hz”,
+Step: “1212 Hz” as shown in figure below. It is very important to change the unit to Hz, instead of
+GHz.</p>
+<img alt="../_images/gui_view2.png" src="../_images/gui_view2.png" />
+</li>
+<li><p>In “Options” view, go to mesh and in “Mesh density”, select “Cells/Wavelength” and set it to “33333”.
+Enable “Edge mesh”, with the option “Auto-determine edge width”.
+Enable “Transmission line mesh”, and set it to “44444”. The view is shown in figure below</p>
+<img alt="../_images/gui_view3.png" src="../_images/gui_view3.png" />
+</li>
+<li><p>Save the EM Setup view.</p></li>
+<li><p>Move the generated emStateFile.xml (should be
+./WORKSPACE_placeholder/WORKSPACE_placeholder_lib/CELL_placeholder/emSetup/emStateFile.xml)
+to this ads folder to ./adsfiles/emStateFile.template</p></li>
+<li><p>Add line “EMSTATEFILE=${THESDKHOME}/Entities/ads/adsfiles/emStateFile.template”
+and line ADSSUBSTRATEFILE=”&lt;path_to_process_substrate_file&gt;”
+to configure in TheSyDeKick project root, and run “./configure”.</p></li>
+<li><p>The design kit requires an environment variable VIRTUOSO_DIR, which refers to path to your
+virtuoso directory (folder that contains cds.lib).</p></li>
+<li><p>Then clone ads_template entity, and change “TECH_FILE_NAME” variable in link_oa_design.sh
+to the correct filename for your technology. After this run “./configure”.</p></li>
+</ol>
+<p>Congratulations, you’re done.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sections.html" class="btn btn-neutral float-left" title="ADS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ads_template/sections.html" class="btn btn-neutral float-right" title="ADS template class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

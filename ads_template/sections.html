@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Documentation instructions" href="../documentation_instructions.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../ads/sections.html" /> 
+    <link rel="prev" title="Initial setup tutorial" href="../ads/initial_setup_tutorial.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,7 +47,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter_tests class</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ADS template class</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../ads/initial_setup_tutorial.html">Initial setup tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html">ADS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html#citi-to-touchstone">Citi to Touchstone</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ADS template class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ads-template">ads_template</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
@@ -82,13 +86,57 @@
 <h1>ADS template class<a class="headerlink" href="#ads-template-class" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-ads_template"></span></section>
+<span class="target" id="module-ads_template"></span><section id="ads-template">
+<h2>ads_template<a class="headerlink" href="#ads-template" title="Permalink to this heading"></a></h2>
+<p>ads_template model template The System Development Kit
+Used as a template for all TheSyDeKick Entities.</p>
+<p>Current docstring documentation style is Numpy
+<a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a></p>
+<p>This text here is to remind you that documentation is important.
+However, youu may find it out the even the documentation of this
+entity may be outdated and incomplete. Regardless of that, every day
+and in every way we are getting better and better :).</p>
+<p>Initially written by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 2017.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ads_template.ads_template">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads_template.</span></span><span class="sig-name descname"><span class="pre">ads_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads_template.html#ads_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads_template.ads_template" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="ads_template.ads_template.configure_ads">
+<span class="sig-name descname"><span class="pre">configure_ads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads_template.html#ads_template.configure_ads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads_template.ads_template.configure_ads" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ads_template.ads_template.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads_template.html#ads_template.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads_template.ads_template.init" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ads_template.ads_template.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads_template.html#ads_template.main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads_template.ads_template.main" title="Permalink to this definition"></a></dt>
+<dd><p>Guideline. Isolate python processing to main method.</p>
+<p>To isolate the interna processing from IO connection assigments,
+The procedure to follow is
+1) Assign input data from input to local variable
+2) Do the processing
+3) Assign local variable to output</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ads_template.ads_template.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads_template.html#ads_template.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads_template.ads_template.run" title="Permalink to this definition"></a></dt>
+<dd><p>Guideline: Define model depencies of executions in <cite>run</cite> method.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../ads/sections.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ads/initial_setup_tutorial.html" class="btn btn-neutral float-left" title="Initial setup tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../documentation_instructions.html" class="btn btn-neutral float-right" title="Documentation instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

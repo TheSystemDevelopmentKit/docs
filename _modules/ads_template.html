@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ads_template &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter_tests class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/initial_setup_tutorial.html">Initial setup tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html">ADS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html#citi-to-touchstone">Citi to Touchstone</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>ads_template</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ads_template</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">============</span>
+<span class="sd">ads_template</span>
+<span class="sd">============</span>
+
+<span class="sd">ads_template model template The System Development Kit</span>
+<span class="sd">Used as a template for all TheSyDeKick Entities.</span>
+
+<span class="sd">Current docstring documentation style is Numpy</span>
+<span class="sd">https://numpydoc.readthedocs.io/en/latest/format.html</span>
+
+<span class="sd">This text here is to remind you that documentation is important.</span>
+<span class="sd">However, youu may find it out the even the documentation of this </span>
+<span class="sd">entity may be outdated and incomplete. Regardless of that, every day </span>
+<span class="sd">and in every way we are getting better and better :).</span>
+
+<span class="sd">Initially written by Marko Kosunen, marko.kosunen@aalto.fi, 2017.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ads</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="ads_template"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template">[docs]</a><span class="k">class</span> <span class="nc">ads_template</span><span class="p">(</span><span class="n">ads</span><span class="p">,</span> <span class="n">thesdk</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
+        <span class="c1">#SyDeKick</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Inititalizing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="vm">__name__</span><span class="p">))</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">proplist</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;Rs&#39;</span> <span class="p">];</span>    <span class="c1"># Properties that can be propagated from parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Rs</span> <span class="o">=</span>  <span class="mf">100e6</span><span class="p">;</span>            <span class="c1"># Sampling frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>            <span class="c1"># Pointer for input data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">IO</span><span class="p">()</span>   <span class="c1"># Pointer for input data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">IO</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;ads&#39;</span><span class="p">;</span>             <span class="c1"># Can be set externally, but is not propagated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="o">=</span> <span class="kc">False</span>              <span class="c1"># By default, no parallel processing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">=</span> <span class="p">[]</span>               <span class="c1"># By default, no parallel processing</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">parent</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_propval</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span><span class="n">parent</span><span class="p">;</span>
+
+<div class="viewcode-block" id="ads_template.init"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span> <span class="c1">#Currently nohing to add</span></div>
+
+<div class="viewcode-block" id="ads_template.main"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Guideline. Isolate python processing to main method.</span>
+<span class="sd">        </span>
+<span class="sd">        To isolate the interna processing from IO connection assigments, </span>
+<span class="sd">        The procedure to follow is</span>
+<span class="sd">        1) Assign input data from input to local variable</span>
+<span class="sd">        2) Do the processing</span>
+<span class="sd">        3) Assign local variable to output</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ads_template.configure_ads"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.configure_ads">[docs]</a>    <span class="k">def</span> <span class="nf">configure_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ads_template_gen&#39;</span>
+        <span class="c1"># Momentum Simulation settings example</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interactive_ads</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Print the progress of simulation even with LSF</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fstop</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1"># Stop frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fstep</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Frequency step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fstop_unit</span> <span class="o">=</span> <span class="s2">&quot;GHz&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">fstep_unit</span> <span class="o">=</span> <span class="s2">&quot;GHz&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh_cells</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_ads</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ads_template.run"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Guideline: Define model depencies of executions in `run` method.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="o">=</span><span class="kc">True</span>      <span class="c1">#flag for parallel processing</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#multiprocessing.queue as the first argument</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;py&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;ads&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">configure_ads</span><span class="p">()</span></div></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

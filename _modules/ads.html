@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ads &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter_tests class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/initial_setup_tutorial.html">Initial setup tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html">ADS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html#citi-to-touchstone">Citi to Touchstone</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>ads</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ads</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">===</span>
+<span class="sd">ADS</span>
+<span class="sd">===</span>
+
+<span class="sd">ADS Momentum simulation interface package for The System Development Kit </span>
+
+<span class="sd">Provides utilities to import ads modules to python environment and</span>
+<span class="sd">automatically generate testbenches for the most common simulation cases.</span>
+
+<span class="sd">Initially written by Veeti Lahtinen and Kaisa Ryynänen, 2021</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">))</span>
+
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ads.citi_to_touchstone</span> <span class="kn">import</span> <span class="n">citi_to_touchstone</span> <span class="k">as</span> <span class="n">ctt</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<div class="viewcode-block" id="ads"><a class="viewcode-back" href="../ads/sections.html#ads.ads">[docs]</a><span class="k">class</span> <span class="nc">ads</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
+
+    <span class="c1">#These need to be converted to abstact properties</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Name of the module.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classfile</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sourcelib</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;String</span>
+<span class="sd">        </span>
+<span class="sd">        Sourcelib name. Currently defaults to nameofthemodule_generated, which is a BAG assumption</span>
+
+<span class="sd">        Can (and should) be set externally, if the sourcelib name is different than &lt;entityname&gt;_generated.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_sourcelib&#39;</span><span class="p">):</span>
+            <span class="c1"># TODO: make this non-BAG assumption</span>
+            <span class="c1"># Bag assumption</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sourcelib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_generated&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sourcelib</span>
+    <span class="nd">@sourcelib</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">sourcelib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sourcelib</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sourcelibpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Path to the virtuoso entity (&#39;VIRTUOSO_DIR/&lt;sourcelib&gt;&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_sourcelibpath&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sourcelibpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;VIRTUOSO_DIR&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">sourcelib</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sourcelibpath</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">emsetupsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Path to the emSetup source of the virtuoso entity (&#39;VIRTUOSO_DIR/&lt;sourcelib&gt;/&lt;name&gt;/emSetup&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_emsetupsrcpath&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_emsetupsrcpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourcelibpath</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;/emSetup&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_emsetupsrcpath</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">preserve_adsfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+
+<span class="sd">        If True, do not delete file IO files (proj) after simulations. Useful for</span>
+<span class="sd">        debugging the file IO&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_preserve_adsfiles&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_adsfiles</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_adsfiles</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_adsfiles</span>
+    <span class="nd">@preserve_adsfiles</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">preserve_adsfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_adsfiles</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">distributed_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Boolean (default False)</span>
+
+<span class="sd">            If True, distributes simulations </span>
+<span class="sd">            into the LSF cluster. The number of subprocesses launched is</span>
+<span class="sd">            set by self.num_processes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_distributed_run&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_distributed_run</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_distributed_run</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributed_run</span>
+    <span class="nd">@distributed_run</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">distributed_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_distributed_run</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; integer</span>
+
+<span class="sd">            Maximum number of spawned child processes for distributed runs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_num_processes&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_processes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_num_processes</span><span class="o">=</span><span class="mi">10</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span>
+    <span class="nd">@num_processes</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">num_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_processes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interactive_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+<span class="sd">        </span>
+<span class="sd">        Launch simulator in interactive mode, which means that the simulation</span>
+<span class="sd">        progress is displayed on the screen. &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_interactive_ads&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_ads</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_ads</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_ads</span>
+    <span class="nd">@interactive_ads</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">interactive_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_ads</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span> 
+    <span class="k">def</span> <span class="nf">has_lsf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returs True if LSF submissions are properly defined. Default False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;LSFINTERACTIVE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;LSFINTERACTIVE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_has_lsf</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_has_lsf</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_lsf</span>
+
+    <span class="nd">@property</span> 
+    <span class="k">def</span> <span class="nf">ads_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines ads submission prefix from thesdk.GLOBALS[&#39;LSFSUBMISSION&#39;]</span>
+<span class="sd">        for LSF submissions.</span>
+
+<span class="sd">        Usually something like &#39;bsub -K&#39; and &#39;bsub -I&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_ads_submission&#39;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_lsf</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;LSF not configured. Running locally&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_ads</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span> <span class="o">=</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;LSFINTERACTIVE&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="c1"># Spectre LSF doesn&#39;t support interactive queues</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Cannot run in interactive mode if distributed mode is on!&#39;</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span> <span class="o">=</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;LSFSUBMISSION&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; -o </span><span class="si">%s</span><span class="s1">/bsublog.txt &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adssimpath</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span> <span class="o">=</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;LSFSUBMISSION&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; -o </span><span class="si">%s</span><span class="s1">/bsublog.txt &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adssimpath</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Error while defining ads submission command. Running locally.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span>
+    <span class="nd">@ads_submission</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ads_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ads_submission</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">adssrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Path to the ads source of the entity (&#39;./ads&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adssrcpath</span>  <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span> <span class="o">+</span> <span class="s1">&#39;/ads&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adssrcpath</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;The </span><span class="si">%s</span><span class="s1"> source entity folder does not exist. Run configure!&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adssrcpath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adssrcpath</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">adssrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; String</span>
+<span class="sd">        </span>
+<span class="sd">        Path to the input/configuration files generated (&#39;./ads/simulation&#39;)</span>
+
+<span class="sd">        Automatically created by init.ael upon running the AEL program.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_adssrc&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_adssrc</span>  <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span> <span class="o">+</span> <span class="s1">&#39;/ads/simulation&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adssrc</span>
+    <span class="nd">@adssrc</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">adssrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve_adsfiles</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Removing </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not remove </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">adssimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Simulation path. (./Simulations/adssim/&lt;runname&gt;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adssimpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span><span class="o">+</span><span class="s1">&#39;/Simulations/adssim/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">runname</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adssimpath</span><span class="p">)):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adssimpath</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adssimpath</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed to create </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adssimpath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adssimpath</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sparam_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;String</span>
+<span class="sd">        </span>
+<span class="sd">        Changes the S-parameter output file name. Defaults to proj&lt;i&gt;, where i corresponds to</span>
+<span class="sd">        the simulation repetition. E.g 0 -&gt; first simulation, 1 -&gt; 2nd. etc.</span>
+
+<span class="sd">        Should be given without the file type extension, because touchstone .sNp format</span>
+<span class="sd">        extension depends on the number of ports in the layout. This is automatically generated</span>
+<span class="sd">        by citi_to_touchstone.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_sparam_filename&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sparam_filename</span> <span class="o">=</span> <span class="s1">&#39;proj0&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sparam_filename</span>
+    <span class="nd">@sparam_filename</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">sparam_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sparam_filename</span> <span class="o">=</span> <span class="n">value</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">adscmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        ADS Momentum simulation command string to be executed on the command line.</span>
+<span class="sd">        Automatically generated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#if not hasattr(self,&#39;_adscmd&#39;):</span>
+        <span class="n">adssimcmd</span> <span class="o">=</span> <span class="s2">&quot;adsMomWrapper -O -3D --objMode=RF proj proj&quot;</span>
+        <span class="c1"># Check if the filename already exists:</span>
+        <span class="c1"># If it does, name the new generated file as proj&lt;i&gt;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> 
+        <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adssimpath</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="n">files_no_ext</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">sparam_filename</span> <span class="ow">in</span> <span class="n">files_no_ext</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sparam_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;proj</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adscmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;cd </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span><span class="si">}</span><span class="s1"> &amp;&amp; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ads_submission</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">adssimcmd</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adscmd</span>
+    <span class="c1"># Just to give the freedom to set this if needed</span>
+    <span class="nd">@adscmd</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">adscmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adscmd</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">runname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String </span>
+<span class="sd">        </span>
+<span class="sd">        Automatically generated name for the simulation. </span>
+<span class="sd">        </span>
+<span class="sd">        Formatted as timestamp_randomtag, i.e. &#39;20201002103638_tmpdbw11nr4&#39;.</span>
+<span class="sd">        Can be overridden by assigning self.runname = &#39;myname&#39;.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_runname&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runname</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_runname</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> \
+                    <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">%H%M%S&#39;</span><span class="p">),</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runname</span>
+    <span class="nd">@runname</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">runname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runname</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fstop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Integer or float</span>
+
+<span class="sd">        Maximum frequency of the simulation. &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_fstop&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fstop</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fstop</span>
+    <span class="nd">@fstop</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fstop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fstop</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fstep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Integer or float</span>
+
+<span class="sd">        Frequency step for the simulation. &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_fstep&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fstep</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fstep</span>
+    <span class="nd">@fstep</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fstep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fstep</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fstop_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; String</span>
+
+<span class="sd">        Frequency unit for fstop &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_fstop_unit&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fstop_unit</span> <span class="o">=</span> <span class="s2">&quot;Hz&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fstop_unit</span>
+    <span class="nd">@fstop_unit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fstop_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fstop_unit</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fstep_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; String</span>
+
+<span class="sd">        Frequency unit for fstep &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_fstep_unit&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fstep_unit</span> <span class="o">=</span> <span class="s2">&quot;Hz&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fstep_unit</span>
+    <span class="nd">@fstep_unit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fstep_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fstep_unit</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">edge_mesh_enable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Boolean (True or False)</span>
+
+<span class="sd">        Enables edge mesh &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_edge_mesh_enable&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edge_mesh_enable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edge_mesh_enable</span>
+    <span class="nd">@edge_mesh_enable</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">edge_mesh_enable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edge_mesh_enable</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mesh_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Integer</span>
+
+<span class="sd">        Defines the mesh density. Cells per fstop wavelength &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_mesh_cells&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_cells</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_cells</span>
+    <span class="nd">@mesh_cells</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">mesh_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_cells</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">TL_mesh_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Integer</span>
+
+<span class="sd">        Defines the transmission line mesh density. Cells per line width &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_TL_mesh_cells&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_TL_mesh_cells</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_TL_mesh_cells</span>
+    <span class="nd">@TL_mesh_cells</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">TL_mesh_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_TL_mesh_cells</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="ads.set_simulation_options"><a class="viewcode-back" href="../ads/sections.html#ads.ads.set_simulation_options">[docs]</a>    <span class="k">def</span> <span class="nf">set_simulation_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Automatically called function to set the simulation settings</span>
+
+<span class="sd">        When changing settings, always run ./configure first.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">TL_mesh_cells</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Enable TL mesh</span>
+            <span class="n">TL_mesh_enable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">TL_mesh_enable</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">stop_freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fstop</span>
+        <span class="n">step_freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fstep</span>
+        <span class="n">stop_freq_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fstop_unit</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">stop_freq_unit</span> <span class="o">==</span> <span class="s1">&#39;khz&#39;</span><span class="p">:</span>
+            <span class="n">stop_freq</span> <span class="o">=</span> <span class="n">stop_freq</span> <span class="o">*</span> <span class="mf">10e+2</span>
+        <span class="k">elif</span> <span class="n">stop_freq_unit</span> <span class="o">==</span> <span class="s1">&#39;mhz&#39;</span><span class="p">:</span>
+            <span class="n">stop_freq</span> <span class="o">=</span> <span class="n">stop_freq</span> <span class="o">*</span> <span class="mf">10e+5</span>
+        <span class="k">elif</span> <span class="n">stop_freq_unit</span> <span class="o">==</span> <span class="s1">&#39;ghz&#39;</span><span class="p">:</span>
+            <span class="n">stop_freq</span> <span class="o">=</span> <span class="n">stop_freq</span> <span class="o">*</span> <span class="mf">10e+8</span>
+        
+        <span class="n">step_freq_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fstep_unit</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">step_freq_unit</span> <span class="o">==</span> <span class="s1">&#39;khz&#39;</span><span class="p">:</span>
+            <span class="n">step_freq</span> <span class="o">=</span> <span class="n">step_freq</span> <span class="o">*</span> <span class="mf">10e+2</span>
+        <span class="k">elif</span> <span class="n">step_freq_unit</span> <span class="o">==</span> <span class="s1">&#39;mhz&#39;</span><span class="p">:</span>
+            <span class="n">step_freq</span> <span class="o">=</span> <span class="n">step_freq</span> <span class="o">*</span> <span class="mf">10e+5</span>
+        <span class="k">elif</span> <span class="n">step_freq_unit</span> <span class="o">==</span> <span class="s1">&#39;ghz&#39;</span><span class="p">:</span>
+            <span class="n">step_freq</span> <span class="o">=</span> <span class="n">step_freq</span> <span class="o">*</span> <span class="mf">10e+8</span>
+
+        <span class="c1"># Calculate number of simulation points</span>
+        <span class="n">freq_points</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">stop_freq</span> <span class="o">/</span> <span class="n">step_freq</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emsetupsrcpath</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">stop_freq</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">step_freq</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">VIRTUOSO_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;VIRTUOSO_DIR&quot;</span><span class="p">]</span>
+
+                <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sed -i -e &quot;s/22222/</span><span class="si">{</span><span class="n">stop_freq</span><span class="si">}</span><span class="s1">/g&quot; </span><span class="se">\</span>
+<span class="s1">                -e &quot;s#1212#</span><span class="si">{</span><span class="n">step_freq</span><span class="si">}</span><span class="s1">#g&quot; </span><span class="se">\</span>
+<span class="s1">                -e &quot;s#&lt;ptsFreq&gt;19&lt;/ptsFreq&gt;#&lt;ptsFreq&gt;</span><span class="si">{</span><span class="n">freq_points</span><span class="si">}</span><span class="s1">&lt;/ptsFreq&gt;#g&quot; </span><span class="se">\</span>
+<span class="s1">                -e &quot;s#&lt;EdgeMeshEnabled&gt;True&lt;/EdgeMeshEnabled&gt;#&lt;EdgeMeshEnabled&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_mesh_enable</span><span class="si">}</span><span class="s1">&lt;/EdgeMeshEnabled&gt;#g&quot; </span><span class="se">\</span>
+<span class="s1">                -e &quot;s#44444#</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">TL_mesh_cells</span><span class="si">}</span><span class="s1">#g&quot; </span><span class="se">\</span>
+<span class="s1">                -e &quot;s#&lt;TLMeshEnabled&gt;True&lt;/TLMeshEnabled&gt;#&lt;TLMeshEnabled&gt;</span><span class="si">{</span><span class="n">TL_mesh_enable</span><span class="si">}</span><span class="s1">&lt;/TLMeshEnabled&gt;#g&quot; </span><span class="se">\</span>
+<span class="s1">                -e &quot;s#33333#</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_cells</span><span class="si">}</span><span class="s1">#g&quot; </span><span class="se">\</span>
+<span class="s1">                 &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">emsetupsrcpath</span><span class="si">}</span><span class="s1">/emStateFile.xml&quot;&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">emsetupsrcpath</span><span class="si">}</span><span class="s2"> folder does not exist, run configure&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ads.generate_input_files"><a class="viewcode-back" href="../ads/sections.html#ads.ads.generate_input_files">[docs]</a>    <span class="k">def</span> <span class="nf">generate_input_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Automatically called function to generate the input/configuration files using AEL &quot;&quot;&quot;</span>
+        <span class="n">aelpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrcpath</span><span class="o">+</span><span class="s1">&#39;/init.ael&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">aelpath</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;The </span><span class="si">{</span><span class="n">aelpath</span><span class="si">}</span><span class="s1"> file does not exist. Run configure!&#39;</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;cd </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">adssrcpath</span><span class="si">}</span><span class="s1"> &amp;&amp; ads -nw -m init.ael&#39;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Running external command </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ads.execute_ads_sim"><a class="viewcode-back" href="../ads/sections.html#ads.ads.execute_ads_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_ads_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Automatically called function to execute ADS momentum simulation.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Running external command </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adscmd</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adscmd</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ads.run_ads"><a class="viewcode-back" href="../ads/sections.html#ads.ads.run_ads">[docs]</a>    <span class="k">def</span> <span class="nf">run_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Externally called function to execute ads simulation.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_simulation_options</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_input_files</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute_ads_sim</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">ctt</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span><span class="si">}</span><span class="s1">/proj.cti&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">output_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">adssimpath</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sparam_filename</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">generate_contents</span><span class="p">()</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
