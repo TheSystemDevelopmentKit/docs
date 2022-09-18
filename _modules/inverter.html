@@ -354,6 +354,12 @@
     <span class="kn">from</span> <span class="nn">inverter.signal_plotter</span> <span class="kn">import</span> <span class="n">signal_plotter</span>
     <span class="kn">import</span> <span class="nn">pdb</span>
 
+    <span class="c1"># Implement argument parser</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Parse selectors&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--show&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="n">const</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
+            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s1">&#39;Show figures on screen&#39;</span><span class="p">)</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
     <span class="n">length</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">8</span>
     <span class="n">rs</span><span class="o">=</span><span class="mf">100e6</span>
     <span class="n">controller</span><span class="o">=</span><span class="n">inverter_controller</span><span class="p">()</span>
@@ -420,7 +426,11 @@
 
      <span class="c1">#This is here to keep the images visible</span>
      <span class="c1">#For batch execution, you should comment the following line </span>
-    <span class="nb">input</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">show</span><span class="p">:</span>
+       <span class="nb">input</span><span class="p">()</span>
+    <span class="c1">#This is to have exit status for succesfuulexecution</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
 </pre></div>
 
            </div>
