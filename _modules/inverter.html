@@ -121,9 +121,6 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <div class="viewcode-block" id="inverter"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter">[docs]</a><span class="k">class</span> <span class="nc">inverter</span><span class="p">(</span><span class="n">rtl</span><span class="p">,</span><span class="n">spice</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
 
 <div class="viewcode-block" id="inverter.__init__"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
         <span class="sd">&quot;&quot;&quot; Inverter parameters and attributes</span>
@@ -222,19 +219,31 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span> 
             <span class="c1"># This defines contents of modelsim control file executed when interactive_rtl = True</span>
-            <span class="n">interactive_control_contents</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">                add wave -position insertpoint </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                sim/:tb_inverter:A </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                sim/:tb_inverter:initdone </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                sim/:tb_inverter:clock </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                sim/:tb_inverter:Z</span>
-<span class="s2">                run -all</span>
-<span class="s2">                wave zoom full</span>
-<span class="s2">            &quot;&quot;&quot;</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+                <span class="n">interactive_control_contents</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    set io_facs [list] </span>
+<span class="s2">                    lappend io_facs &quot;tb_inverter.inverter.A&quot;</span>
+<span class="s2">                    lappend io_facs &quot;tb_inverter.inverter.Z&quot; </span>
+<span class="s2">                    lappend io_facs &quot;tb_inverter.clock&quot;</span>
+<span class="s2">                    gtkwave::addSignalsFromList $io_facs </span>
+<span class="s2">                    gtkwave::/Time/Zoom/Zoom_Full</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">interactive_control_contents</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    add wave -position insertpoint </span><span class="se">\\</span><span class="s2"></span>
+<span class="s2">                    sim/:tb_inverter:A </span><span class="se">\\</span><span class="s2"></span>
+<span class="s2">                    sim/:tb_inverter:initdone </span><span class="se">\\</span><span class="s2"></span>
+<span class="s2">                    sim/:tb_inverter:clock </span><span class="se">\\</span><span class="s2"></span>
+<span class="s2">                    sim/:tb_inverter:Z</span>
+<span class="s2">                    run -all</span>
+<span class="s2">                    wave zoom full</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
                 <span class="c1"># Verilog simulation options here</span>
                 <span class="n">_</span><span class="o">=</span><span class="n">rtl_iofile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="n">iotype</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">ionames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">],</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">&#39;sint&#39;</span><span class="p">)</span> <span class="c1"># IO file for input A</span>
-                <span class="n">_</span><span class="o">=</span><span class="n">rtl_iofile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="n">iotype</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">ionames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">],</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">&#39;sint&#39;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">=</span><span class="n">rtl_iofile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="n">iotype</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">ionames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">],</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">&#39;sint&#39;</span><span class="p">)</span>
+                <span class="c1"># This is to avoid sampling time confusion with Icarus</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">verilog_io_sync</span><span class="o">=</span><span class="s1">&#39;@(negedge clock)&#39;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rtlparameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;g_Rs&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">Rs</span><span class="p">),])</span> <span class="c1"># Defines the sample rate</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">interactive_control_contents</span><span class="o">=</span><span class="n">interactive_control_contents</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">run_rtl</span><span class="p">()</span>
@@ -354,8 +363,8 @@
     <span class="n">controller</span><span class="o">.</span><span class="n">start_datafeed</span><span class="p">()</span>
 
     <span class="c1">#By default, we set only open souce simulators</span>
-    <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">]</span>
-    <span class="c1">#models=[&#39;py&#39;,&#39;sv&#39;,&#39;vhdl&#39;,&#39;eldo&#39;,&#39;spectre&#39;]</span>
+    <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">]</span>
+    <span class="c1">#models=[&#39;py&#39;,&#39;sv&#39; &#39;icarus&#39;,&#39;vhdl&#39;,&#39;eldo&#39;,&#39;spectre&#39;]</span>
     <span class="c1"># Here we instantiate the signal source</span>
     <span class="n">duts</span><span class="o">=</span><span class="p">[]</span>
     <span class="n">plotters</span><span class="o">=</span><span class="p">[]</span>
@@ -367,13 +376,14 @@
         <span class="n">duts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> 
         <span class="n">d</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="n">model</span>
         <span class="n">d</span><span class="o">.</span><span class="n">Rs</span><span class="o">=</span><span class="n">rs</span>
+        <span class="c1">#d.preserve_rtlfiles = True</span>
         <span class="c1"># Enable debug messages</span>
         <span class="c1">#d.DEBUG = True</span>
         <span class="c1"># Run simulations in interactive modes to monitor progress/results</span>
         <span class="c1">#d.interactive_spice=True</span>
         <span class="c1">#d.interactive_rtl=True</span>
         <span class="c1"># Preserve the IO files or simulator files for debugging purposes</span>
-        <span class="c1"># d.preserve_iofiles = True</span>
+        <span class="c1">#d.preserve_iofiles = True</span>
         <span class="c1"># d.preserve_spicefiles = True</span>
         <span class="c1"># Save the entity state after simulation</span>
         <span class="c1">#d.save_state = True</span>

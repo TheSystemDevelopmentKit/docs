@@ -99,7 +99,7 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 
-<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">intend</span>
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">indent</span><span class="p">,</span> <span class="n">verilog_connector_bundle</span>
 <span class="kn">from</span> <span class="nn">rtl.testbench</span> <span class="kn">import</span> <span class="n">testbench</span> <span class="k">as</span> <span class="n">vtb</span>
 <span class="kn">from</span> <span class="nn">rtl.rtl_iofile</span> <span class="kn">import</span> <span class="n">rtl_iofile</span> <span class="k">as</span> <span class="n">rtl_iofile</span>
 
@@ -334,7 +334,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_simdut&#39;</span><span class="p">):</span>
             <span class="n">extension</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
                 <span class="n">extension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogext</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
                 <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;.vhd&#39;</span>
@@ -379,6 +379,17 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Removing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not remove </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; List of arguments passed to the simulator</span>
+<span class="sd">        during the verilog compilation &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogcompargs&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogcompargs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlogcompargs</span>
+    <span class="nd">@vlogcompargs</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vlogcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vlogcompargs</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
@@ -462,10 +473,16 @@
 <span class="sd">        read from this file path. Default path is</span>
 <span class="sd">        `./interactive_control_files/modelsim/dofile.do`.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">dofiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/modelsim&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
-        <span class="n">dofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span>
-        <span class="n">obsoletepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/Simulations/rtlsim/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
-        <span class="n">newdofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+            <span class="n">dofiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/gtkwave&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
+            <span class="n">dofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/general.tcl&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span>
+            <span class="n">obsoletepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/Simulations/rtlsim/general.tcl&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
+            <span class="n">newdofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/general.tcl&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>
+        <span class="k">else</span><span class="p">:</span>    
+            <span class="n">dofiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/modelsim&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
+            <span class="n">dofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span>
+            <span class="n">obsoletepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/Simulations/rtlsim/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
+            <span class="n">newdofilepath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dofiledir</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span><span class="p">)</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dofiledir</span><span class="p">)</span>
@@ -509,8 +526,11 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">submission</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_submission</span>
-        <span class="n">rtllibcmd</span> <span class="o">=</span>  <span class="s1">&#39;vlib &#39;</span> <span class="o">+</span>  <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
-        <span class="n">rtllibmapcmd</span> <span class="o">=</span> <span class="s1">&#39;vmap work &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rtllibcmd</span> <span class="o">=</span>  <span class="s1">&#39;vlib &#39;</span> <span class="o">+</span>  <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
+            <span class="n">rtllibmapcmd</span> <span class="o">=</span> <span class="s1">&#39;vmap work &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
 
         <span class="n">vlogmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
             <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span><span class="p">])</span>
@@ -520,10 +540,13 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
             <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
-                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogcompargs</span><span class="p">))</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
             <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
                     <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;iverilog -Wall -v -g2012 -o &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span>
+    	            <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
 
         <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vcom -work work &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
                        <span class="n">vhdlmodulesstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrc</span> <span class="p">)</span>
@@ -536,11 +559,14 @@
             <span class="n">fileparams</span><span class="o">+=</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">simparam</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
-            <span class="n">dostring</span><span class="o">=</span><span class="s1">&#39; -do &quot;run -all; quit;&quot;&#39;</span>
-            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -voptargs=+acc &#39;</span> 
-                    <span class="o">+</span> <span class="n">fileparams</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span>
-                    <span class="o">+</span><span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  
-                    <span class="o">+</span> <span class="n">dostring</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+                <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;vvp -v &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">fileparams</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dostring</span><span class="o">=</span><span class="s1">&#39; -do &quot;run -all; quit;&quot;&#39;</span>
+                <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -voptargs=+acc &#39;</span> 
+                        <span class="o">+</span> <span class="n">fileparams</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span>
+                        <span class="o">+</span><span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  
+                        <span class="o">+</span> <span class="n">dostring</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dofile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">interactive_controlfile</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dofile</span><span class="p">):</span>
@@ -550,8 +576,13 @@
                 <span class="n">dostring</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;No interactive control file set.&#39;</span><span class="p">)</span>
             <span class="n">submission</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="c1">#Local execution</span>
-            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -novopt &#39;</span> <span class="o">+</span> <span class="n">fileparams</span> 
-                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span> <span class="o">+</span><span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">dostring</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+                <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;vvp -v &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+                        <span class="o">+</span> <span class="s1">&#39; &amp;&amp; gtkwave -S&#39;</span> <span class="o">+</span> <span class="n">dofile</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dump.vcd&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -novopt &#39;</span> <span class="o">+</span> <span class="n">fileparams</span> 
+                        <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span> <span class="o">+</span><span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">dostring</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">=</span>  <span class="n">rtllibcmd</span>  <span class="o">+</span>\
@@ -565,6 +596,11 @@
                     <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">rtllibmapcmd</span> <span class="o">+</span>\
                     <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vhdlcompcmd</span> <span class="o">+</span>\
                     <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vlogcompcmd</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; sync &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span>\
+                    <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">submission</span> <span class="o">+</span>\
+                    <span class="n">rtlsimcmd</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">=</span>  <span class="n">vlogcompcmd</span> <span class="o">+</span>\
                     <span class="s1">&#39; &amp;&amp; sync &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span>\
                     <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">submission</span> <span class="o">+</span>\
                     <span class="n">rtlsimcmd</span>
@@ -660,7 +696,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Copying rtl sources to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
             <span class="c1"># copy dut source</span>
             <span class="n">vlogsrc_exists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">)</span>   <span class="c1"># verilog source present in self.entitypath/sv</span>
             <span class="n">simdut_exists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">)</span>     <span class="c1"># verilog source generated to self.rtlsimpath</span>
@@ -755,6 +791,40 @@
                 <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
                     <span class="n">files_ok</span><span class="o">=</span><span class="kc">True</span>
                     <span class="n">files_ok</span><span class="o">=</span><span class="n">files_ok</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">)</span></div>
+
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;List, which signals are connected in assignment stage during testbench generation</span>
+<span class="sd">        Should be a list of strings, where a string is the signal name</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_assignment_matchlist&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_assignment_matchlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assignment_matchlist</span>
+    <span class="nd">@assignment_matchlist</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matchlist</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assignment_matchlist</span> <span class="o">=</span> <span class="n">matchlist</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">custom_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Custom connectors to be added to the testbench</span>
+<span class="sd">        Should be a e.g. a verilog_connector_bundle</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_custom_connectors&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_custom_connectors</span> <span class="o">=</span> <span class="n">verilog_connector_bundle</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_connectors</span>
+    <span class="nd">@custom_connectors</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">custom_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_connectors</span> <span class="o">=</span> <span class="n">bundle</span>
+
+<div class="viewcode-block" id="rtl.add_connectors"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.add_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">add_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Adds custom connectors to the testbench. </span>
+<span class="sd">        Also connects rtl matchlist to testbench matchlist.</span>
+<span class="sd">        Custom connectors should be saved in self.custom_connectors</span>
+<span class="sd">        Matchlist for these connectors should be saved in self.assignment_matchlist </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bundle</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">assignment_matchlist</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assignment_matchlist</span></div>
     
 <div class="viewcode-block" id="rtl.run_rtl"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.run_rtl">[docs]</a>    <span class="k">def</span> <span class="nf">run_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;1) Copies rtl sources to a temporary simulation directory</span>
@@ -783,6 +853,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">copy_rtl_sources</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">=</span><span class="n">vtb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>             
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">define_testbench</span><span class="p">()</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_connectors</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">create_connectors</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connect_inputs</span><span class="p">()</span>         
 

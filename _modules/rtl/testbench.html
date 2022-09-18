@@ -99,7 +99,7 @@
 <span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">verilog_connector</span>
 <span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">verilog_connector_bundle</span>
-<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">intend</span> 
+<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">indent</span>
 <span class="kn">from</span> <span class="nn">rtl.module</span> <span class="kn">import</span> <span class="n">verilog_module</span>
 <span class="kn">from</span> <span class="nn">rtl.entity</span> <span class="kn">import</span> <span class="n">vhdl_entity</span>
 
@@ -170,7 +170,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dut_instance&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">verilog_module</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">vhdl_entity</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
@@ -248,7 +248,7 @@
         <span class="n">assigns</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">//Assignments</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matchlist</span><span class="p">:</span>
             <span class="n">assigns</span><span class="o">=</span><span class="n">assigns</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">match</span><span class="o">=</span><span class="n">match</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">intend</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">assigns</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">assigns</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div>
      
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -304,7 +304,22 @@
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">deleter</span>
     <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
-   
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dumpfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="sd">        </span>
+<span class="sd">        Code that generates a VCD dumpfile when running the testbench with icarus verilog.</span>
+<span class="sd">        This dumpfile can be used with gtkwave. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dumpStr</span><span class="o">=</span><span class="s2">&quot;// Generates dumpfile with iverilog</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
+            <span class="n">dumpStr</span> <span class="o">+=</span> <span class="s2">&quot;initial begin</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">dumpStr</span> <span class="o">+=</span> <span class="s1">&#39;  $dumpfile(&quot;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dump.vcd&quot;);</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">dumpStr</span> <span class="o">+=</span> <span class="s2">&quot;  $dumpvars(0, tb_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;);</span><span class="se">\n</span><span class="s2">end </span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">dumpStr</span>
+
+
     <span class="c1"># This method </span>
 <div class="viewcode-block" id="testbench.define_testbench"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.define_testbench">[docs]</a>    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
@@ -377,7 +392,8 @@
 <span class="sd">                self.connector_definitions</span>
 <span class="sd">                self.assignments()</span>
 <span class="sd">                self.iofile_definitions</span>
-<span class="sd">                sefl.misccmd</span>
+<span class="sd">                self.misccmd</span>
+<span class="sd">                self.dumpfile</span>
 <span class="sd">                self.dut_instance.instance</span>
 <span class="sd">                self.verilog_instance_members.items().instance (for all members)</span>
 <span class="sd">                self.connectors.verilog_inits()</span>
@@ -396,6 +412,7 @@
 <span class="bp">self</span><span class="o">.</span><span class="n">assignments</span><span class="p">()</span> <span class="o">+</span>\
 <span class="bp">self</span><span class="o">.</span><span class="n">iofile_definitions</span><span class="o">+</span>\
 <span class="bp">self</span><span class="o">.</span><span class="n">misccmd</span><span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">dumpfile</span><span class="o">+</span>\
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">//DUT definition</span>
 <span class="sd">&quot;&quot;&quot;</span><span class="o">+</span>\
@@ -408,7 +425,7 @@
         <span class="n">contents</span><span class="o">+=</span><span class="s2">&quot;&quot;&quot;</span>
 
 <span class="s2">//io_out</span>
-<span class="s2">        &quot;&quot;&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
                 <span class="n">contents</span><span class="o">+=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span>
@@ -423,11 +440,11 @@
 
 <span class="sd">    // Sequences enabled by initdone</span>
 <span class="sd">    $display(&quot;Ready to read&quot;); </span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
-                <span class="n">contents</span><span class="o">+=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span>
+                <span class="n">contents</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">join</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">$finish;</span><span class="se">\n</span><span class="s1">end</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="o">=</span><span class="n">contents</span></div></div>

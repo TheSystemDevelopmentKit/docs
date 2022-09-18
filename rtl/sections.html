@@ -99,6 +99,22 @@ most common simulation cases.</p>
 <dd><p>Adding this class as a superclass enforces the definitions
 for rtl simulations in the subclasses.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="rtl.rtl.add_connectors">
+<span class="sig-name descname"><span class="pre">add_connectors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.add_connectors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.add_connectors" title="Permalink to this definition"></a></dt>
+<dd><p>Adds custom connectors to the testbench.
+Also connects rtl matchlist to testbench matchlist.
+Custom connectors should be saved in self.custom_connectors
+Matchlist for these connectors should be saved in self.assignment_matchlist</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.assignment_matchlist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assignment_matchlist</span></span><a class="headerlink" href="#rtl.rtl.assignment_matchlist" title="Permalink to this definition"></a></dt>
+<dd><p>List, which signals are connected in assignment stage during testbench generation
+Should be a list of strings, where a string is the signal name</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="rtl.rtl.connect_inputs">
 <span class="sig-name descname"><span class="pre">connect_inputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.connect_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.connect_inputs" title="Permalink to this definition"></a></dt>
 <dd><p>Assigns all IOS.Members[name].Data to
@@ -124,6 +140,13 @@ self.iofile_bundle.Members[ioname].Data</p>
 1) From a iofile that is provided in the Data
 attribute of an IO.
 2) IOS of the verilog DUT</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.custom_connectors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">custom_connectors</span></span><a class="headerlink" href="#rtl.rtl.custom_connectors" title="Permalink to this definition"></a></dt>
+<dd><p>Custom connectors to be added to the testbench
+Should be a e.g. a verilog_connector_bundle</p>
 </dd></dl>
 
 <dl class="py method">
@@ -352,6 +375,13 @@ self.entitypath/vhdl</p>
 <dd class="field-odd"><p>self.entitypath/vhdl</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.vlogcompargs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogcompargs</span></span><a class="headerlink" href="#rtl.rtl.vlogcompargs" title="Permalink to this definition"></a></dt>
+<dd><p>List of arguments passed to the simulator
+during the verilog compilation</p>
 </dd></dl>
 
 <dl class="py property">
@@ -659,6 +689,14 @@ Create append mechanism to add more clocks.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.dumpfile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dumpfile</span></span><a class="headerlink" href="#rtl.testbench.testbench.dumpfile" title="Permalink to this definition"></a></dt>
+<dd><p>String</p>
+<p>Code that generates a VCD dumpfile when running the testbench with icarus verilog.
+This dumpfile can be used with gtkwave.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="rtl.testbench.testbench.dut_instance">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dut_instance</span></span><a class="headerlink" href="#rtl.testbench.testbench.dut_instance" title="Permalink to this definition"></a></dt>
 <dd><p>RTL module parsed from the verilog or VHDL file of the parent depending on <cite>parent.model</cite></p>
@@ -681,7 +719,8 @@ following order</p>
    <span class="bp">self</span><span class="o">.</span><span class="n">connector_definitions</span>
    <span class="bp">self</span><span class="o">.</span><span class="n">assignments</span><span class="p">()</span>
    <span class="bp">self</span><span class="o">.</span><span class="n">iofile_definitions</span>
-   <span class="n">sefl</span><span class="o">.</span><span class="n">misccmd</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">misccmd</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">dumpfile</span>
    <span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">instance</span>
    <span class="bp">self</span><span class="o">.</span><span class="n">verilog_instance_members</span><span class="o">.</span><span class="n">items</span><span class="p">()</span><span class="o">.</span><span class="n">instance</span> <span class="p">(</span><span class="k">for</span> <span class="nb">all</span> <span class="n">members</span><span class="p">)</span>
    <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">verilog_inits</span><span class="p">()</span>

@@ -191,14 +191,10 @@ are printed as is (typically absolute paths).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk._classfile">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.thesdk._classfile" title="Permalink to this definition"></a></dt>
-<dd><p>Abstract property of thesdk class. Defines the location of the
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.thesdk._classfile" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the location of the
 classfile.</p>
-<p>Define in every child class of thesdk as:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
-</pre></div>
-</div>
+<p>Returns: &lt;path&gt;/Entities/&lt;entity&gt;/&lt;entity&gt;</p>
 </dd></dl>
 
 <dl class="py property">
@@ -211,7 +207,7 @@ classfile.</p>
 <dt class="sig sig-object py" id="thesdk.thesdk.model">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#thesdk.thesdk.model" title="Permalink to this definition"></a></dt>
 <dd><p>Simulation model to be used</p>
-<p>‘py’ |  ‘sv’ |  ‘vhdl’ |  ‘eldo’ |  ‘spectre’ | ‘ngspice’ | ‘hw’</p>
+<p>‘py’ |  ‘sv’ |  ‘vhdl’ |  ‘eldo’ |  ‘spectre’ | ‘ngspice’ | ‘hw’ | ‘icarus’</p>
 </dd></dl>
 
 <dl class="py property">
@@ -548,13 +544,9 @@ In case modifications are needed, define class for desired iofile type with remo
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.IO._classfile">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.IO._classfile" title="Permalink to this definition"></a></dt>
-<dd><p>Abstract property of thesdk class. Defines the location of the
+<dd><p>Defines the location of the
 classfile.</p>
-<p>Define in every child class of thesdk as:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
-</pre></div>
-</div>
+<p>Returns: &lt;path&gt;/Entities/&lt;entity&gt;/&lt;entity&gt;</p>
 </dd></dl>
 
 <dl class="py property">

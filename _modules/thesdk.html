@@ -256,19 +256,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_print_relative_path</span><span class="o">=</span><span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Abstract property of thesdk class. Defines the location of the</span>
+        <span class="sd">&#39;&#39;&#39; Defines the location of the</span>
 <span class="sd">        classfile. </span>
 
-<span class="sd">        Define in every child class of thesdk as:: </span>
-
-<span class="sd">            def _classfile(self):</span>
-<span class="sd">                return os.path.dirname(os.path.realpath(__file__)) + &quot;/&quot;+__name__</span>
+<span class="sd">        Returns: &lt;path&gt;/Entities/&lt;entity&gt;/&lt;entity&gt;</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
-    
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">]</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">)</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">entitypath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Path to entity. Extracted from the location of __init__.py file.</span>
@@ -282,7 +279,7 @@
     <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Simulation model to be used </span>
 
-<span class="sd">        &#39;py&#39; |  &#39;sv&#39; |  &#39;vhdl&#39; |  &#39;eldo&#39; |  &#39;spectre&#39; | &#39;ngspice&#39; | &#39;hw&#39; </span>
+<span class="sd">        &#39;py&#39; |  &#39;sv&#39; |  &#39;vhdl&#39; |  &#39;eldo&#39; |  &#39;spectre&#39; | &#39;ngspice&#39; | &#39;hw&#39; | &#39;icarus&#39;</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_model&#39;</span><span class="p">):</span>
@@ -291,7 +288,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>
     <span class="nd">@model</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">,</span> <span class="s1">&#39;eldo&#39;</span><span class="p">,</span> <span class="s1">&#39;spectre&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">,</span> <span class="s1">&#39;hw&#39;</span> <span class="p">]:</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">,</span> <span class="s1">&#39;eldo&#39;</span><span class="p">,</span> <span class="s1">&#39;spectre&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">,</span> <span class="s1">&#39;hw&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span> <span class="s1">&#39;Simulator model </span><span class="si">%s</span><span class="s1"> not supported.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">=</span><span class="n">val</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>
