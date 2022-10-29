@@ -106,7 +106,7 @@ and in every way we are getting better and better :).</p>
 thesdkclass. Used as a reference point for other locations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -117,7 +117,7 @@ thesdkclass. Used as a reference point for other locations</p>
 <dd><p>HOME/TheSDK.config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -129,7 +129,7 @@ thesdkclass. Used as a reference point for other locations</p>
 Appended to sys.path to locate TheSyDeKick system modules</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -141,7 +141,7 @@ Appended to sys.path to locate TheSyDeKick system modules</p>
 Override with initlog if you want something else</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -152,7 +152,7 @@ Override with initlog if you want something else</p>
 <dd><p>List of global parameters to be read to GLOBALS dictionary from CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>)</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -164,7 +164,7 @@ Override with initlog if you want something else</p>
 values defined in CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -243,7 +243,8 @@ simulations. Useful for debugging the file IO</p>
 </pre></div>
 </div>
 <p>Attributes listed in proplist attribute of ‘some_thesdkclass’ are copied from
-self to a. Impemented by including following code at the end of __init__ method
+self to a, if and only if both self and a define the property mentioned in the
+proplist. Implemented by including following code at the end of __init__ method
 of every entity:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
     <span class="n">parent</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -584,7 +585,7 @@ Accessible as iofile_bundle.Members[‘name’].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
 <li><p><strong>**kwargs</strong> – <dl class="simple">
 <dt>name: str</dt><dd><p>Name of the file. Appended with
 random string during the simulation.</p>
@@ -706,6 +707,8 @@ This is a help parameter to give more control over reading.</p>
 </dd></dl>
 
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
 

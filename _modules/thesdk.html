@@ -301,7 +301,8 @@
 <span class="sd">        This is not meant to be set manually.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_simpath&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_simpath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/simulations/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">runname</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">runname</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">runname</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simpath</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/simulations/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simpath</span><span class="p">)):</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simpath</span><span class="p">)</span>
@@ -316,7 +317,7 @@
    
     <span class="nd">@property</span> 
     <span class="k">def</span> <span class="nf">has_lsf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
 
 <span class="sd">        True if LSFINTERACTIVE and LSFSUBMISSION global veriables are defined</span>
 <span class="sd">        in TheSDK.config.</span>
@@ -353,7 +354,8 @@
 <span class="sd">           a=some_thesdk_class(self)</span>
 
 <span class="sd">        Attributes listed in proplist attribute of &#39;some_thesdkclass&#39; are copied from</span>
-<span class="sd">        self to a. Impemented by including following code at the end of __init__ method </span>
+<span class="sd">        self to a, if and only if both self and a define the property mentioned in the </span>
+<span class="sd">        proplist. Implemented by including following code at the end of __init__ method </span>
 <span class="sd">        of every entity::</span>
 <span class="sd">        </span>
 <span class="sd">            if len(arg)&gt;=1:</span>
@@ -366,13 +368,16 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">prop</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
                     <span class="c1">#Its nice to see how things propagate</span>
-                    <span class="k">if</span>  <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
-                        <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Setting </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
-                        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span></div>
+                    <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Setting </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="n">prop</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">prop</span><span class="p">,</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="n">prop</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Property </span><span class="si">%s</span><span class="s2"> not defined for entity </span><span class="si">%s</span><span class="s2">, omitting copy!&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prop</span><span class="p">,</span><span class="n">obj</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span></div>
 
     <span class="c1">#Method for logging</span>
     <span class="c1">#This is a method because it uses the logfile property</span>
@@ -424,7 +429,7 @@
             <span class="n">fid</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> thesdk: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span> <span class="n">typestr</span><span class="p">,</span> <span class="n">initmsg</span><span class="p">))</span>
             <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="nb">type</span><span class="o">==</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
                 <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[DEBUG]&quot;</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cblue</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
@@ -435,24 +440,24 @@
                     <span class="n">typestr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span> 
                     <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="k">return</span>
-        <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
-            <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[INFO]&quot;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+            <span class="n">typestr</span> <span class="o">=</span><span class="s2">&quot;[INFO]&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cgreen</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="s1">&#39;W&#39;</span><span class="p">:</span>
-            <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[WARNING]&quot;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;W&#39;</span><span class="p">:</span>
+            <span class="n">typestr</span> <span class="o">=</span> <span class="s2">&quot;[WARNING]&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cyellow</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="s1">&#39;E&#39;</span><span class="p">:</span>
-            <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[ERROR]&quot;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;E&#39;</span><span class="p">:</span>
+            <span class="n">typestr</span> <span class="o">=</span> <span class="s2">&quot;[ERROR]&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cred</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="s1">&#39;O&#39;</span><span class="p">:</span>
-            <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[OBSOLETE]&quot;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;O&#39;</span><span class="p">:</span>
+            <span class="n">typestr</span> <span class="o">=</span> <span class="s2">&quot;[OBSOLETE]&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cviolet</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="s1">&#39;F&#39;</span><span class="p">:</span>
-            <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[FATAL]&quot;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;F&#39;</span><span class="p">:</span>
+            <span class="n">typestr</span> <span class="o">=</span> <span class="s2">&quot;[FATAL]&quot;</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cred</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quitting due to fatal error in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
@@ -463,7 +468,7 @@
                 <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                 <span class="n">quit</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">typestr</span><span class="o">=</span><span class="s2">&quot;[ERROR]&quot;</span>
+            <span class="n">typestr</span> <span class="o">=</span><span class="s2">&quot;[ERROR]&quot;</span>
             <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Incorrect message type &#39;</span><span class="si">%s</span><span class="s2">&#39;. Choose one of &#39;D&#39;, &#39;I&#39;, &#39;E&#39; or &#39;F&#39;.&quot;</span> <span class="o">%</span> <span class="nb">type</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span><span class="n">cred</span><span class="p">,</span><span class="n">typestr</span><span class="p">,</span><span class="n">cend</span><span class="p">,</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
@@ -476,7 +481,7 @@
             <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="thesdk.timer"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.timer">[docs]</a>    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Timer decorator</span>
+        <span class="sd">&quot;&quot;&quot;Timer decorator</span>
 
 <span class="sd">        Print execution time of member functions of classes inheriting</span>
 <span class="sd">        thesdk to the logfile.</span>
@@ -571,7 +576,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="thesdk.run_parallel"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.run_parallel">[docs]</a>    <span class="k">def</span> <span class="nf">run_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Run instances in parallel and collect results</span>
+        <span class="sd">&quot;&quot;&quot;Run instances in parallel and collect results</span>
 
 <span class="sd">        Usage: Takes in a set of instances, runs a given method for them, and</span>
 <span class="sd">        saves result data to the original instances.</span>
@@ -596,7 +601,6 @@
 <span class="sd">                ret_dict = {**self.IOS.Members,**self.extracts.Members} </span>
 <span class="sd">                self.queue.put(ret_dict)</span>
 
-<span class="sd">        ----------</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">         **kwargs:  </span>
@@ -643,7 +647,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">IOS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; Type: Bundle of IO&#39;s</span>
+        <span class="sd">&quot;&quot;&quot;Type: Bundle of IO&#39;s</span>
 <span class="sd">        </span>
 <span class="sd">        Property holding the IOS</span>
 
@@ -663,7 +667,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; Bundle</span>
+        <span class="sd">&quot;&quot;&quot;Bundle</span>
 <span class="sd">        </span>
 <span class="sd">        Bundle for holding the returned results from simulations that are</span>
 <span class="sd">        not attributes or IOs. </span>
@@ -685,7 +689,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">netlist_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; List[string]</span>
+        <span class="sd">&quot;&quot;&quot;List[string]</span>
 <span class="sd">        </span>
 <span class="sd">        List of strings containing the parameters of a netlist. List is populated by calling</span>
 <span class="sd">        ecd_methods.get_params(). Empty if no parameters were found in the netlist.</span>
@@ -702,7 +706,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">print_colors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; True (default) | False</span>
+        <span class="sd">&quot;&quot;&quot;True (default) | False</span>
 <span class="sd">        </span>
 <span class="sd">        Enable color tags in log print messages.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -741,7 +745,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">statepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; String</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Path where the entity state is stored and where existing states are</span>
 <span class="sd">        loaded from.</span>
@@ -755,12 +759,15 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">statedir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; String</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Path to the most recently stored state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_statedir&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_statedir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statepath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">runname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">runname</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_statedir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statepath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">runname</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_statedir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statepath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">load_state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statedir</span>
     <span class="nd">@statedir</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">statedir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
@@ -768,7 +775,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">save_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
 <span class="sd">        </span>
 <span class="sd">        Save the entity state after simulation (including output data). Any</span>
 <span class="sd">        stored state can be loaded using the matching state name passed to the</span>
@@ -783,7 +790,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">load_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; String (default &#39;&#39;)</span>
+        <span class="sd">&quot;&quot;&quot;String (default &#39;&#39;)</span>
 
 <span class="sd">        Feature for loading results of previous simulation. When calling run()</span>
 <span class="sd">        with this property set, the simulation is not re-executed, but the</span>
@@ -813,7 +820,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">load_state_full</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot; True (default) | False</span>
+        <span class="sd">&quot;&quot;&quot;True (default) | False</span>
 <span class="sd">        </span>
 <span class="sd">        Whether to load the full entity state or not. If False, only IOs are</span>
 <span class="sd">        loaded in order to not override the entity state otherwise. In that</span>
@@ -827,7 +834,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_load_state_full</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="thesdk._write_state"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk._write_state">[docs]</a>    <span class="k">def</span> <span class="nf">_write_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Write the entity state to a binary file.</span>
+        <span class="sd">&quot;&quot;&quot;Write the entity state to a binary file.</span>
 
 <span class="sd">        This should be called after the simulation has finished.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -846,7 +853,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed saving state to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">statedir</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="thesdk._read_state"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk._read_state">[docs]</a>    <span class="k">def</span> <span class="nf">_read_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Read the entity state from a binary file.</span>
+        <span class="sd">&quot;&quot;&quot;Read the entity state from a binary file.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span>
@@ -876,6 +883,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Loading </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed loading state from </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pathname</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -894,7 +902,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Bundle</span>
+        <span class="sd">&quot;&quot;&quot;Bundle</span>
 
 <span class="sd">        A thesdk.Bundle containing `iofile` objects. The `iofile`</span>
 <span class="sd">        objects are automatically added to this Bundle, nothing should be</span>
@@ -909,7 +917,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_iofile_bundle</span><span class="o">=</span><span class="n">value</span>
 
 <div class="viewcode-block" id="thesdk.delete_iofile_bundle"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.delete_iofile_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">delete_iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Method to delete all files in iofile bundle</span>
+        <span class="sd">&quot;&quot;&quot;Method to delete all files in iofile bundle</span>
 
 <span class="sd">        For each of the member of the bundle of type iofile, it calls &#39;remove&#39; method.</span>
 <span class="sd">        In case modifications are needed, define class for desired iofile type with remove method.</span>
