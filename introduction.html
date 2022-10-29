@@ -14,7 +14,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -87,7 +86,7 @@
            <div itemprop="articleBody">
              
   <section id="introduction-to-thesydekick">
-<h1>Introduction to TheSyDeKick<a class="headerlink" href="#introduction-to-thesydekick" title="Permalink to this heading"></a></h1>
+<h1>Introduction to TheSyDeKick<a class="headerlink" href="#introduction-to-thesydekick" title="Permalink to this headline"></a></h1>
 <p>TheSyDeKick (abbreviated from ‘The System Development Kit’) is a multi-tool simulation and developement environment for
 developing systems. Development was initiated by Marko Kosunen, marko.kosunen&lt;at&gt;aalto.fi 7.8.2017</p>
 <p>It targets to using a single control environment to simulate, design and measure
@@ -107,7 +106,7 @@ compliant with your shell.:</p>
 <p>For background information, see the
 <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template/wiki/The-System-Development-Kit">wikipage</a>.</p>
 <section id="configuration-quickstart">
-<h2>Configuration quickstart<a class="headerlink" href="#configuration-quickstart" title="Permalink to this heading"></a></h2>
+<h2>Configuration quickstart<a class="headerlink" href="#configuration-quickstart" title="Permalink to this headline"></a></h2>
 <ul>
 <li><p>Go to TheSDK directory and run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">init_submodules</span><span class="o">.</span><span class="n">sh</span>
@@ -159,7 +158,7 @@ Entities/inverter/inverter/__init__.py and Change the line:</p>
 </ul>
 </section>
 <section id="how-to-use-thesydekick">
-<h2>How to use TheSyDeKick<a class="headerlink" href="#how-to-use-thesydekick" title="Permalink to this heading"></a></h2>
+<h2>How to use TheSyDeKick<a class="headerlink" href="#how-to-use-thesydekick" title="Permalink to this headline"></a></h2>
 <p>TheSyDeKick is a multi-tool simulation and developement environment for developing systems.
 It targets to using a single control environment to simulate,design and measure the
 system components with various tools by using a single “Control environment” for
@@ -169,7 +168,7 @@ Python. Python selected based on its good support for computing and signal proce
 interfaces to measurement equipment..</p>
 </section>
 <section id="naming-and-structure">
-<h2>Naming and structure<a class="headerlink" href="#naming-and-structure" title="Permalink to this heading"></a></h2>
+<h2>Naming and structure<a class="headerlink" href="#naming-and-structure" title="Permalink to this headline"></a></h2>
 <p>The files are organized in directories as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      <span class="n">TheSDK</span>
 <span class="n">pip3userinstall</span><span class="o">.</span><span class="n">sh</span>
@@ -204,7 +203,7 @@ interfaces to measurement equipment..</p>
 <p>Naming convention is strict. The placeholder string ‘entity1’ above identifies the name of the Entity and it’s netllists ans testbenches. User is not allowed to freely name the files. This is the basic configuration.</p>
 </section>
 <section id="guidelines-to-follow">
-<h2>Guidelines to follow<a class="headerlink" href="#guidelines-to-follow" title="Permalink to this heading"></a></h2>
+<h2>Guidelines to follow<a class="headerlink" href="#guidelines-to-follow" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p>All component descriptions, called Entities, regardless of the used
 tool/language are located under Entities directory.</p></li>
@@ -233,7 +232,7 @@ See <cite>Entities/inv_sim/inv_sim/__init__.py</cite> for reference.</p>
 <p>Documentation is NEVER comlete or good enough. Feel free to improve.</p>
 </section>
 <section id="how-to-create-and-test-new-entity">
-<h2>How to create and test new entity<a class="headerlink" href="#how-to-create-and-test-new-entity" title="Permalink to this heading"></a></h2>
+<h2>How to create and test new entity<a class="headerlink" href="#how-to-create-and-test-new-entity" title="Permalink to this headline"></a></h2>
 <p>Create a new entity with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">./</span><span class="n">Entities</span>
 <span class="o">../</span><span class="n">thesdk_helpers</span><span class="o">/</span><span class="n">initentity</span> <span class="o">&lt;</span><span class="n">NAME</span><span class="o">&gt;</span>
@@ -247,7 +246,7 @@ See <cite>Entities/inv_sim/inv_sim/__init__.py</cite> for reference.</p>
 The new entity is created as a git project. Push it to your favourite repository</p>
 </section>
 <section id="class-organization-guideline">
-<h2>Class organization guideline<a class="headerlink" href="#class-organization-guideline" title="Permalink to this heading"></a></h2>
+<h2>Class organization guideline<a class="headerlink" href="#class-organization-guideline" title="Permalink to this headline"></a></h2>
 <p>This is not a strict ruleset, rather a guideline how to alleviate your modeling tasks and support modularity.</p>
 <p>The Entities and simulation setups are implemented as classes that
 cross-reference to each other without restrictions. (Hardware) modules are
@@ -317,7 +316,7 @@ simulated.</p></li>
 </ul>
 </section>
 <section id="what-next">
-<h2>What next?<a class="headerlink" href="#what-next" title="Permalink to this heading"></a></h2>
+<h2>What next?<a class="headerlink" href="#what-next" title="Permalink to this headline"></a></h2>
 <p>Take yout time to get acquainted with <cite>Entities/inverter</cite>,
 <cite>Entities/inverter_testbench</cite>, and <cite>Entities/inverter_tests</cite> together with the
 documentation of <em>thesdk</em>, <em>rtl</em> and <em>spice</em> presented in this manual. Those
