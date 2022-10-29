@@ -181,75 +181,79 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_ios&#39;</span><span class="p">):</span>
-            <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module *(?=&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s*\()\s*&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;.*.+$&quot;</span><span class="p">)</span>
-            <span class="n">iomatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*(?&lt;!#)\(.*$&quot;</span><span class="p">)</span>
-            <span class="n">parammatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*#\(.*$&quot;</span><span class="p">)</span>
-            <span class="n">iostopmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.*\);.*$&#39;</span><span class="p">)</span>
-            <span class="n">dut</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-            <span class="c1"># Extract the module definition</span>
+            <span class="c1"># multiline regex for parsing relevant sections of a module definition</span>
+            <span class="c1"># capture groups:</span>
+            <span class="c1">#   0. (full match)</span>
+            <span class="c1">#   1. module parameter port list</span>
+            <span class="c1">#   2. list of ports</span>
+            <span class="c1">#   3. module items</span>
+            <span class="c1">#</span>
+            <span class="c1"># playground: https://regex101.com/r/n2Zmgn/1</span>
+            <span class="n">module_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;module\s*&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s*(\s*#\([\s\S]*?\))?\s*\(([\s\S]*?)\);([\s\S]*?)endmodule&quot;</span>
+            <span class="n">module_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">module_pattern</span><span class="p">)</span>
+
+            <span class="c1"># regex pattern for parsing port declarations</span>
+            <span class="c1"># capture groups:</span>
+            <span class="c1">#   0. (full match)</span>
+            <span class="c1">#   1. port direction   (input|output|inout)</span>
+            <span class="c1">#   2. port type        (wire|reg)</span>
+            <span class="c1">#   3. port size        [msb:lsb]</span>
+            <span class="c1">#     4. msb index</span>
+            <span class="c1">#     5. lsb index</span>
+            <span class="c1">#   6. port name (identifier)</span>
+            <span class="c1">#</span>
+            <span class="c1"># playground: https://regex101.com/r/eiZDS0/1</span>
+            <span class="c1"># TODO: add support for escaped identifiers</span>
+            <span class="k">def</span> <span class="nf">port_pattern</span><span class="p">(</span><span class="n">identifier</span><span class="p">):</span>
+                <span class="k">return</span> <span class="sa">fr</span><span class="s2">&quot;\s*(input|output|inout)?\s*(wire|reg)?\s*(\[\s*([0-9]+)\s*:\s*([0-9]+)\s*\])?\s*(</span><span class="si">{</span><span class="n">identifier</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+            <span class="n">port_identifier_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[a-zA-Z_]+[a-zA-Z0-9_$]*&quot;</span>
+            <span class="n">port_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">port_pattern</span><span class="p">(</span><span class="n">port_identifier_pattern</span><span class="p">))</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span><span class="o">=</span><span class="n">verilog_connector_bundle</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
-                    <span class="n">wholefile</span><span class="o">=</span><span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-                    <span class="n">modfind</span><span class="o">=</span><span class="kc">False</span>
-                    <span class="n">paramfind</span><span class="o">=</span><span class="kc">False</span>
-                    <span class="n">iofind</span><span class="o">=</span><span class="kc">False</span>
-                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wholefile</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">startmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
-                            <span class="n">modfind</span><span class="o">=</span><span class="kc">True</span>
-                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">parammatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
-                                <span class="n">paramfind</span><span class="o">=</span><span class="kc">True</span>
-                        <span class="k">if</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">iomatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
-                                <span class="n">iofind</span><span class="o">=</span><span class="kc">True</span>
-                        <span class="k">if</span> <span class="p">(</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="p">(</span><span class="n">iofind</span> <span class="ow">or</span> <span class="n">paramfind</span><span class="p">)</span> <span class="ow">and</span> <span class="n">iostopmatch</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
-                            <span class="n">modfind</span><span class="o">=</span><span class="kc">False</span>
-                            <span class="n">iofind</span><span class="o">=</span><span class="kc">False</span>
-                            <span class="n">paramfind</span><span class="o">=</span><span class="kc">False</span>
-                            <span class="c1">#Inclusive</span>
-                            <span class="n">dut</span><span class="o">=</span><span class="n">dut</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;//.*;.*$&quot;</span><span class="p">,</span><span class="s2">&quot;\);&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-                        <span class="k">elif</span> <span class="n">modfind</span> <span class="ow">and</span> <span class="n">iofind</span><span class="p">:</span>
-                            <span class="n">dut</span><span class="o">=</span><span class="n">dut</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;//.*$&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
-                    <span class="c1">#Remove the scala comments</span>
-                    <span class="n">dut</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,.*$&quot;</span><span class="p">,</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">dut</span><span class="p">)</span>
-                    <span class="n">dut</span><span class="o">=</span><span class="n">dut</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                    <span class="c1">#Generate lambda functions for pattern filtering</span>
-                    <span class="n">fils</span><span class="o">=</span><span class="p">[</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;module\s*&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s*&quot;</span><span class="p">),</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(&quot;</span><span class="p">),</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\)&quot;</span><span class="p">),</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*&quot;</span><span class="p">),</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*(?=&gt; )&quot;</span><span class="p">),</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;////.*$&quot;</span><span class="p">),</span>
-                        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;;.*&quot;</span><span class="p">)</span>
-                      <span class="p">]</span>
-                    <span class="n">func_list</span><span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">s</span><span class="p">,</span><span class="n">fil</span><span class="o">=</span><span class="n">x</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fils</span><span class="p">]</span>
-                    <span class="n">dut</span><span class="o">=</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">func_list</span><span class="p">,</span> <span class="n">dut</span><span class="p">)</span>
-                    <span class="n">dut</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,\s*&quot;</span><span class="p">,</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">dut</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">dut</span><span class="p">:</span>
-                        <span class="k">for</span> <span class="n">ioline</span> <span class="ow">in</span> <span class="n">dut</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
-                            <span class="n">extr</span><span class="o">=</span><span class="n">ioline</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-                            <span class="n">signal</span><span class="o">=</span><span class="n">verilog_connector</span><span class="p">()</span>
-                            <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extr</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
-                                <span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">extr</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-                                <span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">extr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                                <span class="n">busdef</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^.*\[(\d+):(\d+)\]&quot;</span><span class="p">,</span><span class="n">extr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                                <span class="n">signal</span><span class="o">.</span><span class="n">ll</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">busdef</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-                                <span class="n">signal</span><span class="o">.</span><span class="n">rl</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">busdef</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-
-                            <span class="c1">#By default, we create a connector that is cross connected to the input</span>
-                            <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
-                            <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
-                                <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span>
-                            <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;output&#39;</span><span class="p">:</span>
-                                <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="s1">&#39;wire&#39;</span>
-                            <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">signal</span>
-
-                            <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">signal</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;File does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+
+            <span class="c1"># parse module IO definitions</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+                <span class="n">file_str</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">module_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">module_regex</span><span class="p">,</span> <span class="n">file_str</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">module_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">signals</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">port_list</span> <span class="o">=</span> <span class="n">module_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">port_list</span><span class="p">:</span>
+                        <span class="n">port_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">port_regex</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+                        <span class="n">signal</span><span class="o">=</span><span class="n">verilog_connector</span><span class="p">()</span>
+                        <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="n">port_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">port_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">ll</span><span class="o">=</span><span class="n">port_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">rl</span><span class="o">=</span><span class="n">port_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+                        <span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">port_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+                        <span class="n">signals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+
+                    <span class="c1"># look for port information in module items since</span>
+                    <span class="c1"># some tools output verilog in a format where the port declarations are</span>
+                    <span class="c1"># split between the module port list and the module body</span>
+                    <span class="k">for</span> <span class="n">signal</span> <span class="ow">in</span> <span class="n">signals</span><span class="p">:</span>
+                        <span class="c1"># fill in IO information defined in module body</span>
+                        <span class="n">signal_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">port_pattern</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">signal_regex</span><span class="p">,</span> <span class="n">module_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">cls</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">ll</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+                                <span class="n">signal</span><span class="o">.</span><span class="n">rl</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+                        <span class="c1"># By default, we create a connector that is cross connected to the input</span>
+                        <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span>
+                        <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;output&#39;</span><span class="p">:</span>
+                            <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">cls</span><span class="o">=</span><span class="s1">&#39;wire&#39;</span>
+                        <span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">signal</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">signal</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ios</span>
 
     <span class="c1"># Setting principle, assign a dict</span>
