@@ -346,6 +346,20 @@
     <span class="k">def</span> <span class="nf">preserve_iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_iofiles</span><span class="o">=</span><span class="n">value</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pickle_excludes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Properties of entity to be excluded from pickling when saving entity state to disk.</span>
+<span class="sd">        Useful for filtering out e.g. lambdas and other non-serializable objects.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_pickle_excludes&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pickle_excludes</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pickle_excludes</span>
+
+    <span class="nd">@pickle_excludes</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">pickle_excludes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pickle_excludes</span><span class="o">=</span><span class="n">val</span>
+
 
     <span class="c1">#Common method to propagate system parameters</span>
 <div class="viewcode-block" id="thesdk.copy_propval"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.copy_propval">[docs]</a>    <span class="k">def</span> <span class="nf">copy_propval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
@@ -890,13 +904,13 @@
 
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">exclude_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_par&#39;</span><span class="p">,</span> <span class="s1">&#39;_queue&#39;</span><span class="p">,</span> <span class="s1">&#39;generator&#39;</span><span class="p">]</span>
+        <span class="n">exclude_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_par&#39;</span><span class="p">,</span> <span class="s1">&#39;_queue&#39;</span><span class="p">,</span> <span class="s1">&#39;generator&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pickle_excludes</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">exclude_list</span><span class="p">:</span> 
             <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">state</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">state</span>
     <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
-        <span class="n">exclude_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_par&#39;</span><span class="p">,</span> <span class="s1">&#39;_queue&#39;</span><span class="p">,</span> <span class="s1">&#39;generator&#39;</span><span class="p">]</span>
+        <span class="n">exclude_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_par&#39;</span><span class="p">,</span> <span class="s1">&#39;_queue&#39;</span><span class="p">,</span> <span class="s1">&#39;generator&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pickle_excludes</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">exclude_list</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">state</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>

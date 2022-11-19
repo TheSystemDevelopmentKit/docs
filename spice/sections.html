@@ -60,6 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.get_buswidth"><code class="docutils literal notranslate"><span class="pre">spice.get_buswidth()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.interactive_spice"><code class="docutils literal notranslate"><span class="pre">spice.interactive_spice</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.iofile_eventdict"><code class="docutils literal notranslate"><span class="pre">spice.iofile_eventdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.load_output_file"><code class="docutils literal notranslate"><span class="pre">spice.load_output_file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.load_state"><code class="docutils literal notranslate"><span class="pre">spice.load_state</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.name"><code class="docutils literal notranslate"><span class="pre">spice.name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.nproc"><code class="docutils literal notranslate"><span class="pre">spice.nproc</span></code></a></li>
@@ -73,6 +74,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.run_plotprogram"><code class="docutils literal notranslate"><span class="pre">spice.run_plotprogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.run_spice"><code class="docutils literal notranslate"><span class="pre">spice.run_spice()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.save_database"><code class="docutils literal notranslate"><span class="pre">spice.save_database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.save_output_file"><code class="docutils literal notranslate"><span class="pre">spice.save_output_file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.si_prefix_mult"><code class="docutils literal notranslate"><span class="pre">spice.si_prefix_mult</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.si_string_to_float"><code class="docutils literal notranslate"><span class="pre">spice.si_string_to_float()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.simcmd_bundle"><code class="docutils literal notranslate"><span class="pre">spice.simcmd_bundle</span></code></a></li>
@@ -387,6 +389,17 @@ speed up reading the results.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.load_output_file">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_output_file</span></span><a class="headerlink" href="#spice.spice.load_output_file" title="Permalink to this definition"></a></dt>
+<dd><p>True | False (default)</p>
+<p>Whether to load the outputs from simulator output file.
+This only works if the file exists in the state directory, i.e.
+the simulator was run with save_output_file=True.
+WARNING: This will read the IOS from the output file, and REWRITE
+THE ENTITY STATE on disk.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.load_state">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state</span></span><a class="headerlink" href="#spice.spice.load_state" title="Permalink to this definition"></a></dt>
 <dd><p>String (default ‘’)</p>
@@ -501,6 +514,15 @@ Tested for spectre and eldo.</p>
 <dd><p>True | False (default)</p>
 <p>Whether to save the waveform database (.wdb-file for eldo, raw-database
 for spectre), when save_state=True.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.save_output_file">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_output_file</span></span><a class="headerlink" href="#spice.spice.save_output_file" title="Permalink to this definition"></a></dt>
+<dd><p>True | False (default)</p>
+<p>If True and save_state is True, copy the output file of simulator
+to entity statedir. Useful for scavenging results if simulator exited
+but state was not written to disk for some reason.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -635,23 +657,21 @@ said parameter.</p>
 <dt class="sig sig-object py" id="spice.spice.spicesrc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicesrc</span></span><a class="headerlink" href="#spice.spice.spicesrc" title="Permalink to this definition"></a></dt>
 <dd><p>String</p>
-<p>Path to the source netlist (i.e. ‘spice/entityname.scs’).
-This shouldn’t be set manually.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Provided netlist name has to match entity name (entityname.scs or entityname.cir).</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Netlist has to contain the top-level design as a subcircuit definition.</p>
-</div>
+<p>Path to the source netlist. Can be set manually to desired location.</p>
+<p>Default: ‘spice/entityname.scs’</p>
+<dl class="simple">
+<dt>N.B!:</dt><dd><p>Netlist has to contain the top-level design as a subcircuit definition!</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicesrcpath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicesrcpath</span></span><a class="headerlink" href="#spice.spice.spicesrcpath" title="Permalink to this definition"></a></dt>
 <dd><p>String</p>
-<p>Path to the spice source of the entity (‘./spice’).</p>
+<p>Path to the spice source of the entity. Can be set manually to desired location.
+This variable provides the dspf-parasitic netlist filepath.</p>
+<p>Default: &lt;entity path&gt;/spice</p>
 </dd></dl>
 
 <dl class="py property">

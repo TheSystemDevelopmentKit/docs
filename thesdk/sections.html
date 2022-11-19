@@ -60,6 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.simpath"><code class="docutils literal notranslate"><span class="pre">thesdk.simpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.has_lsf"><code class="docutils literal notranslate"><span class="pre">thesdk.has_lsf</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.preserve_iofiles"><code class="docutils literal notranslate"><span class="pre">thesdk.preserve_iofiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.pickle_excludes"><code class="docutils literal notranslate"><span class="pre">thesdk.pickle_excludes</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.copy_propval"><code class="docutils literal notranslate"><span class="pre">thesdk.copy_propval()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.print_log"><code class="docutils literal notranslate"><span class="pre">thesdk.print_log()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.timer"><code class="docutils literal notranslate"><span class="pre">thesdk.timer()</span></code></a></li>
@@ -291,6 +292,13 @@ in TheSDK.config.</p>
 <dd><p>True | False (default)</p>
 <p>If True, do not delete IO files after
 simulations. Useful for debugging the file IO</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.pickle_excludes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pickle_excludes</span></span><a class="headerlink" href="#thesdk.thesdk.pickle_excludes" title="Permalink to this definition"></a></dt>
+<dd><p>Properties of entity to be excluded from pickling when saving entity state to disk.
+Useful for filtering out e.g. lambdas and other non-serializable objects.</p>
 </dd></dl>
 
 <dl class="py method">

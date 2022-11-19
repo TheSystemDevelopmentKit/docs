@@ -659,31 +659,35 @@
     <span class="k">def</span> <span class="nf">spicesrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String</span>
 
-<span class="sd">        Path to the spice source of the entity (&#39;./spice&#39;).</span>
+<span class="sd">        Path to the spice source of the entity. Can be set manually to desired location.</span>
+<span class="sd">        This variable provides the dspf-parasitic netlist filepath.</span>
+
+<span class="sd">        Default: &lt;entity path&gt;/spice</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span>  <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span> <span class="o">+</span> <span class="s1">&#39;/spice&#39;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)):</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed to create </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_spicesrcpath&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span>  <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span> <span class="o">+</span> <span class="s1">&#39;/spice&#39;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed to create </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span>
+    <span class="nd">@spicesrcpath</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">spicesrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicesrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String</span>
 
-<span class="sd">        Path to the source netlist (i.e. &#39;spice/entityname.scs&#39;).</span>
-<span class="sd">        This shouldn&#39;t be set manually.</span>
+<span class="sd">        Path to the source netlist. Can be set manually to desired location.</span>
+<span class="sd">        </span>
+<span class="sd">        Default: &#39;spice/entityname.scs&#39;</span>
 
-<span class="sd">        .. note::</span>
 
-<span class="sd">            Provided netlist name has to match entity name (entityname.scs or entityname.cir).</span>
-
-<span class="sd">        .. note::</span>
-<span class="sd">            </span>
-<span class="sd">            Netlist has to contain the top-level design as a subcircuit definition.</span>
+<span class="sd">        N.B!:</span>
+<span class="sd">            Netlist has to contain the top-level design as a subcircuit definition!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_spicesrc&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spicesrcpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">syntaxdict</span><span class="p">[</span><span class="s2">&quot;cmdfile_ext&quot;</span><span class="p">]</span>
@@ -814,6 +818,43 @@
     <span class="k">def</span> <span class="nf">save_database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">_save_database</span><span class="o">=</span><span class="n">value</span>
 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">save_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+<span class="sd">            </span>
+<span class="sd">            If True and save_state is True, copy the output file of simulator</span>
+<span class="sd">            to entity statedir. Useful for scavenging results if simulator exited</span>
+<span class="sd">            but state was not written to disk for some reason.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_save_output_file&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_file</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_file</span>
+
+    <span class="nd">@save_output_file</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">save_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_file</span><span class="o">=</span><span class="n">val</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">load_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+
+<span class="sd">        Whether to load the outputs from simulator output file.</span>
+<span class="sd">        This only works if the file exists in the state directory, i.e.</span>
+<span class="sd">        the simulator was run with save_output_file=True.</span>
+<span class="sd">        WARNING: This will read the IOS from the output file, and REWRITE</span>
+<span class="sd">        THE ENTITY STATE on disk.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_load_output_file&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span> 
+    <span class="nd">@load_output_file</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">load_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;load_output_file set to True! This will rewrite the entity state on disk!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="n">value</span>
 
 <div class="viewcode-block" id="spice.connect_spice_inputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (inputs) to top</span>
@@ -1119,7 +1160,18 @@
         <span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> 
             <span class="c1"># Loading a previously stored state</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_read_state</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_output_file</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span> <span class="o">=</span> <span class="n">stb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">dcsources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcsource_bundle</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">simcmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_spice_outputs</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connect_spice_outputs</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extract_powers</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_oppts</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_state</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_read_state</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Normal execution of full simulation</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span> <span class="o">=</span> <span class="n">stb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -1155,6 +1207,12 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Saving waveform database to </span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statedir</span><span class="p">,</span><span class="n">dbname</span><span class="p">))</span>
                     <span class="k">except</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed saving waveform database to </span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statedir</span><span class="p">,</span><span class="n">dbname</span><span class="p">))</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_output_file</span><span class="p">:</span>
+                    <span class="n">output_name</span> <span class="o">=</span> <span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.print&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+                    <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>
+                    <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
+                    <span class="n">targ_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statedir</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">targ_path</span><span class="p">)</span>
             <span class="c1"># Clean simulation results</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">delete_iofile_bundle</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">delete_spicesimpath</span><span class="p">()</span></div></div>
