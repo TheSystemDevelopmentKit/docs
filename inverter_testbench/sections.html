@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -47,6 +48,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Inverter testbench class</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#inverter-testbench">Inverter testbench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inverter_testbench.inverter_testbench"><code class="docutils literal notranslate"><span class="pre">inverter_testbench</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inverter_testbench.inverter_testbench.__init__"><code class="docutils literal notranslate"><span class="pre">inverter_testbench.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter_testbench.inverter_testbench.init"><code class="docutils literal notranslate"><span class="pre">inverter_testbench.init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter_testbench.inverter_testbench.main"><code class="docutils literal notranslate"><span class="pre">inverter_testbench.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter_testbench.inverter_testbench.parallel"><code class="docutils literal notranslate"><span class="pre">inverter_testbench.parallel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter_testbench.inverter_testbench.run"><code class="docutils literal notranslate"><span class="pre">inverter_testbench.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter_testbench.inverter_testbench.serial"><code class="docutils literal notranslate"><span class="pre">inverter_testbench.serial()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter tests class</a></li>
@@ -70,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Inverter testbench class</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Inverter testbench class</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/inverter_testbench/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,6 +101,7 @@
 Entities to gain more versatilyty that can be provided by self tests in the
 mainguard.</p>
 <p>Initially written by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 2022.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="inverter_testbench.inverter_testbench">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">inverter_testbench.</span></span><span class="sig-name descname"><span class="pre">inverter_testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter_testbench.html#inverter_testbench"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter_testbench.inverter_testbench" title="Permalink to this definition"></a></dt>
@@ -131,7 +142,6 @@ Plots from intermediate outputs</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 

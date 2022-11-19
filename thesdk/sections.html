@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -43,7 +44,63 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Thesdk core classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#thesdk">Thesdk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thesdk.thesdk"><code class="docutils literal notranslate"><span class="pre">thesdk</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.HOME"><code class="docutils literal notranslate"><span class="pre">thesdk.HOME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.CONFIGFILE"><code class="docutils literal notranslate"><span class="pre">thesdk.CONFIGFILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.MODULEPATHS"><code class="docutils literal notranslate"><span class="pre">thesdk.MODULEPATHS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.logfile"><code class="docutils literal notranslate"><span class="pre">thesdk.logfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.global_parameters"><code class="docutils literal notranslate"><span class="pre">thesdk.global_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.GLOBALS"><code class="docutils literal notranslate"><span class="pre">thesdk.GLOBALS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.initlog"><code class="docutils literal notranslate"><span class="pre">thesdk.initlog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.DEBUG"><code class="docutils literal notranslate"><span class="pre">thesdk.DEBUG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.print_relative_path"><code class="docutils literal notranslate"><span class="pre">thesdk.print_relative_path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk._classfile"><code class="docutils literal notranslate"><span class="pre">thesdk._classfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.entitypath"><code class="docutils literal notranslate"><span class="pre">thesdk.entitypath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.model"><code class="docutils literal notranslate"><span class="pre">thesdk.model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.simpath"><code class="docutils literal notranslate"><span class="pre">thesdk.simpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.has_lsf"><code class="docutils literal notranslate"><span class="pre">thesdk.has_lsf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.preserve_iofiles"><code class="docutils literal notranslate"><span class="pre">thesdk.preserve_iofiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.copy_propval"><code class="docutils literal notranslate"><span class="pre">thesdk.copy_propval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.print_log"><code class="docutils literal notranslate"><span class="pre">thesdk.print_log()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.timer"><code class="docutils literal notranslate"><span class="pre">thesdk.timer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.silence"><code class="docutils literal notranslate"><span class="pre">thesdk.silence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.par"><code class="docutils literal notranslate"><span class="pre">thesdk.par</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.queue"><code class="docutils literal notranslate"><span class="pre">thesdk.queue</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.run_parallel"><code class="docutils literal notranslate"><span class="pre">thesdk.run_parallel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.IOS"><code class="docutils literal notranslate"><span class="pre">thesdk.IOS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.extracts"><code class="docutils literal notranslate"><span class="pre">thesdk.extracts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.netlist_params"><code class="docutils literal notranslate"><span class="pre">thesdk.netlist_params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.print_colors"><code class="docutils literal notranslate"><span class="pre">thesdk.print_colors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.runname"><code class="docutils literal notranslate"><span class="pre">thesdk.runname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.statepath"><code class="docutils literal notranslate"><span class="pre">thesdk.statepath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.statedir"><code class="docutils literal notranslate"><span class="pre">thesdk.statedir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.save_state"><code class="docutils literal notranslate"><span class="pre">thesdk.save_state</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.load_state"><code class="docutils literal notranslate"><span class="pre">thesdk.load_state</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.load_state_full"><code class="docutils literal notranslate"><span class="pre">thesdk.load_state_full</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk._write_state"><code class="docutils literal notranslate"><span class="pre">thesdk._write_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk._read_state"><code class="docutils literal notranslate"><span class="pre">thesdk._read_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.iofile_bundle"><code class="docutils literal notranslate"><span class="pre">thesdk.iofile_bundle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.delete_iofile_bundle"><code class="docutils literal notranslate"><span class="pre">thesdk.delete_iofile_bundle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#thesdk.IO"><code class="docutils literal notranslate"><span class="pre">IO</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.IO._classfile"><code class="docutils literal notranslate"><span class="pre">IO._classfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.IO.Data"><code class="docutils literal notranslate"><span class="pre">IO.Data</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#iofile-package">Iofile package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thesdk.iofile.iofile"><code class="docutils literal notranslate"><span class="pre">iofile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.adopt"><code class="docutils literal notranslate"><span class="pre">iofile.adopt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.datatype"><code class="docutils literal notranslate"><span class="pre">iofile.datatype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.dir"><code class="docutils literal notranslate"><span class="pre">iofile.dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.file"><code class="docutils literal notranslate"><span class="pre">iofile.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.ionames"><code class="docutils literal notranslate"><span class="pre">iofile.ionames</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.iotype"><code class="docutils literal notranslate"><span class="pre">iofile.iotype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.read"><code class="docutils literal notranslate"><span class="pre">iofile.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.remove"><code class="docutils literal notranslate"><span class="pre">iofile.remove()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.iofile.iofile.write"><code class="docutils literal notranslate"><span class="pre">iofile.write()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
@@ -71,8 +128,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Thesdk core classes</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Thesdk core classes</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/thesdk/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -96,6 +153,7 @@ commmon methods and utility classes for other classes in TheSyDeKick.</p>
 However, you may find out that even the documentation of this
 entity may be outdated and incomplete. Regardless of that, every day
 and in every way we are getting better and better :).</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="thesdk.thesdk">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">thesdk</span></span><a class="reference internal" href="../_modules/thesdk.html#thesdk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk" title="Permalink to this definition"></a></dt>
@@ -559,7 +617,6 @@ classfile.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-thesdk.iofile"></span><section id="iofile-package">
 <h2>Iofile package<a class="headerlink" href="#iofile-package" title="Permalink to this heading"></a></h2>
 <p>Provides Common file-io related attributes and methods
@@ -572,6 +629,7 @@ packages.</p>
 Yue Dai, 2018</p>
 <p>Generalized for common file-io by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>,
 2019.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.iofile.</span></span><span class="sig-name descname"><span class="pre">iofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile" title="Permalink to this definition"></a></dt>
@@ -707,7 +765,6 @@ This is a help parameter to give more control over reading.</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 

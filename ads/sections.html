@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -50,7 +51,56 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ADS interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="initial_setup_tutorial.html">ADS interface Initial setup tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ads-interface-class">ADS Interface class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ads.ads"><code class="docutils literal notranslate"><span class="pre">ads</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.TL_mesh_cells"><code class="docutils literal notranslate"><span class="pre">ads.TL_mesh_cells</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.ads_submission"><code class="docutils literal notranslate"><span class="pre">ads.ads_submission</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.adscmd"><code class="docutils literal notranslate"><span class="pre">ads.adscmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.adssimpath"><code class="docutils literal notranslate"><span class="pre">ads.adssimpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.adssrc"><code class="docutils literal notranslate"><span class="pre">ads.adssrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.adssrcpath"><code class="docutils literal notranslate"><span class="pre">ads.adssrcpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.distributed_run"><code class="docutils literal notranslate"><span class="pre">ads.distributed_run</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.edge_mesh_enable"><code class="docutils literal notranslate"><span class="pre">ads.edge_mesh_enable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.emsetupsrcpath"><code class="docutils literal notranslate"><span class="pre">ads.emsetupsrcpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.execute_ads_sim"><code class="docutils literal notranslate"><span class="pre">ads.execute_ads_sim()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.fstep"><code class="docutils literal notranslate"><span class="pre">ads.fstep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.fstep_unit"><code class="docutils literal notranslate"><span class="pre">ads.fstep_unit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.fstop"><code class="docutils literal notranslate"><span class="pre">ads.fstop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.fstop_unit"><code class="docutils literal notranslate"><span class="pre">ads.fstop_unit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.generate_input_files"><code class="docutils literal notranslate"><span class="pre">ads.generate_input_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.has_lsf"><code class="docutils literal notranslate"><span class="pre">ads.has_lsf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.interactive_ads"><code class="docutils literal notranslate"><span class="pre">ads.interactive_ads</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.mesh_cells"><code class="docutils literal notranslate"><span class="pre">ads.mesh_cells</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.name"><code class="docutils literal notranslate"><span class="pre">ads.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.num_processes"><code class="docutils literal notranslate"><span class="pre">ads.num_processes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.preserve_adsfiles"><code class="docutils literal notranslate"><span class="pre">ads.preserve_adsfiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.run_ads"><code class="docutils literal notranslate"><span class="pre">ads.run_ads()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.runname"><code class="docutils literal notranslate"><span class="pre">ads.runname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.set_simulation_options"><code class="docutils literal notranslate"><span class="pre">ads.set_simulation_options()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.sourcelib"><code class="docutils literal notranslate"><span class="pre">ads.sourcelib</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.sourcelibpath"><code class="docutils literal notranslate"><span class="pre">ads.sourcelibpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.ads.sparam_filename"><code class="docutils literal notranslate"><span class="pre">ads.sparam_filename</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#citi-to-touchstone">Citi to Touchstone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.comments"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.comments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.data"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.data_names"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.data_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.generate_contents"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.generate_contents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.input_file"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.input_file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.lines"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.lines</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.nbr_of_ports"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.nbr_of_ports</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.normalization"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.normalization</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.output_file"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.output_file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.output_file_extension"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.output_file_extension</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.parse_citi"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.parse_citi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.var_data"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.var_format"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_format</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.var_name"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.var_nbr_of_points"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_nbr_of_points</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ads.citi_to_touchstone.citi_to_touchstone.write_touchstone"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.write_touchstone()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
@@ -72,8 +122,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>ADS interface</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">ADS interface</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/ads/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -97,6 +147,7 @@
 <p>Provides utilities to import ads modules to python environment and
 automatically generate testbenches for the most common simulation cases.</p>
 <p>Initially written by Veeti Lahtinen and Kaisa Ryynänen, 2021</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="ads.ads">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads.</span></span><span class="sig-name descname"><span class="pre">ads</span></span><a class="reference internal" href="../_modules/ads.html#ads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads" title="Permalink to this definition"></a></dt>
@@ -301,7 +352,6 @@ by citi_to_touchstone.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-ads.citi_to_touchstone"></span><section id="citi-to-touchstone">
 <h2>Citi to Touchstone<a class="headerlink" href="#citi-to-touchstone" title="Permalink to this heading"></a></h2>
 <p>Citifile to Touchstone fileformat converter</p>
@@ -313,6 +363,7 @@ ADS data file tool.</p>
 <p>Touchstone documentation:
 <a class="reference external" href="http://literature.cdn.keysight.com/litweb/pdf/genesys200801/sim/linear_sim/sparams/touchstone_file_format.htm">http://literature.cdn.keysight.com/litweb/pdf/genesys200801/sim/linear_sim/sparams/touchstone_file_format.htm</a></p>
 <p>Initially written by Veeti Lahtinen 2021</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads.citi_to_touchstone.</span></span><span class="sig-name descname"><span class="pre">citi_to_touchstone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone" title="Permalink to this definition"></a></dt>
@@ -457,7 +508,6 @@ read from the CITIfile.</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 

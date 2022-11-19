@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -44,10 +45,110 @@
 <li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">RTL interface classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rtl-package">RTL package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rtl.rtl"><code class="docutils literal notranslate"><span class="pre">rtl</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.add_connectors"><code class="docutils literal notranslate"><span class="pre">rtl.add_connectors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.assignment_matchlist"><code class="docutils literal notranslate"><span class="pre">rtl.assignment_matchlist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.connect_inputs"><code class="docutils literal notranslate"><span class="pre">rtl.connect_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.connect_outputs"><code class="docutils literal notranslate"><span class="pre">rtl.connect_outputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.copy_rtl_sources"><code class="docutils literal notranslate"><span class="pre">rtl.copy_rtl_sources()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.create_connectors"><code class="docutils literal notranslate"><span class="pre">rtl.create_connectors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.custom_connectors"><code class="docutils literal notranslate"><span class="pre">rtl.custom_connectors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.delete_rtlsimpath"><code class="docutils literal notranslate"><span class="pre">rtl.delete_rtlsimpath()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.delete_rtlworkpath"><code class="docutils literal notranslate"><span class="pre">rtl.delete_rtlworkpath()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.execute_rtl_sim"><code class="docutils literal notranslate"><span class="pre">rtl.execute_rtl_sim()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.format_ios"><code class="docutils literal notranslate"><span class="pre">rtl.format_ios()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_control_contents"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_control_contents</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_controlfile"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_controlfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_rtl"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_rtl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.name"><code class="docutils literal notranslate"><span class="pre">rtl.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.preserve_rtlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.preserve_rtlfiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.read_outfile"><code class="docutils literal notranslate"><span class="pre">rtl.read_outfile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtl_timescale"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timescale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlcmd"><code class="docutils literal notranslate"><span class="pre">rtl.rtlcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlmisc"><code class="docutils literal notranslate"><span class="pre">rtl.rtlmisc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlparameters"><code class="docutils literal notranslate"><span class="pre">rtl.rtlparameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlsimpath"><code class="docutils literal notranslate"><span class="pre">rtl.rtlsimpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlworkpath"><code class="docutils literal notranslate"><span class="pre">rtl.rtlworkpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.run_rtl"><code class="docutils literal notranslate"><span class="pre">rtl.run_rtl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simdut"><code class="docutils literal notranslate"><span class="pre">rtl.simdut</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simtb"><code class="docutils literal notranslate"><span class="pre">rtl.simtb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.verilog_submission"><code class="docutils literal notranslate"><span class="pre">rtl.verilog_submission</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdlentityfiles"><code class="docutils literal notranslate"><span class="pre">rtl.vhdlentityfiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdlsrc"><code class="docutils literal notranslate"><span class="pre">rtl.vhdlsrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdlsrcpath"><code class="docutils literal notranslate"><span class="pre">rtl.vhdlsrcpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogcompargs"><code class="docutils literal notranslate"><span class="pre">rtl.vlogcompargs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogext"><code class="docutils literal notranslate"><span class="pre">rtl.vlogext</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogmodulefiles"><code class="docutils literal notranslate"><span class="pre">rtl.vlogmodulefiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogsimargs"><code class="docutils literal notranslate"><span class="pre">rtl.vlogsimargs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogsrc"><code class="docutils literal notranslate"><span class="pre">rtl.vlogsrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogsrcpath"><code class="docutils literal notranslate"><span class="pre">rtl.vlogsrcpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.write_infile"><code class="docutils literal notranslate"><span class="pre">rtl.write_infile()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#rtl-iofile-module">RTL IOfile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile"><code class="docutils literal notranslate"><span class="pre">rtl_iofile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.Data"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.Data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.DictData"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.DictData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.connector_datamap"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.connector_datamap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.file"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.ioformat"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.ioformat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.rtlparam"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.rtlparam</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.set_control_data"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.set_control_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.simparam"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.simparam</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_connectors"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_connectors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_ctstamp"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_ctstamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_fclose"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_fclose</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_fopen"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_fopen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_fptr"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_fptr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_io"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_io</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_io_condition"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_io_condition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_io_condition_append"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_io_condition_append()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_io_sync"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_io_sync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_ptstamp"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_ptstamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_stat"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_stat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_statdef"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_statdef</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl_iofile.rtl_iofile.verilog_tdiff"><code class="docutils literal notranslate"><span class="pre">rtl_iofile.verilog_tdiff</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#testbench">Testbench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rtl.testbench.testbench"><code class="docutils literal notranslate"><span class="pre">testbench</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.assignments"><code class="docutils literal notranslate"><span class="pre">testbench.assignments()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.clock_definition"><code class="docutils literal notranslate"><span class="pre">testbench.clock_definition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.connect_inputs"><code class="docutils literal notranslate"><span class="pre">testbench.connect_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.connector_definitions"><code class="docutils literal notranslate"><span class="pre">testbench.connector_definitions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.define_testbench"><code class="docutils literal notranslate"><span class="pre">testbench.define_testbench()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.dumpfile"><code class="docutils literal notranslate"><span class="pre">testbench.dumpfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.dut_instance"><code class="docutils literal notranslate"><span class="pre">testbench.dut_instance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.file"><code class="docutils literal notranslate"><span class="pre">testbench.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.generate_contents"><code class="docutils literal notranslate"><span class="pre">testbench.generate_contents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.iofile_close"><code class="docutils literal notranslate"><span class="pre">testbench.iofile_close</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.iofile_definitions"><code class="docutils literal notranslate"><span class="pre">testbench.iofile_definitions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.misccmd"><code class="docutils literal notranslate"><span class="pre">testbench.misccmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.parameter_definitions"><code class="docutils literal notranslate"><span class="pre">testbench.parameter_definitions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.verilog_instance_add"><code class="docutils literal notranslate"><span class="pre">testbench.verilog_instance_add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.verilog_instances"><code class="docutils literal notranslate"><span class="pre">testbench.verilog_instances</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module">Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rtl.module.verilog_module"><code class="docutils literal notranslate"><span class="pre">verilog_module</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.contents"><code class="docutils literal notranslate"><span class="pre">verilog_module.contents</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.definition"><code class="docutils literal notranslate"><span class="pre">verilog_module.definition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.export"><code class="docutils literal notranslate"><span class="pre">verilog_module.export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.instance"><code class="docutils literal notranslate"><span class="pre">verilog_module.instance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.instname"><code class="docutils literal notranslate"><span class="pre">verilog_module.instname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.io_signals"><code class="docutils literal notranslate"><span class="pre">verilog_module.io_signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.ios"><code class="docutils literal notranslate"><span class="pre">verilog_module.ios</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.name"><code class="docutils literal notranslate"><span class="pre">verilog_module.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.parameters"><code class="docutils literal notranslate"><span class="pre">verilog_module.parameters</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#entity">Entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rtl.entity.vhdl_entity"><code class="docutils literal notranslate"><span class="pre">vhdl_entity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.entity.vhdl_entity.contents"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.contents</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.entity.vhdl_entity.ios"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.ios</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.entity.vhdl_entity.parameters"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.parameters</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
@@ -74,8 +175,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>RTL interface classes</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">RTL interface classes</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/rtl/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,6 +195,7 @@
 python environment and sutomatically generate testbenches for the
 most common simulation cases.</p>
 <p>Initially written by Marko Kosunen, 2017</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.rtl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.</span></span><span class="sig-name descname"><span class="pre">rtl</span></span><a class="reference internal" href="../_modules/rtl.html#rtl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl" title="Permalink to this definition"></a></dt>
@@ -438,13 +540,13 @@ self.entitypath/sv</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-rtl.rtl_iofile"></span><section id="rtl-iofile-module">
 <h2>RTL IOfile module<a class="headerlink" href="#rtl-iofile-module" title="Permalink to this heading"></a></h2>
 <p>Provides verilog- file-io related attributes and methods
 for TheSyDeKick RTL intereface.</p>
 <p>Initially written by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>,
 Yue Dai, 2018</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.rtl_iofile.rtl_iofile">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.rtl_iofile.</span></span><span class="sig-name descname"><span class="pre">rtl_iofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/rtl_iofile.html#rtl_iofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl_iofile.rtl_iofile" title="Permalink to this definition"></a></dt>
@@ -644,7 +746,6 @@ Default: <cite>&#64;(posedge clock)</cite></p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-rtl.testbench"></span><section id="testbench">
 <h2>Testbench<a class="headerlink" href="#testbench" title="Permalink to this heading"></a></h2>
 <p>Verilog testbench utility mmodule for TheSyDeKick. Contains attributes annd methods to import DUT as <cite>verilog_module</cite>
@@ -652,6 +753,7 @@ instance, parse its IO and parameter definitions and construct a structured test
 <p>Utilizes logging method from thesdk.
 Extendsd <cite>verilog_module</cite> with additional properties.</p>
 <p>Initially written by Marko Kosunen 20190108, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a></p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.testbench.testbench">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.testbench.</span></span><span class="sig-name descname"><span class="pre">testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench.html#testbench"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench.testbench" title="Permalink to this definition"></a></dt>
@@ -794,7 +896,6 @@ Need to handle VHDL instance too.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-rtl.module"></span><section id="module">
 <h2>Module<a class="headerlink" href="#module" title="Permalink to this heading"></a></h2>
 <p>Verilog module import features for RTL simulation package of
@@ -803,6 +904,7 @@ The System Development Kit.</p>
 python environment.</p>
 <p>Initially written by Marko Kosunen, 2017
 Last modification by Okko Järvinen, 28.10.2021 07:55</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.module.verilog_module">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.module.</span></span><span class="sig-name descname"><span class="pre">verilog_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module.html#verilog_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module.verilog_module" title="Permalink to this definition"></a></dt>
@@ -904,7 +1006,6 @@ that all signals are connectors.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-rtl.entity"></span><section id="entity">
 <h2>Entity<a class="headerlink" href="#entity" title="Permalink to this heading"></a></h2>
 <p>VHDL import features for RTL simulation package of The System Development Kit</p>
@@ -915,6 +1016,7 @@ cross language compilations.</p>
 <p>Initially written by Marko Kosunen, 2017</p>
 <p>Transferred from VHL package in Dec 2019</p>
 <p>Last modification by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 21.01.2020 19:27</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.entity.vhdl_entity">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.entity.</span></span><span class="sig-name descname"><span class="pre">vhdl_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/entity.html#vhdl_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.entity.vhdl_entity" title="Permalink to this definition"></a></dt>
@@ -948,7 +1050,6 @@ that all signals are connectors.</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 

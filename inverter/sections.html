@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -49,6 +50,24 @@
 <li class="toctree-l3"><a class="reference internal" href="#role-of-section-if-name-main">Role of section ‘if __name__==”__main__”’</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#inverter.inverter"><code class="docutils literal notranslate"><span class="pre">inverter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.proplist"><code class="docutils literal notranslate"><span class="pre">inverter.proplist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.Rs"><code class="docutils literal notranslate"><span class="pre">inverter.Rs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.vdd"><code class="docutils literal notranslate"><span class="pre">inverter.vdd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.IOS"><code class="docutils literal notranslate"><span class="pre">inverter.IOS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.model"><code class="docutils literal notranslate"><span class="pre">inverter.model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.__init__"><code class="docutils literal notranslate"><span class="pre">inverter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">inverter.proplist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">inverter.Rs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">inverter.vdd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">inverter.IOS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">inverter.model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.define_io_conditions"><code class="docutils literal notranslate"><span class="pre">inverter.define_io_conditions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.init"><code class="docutils literal notranslate"><span class="pre">inverter.init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.main"><code class="docutils literal notranslate"><span class="pre">inverter.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverter.inverter.run"><code class="docutils literal notranslate"><span class="pre">inverter.run()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
@@ -73,8 +92,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Inverter class</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Inverter class</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/inverter/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -109,6 +128,8 @@ functionality of the class by calling it as <code class="docutils literal notran
 define how it handles the arguments passed during the invocation. In this
 example it is used as a complete self test script for all the simulation models
 defined for the inverter.</p>
+</section>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="inverter.inverter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">inverter.</span></span><span class="sig-name descname"><span class="pre">inverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/inverter.html#inverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inverter.inverter" title="Permalink to this definition"></a></dt>
@@ -285,8 +306,6 @@ and it is assigned to self.queue and self.par is set to True.</p>
 
 </dd></dl>
 
-</section>
-</section>
 </section>
 
 

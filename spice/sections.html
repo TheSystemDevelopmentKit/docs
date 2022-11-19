@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,11 +46,160 @@
 <li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spice simulator interface classess</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#spice">Spice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.spice"><code class="docutils literal notranslate"><span class="pre">spice</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.connect_spice_inputs"><code class="docutils literal notranslate"><span class="pre">spice.connect_spice_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.connect_spice_outputs"><code class="docutils literal notranslate"><span class="pre">spice.connect_spice_outputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.dcsource_bundle"><code class="docutils literal notranslate"><span class="pre">spice.dcsource_bundle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.delete_spicesimpath"><code class="docutils literal notranslate"><span class="pre">spice.delete_spicesimpath()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.distributed_run"><code class="docutils literal notranslate"><span class="pre">spice.distributed_run</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.dspf"><code class="docutils literal notranslate"><span class="pre">spice.dspf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.errpreset"><code class="docutils literal notranslate"><span class="pre">spice.errpreset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.execute_spice_sim"><code class="docutils literal notranslate"><span class="pre">spice.execute_spice_sim()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.extract_powers"><code class="docutils literal notranslate"><span class="pre">spice.extract_powers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.extracts"><code class="docutils literal notranslate"><span class="pre">spice.extracts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.get_buswidth"><code class="docutils literal notranslate"><span class="pre">spice.get_buswidth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.interactive_spice"><code class="docutils literal notranslate"><span class="pre">spice.interactive_spice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.iofile_eventdict"><code class="docutils literal notranslate"><span class="pre">spice.iofile_eventdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.load_state"><code class="docutils literal notranslate"><span class="pre">spice.load_state</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.name"><code class="docutils literal notranslate"><span class="pre">spice.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.nproc"><code class="docutils literal notranslate"><span class="pre">spice.nproc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.num_processes"><code class="docutils literal notranslate"><span class="pre">spice.num_processes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotlist"><code class="docutils literal notranslate"><span class="pre">spice.plotlist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">spice.plotprogcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotprogram"><code class="docutils literal notranslate"><span class="pre">spice.plotprogram</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.preserve_spicefiles"><code class="docutils literal notranslate"><span class="pre">spice.preserve_spicefiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.read_oppts"><code class="docutils literal notranslate"><span class="pre">spice.read_oppts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.read_spice_outputs"><code class="docutils literal notranslate"><span class="pre">spice.read_spice_outputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.run_plotprogram"><code class="docutils literal notranslate"><span class="pre">spice.run_plotprogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.run_spice"><code class="docutils literal notranslate"><span class="pre">spice.run_spice()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.save_database"><code class="docutils literal notranslate"><span class="pre">spice.save_database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.si_prefix_mult"><code class="docutils literal notranslate"><span class="pre">spice.si_prefix_mult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.si_string_to_float"><code class="docutils literal notranslate"><span class="pre">spice.si_string_to_float()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.simcmd_bundle"><code class="docutils literal notranslate"><span class="pre">spice.simcmd_bundle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spice_submission"><code class="docutils literal notranslate"><span class="pre">spice.spice_submission</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicecmd"><code class="docutils literal notranslate"><span class="pre">spice.spicecmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicecorner"><code class="docutils literal notranslate"><span class="pre">spice.spicecorner</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicedbpath"><code class="docutils literal notranslate"><span class="pre">spice.spicedbpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicemisc"><code class="docutils literal notranslate"><span class="pre">spice.spicemisc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spiceoptions"><code class="docutils literal notranslate"><span class="pre">spice.spiceoptions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spiceparameters"><code class="docutils literal notranslate"><span class="pre">spice.spiceparameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesimpath"><code class="docutils literal notranslate"><span class="pre">spice.spicesimpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesrc"><code class="docutils literal notranslate"><span class="pre">spice.spicesrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesrcpath"><code class="docutils literal notranslate"><span class="pre">spice.spicesrcpath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesubcktsrc"><code class="docutils literal notranslate"><span class="pre">spice.spicesubcktsrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicetbsrc"><code class="docutils literal notranslate"><span class="pre">spice.spicetbsrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.syntaxdict"><code class="docutils literal notranslate"><span class="pre">spice.syntaxdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.write_spice_inputs"><code class="docutils literal notranslate"><span class="pre">spice.write_spice_inputs()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-io-file">Spice IO-file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.spice_iofile.spice_iofile"><code class="docutils literal notranslate"><span class="pre">spice_iofile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.parent"><code class="docutils literal notranslate"><span class="pre">spice_iofile.parent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.name"><code class="docutils literal notranslate"><span class="pre">spice_iofile.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.dir"><code class="docutils literal notranslate"><span class="pre">spice_iofile.dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.iotype"><code class="docutils literal notranslate"><span class="pre">spice_iofile.iotype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.ioformat"><code class="docutils literal notranslate"><span class="pre">spice_iofile.ioformat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.sourcetype"><code class="docutils literal notranslate"><span class="pre">spice_iofile.sourcetype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.datatype"><code class="docutils literal notranslate"><span class="pre">spice_iofile.datatype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.trigger"><code class="docutils literal notranslate"><span class="pre">spice_iofile.trigger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.vth"><code class="docutils literal notranslate"><span class="pre">spice_iofile.vth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.edgetype"><code class="docutils literal notranslate"><span class="pre">spice_iofile.edgetype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.after"><code class="docutils literal notranslate"><span class="pre">spice_iofile.after</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.big_endian"><code class="docutils literal notranslate"><span class="pre">spice_iofile.big_endian</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.rs"><code class="docutils literal notranslate"><span class="pre">spice_iofile.rs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.vhi"><code class="docutils literal notranslate"><span class="pre">spice_iofile.vhi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.vlo"><code class="docutils literal notranslate"><span class="pre">spice_iofile.vlo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.tfall"><code class="docutils literal notranslate"><span class="pre">spice_iofile.tfall</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.trise"><code class="docutils literal notranslate"><span class="pre">spice_iofile.trise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.DEBUG"><code class="docutils literal notranslate"><span class="pre">spice_iofile.DEBUG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.append_to_data"><code class="docutils literal notranslate"><span class="pre">spice_iofile.append_to_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.file"><code class="docutils literal notranslate"><span class="pre">spice_iofile.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.interp_crossings"><code class="docutils literal notranslate"><span class="pre">spice_iofile.interp_crossings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.ionames"><code class="docutils literal notranslate"><span class="pre">spice_iofile.ionames</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.parse_io_from_file"><code class="docutils literal notranslate"><span class="pre">spice_iofile.parse_io_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.read"><code class="docutils literal notranslate"><span class="pre">spice_iofile.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.remove"><code class="docutils literal notranslate"><span class="pre">spice_iofile.remove()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.sample_signal"><code class="docutils literal notranslate"><span class="pre">spice_iofile.sample_signal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.write"><code class="docutils literal notranslate"><span class="pre">spice_iofile.write()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-simulation-command">Spice Simulation Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd"><code class="docutils literal notranslate"><span class="pre">spice_simcmd</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.parent"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.parent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.sim"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.sim</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.plotlist"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.plotlist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.excludelist"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.excludelist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.sweep"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.sweep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.subcktname"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.subcktname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.devname"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.devname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.swpstart"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.swpstart</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.swpstop"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.swpstop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.swpstep"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.swpstep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.tprint"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.tprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.tstop"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.tstop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.uic"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.uic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.noise"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.noise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.fmin"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fmin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.fmax"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fmax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.fscale"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fscale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.fpoints"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fpoints</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.fstepsize"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fstepsize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.seed"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.seed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.method"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.method</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.cmin"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.cmin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.mc"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.mc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.mc_seed"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.mc_seed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.model_info"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.model_info</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.maxstep"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.maxstep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.step"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.step</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-dc-source">Spice DC Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource"><code class="docutils literal notranslate"><span class="pre">spice_dcsource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.parent"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.parent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.name"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.value"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.value</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.paramname"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.paramname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.sourcetype"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.sourcetype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.pos"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.neg"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.neg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.extract"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.extract</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.ext_start"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.ext_start</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.ext_stop"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.ext_stop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.noise"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.noise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.ramp"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.ramp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_dcsource.spice_dcsource.ext_file"><code class="docutils literal notranslate"><span class="pre">spice_dcsource.ext_file</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-testbench">Spice Testbench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.testbench.testbench"><code class="docutils literal notranslate"><span class="pre">testbench</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.dcsourcestr"><code class="docutils literal notranslate"><span class="pre">testbench.dcsourcestr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.dspfincludecmd"><code class="docutils literal notranslate"><span class="pre">testbench.dspfincludecmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.esc_bus"><code class="docutils literal notranslate"><span class="pre">testbench.esc_bus()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.export"><code class="docutils literal notranslate"><span class="pre">testbench.export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.export_subckt"><code class="docutils literal notranslate"><span class="pre">testbench.export_subckt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.file"><code class="docutils literal notranslate"><span class="pre">testbench.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.generate_contents"><code class="docutils literal notranslate"><span class="pre">testbench.generate_contents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.includecmd"><code class="docutils literal notranslate"><span class="pre">testbench.includecmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.inputsignals"><code class="docutils literal notranslate"><span class="pre">testbench.inputsignals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.libcmd"><code class="docutils literal notranslate"><span class="pre">testbench.libcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.misccmd"><code class="docutils literal notranslate"><span class="pre">testbench.misccmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.options"><code class="docutils literal notranslate"><span class="pre">testbench.options</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.parameters"><code class="docutils literal notranslate"><span class="pre">testbench.parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.plotcmd"><code class="docutils literal notranslate"><span class="pre">testbench.plotcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.simcmdstr"><code class="docutils literal notranslate"><span class="pre">testbench.simcmdstr</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-module">Spice Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.spice_module.spice_module"><code class="docutils literal notranslate"><span class="pre">spice_module</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.DEBUG"><code class="docutils literal notranslate"><span class="pre">spice_module.DEBUG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.name"><code class="docutils literal notranslate"><span class="pre">spice_module.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.postlayout"><code class="docutils literal notranslate"><span class="pre">spice_module.postlayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.subckt"><code class="docutils literal notranslate"><span class="pre">spice_module.subckt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.subinst"><code class="docutils literal notranslate"><span class="pre">spice_module.subinst</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.subinst_constructor"><code class="docutils literal notranslate"><span class="pre">spice_module.subinst_constructor()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
@@ -75,8 +225,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Spice simulator interface classess</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Spice simulator interface classess</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/spice/sections.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,6 +244,7 @@
 <p>Provides utilities to import spice-like modules to Python environment and
 generate testbenches for the various simulation cases.</p>
 <p>Initially written by Okko Järvinen, 2019</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.spice">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.</span></span><span class="sig-name descname"><span class="pre">spice</span></span><a class="reference internal" href="../_modules/spice.html#spice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice" title="Permalink to this definition"></a></dt>
@@ -536,12 +687,12 @@ iofile with direction ‘input’.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-spice.spice_iofile"></span><section id="spice-io-file">
 <h2>Spice IO-file<a class="headerlink" href="#spice-io-file" title="Permalink to this heading"></a></h2>
 <p>Provides spice file IO related attributes and methods
 for TheSDK spice.</p>
 <p>Initially written by Okko Järvinen, 2020</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.spice_iofile.spice_iofile">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.spice_iofile.</span></span><span class="sig-name descname"><span class="pre">spice_iofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/spice_iofile.html#spice_iofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_iofile.spice_iofile" title="Permalink to this definition"></a></dt>
@@ -927,11 +1078,11 @@ threshold crossing as possible.</p></li>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-spice.spice_simcmd"></span><section id="spice-simulation-command">
 <h2>Spice Simulation Command<a class="headerlink" href="#spice-simulation-command" title="Permalink to this heading"></a></h2>
 <p>Class for spice simulation commands.</p>
 <p>Initially written by Okko Järvinen, 9.1.2020</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.spice_simcmd.spice_simcmd">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.spice_simcmd.</span></span><span class="sig-name descname"><span class="pre">spice_simcmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/spice_simcmd.html#spice_simcmd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd" title="Permalink to this definition"></a></dt>
@@ -1316,12 +1467,12 @@ post-processing results in Python.</p>
 </div>
 </dd></dl>
 
-</section>
 <span class="target" id="module-spice.spice_dcsource"></span><section id="spice-dc-source">
 <h2>Spice DC Source<a class="headerlink" href="#spice-dc-source" title="Permalink to this heading"></a></h2>
 <p>Class for generating DC voltage/current sources in the Spectre or Eldo
 testbench.</p>
 <p>Initially written by Okko Järvinen, 9.1.2020</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.spice_dcsource.spice_dcsource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.spice_dcsource.</span></span><span class="sig-name descname"><span class="pre">spice_dcsource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/spice_dcsource.html#spice_dcsource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_dcsource.spice_dcsource" title="Permalink to this definition"></a></dt>
@@ -1491,10 +1642,10 @@ self.extract=True.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-spice.testbench"></span><section id="spice-testbench">
 <h2>Spice Testbench<a class="headerlink" href="#spice-testbench" title="Permalink to this heading"></a></h2>
 <p>Testbench generation class for spice simulations.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.testbench.testbench">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.testbench.</span></span><span class="sig-name descname"><span class="pre">testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/testbench.html#testbench"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.testbench.testbench" title="Permalink to this definition"></a></dt>
@@ -1618,10 +1769,10 @@ instantiated in the parent entity.</p>
 
 </dd></dl>
 
-</section>
 <span class="target" id="module-spice.spice_module"></span><section id="spice-module">
 <h2>Spice Module<a class="headerlink" href="#spice-module" title="Permalink to this heading"></a></h2>
 <p>Class for Spice netlist parsing.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="spice.spice_module.spice_module">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.spice_module.</span></span><span class="sig-name descname"><span class="pre">spice_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/spice_module.html#spice_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_module.spice_module" title="Permalink to this definition"></a></dt>
@@ -1684,7 +1835,6 @@ constructs a subcircuit instance out of it.</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 
