@@ -44,7 +44,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to TheSyDeKick</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-is-the-thesydekick">What is the TheSydeKick</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#operation-principle">Operation principle</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Operation principle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#modular-system-description-with-objects">Modular system description with objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#system-modeling-and-design-exploration">System modeling and design exploration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#further-reading-and-related-information">Further reading and related information</a></li>
@@ -111,6 +110,9 @@
 is primarily targeted for design and testing of integrated circuits and Systems
 on Chip (SoC’s). The operation principle of TheSDK is depicted below.</p>
 <img alt="TheSDK block diagram" src="_images/TheSDK_block_diagram.png" />
+<p>This is the master documentation of TheSystem development kit. These pages
+provide an introduction and browsable documentation for the core Entities:
+thesdk, rtl, spice and ads.</p>
 <section id="operation-principle">
 <h3>Operation principle<a class="headerlink" href="#operation-principle" title="Permalink to this heading"></a></h3>
 <p>TheSyDeKick supports the system design by “testing first” principle. Design is
@@ -121,29 +123,9 @@ circuitry. Circuit level simulations are executed by calling external
 simulators like Spectre, Eldo or Questasim. This makes it possible to write the
 test cases and analyses for the system only once, and carry out the circuit
 development with those tests from beginning to end.</p>
-<p>TheSyDeKick also aims for full support of system measurements. The intended
-operation is that once the circuit or system is manufactured, the signal
-sources and analyzers of TheSDK model are replaced with measurement equipment,
-and the same tests are carried out for the actual hardware within the same
-framework. However, this requires a measurement hardware driver libraries that
-are to be developed. V1.3 does not support measurements.</p>
 <p>It targets to using a single control environment to simulate, design and measure
 the system components with various tools by using a single “Control
 environment” for control, analysis, and visualization of the results.</p>
-<p>This is the master documentation of TheSystem development kit. These pages
-provide an introduction and browsable documentation for the core Entities:
-thesdk, rtl, spice and ads.</p>
-</section>
-<section id="id1">
-<h3>Operation principle<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
-<p>TheSyDeKick supports the system design by “testing first” principle. Design is
-started by writing a system test bench and simple model for the design under
-test with Python. Gradually the implementation details are added to the DUT by
-introducing analog circuit model or RTL level descriptions of digital
-circuitry. Circuit level simulations are executed by calling external
-simulators like Spectre, Eldo, Ngspice, Questasim or Icarus. This makes it possible to write the
-test cases and analyses for the system only once, and carry out the circuit
-development with those tests from beginning to end.</p>
 <p>TheSyDeKick also aims for full support of system measurements. The intended
 operation is that once the circuit or system is manufactured, the signal
 sources and analyzers of TheSDK model are replaced with measurement equipment,
