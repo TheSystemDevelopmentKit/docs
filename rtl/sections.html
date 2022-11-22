@@ -60,6 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_control_contents"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_control_contents</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_controlfile"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_controlfile</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_rtl"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_rtl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.lsf_submission"><code class="docutils literal notranslate"><span class="pre">rtl.lsf_submission</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.name"><code class="docutils literal notranslate"><span class="pre">rtl.name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.preserve_rtlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.preserve_rtlfiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.read_outfile"><code class="docutils literal notranslate"><span class="pre">rtl.read_outfile()</span></code></a></li>
@@ -72,16 +73,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.run_rtl"><code class="docutils literal notranslate"><span class="pre">rtl.run_rtl()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simdut"><code class="docutils literal notranslate"><span class="pre">rtl.simdut</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simtb"><code class="docutils literal notranslate"><span class="pre">rtl.simtb</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.verilog_submission"><code class="docutils literal notranslate"><span class="pre">rtl.verilog_submission</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdlentityfiles"><code class="docutils literal notranslate"><span class="pre">rtl.vhdlentityfiles</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdlsrc"><code class="docutils literal notranslate"><span class="pre">rtl.vhdlsrc</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdlsrcpath"><code class="docutils literal notranslate"><span class="pre">rtl.vhdlsrcpath</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogcompargs"><code class="docutils literal notranslate"><span class="pre">rtl.vlogcompargs</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogext"><code class="docutils literal notranslate"><span class="pre">rtl.vlogext</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogmodulefiles"><code class="docutils literal notranslate"><span class="pre">rtl.vlogmodulefiles</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogsimargs"><code class="docutils literal notranslate"><span class="pre">rtl.vlogsimargs</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogsrc"><code class="docutils literal notranslate"><span class="pre">rtl.vlogsrc</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogsrcpath"><code class="docutils literal notranslate"><span class="pre">rtl.vlogsrcpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.write_infile"><code class="docutils literal notranslate"><span class="pre">rtl.write_infile()</span></code></a></li>
 </ul>
 </li>
@@ -112,17 +103,22 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#testbench">Testbench</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rtl.testbench.testbench"><code class="docutils literal notranslate"><span class="pre">testbench</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.assignment_matchlist"><code class="docutils literal notranslate"><span class="pre">testbench.assignment_matchlist</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.assignments"><code class="docutils literal notranslate"><span class="pre">testbench.assignments()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.clock_definition"><code class="docutils literal notranslate"><span class="pre">testbench.clock_definition</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.connect_inputs"><code class="docutils literal notranslate"><span class="pre">testbench.connect_inputs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.connector_definitions"><code class="docutils literal notranslate"><span class="pre">testbench.connector_definitions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.connectors"><code class="docutils literal notranslate"><span class="pre">testbench.connectors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.content_parameters"><code class="docutils literal notranslate"><span class="pre">testbench.content_parameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.define_testbench"><code class="docutils literal notranslate"><span class="pre">testbench.define_testbench()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.dumpfile"><code class="docutils literal notranslate"><span class="pre">testbench.dumpfile</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.dut_instance"><code class="docutils literal notranslate"><span class="pre">testbench.dut_instance</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.file"><code class="docutils literal notranslate"><span class="pre">testbench.file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.generate_contents"><code class="docutils literal notranslate"><span class="pre">testbench.generate_contents()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.iofile_close"><code class="docutils literal notranslate"><span class="pre">testbench.iofile_close</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.iofile_definitions"><code class="docutils literal notranslate"><span class="pre">testbench.iofile_definitions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.iofiles"><code class="docutils literal notranslate"><span class="pre">testbench.iofiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.lang"><code class="docutils literal notranslate"><span class="pre">testbench.lang</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.langmodule"><code class="docutils literal notranslate"><span class="pre">testbench.langmodule</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.misccmd"><code class="docutils literal notranslate"><span class="pre">testbench.misccmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.parameter_definitions"><code class="docutils literal notranslate"><span class="pre">testbench.parameter_definitions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.verilog_instance_add"><code class="docutils literal notranslate"><span class="pre">testbench.verilog_instance_add()</span></code></a></li>
@@ -130,23 +126,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module">Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rtl.module.verilog_module"><code class="docutils literal notranslate"><span class="pre">verilog_module</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.contents"><code class="docutils literal notranslate"><span class="pre">verilog_module.contents</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.definition"><code class="docutils literal notranslate"><span class="pre">verilog_module.definition</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.export"><code class="docutils literal notranslate"><span class="pre">verilog_module.export()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.instance"><code class="docutils literal notranslate"><span class="pre">verilog_module.instance</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.instname"><code class="docutils literal notranslate"><span class="pre">verilog_module.instname</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.io_signals"><code class="docutils literal notranslate"><span class="pre">verilog_module.io_signals</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.ios"><code class="docutils literal notranslate"><span class="pre">verilog_module.ios</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.name"><code class="docutils literal notranslate"><span class="pre">verilog_module.name</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.module.verilog_module.parameters"><code class="docutils literal notranslate"><span class="pre">verilog_module.parameters</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#entity">Entity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rtl.entity.vhdl_entity"><code class="docutils literal notranslate"><span class="pre">vhdl_entity</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.entity.vhdl_entity.contents"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.contents</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.entity.vhdl_entity.ios"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.ios</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.entity.vhdl_entity.parameters"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.parameters</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rtl.module.module"><code class="docutils literal notranslate"><span class="pre">module</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.contents"><code class="docutils literal notranslate"><span class="pre">module.contents</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.definition"><code class="docutils literal notranslate"><span class="pre">module.definition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.export"><code class="docutils literal notranslate"><span class="pre">module.export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.instance"><code class="docutils literal notranslate"><span class="pre">module.instance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.io_signals"><code class="docutils literal notranslate"><span class="pre">module.io_signals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.ios"><code class="docutils literal notranslate"><span class="pre">module.ios</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.lang"><code class="docutils literal notranslate"><span class="pre">module.lang</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.langmodule"><code class="docutils literal notranslate"><span class="pre">module.langmodule</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.module.module.parameters"><code class="docutils literal notranslate"><span class="pre">module.parameters</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -239,7 +228,7 @@ self.iofile_bundle.Members[ioname].Data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="rtl.rtl.create_connectors">
 <span class="sig-name descname"><span class="pre">create_connectors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.create_connectors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.create_connectors" title="Permalink to this definition"></a></dt>
-<dd><p>Cretes verilog connector definitions from
+<dd><p>Creates connector definitions from
 1) From a iofile that is provided in the Data
 attribute of an IO.
 2) IOS of the verilog DUT</p>
@@ -249,7 +238,7 @@ attribute of an IO.
 <dt class="sig sig-object py" id="rtl.rtl.custom_connectors">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">custom_connectors</span></span><a class="headerlink" href="#rtl.rtl.custom_connectors" title="Permalink to this definition"></a></dt>
 <dd><p>Custom connectors to be added to the testbench
-Should be a e.g. a verilog_connector_bundle</p>
+Should be a e.g. a rtl_connector_bundle</p>
 </dd></dl>
 
 <dl class="py method">
@@ -319,6 +308,14 @@ read from this file path. Default path is
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.lsf_submission">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lsf_submission</span></span><a class="headerlink" href="#rtl.rtl.lsf_submission" title="Permalink to this definition"></a></dt>
+<dd><p>Defines submission prefix from thesdk.GLOBALS[‘LSFSUBMISSION’].
+[ ToDo ] Transfer definition to thesdk entity.</p>
+<p>Usually something like ‘bsub -K’</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="rtl.rtl.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#rtl.rtl.name" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the entity
@@ -359,7 +356,7 @@ Compiled from various parameters. See source for details.</p>
 <p>List of manual commands to be pasted to the testbench. The strings are
 pasted to their own lines (no linebreaks needed), and the syntax is
 unchanged.</p>
-<p>Example: creating a custm clock:</p>
+<p>Example: creating a custom clock:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">rtlmisc</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">rtlmisc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;reg clock2;&#39;</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">rtlmisc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;initial clock2=&#39;</span><span class="n">b0</span><span class="p">;</span><span class="s1">&#39;)</span>
@@ -440,96 +437,9 @@ and debugging the testbench.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.rtl.simtb">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simtb</span></span><a class="headerlink" href="#rtl.rtl.simtb" title="Permalink to this definition"></a></dt>
-<dd><p>Verilog testbench source file in simulations directory</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.verilog_submission">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verilog_submission</span></span><a class="headerlink" href="#rtl.rtl.verilog_submission" title="Permalink to this definition"></a></dt>
-<dd><p>Defines verilog submission prefix from thesdk.GLOBALS[‘LSFSUBMISSION’]</p>
-<p>Usually something like ‘bsub -K’</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vhdlentityfiles">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vhdlentityfiles</span></span><a class="headerlink" href="#rtl.rtl.vhdlentityfiles" title="Permalink to this definition"></a></dt>
-<dd><p>List of VHDL entity files to be compiled in addition to DUT</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vhdlsrc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vhdlsrc</span></span><a class="headerlink" href="#rtl.rtl.vhdlsrc" title="Permalink to this definition"></a></dt>
-<dd><p>VHDL source file
-self.vhdlsrcpath/self.name.sv’</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>self.vhdlsrcpath + ‘/’ + self.name + ‘.vhd’</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vhdlsrcpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vhdlsrcpath</span></span><a class="headerlink" href="#rtl.rtl.vhdlsrcpath" title="Permalink to this definition"></a></dt>
-<dd><p>VHDL search path
-self.entitypath/vhdl</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>self.entitypath/vhdl</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vlogcompargs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogcompargs</span></span><a class="headerlink" href="#rtl.rtl.vlogcompargs" title="Permalink to this definition"></a></dt>
-<dd><p>List of arguments passed to the simulator
-during the verilog compilation</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vlogext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogext</span></span><a class="headerlink" href="#rtl.rtl.vlogext" title="Permalink to this definition"></a></dt>
-<dd><p>File extension for verilog files</p>
-<p>Default is ‘.sv’, but this can be overridden to support, e.g.
-generators like Chisel that always use the ‘.v’ prefix.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vlogmodulefiles">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogmodulefiles</span></span><a class="headerlink" href="#rtl.rtl.vlogmodulefiles" title="Permalink to this definition"></a></dt>
-<dd><p>List of verilog modules to be compiled in addition of DUT</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vlogsimargs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogsimargs</span></span><a class="headerlink" href="#rtl.rtl.vlogsimargs" title="Permalink to this definition"></a></dt>
-<dd><p>Custom parameters for verilog simulation (vsim, vvp)
-Provide as a list of strings</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vlogsrc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogsrc</span></span><a class="headerlink" href="#rtl.rtl.vlogsrc" title="Permalink to this definition"></a></dt>
-<dd><p>Verilog source file
-self.vlogsrcpath/self.name.sv</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>self.vlogsrcpath + ‘/’ + self.name + self.vlogext</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.rtl.vlogsrcpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogsrcpath</span></span><a class="headerlink" href="#rtl.rtl.vlogsrcpath" title="Permalink to this definition"></a></dt>
-<dd><p>Search path for the verilogfiles
-self.entitypath/sv</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>self.entitypath/sv</p>
-</dd>
-</dl>
+<dd><p>Testbench source file in simulations directory.</p>
+<p>This file and it’s format is dependent on the language(s)
+supported by the simulator. Currently we have support only for verilog testbenches.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -748,28 +658,33 @@ Default: <cite>&#64;(posedge clock)</cite></p>
 
 <span class="target" id="module-rtl.testbench"></span><section id="testbench">
 <h2>Testbench<a class="headerlink" href="#testbench" title="Permalink to this heading"></a></h2>
-<p>Verilog testbench utility mmodule for TheSyDeKick. Contains attributes annd methods to import DUT as <cite>verilog_module</cite>
-instance, parse its IO and parameter definitions and construct a structured testbench with clock and file IO.</p>
-<p>Utilizes logging method from thesdk.
-Extendsd <cite>verilog_module</cite> with additional properties.</p>
-<p>Initially written by Marko Kosunen 20190108, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a></p>
+<p>Testbench utility module for TheSyDeKick. Contains attributes and methods to
+construct a Verilog or VHDL testbench for a provided DUT module/entity, parse
+its IO and parameter definitions and construct a structured testbench with clock and file IO.</p>
+<p>Utilizes logging method from thesdk.</p>
+<p>Initially written by Marko Kosunen 20190108, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>
+Refactored from ‘testbench’ by Marko Kosunen 20221119, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a></p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.testbench.testbench">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.testbench.</span></span><span class="sig-name descname"><span class="pre">testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench.html#testbench"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench.testbench" title="Permalink to this definition"></a></dt>
-<dd><p>Testbench class. Extends <cite>verilog_module</cite></p>
+<dd><p>Testbench class. Extends <cite>module</cite> through ‘testbench_commom’</p>
+<p>Executes init of testbench_common, thus having the same attributes and
+parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this testbench.</em>) – </p></li>
-<li><p><strong>**kwargs</strong> – None</p></li>
-</ul>
+<dd class="field-odd"><p><strong>**kwargs</strong> – See module testbench_common</p>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.assignment_matchlist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assignment_matchlist</span></span><a class="headerlink" href="#rtl.testbench.testbench.assignment_matchlist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="rtl.testbench.testbench.assignments">
 <span class="sig-name descname"><span class="pre">assignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench.html#testbench.assignments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench.testbench.assignments" title="Permalink to this definition"></a></dt>
-<dd><p>Wire assingment strings</p>
+<dd><p>Wire/signal assingment strings</p>
 </dd></dl>
 
 <dl class="py property">
@@ -789,7 +704,20 @@ Create append mechanism to add more clocks.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.testbench.testbench.connector_definitions">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connector_definitions</span></span><a class="headerlink" href="#rtl.testbench.testbench.connector_definitions" title="Permalink to this definition"></a></dt>
-<dd><p>Verilog register and wire definition strings</p>
+<dd><p>Verilog register and wire definition, VHDL signal strings.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.connectors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connectors</span></span><a class="headerlink" href="#rtl.testbench.testbench.connectors" title="Permalink to this definition"></a></dt>
+<dd><p>Overload to pass values to langmodule.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.content_parameters">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">content_parameters</span></span><a class="headerlink" href="#rtl.testbench.testbench.content_parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Parameters used inside the testbench</p>
+<p>Dict of name: (type,value)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -812,35 +740,10 @@ This dumpfile can be used with gtkwave.</p>
 <dd><p>RTL module parsed from the verilog or VHDL file of the parent depending on <cite>parent.model</cite></p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.testbench.testbench.file">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#rtl.testbench.testbench.file" title="Permalink to this definition"></a></dt>
-<dd><p>Path to the testbench file</p>
-<p>Default: <cite>self.parent.vlogsrcpath + ‘/tb_’ + self.parent.name + ‘.sv’</cite></p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="rtl.testbench.testbench.generate_contents">
 <span class="sig-name descname"><span class="pre">generate_contents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench.html#testbench.generate_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench.testbench.generate_contents" title="Permalink to this definition"></a></dt>
-<dd><p>This is the method to generate testbench contents. Override if needed
-Contents of the testbench is constructed from attributes in the
-following order</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="bp">self</span><span class="o">.</span><span class="n">parameter_definitions</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">connector_definitions</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">assignments</span><span class="p">()</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">iofile_definitions</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">misccmd</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">dumpfile</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">instance</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">verilog_instance_members</span><span class="o">.</span><span class="n">items</span><span class="p">()</span><span class="o">.</span><span class="n">instance</span> <span class="p">(</span><span class="k">for</span> <span class="nb">all</span> <span class="n">members</span><span class="p">)</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">verilog_inits</span><span class="p">()</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">()</span><span class="o">.</span><span class="n">verilog_io</span> <span class="p">(</span><span class="k">for</span> <span class="nb">all</span> <span class="n">members</span><span class="p">)</span>
-   <span class="bp">self</span><span class="o">.</span><span class="n">iofile</span><span class="o">.</span><span class="n">close</span> <span class="p">(</span><span class="k">for</span> <span class="nb">all</span> <span class="n">members</span><span class="p">)</span>
-
-<span class="n">Addtional</span> <span class="n">code</span> <span class="n">may</span> <span class="n">be</span> <span class="n">currently</span> <span class="n">injected</span> <span class="n">by</span> <span class="n">appending</span> <span class="n">desired</span>
-<span class="n">strings</span> <span class="p">(</span><span class="n">Verilog</span> <span class="n">sytax</span><span class="p">)</span> <span class="n">to</span> <span class="n">the</span> <span class="n">relevant</span> <span class="n">string</span> <span class="n">attributes</span><span class="o">.</span>
-</pre></div>
-</div>
+<dd><p>Call language specific contents generator.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -856,6 +759,25 @@ following order</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.iofiles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofiles</span></span><a class="headerlink" href="#rtl.testbench.testbench.iofiles" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.lang">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lang</span></span><a class="headerlink" href="#rtl.testbench.testbench.lang" title="Permalink to this definition"></a></dt>
+<dd><p>Description language used.</p>
+<p>Default: <cite>sv</cite></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench.testbench.langmodule">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">langmodule</span></span><a class="headerlink" href="#rtl.testbench.testbench.langmodule" title="Permalink to this definition"></a></dt>
+<dd><p>The language specific operation is defined with an instance of
+language specific class. Properties and methods return values from that class.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="rtl.testbench.testbench.misccmd">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">misccmd</span></span><a class="headerlink" href="#rtl.testbench.testbench.misccmd" title="Permalink to this definition"></a></dt>
 <dd><p>String</p>
@@ -866,7 +788,7 @@ the parent entity.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.testbench.testbench.parameter_definitions">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter_definitions</span></span><a class="headerlink" href="#rtl.testbench.testbench.parameter_definitions" title="Permalink to this definition"></a></dt>
-<dd><p>Parameter  and variable definition strins of the testbench</p>
+<dd><p>Parameter  and variable definition strings of the testbench</p>
 </dd></dl>
 
 <dl class="py method">
@@ -898,64 +820,41 @@ Need to handle VHDL instance too.</p>
 
 <span class="target" id="module-rtl.module"></span><section id="module">
 <h2>Module<a class="headerlink" href="#module" title="Permalink to this heading"></a></h2>
-<p>Verilog module import features for RTL simulation package of
-The System Development Kit.</p>
+<p>Module import features for RTL simulation package of
+The System Development Kit. ‘Module’ represents verilog
+module or VHDL entity.</p>
 <p>Provides utilities to import Verilog modules to
 python environment.</p>
-<p>Initially written by Marko Kosunen, 2017
-Last modification by Okko Järvinen, 28.10.2021 07:55</p>
+<p>Initially written by Marko Kosunen, 2017</p>
 </section>
 <dl class="py class">
-<dt class="sig sig-object py" id="rtl.module.verilog_module">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.module.</span></span><span class="sig-name descname"><span class="pre">verilog_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module.html#verilog_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module.verilog_module" title="Permalink to this definition"></a></dt>
-<dd><p>Objective:</p>
-<ol class="arabic simple">
-<li><ol class="loweralpha simple">
-<li><p>Collect IO’s to database</p></li>
-<li><p>collect parameters to dict</p></li>
-</ol>
-</li>
-<li><p>Reconstruct the module definition</p></li>
-<li><ol class="loweralpha simple">
-<li><p>Implement methods provide sinal connections</p></li>
-<li><p>Implement methods to provide parameter assingments</p></li>
-</ol>
-</li>
-<li><p>Create a method to create assigned module            definition, where signals are
-a) assigned by name
-b) to arbitrary name vector.</p></li>
-<li><p>Add contents, if required, and include that to definition</p></li>
-</ol>
+<dt class="sig sig-object py" id="rtl.module.module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.module.</span></span><span class="sig-name descname"><span class="pre">module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module.html#module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module.module" title="Permalink to this definition"></a></dt>
+<dd><p>Currently module class is just an alias for verilog_module.</p>
+<p>Executes init of module_common, thus having the same attributes and
+parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
-<dt>file: str</dt><dd><p>Verilog file containing the module</p>
-</dd>
-<dt>name: str</dt><dd><p>Name of the module</p>
-</dd>
-<dt>instname: str, self.name</dt><dd><p>Name of the instance</p>
-</dd>
-</dl>
-</p>
+<dd class="field-odd"><p><strong>**kwargs</strong> – See module module_common</p>
 </dd>
 </dl>
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.contents">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contents</span></span><a class="headerlink" href="#rtl.module.verilog_module.contents" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="rtl.module.module.contents">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contents</span></span><a class="headerlink" href="#rtl.module.module.contents" title="Permalink to this definition"></a></dt>
 <dd><p>Contents of the module. String containing the Verilog code after
 the module definition.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.definition">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">definition</span></span><a class="headerlink" href="#rtl.module.verilog_module.definition" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="rtl.module.module.definition">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">definition</span></span><a class="headerlink" href="#rtl.module.module.definition" title="Permalink to this definition"></a></dt>
 <dd><p>Module definition part extracted for the file. Contains parameters and
 IO definitions.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.export">
-<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module.html#verilog_module.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module.verilog_module.export" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="rtl.module.module.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module.html#module.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module.module.export" title="Permalink to this definition"></a></dt>
 <dd><p>Method to export the module to a given file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -965,87 +864,44 @@ IO definitions.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.instance">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instance</span></span><a class="headerlink" href="#rtl.module.verilog_module.instance" title="Permalink to this definition"></a></dt>
-<dd><p>Instantioation string of the module. Can be used inside of the other modules.</p>
+<dt class="sig sig-object py" id="rtl.module.module.instance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instance</span></span><a class="headerlink" href="#rtl.module.module.instance" title="Permalink to this definition"></a></dt>
+<dd><p>Instantiation string of the module. Can be used inside of the other modules.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.instname">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instname</span></span><a class="headerlink" href="#rtl.module.verilog_module.instname" title="Permalink to this definition"></a></dt>
-<dd><p>Name of the instance, when instantiated inside other module.</p>
-<p>Default: <cite>self.name_DUT</cite></p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.io_signals">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">io_signals</span></span><a class="headerlink" href="#rtl.module.verilog_module.io_signals" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="rtl.module.module.io_signals">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">io_signals</span></span><a class="headerlink" href="#rtl.module.module.io_signals" title="Permalink to this definition"></a></dt>
 <dd><p>Bundle containing the signal connectors for IO connections.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.ios">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ios</span></span><a class="headerlink" href="#rtl.module.verilog_module.ios" title="Permalink to this definition"></a></dt>
-<dd><p>Verilog connector bundle containing connectors for all module IOS.
+<dt class="sig sig-object py" id="rtl.module.module.ios">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ios</span></span><a class="headerlink" href="#rtl.module.module.ios" title="Permalink to this definition"></a></dt>
+<dd><p>Connector bundle containing connectors for all module IOS.
 All the IOs are connected to signal connectors that
 have the same name than the IOs. This is due to fact the we have decided
 that all signals are connectors.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#rtl.module.verilog_module.name" title="Permalink to this definition"></a></dt>
-<dd><p>Name of the module. Derived from the file name.</p>
+<dt class="sig sig-object py" id="rtl.module.module.lang">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lang</span></span><a class="headerlink" href="#rtl.module.module.lang" title="Permalink to this definition"></a></dt>
+<dd><p>Description language used.</p>
+<p>Default: <cite>sv</cite></p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="rtl.module.verilog_module.parameters">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#rtl.module.verilog_module.parameters" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="rtl.module.module.langmodule">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">langmodule</span></span><a class="headerlink" href="#rtl.module.module.langmodule" title="Permalink to this definition"></a></dt>
+<dd><p>The language specific operation is defined with an instance of
+language specific class. Properties and methods return values from that class.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.module.module.parameters">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#rtl.module.module.parameters" title="Permalink to this definition"></a></dt>
 <dd><p>Parameters of the verilog module. Bundle of values of type string.</p>
-</dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-rtl.entity"></span><section id="entity">
-<h2>Entity<a class="headerlink" href="#entity" title="Permalink to this heading"></a></h2>
-<p>VHDL import features for RTL simulation package of The System Development Kit</p>
-<p>Provides utilities to import VHDL entities to
-python environment. Imported VHDL entities will be instantiated as verilog modules,
-and are intended to be simulated within verilog testbench with simulator supporting
-cross language compilations.</p>
-<p>Initially written by Marko Kosunen, 2017</p>
-<p>Transferred from VHL package in Dec 2019</p>
-<p>Last modification by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 21.01.2020 19:27</p>
-</section>
-<dl class="py class">
-<dt class="sig sig-object py" id="rtl.entity.vhdl_entity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.entity.</span></span><span class="sig-name descname"><span class="pre">vhdl_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/entity.html#vhdl_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.entity.vhdl_entity" title="Permalink to this definition"></a></dt>
-<dd><p>Executes init of verilog_module, thus having the same attributes and
-parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> – See module module</p>
-</dd>
-</dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.entity.vhdl_entity.contents">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contents</span></span><a class="headerlink" href="#rtl.entity.vhdl_entity.contents" title="Permalink to this definition"></a></dt>
-<dd><p>Contents is extracted. We do not know what to do with it yet.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.entity.vhdl_entity.ios">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ios</span></span><a class="headerlink" href="#rtl.entity.vhdl_entity.ios" title="Permalink to this definition"></a></dt>
-<dd><p>Verilog connector bundle containing connectors for all module IOS.
-All the IOs are connected to signal connectors that
-have the same name than the IOs. This is due to fact the we have decided
-that all signals are connectors.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.entity.vhdl_entity.parameters">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#rtl.entity.vhdl_entity.parameters" title="Permalink to this definition"></a></dt>
-<dd><p>Verilog parameters extracted from generics of the VHDL entity</p>
 </dd></dl>
 
 </dd></dl>
