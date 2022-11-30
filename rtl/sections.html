@@ -50,6 +50,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.assignment_matchlist"><code class="docutils literal notranslate"><span class="pre">rtl.assignment_matchlist</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.connect_inputs"><code class="docutils literal notranslate"><span class="pre">rtl.connect_inputs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.connect_outputs"><code class="docutils literal notranslate"><span class="pre">rtl.connect_outputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.copy_or_relink"><code class="docutils literal notranslate"><span class="pre">rtl.copy_or_relink()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.copy_rtl_sources"><code class="docutils literal notranslate"><span class="pre">rtl.copy_rtl_sources()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.create_connectors"><code class="docutils literal notranslate"><span class="pre">rtl.create_connectors()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.custom_connectors"><code class="docutils literal notranslate"><span class="pre">rtl.custom_connectors</span></code></a></li>
@@ -217,6 +218,21 @@ self.iofile_bundle.Members[ioname].Data</p>
 <dt class="sig sig-object py" id="rtl.rtl.connect_outputs">
 <span class="sig-name descname"><span class="pre">connect_outputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.connect_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.connect_outputs" title="Permalink to this definition"></a></dt>
 <dd><p>Connects the ouput data from files to corresponding output IOs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtl.rtl.copy_or_relink">
+<span class="sig-name descname"><span class="pre">copy_or_relink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.copy_or_relink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.copy_or_relink" title="Permalink to this definition"></a></dt>
+<dd><p>If the source is a symlink, create the target as a link to original target.
+otherwise, copy the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to source file</p></li>
+<li><p><strong>dst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to destination file.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
