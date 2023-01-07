@@ -98,6 +98,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
 <span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
@@ -167,6 +168,7 @@
                     <span class="s2">&quot;include&quot;</span> <span class="p">:</span> <span class="s1">&#39;.include&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;dspfinclude&quot;</span> <span class="p">:</span> <span class="s1">&#39;.include&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;subckt&quot;</span> <span class="p">:</span> <span class="s1">&#39;.subckt&#39;</span><span class="p">,</span>
+                    <span class="s2">&quot;subend&quot;</span> <span class="p">:</span> <span class="s1">&#39;.ends&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;lastline&quot;</span> <span class="p">:</span> <span class="s1">&#39;.end&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;eventoutdelim&quot;</span> <span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="p">,</span>
                     <span class="s2">&quot;csvskip&quot;</span> <span class="p">:</span> <span class="mi">2</span>
@@ -185,6 +187,7 @@
                     <span class="s2">&quot;include&quot;</span> <span class="p">:</span> <span class="s1">&#39;include &#39;</span><span class="p">,</span>
                     <span class="s2">&quot;dspfinclude&quot;</span> <span class="p">:</span> <span class="s1">&#39;dspf_include &#39;</span><span class="p">,</span>
                     <span class="s2">&quot;subckt&quot;</span> <span class="p">:</span> <span class="s1">&#39;subckt&#39;</span><span class="p">,</span>
+                    <span class="s2">&quot;subend&quot;</span> <span class="p">:</span> <span class="s1">&#39;ends&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;lastline&quot;</span> <span class="p">:</span> <span class="s1">&#39;///&#39;</span><span class="p">,</span> <span class="c1">#needed?</span>
                     <span class="s2">&quot;eventoutdelim&quot;</span> <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;csvskip&quot;</span> <span class="p">:</span> <span class="mi">0</span>
@@ -203,6 +206,7 @@
                     <span class="s2">&quot;include&quot;</span> <span class="p">:</span> <span class="s1">&#39;.include&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;dspfinclude&quot;</span> <span class="p">:</span> <span class="s1">&#39;.include&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;subckt&quot;</span> <span class="p">:</span> <span class="s1">&#39;.subckt&#39;</span><span class="p">,</span>
+                    <span class="s2">&quot;subend&quot;</span> <span class="p">:</span> <span class="s1">&#39;.ends&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;lastline&quot;</span> <span class="p">:</span> <span class="s1">&#39;.end&#39;</span><span class="p">,</span>
                     <span class="s2">&quot;eventoutdelim&quot;</span> <span class="p">:</span> <span class="s1">&#39;  &#39;</span><span class="p">,</span> <span class="c1"># Two spaces</span>
                     <span class="s2">&quot;csvskip&quot;</span> <span class="p">:</span> <span class="mi">1</span>
@@ -674,8 +678,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed to create </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span>
     <span class="nd">@spicesrcpath</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">spicesrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">def</span> <span class="nf">spicesrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spicesrcpath</span><span class="o">=</span><span class="n">val</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicesrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -721,6 +725,31 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_spicesubcktsrc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spicesimpath</span> <span class="o">+</span> <span class="s1">&#39;/subckt_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">syntaxdict</span><span class="p">[</span><span class="s2">&quot;cmdfile_ext&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesubcktsrc</span>
 
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Postlayout simulation accuracy/RC reduction flag.</span>
+<span class="sd">        See: https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plflag&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s2">&quot;upa&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span>
+
+    <span class="nd">@plflag</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;spectre&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;upa&quot;</span><span class="p">,</span> <span class="s2">&quot;hpa&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="n">val</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported postlayout flag: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># This should be checked, can the other flags given to e.g. ELDO (previously upa was </span>
+            <span class="c1"># passed to all simulators)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Simulator </span><span class="si">%s</span><span class="s1"> supports only postlayout flag: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+            
+
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String</span>
@@ -735,7 +764,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">nprocflag</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
-                <span class="n">plflag</span> <span class="o">=</span> <span class="s1">&#39;+postlayout=upa&#39;</span>
+                <span class="n">plflag</span> <span class="o">=</span> <span class="s1">&#39;+postlayout=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plflag</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Enabling post-layout optimization </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">plflag</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">plflag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -818,6 +847,73 @@
     <span class="k">def</span> <span class="nf">save_database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">_save_database</span><span class="o">=</span><span class="n">value</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">save_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+<span class="sd">            </span>
+<span class="sd">            If True and save_state is True, copy the output file of simulator</span>
+<span class="sd">            to entity statedir. Useful for scavenging results if simulator exited</span>
+<span class="sd">            but state was not written to disk for some reason.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_save_output_file&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_file</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_file</span>
+
+    <span class="nd">@save_output_file</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">save_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_file</span><span class="o">=</span><span class="n">val</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">load_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+
+<span class="sd">        Whether to load the outputs from simulator output file.</span>
+<span class="sd">        This only works if the file exists in the state directory, i.e.</span>
+<span class="sd">        the simulator was run with save_output_file=True.</span>
+<span class="sd">        WARNING: This will read the IOS from the output file, and REWRITE</span>
+<span class="sd">        THE ENTITY STATE on disk.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_load_output_file&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span> 
+    <span class="nd">@load_output_file</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">load_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;load_output_file set to True! This will rewrite the entity state on disk!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="n">value</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internally set list of indices corresponding to time,amplitude pairs</span>
+<span class="sd">        whose time value of is a multiple of the strobeperiod (see spice_simcmd).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_strobe_indices&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span>
+
+    <span class="nd">@strobe_indices</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span><span class="o">=</span><span class="n">val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Cannot set strobe_indices to be of type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_strobed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if simulation was strobed or not</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_is_strobed&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_strobed</span><span class="o">=</span><span class="kc">False</span>
+            <span class="k">for</span> <span class="n">simtype</span><span class="p">,</span> <span class="n">simcmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">simtype</span><span class="o">==</span><span class="s1">&#39;tran&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">simcmd</span><span class="o">.</span><span class="n">strobeperiod</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_is_strobed</span><span class="o">=</span><span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_strobed</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">save_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -882,6 +978,83 @@
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;in&#39;</span> <span class="ow">or</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="spice.filter_strobed"><a class="viewcode-back" href="../spice/sections.html#spice.spice.filter_strobed">[docs]</a>    <span class="k">def</span> <span class="nf">filter_strobed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span><span class="n">ioname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper function to read in the strobed simulation results. Only for spectre.</span>
+
+<span class="sd">        TODO:</span>
+<span class="sd">        this is because the strobeoutput</span>
+<span class="sd">        parameter for some reason still outputs</span>
+<span class="sd">        all the data points, even when it is in mode</span>
+<span class="sd">        strobeonly</span>
+<span class="sd">        If solution is found to this later from simulator</span>
+<span class="sd">        remove this.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        key: spice_iofle bundle key (name of the io)</span>
+<span class="sd">        ioname: node name from which date is to be filtered</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">tvals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">ioname</span><span class="o">.</span><span class="n">upper</span><span class="p">()][:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">maxtime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">tvals</span><span class="p">)</span>
+            <span class="n">mintime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">tvals</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">simulationcommand</span><span class="p">,</span> <span class="n">simulationoption</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">strobeperiod</span> <span class="o">=</span> <span class="n">simulationoption</span><span class="o">.</span><span class="n">strobeperiod</span>
+                <span class="n">strobedelay</span> <span class="o">=</span> <span class="n">simulationoption</span><span class="o">.</span><span class="n">strobedelay</span>
+                <span class="n">skipstart</span> <span class="o">=</span> <span class="n">simulationoption</span><span class="o">.</span><span class="n">skipstart</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">skipstart</span><span class="p">:</span>
+                <span class="n">skipstart</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">strobedelay</span><span class="p">:</span>
+                <span class="n">strobedelay</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">strobetimestamps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mintime</span><span class="p">,</span><span class="n">maxtime</span><span class="p">,</span><span class="n">strobeperiod</span><span class="p">)</span><span class="o">+</span><span class="n">strobedelay</span><span class="o">+</span><span class="n">skipstart</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strobetimestamps</span><span class="p">))</span> <span class="c1"># indexes to take the values</span>
+            <span class="n">seg</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">strobetimestamps</span><span class="p">))</span> <span class="c1"># length of a segment in the for loop (how many samples at a time)</span>
+            <span class="n">idxmin</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">l</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">strobetimestamps</span><span class="p">)</span>
+            <span class="n">nseg</span><span class="o">=</span><span class="n">l</span><span class="o">//</span><span class="n">seg</span> <span class="c1"># number of segments, rounded down (how many loops required)</span>
+            <span class="n">idxmax</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nseg</span><span class="p">):</span>
+                <span class="n">idxmax</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">seg</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">tvals</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">seg</span><span class="p">:]</span><span class="o">-</span><span class="n">strobetimestamps</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">seg</span><span class="p">]))</span> <span class="c1"># find index of the received signal which corresponds to the largest value in reference</span>
+                <span class="n">ind</span><span class="o">=</span><span class="n">idxmin</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">strobetimestamps</span><span class="p">[</span><span class="n">seg</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">seg</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="kc">None</span><span class="p">]</span><span class="o">-</span><span class="n">tvals</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="n">idxmin</span><span class="p">:</span><span class="n">idxmax</span><span class="p">])</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># take index for the seg&#39;s values</span>
+                <span class="n">idxmin</span><span class="o">=</span><span class="n">idxmax</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="p">[</span><span class="n">seg</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">seg</span><span class="o">*</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">ind</span>  
+            <span class="c1"># again just in case that the loop does not overflow to take the final samples into account</span>
+            <span class="n">idxmax</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">tvals</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="n">ind</span><span class="o">=</span><span class="n">idxmin</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">strobetimestamps</span><span class="p">[</span><span class="n">seg</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">):,</span><span class="kc">None</span><span class="p">]</span><span class="o">-</span><span class="n">tvals</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="n">idxmin</span><span class="p">:</span><span class="n">idxmax</span><span class="p">])</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">idxmin</span><span class="o">=</span><span class="n">idxmax</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="p">[</span><span class="n">seg</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">):]</span><span class="o">=</span><span class="n">ind</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">strobe</span><span class="p">:</span>
+                <span class="n">new_array</span> <span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">ioname</span><span class="o">.</span><span class="n">upper</span><span class="p">()][</span><span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">strobetimestamps</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="n">new_array</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                            <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Oh no, something went wrong while reading the strobeperiod data&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                            <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Check data lenghts!&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_array</span> <span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">ioname</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># We already know the strobe indices, use them!</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">strobe</span><span class="p">:</span>
+                <span class="n">new_array</span> <span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">ioname</span><span class="o">.</span><span class="n">upper</span><span class="p">()][</span><span class="bp">self</span><span class="o">.</span><span class="n">strobe_indices</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_array</span> <span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">ioname</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">new_array</span></div>
+
+<div class="viewcode-block" id="spice.check_output_accuracy"><a class="viewcode-back" href="../spice/sections.html#spice.spice.check_output_accuracy">[docs]</a>    <span class="k">def</span> <span class="nf">check_output_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Helper function to check output accuracy</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tdiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()][:,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">tdiff</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Accuracy of output file is insufficient. Increase value of </span><span class="se">\&#39;</span><span class="s1">digits</span><span class="se">\&#39;</span><span class="s1"> parameter and re-run simulation!&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span> <span class="c1"># Requested output wasn&#39;t in output file, do nothing</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Couldn</span><span class="se">\&#39;</span><span class="s1">t check output file accuracy&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span></div>
+
 <div class="viewcode-block" id="spice.read_spice_outputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.read_spice_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">read_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Automatically called function to call read() functions of each</span>
 <span class="sd">        iofile with direction &#39;output&#39;.&quot;&quot;&quot;</span>
@@ -892,15 +1065,16 @@
                     <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                         <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">check_output_accuracy</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># Time stamps are common to all, need to do only once</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="k">try</span><span class="p">:</span>
-                            <span class="k">try</span><span class="p">:</span>
-                                <span class="n">tdiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()][:,</span><span class="mi">0</span><span class="p">])</span>
-                                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">tdiff</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">):</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Accuracy of output file is insufficient. Increase value of </span><span class="se">\&#39;</span><span class="s1">digits</span><span class="se">\&#39;</span><span class="s1"> parameter and re-run simulation!&#39;</span><span class="p">)</span>
-                            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span> <span class="c1"># Requested output wasn&#39;t in output file, do nothing</span>
-                                <span class="k">pass</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;spectre&#39;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_strobed</span><span class="p">:</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_strobed</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
                         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Invalid ioname </span><span class="si">%s</span><span class="s1"> for iofile </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span> <span class="c1"># Iofile is a bus?</span>
@@ -908,10 +1082,22 @@
                         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">):</span>
                             <span class="k">try</span><span class="p">:</span>
                                 <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                                    <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+                                    <span class="c1"># Parse the first member of bus</span>
+                                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;spectre&#39;</span><span class="p">:</span>
+                                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_strobed</span><span class="p">:</span>
+                                            <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_strobed</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                                        <span class="k">else</span><span class="p">:</span>
+                                            <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
                                 <span class="k">else</span><span class="p">:</span>
+                                    <span class="c1"># Next members are concatenated to array</span>
+                                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;spectre&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_strobed</span><span class="p">:</span>
+                                        <span class="nb">next</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_strobed</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="nb">next</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
                                     <span class="k">try</span><span class="p">:</span>
-                                        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_eventdict</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()]]</span>
+                                        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="nb">next</span><span class="p">]</span>
                                     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Invalid dimensions for concatenating arrays for IO </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
                             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>

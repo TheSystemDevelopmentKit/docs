@@ -47,6 +47,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spice simulator interface classess</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#spice">Spice</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spice.spice"><code class="docutils literal notranslate"><span class="pre">spice</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.check_output_accuracy"><code class="docutils literal notranslate"><span class="pre">spice.check_output_accuracy()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.connect_spice_inputs"><code class="docutils literal notranslate"><span class="pre">spice.connect_spice_inputs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.connect_spice_outputs"><code class="docutils literal notranslate"><span class="pre">spice.connect_spice_outputs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.dcsource_bundle"><code class="docutils literal notranslate"><span class="pre">spice.dcsource_bundle</span></code></a></li>
@@ -57,14 +58,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.execute_spice_sim"><code class="docutils literal notranslate"><span class="pre">spice.execute_spice_sim()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.extract_powers"><code class="docutils literal notranslate"><span class="pre">spice.extract_powers()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.extracts"><code class="docutils literal notranslate"><span class="pre">spice.extracts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.filter_strobed"><code class="docutils literal notranslate"><span class="pre">spice.filter_strobed()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.get_buswidth"><code class="docutils literal notranslate"><span class="pre">spice.get_buswidth()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.interactive_spice"><code class="docutils literal notranslate"><span class="pre">spice.interactive_spice</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.iofile_eventdict"><code class="docutils literal notranslate"><span class="pre">spice.iofile_eventdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.is_strobed"><code class="docutils literal notranslate"><span class="pre">spice.is_strobed</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.load_output_file"><code class="docutils literal notranslate"><span class="pre">spice.load_output_file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.load_state"><code class="docutils literal notranslate"><span class="pre">spice.load_state</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.name"><code class="docutils literal notranslate"><span class="pre">spice.name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.nproc"><code class="docutils literal notranslate"><span class="pre">spice.nproc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.num_processes"><code class="docutils literal notranslate"><span class="pre">spice.num_processes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.plflag"><code class="docutils literal notranslate"><span class="pre">spice.plflag</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotlist"><code class="docutils literal notranslate"><span class="pre">spice.plotlist</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">spice.plotprogcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotprogram"><code class="docutils literal notranslate"><span class="pre">spice.plotprogram</span></code></a></li>
@@ -90,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesrcpath"><code class="docutils literal notranslate"><span class="pre">spice.spicesrcpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesubcktsrc"><code class="docutils literal notranslate"><span class="pre">spice.spicesubcktsrc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicetbsrc"><code class="docutils literal notranslate"><span class="pre">spice.spicetbsrc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.strobe_indices"><code class="docutils literal notranslate"><span class="pre">spice.strobe_indices</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.syntaxdict"><code class="docutils literal notranslate"><span class="pre">spice.syntaxdict</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.write_spice_inputs"><code class="docutils literal notranslate"><span class="pre">spice.write_spice_inputs()</span></code></a></li>
 </ul>
@@ -113,6 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.vlo"><code class="docutils literal notranslate"><span class="pre">spice_iofile.vlo</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.tfall"><code class="docutils literal notranslate"><span class="pre">spice_iofile.tfall</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.trise"><code class="docutils literal notranslate"><span class="pre">spice_iofile.trise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.strobe"><code class="docutils literal notranslate"><span class="pre">spice_iofile.strobe</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.DEBUG"><code class="docutils literal notranslate"><span class="pre">spice_iofile.DEBUG</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.append_to_data"><code class="docutils literal notranslate"><span class="pre">spice_iofile.append_to_data()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_iofile.spice_iofile.file"><code class="docutils literal notranslate"><span class="pre">spice_iofile.file</span></code></a></li>
@@ -154,6 +160,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.model_info"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.model_info</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.maxstep"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.maxstep</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.step"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.step</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.strobeperiod"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.strobeperiod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.skipstart"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.skipstart</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_simcmd.spice_simcmd.strobedelay"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.strobedelay</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-dc-source">Spice DC Source</a></li>
@@ -199,7 +208,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.postlayout"><code class="docutils literal notranslate"><span class="pre">spice_module.postlayout</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.subckt"><code class="docutils literal notranslate"><span class="pre">spice_module.subckt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.subinst"><code class="docutils literal notranslate"><span class="pre">spice_module.subinst</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.subinst_constructor"><code class="docutils literal notranslate"><span class="pre">spice_module.subinst_constructor()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -252,6 +260,12 @@ generate testbenches for the various simulation cases.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.</span></span><span class="sig-name descname"><span class="pre">spice</span></span><a class="reference internal" href="../_modules/spice.html#spice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice" title="Permalink to this definition"></a></dt>
 <dd><p>Adding this class as a superclass enforces the definitions
 for Spice simulations in the subclasses.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="spice.spice.check_output_accuracy">
+<span class="sig-name descname"><span class="pre">check_output_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice.html#spice.check_output_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice.check_output_accuracy" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to check output accuracy</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="spice.spice.connect_spice_inputs">
 <span class="sig-name descname"><span class="pre">connect_spice_inputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice.html#spice.connect_spice_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice.connect_spice_inputs" title="Permalink to this definition"></a></dt>
@@ -350,6 +364,22 @@ the respective <cite>spice_dcsource</cite> objects.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="spice.spice.filter_strobed">
+<span class="sig-name descname"><span class="pre">filter_strobed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ioname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice.html#spice.filter_strobed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice.filter_strobed" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to read in the strobed simulation results. Only for spectre.</p>
+<p>TODO:
+this is because the strobeoutput
+parameter for some reason still outputs
+all the data points, even when it is in mode
+strobeonly
+If solution is found to this later from simulator
+remove this.</p>
+<p>Parameters:</p>
+<p>key: spice_iofle bundle key (name of the io)
+ioname: node name from which date is to be filtered</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="spice.spice.get_buswidth">
 <span class="sig-name descname"><span class="pre">get_buswidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice.html#spice.get_buswidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice.get_buswidth" title="Permalink to this definition"></a></dt>
 <dd><p>Extract buswidth from signal name.</p>
@@ -386,6 +416,12 @@ default) is opened during the simulation for debugging. See
 <dd><p>Dictionary</p>
 <p>Dictionary to store event type output from the simulations. This should
 speed up reading the results.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.is_strobed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_strobed</span></span><a class="headerlink" href="#spice.spice.is_strobed" title="Permalink to this definition"></a></dt>
+<dd><p>Check if simulation was strobed or not</p>
 </dd></dl>
 
 <dl class="py property">
@@ -444,6 +480,13 @@ command line parameter ‘+mt’.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_processes</span></span><a class="headerlink" href="#spice.spice.num_processes" title="Permalink to this definition"></a></dt>
 <dd><p>Integer</p>
 <p>Maximum number of spawned child processes for distributed runs.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.plflag">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plflag</span></span><a class="headerlink" href="#spice.spice.plflag" title="Permalink to this definition"></a></dt>
+<dd><p>Postlayout simulation accuracy/RC reduction flag.
+See: <a class="reference external" href="https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance">https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance</a></p>
 </dd></dl>
 
 <dl class="py property">
@@ -691,6 +734,13 @@ This shouldn’t be set manually.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.strobe_indices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strobe_indices</span></span><a class="headerlink" href="#spice.spice.strobe_indices" title="Permalink to this definition"></a></dt>
+<dd><p>Internally set list of indices corresponding to time,amplitude pairs
+whose time value of is a multiple of the strobeperiod (see spice_simcmd).</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.syntaxdict">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">syntaxdict</span></span><a class="headerlink" href="#spice.spice.syntaxdict" title="Permalink to this definition"></a></dt>
 <dd><p>Dictionary</p>
@@ -923,6 +973,18 @@ type outputs. Default False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spice.spice_iofile.spice_iofile.strobe">
+<span class="sig-name descname"><span class="pre">strobe</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.strobe" title="Permalink to this definition"></a></dt>
+<dd><p>True if the event type IO uses only the strobe filtered values. False if the IO contains
+all of the values simulated values (not consistently strobed). Default False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1475,6 +1537,42 @@ post-processing results in Python.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spice.spice_simcmd.spice_simcmd.strobeperiod">
+<span class="sig-name descname"><span class="pre">strobeperiod</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.strobeperiod" title="Permalink to this definition"></a></dt>
+<dd><p>For Spectre only! Forces simulator to write output data to file at interval defined
+by this parameter. Note that the simulator still outputs points between the sampling
+points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spice.spice_simcmd.spice_simcmd.skipstart">
+<span class="sig-name descname"><span class="pre">skipstart</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.skipstart" title="Permalink to this definition"></a></dt>
+<dd><p>For Spectre only! Delay between start of transient simulation and first strobed output,
+if strobedelay is None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="spice.spice_simcmd.spice_simcmd.strobedelay">
+<span class="sig-name descname"><span class="pre">strobedelay</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.strobedelay" title="Permalink to this definition"></a></dt>
+<dd><p>For Spectre only! Delay between skipstart and the first strobe point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <p class="rubric">Examples</p>
 <p>Initiated in parent as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">spice_simcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sim</span><span class="o">=</span><span class="s1">&#39;tran&#39;</span><span class="p">,</span><span class="n">tprint</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span><span class="n">tstop</span><span class="o">=</span><span class="s1">&#39;10n&#39;</span><span class="p">,</span>
@@ -1839,18 +1937,6 @@ written to the subckt-file.</p>
 <p>String containing the subcircuit instance to be placed in the
 testbench. The instance is parsed from the previously generated
 subckt_* -file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="spice.spice_module.spice_module.subinst_constructor">
-<span class="sig-name descname"><span class="pre">subinst_constructor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/spice_module.html#spice_module.subinst_constructor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_module.spice_module.subinst_constructor" title="Permalink to this definition"></a></dt>
-<dd><p>Method that parses the subcircuit definition and
-constructs a subcircuit instance out of it.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> – subckt : string</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
