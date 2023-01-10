@@ -153,9 +153,9 @@
     <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
-<span class="sd">        String containing the contents of the subckt_* -file. This attribute</span>
-<span class="sd">        parses the source netlist when called, and generates the contents to be</span>
-<span class="sd">        written to the subckt-file.</span>
+<span class="sd">        String containing the contents of the subcircuit definition of the entity.</span>
+<span class="sd">        Extract the definition form the source netlist. the source netlist when accessed. </span>
+<span class="sd">        Can be written to the subckt_file with export_subckt method. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_subckt&#39;</span><span class="p">):</span>
             <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">syntaxdict</span><span class="p">[</span><span class="s2">&quot;subckt&quot;</span><span class="p">]),</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
@@ -195,11 +195,18 @@
                                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Found top-level cell name &quot;</span><span class="si">%s</span><span class="s1">&quot;.&#39;</span> <span class="o">%</span> <span class="n">cellname</span><span class="p">)</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">origcellname</span> <span class="o">=</span> <span class="n">cellname</span>
                             <span class="c1"># First subcircuit not started, finding Calibre xRC written program name</span>
+                            <span class="c1"># What is so special about the calibre generated subcirsuit definition?</span>
                             <span class="k">if</span> <span class="ow">not</span> <span class="n">startfound</span> <span class="ow">and</span> <span class="n">prognamematch</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Post-layout netlist detected (</span><span class="si">%s</span><span class="s1">).&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">:])))</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">postlayout</span> <span class="o">=</span> <span class="kc">True</span>
+                                <span class="c1"># THIS IS THE PROBLEM PART</span>
+                                <span class="c1"># In pre layout, the file is NOT copied as it may contain something else</span>
+                                <span class="c1"># Than the subckt definitions (i.e simulator directives)</span>
+                                <span class="c1"># In post layout it MUST be copied because of what? Slow parsing?</span>
+                                <span class="c1"># I&#39;ll leave it for now. In any case, &#39;subinst&#39; should not parse the file again. </span>
                                 <span class="c1"># Parsing the post-layout netlist line by line is way too slow</span>
                                 <span class="c1"># Copying the file and editing it seems better</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">postlayout</span> <span class="o">=</span> <span class="kc">True</span>
+
                                 <span class="c1"># Right now this just ignores everything and overwrites the subcircuit file</span>
                                 <span class="c1"># TODO: think about this</span>
                                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_subcktfile</span><span class="p">):</span>
@@ -207,19 +214,25 @@
                                     <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_subcktfile</span><span class="p">)</span>
                                 <span class="k">else</span><span class="p">:</span>
                                     <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_subcktfile</span><span class="p">)</span>
+                                <span class="c1"># Edits the postlayout netlist file in place</span>
                                 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileinput</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_subcktfile</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
                                     <span class="n">startfound</span><span class="o">=</span><span class="kc">False</span>
                                     <span class="n">endfound</span><span class="o">=</span><span class="kc">False</span>
                                     <span class="k">if</span> <span class="ow">not</span> <span class="n">startfound</span> <span class="ow">and</span> <span class="n">startmatch</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                                         <span class="n">startfound</span><span class="o">=</span><span class="kc">True</span>
                                         <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                                        <span class="c1"># There has been no match for cellname.</span>
                                         <span class="k">if</span> <span class="n">cellname</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                                             <span class="n">cellname</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                                        <span class="c1"># If the cellname has been set above, it is set to slef.parent.name</span>
+                                        <span class="c1"># Are they different for some reason?</span>
                                         <span class="k">if</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">cellname</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
                                             <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span>
                                             <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                    <span class="c1"># self._subckt contains the subcircuit definition.</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">_subckt</span> <span class="o">+=</span> <span class="n">line</span> 
                                     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                                <span class="c1">#Why would this happen?</span>
                                 <span class="k">if</span> <span class="n">cellname</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Renaming design cell </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cellname</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
                                 <span class="c1"># Notice the return here</span>
@@ -230,6 +243,8 @@
                                 <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
                                 <span class="c1"># Either it&#39;s a postlayout netlist, or the cell name was not defined</span>
                                 <span class="c1"># in the header -&gt; assuming first subcircuit is top-level circuit</span>
+                                <span class="c1"># This is confusing. Why we need to make this assumption. The top-level</span>
+                                <span class="c1"># Circuit IS the name of the entity.</span>
                                 <span class="k">if</span> <span class="n">cellname</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                                     <span class="n">cellname</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Renaming design cell </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cellname</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
@@ -282,16 +297,17 @@
         <span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        String containing the subcircuit instance to be placed in the</span>
-<span class="sd">        testbench. The instance is parsed from the previously generated</span>
-<span class="sd">        subckt_* -file.</span>
+<span class="sd">        testbench. Parsed from the subckt property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_subinst&#39;</span><span class="p">):</span>
                 <span class="n">subckt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subckt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
-                    <span class="c1">#This means that _subcktfile has already been written</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_subcktfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
-                      <span class="n">subckt</span><span class="o">=</span><span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+                <span class="c1">#if self.postlayout:</span>
+                <span class="c1">#    #This means that _subcktfile has already been written</span>
+                <span class="c1">#    # However, the self._subckt has been parsed from there already. </span>
+                <span class="c1">#    with open(self._subcktfile) as infile:</span>
+                <span class="c1">#      # Here we parse the copied subcircuit file again? Makes no sense at all. </span>
+                <span class="c1">#      subckt=infile.readlines()</span>
                 <span class="n">startmatch</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">syntaxdict</span><span class="p">[</span><span class="s2">&quot;subckt&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
                         <span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
 
@@ -305,11 +321,11 @@
                     <span class="n">endfound</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="n">lastline</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">subckt</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;spectre&#39;</span><span class="p">:</span>
-                                <span class="c1"># Does this actually doe something?</span>
-                                <span class="c1"># Replaces newlines on line with space</span>
-                                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="c1">#if self.postlayout:</span>
+                        <span class="c1">#    if self.parent.model == &#39;spectre&#39;:</span>
+                        <span class="c1">#        # Does this actually doe something?</span>
+                        <span class="c1">#        # Replaces newlines on line with space</span>
+                        <span class="c1">#        line = line.replace(&#39;\n&#39;,&#39;&#39;)</span>
 
                         <span class="k">if</span> <span class="n">startmatch</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                             <span class="n">startfound</span> <span class="o">=</span> <span class="kc">True</span>
@@ -362,7 +378,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while generating subcircuit instance.&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
-
     <span class="nd">@subinst</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">subinst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_subinst</span><span class="o">=</span><span class="n">value</span>

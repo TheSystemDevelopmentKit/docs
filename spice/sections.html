@@ -1925,9 +1925,9 @@ attribute is defined.</p>
 <dt class="sig sig-object py" id="spice.spice_module.spice_module.subckt">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subckt</span></span><a class="headerlink" href="#spice.spice_module.spice_module.subckt" title="Permalink to this definition"></a></dt>
 <dd><p>String</p>
-<p>String containing the contents of the subckt_* -file. This attribute
-parses the source netlist when called, and generates the contents to be
-written to the subckt-file.</p>
+<p>String containing the contents of the subcircuit definition of the entity.
+Extract the definition form the source netlist. the source netlist when accessed.
+Can be written to the subckt_file with export_subckt method.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1935,8 +1935,7 @@ written to the subckt-file.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subinst</span></span><a class="headerlink" href="#spice.spice_module.spice_module.subinst" title="Permalink to this definition"></a></dt>
 <dd><p>String</p>
 <p>String containing the subcircuit instance to be placed in the
-testbench. The instance is parsed from the previously generated
-subckt_* -file.</p>
+testbench. Parsed from the subckt property</p>
 </dd></dl>
 
 </dd></dl>
