@@ -748,6 +748,30 @@
             <span class="c1"># passed to all simulators)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Simulator </span><span class="si">%s</span><span class="s1"> supports only postlayout flag: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
             
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">postlayout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Boolean</span>
+<span class="sd">        </span>
+<span class="sd">        Enables post-layout optimizations in the simulator command options. </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_postlayout&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dspf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Setting postlayout to True due to given dspf-files&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> 
+                               <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;In release v1.9, automatic postlayout simulation detection from netlist has been removed. This warning will be removed in comming releases.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> 
+                               <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Postlayout attribute accessed before defined. Defaulting to False.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout</span>
+    <span class="nd">@postlayout</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">postlayout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@postlayout</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">postlayout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout</span><span class="o">=</span><span class="kc">None</span>
 
 
     <span class="nd">@property</span>
@@ -763,7 +787,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Enabling multithreading </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">nprocflag</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">nprocflag</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
                 <span class="n">plflag</span> <span class="o">=</span> <span class="s1">&#39;+postlayout=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plflag</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Enabling post-layout optimization </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">plflag</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1343,7 +1367,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while extracting DC operating points.&#39;</span><span class="p">)</span></div>
-        
+       
 <div class="viewcode-block" id="spice.run_spice"><a class="viewcode-back" href="../spice/sections.html#spice.spice.run_spice">[docs]</a>    <span class="k">def</span> <span class="nf">run_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> 
@@ -1368,7 +1392,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">simcmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connect_spice_inputs</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">generate_contents</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">export_subckt</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dspf</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">export_subckts</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write_spice_inputs</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_spice</span><span class="p">:</span>
