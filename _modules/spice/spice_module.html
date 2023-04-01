@@ -141,12 +141,13 @@
 <span class="sd">        Custom name of the subcircuit to look from from the netlist file during parsing for </span>
 <span class="sd">        &#39;subckt&#39; property. Enables using compatible (in term sof IOs paremeters) netlists defined </span>
 <span class="sd">        for designs of different name.</span>
-
+<span class="sd"> </span>
 <span class="sd">        Example:</span>
-<span class="sd">            Set this parameter before execution </span>
-<span class="sd">            `self.tb.dut.custom_subckt_neme = &#39;some_name&#39;</span>
+<span class="sd">            Most common use case of module is a dut in a testbench. There you </span>
+<span class="sd">            can set this parameter before execution as</span>
+<span class="sd">            ``self.spice_tb.dut.custom_subckt_name = &#39;some_name&#39;</span>
 <span class="sd">             self.run_spice()</span>
-<span class="sd">            `</span>
+<span class="sd">            ``</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_custom_subckt_name&#39;</span><span class="p">):</span>

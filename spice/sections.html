@@ -1905,12 +1905,13 @@ the spice_testbench module.</p>
 ‘subckt’ property. Enables using compatible (in term sof IOs paremeters) netlists defined
 for designs of different name.</p>
 <p class="rubric">Example</p>
-<p>Set this parameter before execution
-<a href="#id1"><span class="problematic" id="id2">`</span></a>self.tb.dut.custom_subckt_neme = ‘some_name’</p>
+<p>Most common use case of module is a dut in a testbench. There you
+can set this parameter before execution as
+<a href="#id1"><span class="problematic" id="id2">``</span></a>self.spice_tb.dut.custom_subckt_name = ‘some_name’</p>
 <blockquote>
 <div><p>self.run_spice()</p>
 </div></blockquote>
-<p><a href="#id3"><span class="problematic" id="id4">`</span></a></p>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a></p>
 </dd></dl>
 
 <dl class="py method">
