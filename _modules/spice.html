@@ -145,9 +145,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">si_prefix_mult</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Dictionary</span>
-<span class="sd">        </span>
-<span class="sd">        Dictionary mapping SI-prefixes to multipliers.</span>
+        <span class="sd">&quot;&quot;&quot; Dict : Dictionary mapping SI-prefixes to multipliers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_si_prefix_mult&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_si_prefix_mult</span>
@@ -173,6 +171,10 @@
         <span class="sd">&quot;&quot;&quot;The simulator specific operation is defined with an instance of </span>
 <span class="sd">        simulator specific class. Properties and methods return values from that class.</span>
 
+<span class="sd">        :type: ngspice</span>
+<span class="sd">        :type: eldo</span>
+<span class="sd">        :type: spectre</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_spice_simulator&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">:</span>
@@ -186,9 +188,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Dictionary</span>
-<span class="sd">        </span>
-<span class="sd">        Internally used dictionary for common syntax conversions between</span>
+        <span class="sd">&quot;&quot;&quot;dict : Internally used dictionary for common syntax conversions between</span>
 <span class="sd">        Spectre, Eldo, and Ngspice.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_syntaxdict&#39;</span><span class="p">):</span>
@@ -200,10 +200,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preserve_spicefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
-
-<span class="sd">        If True, do not delete generated Spice files (testbench, subcircuit,</span>
+        <span class="sd">&quot;&quot;&quot;bool : If True, do not delete generated Spice files (testbench, subcircuit,</span>
 <span class="sd">        etc.) after simulations.  Useful for debugging.</span>
+
+<span class="sd">            (Default : False )</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_preserve_spicefiles&#39;</span><span class="p">):</span>
@@ -481,9 +481,8 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">postlayout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Boolean</span>
-<span class="sd">        </span>
-<span class="sd">        Enables post-layout optimizations in the simulator command options. </span>
+        <span class="sd">&quot;&quot;&quot;bool : Enables post-layout optimizations in the simulator command options. </span>
+<span class="sd">            (Default : False )</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_postlayout&#39;</span><span class="p">):</span>
@@ -605,23 +604,25 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicemisc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot; List of str</span>
-
-<span class="sd">        List of manual commands to be pasted to the testbench. The strings are</span>
+        <span class="sd">&quot;&quot;&quot; [str] : List of manual commands to be pasted to the testbench. The strings are</span>
 <span class="sd">        pasted to their own lines (no linebreaks needed), and the syntax is</span>
 <span class="sd">        unchanged.</span>
 
 <span class="sd">        Example</span>
 <span class="sd">        -------</span>
 <span class="sd">        Setting initial voltages from testbench (Eldo)::</span>
+<span class="sd">        </span>
 <span class="sd">            for i in range(nodes):</span>
+
 <span class="sd">                self.spicemisc.append(&#39;.ic NODE&lt;%d&gt; 0&#39; % i)</span>
 
 <span class="sd">        The same example for Spectre::</span>
+
 <span class="sd">            self.spicemisc.append(&#39;simulator lang=spice&#39;)</span>
 <span class="sd">            for i in range(nodes):</span>
 <span class="sd">                self.spicemisc.append(&#39;.ic NODE&lt;%d&gt; 0&#39; % i)</span>
 <span class="sd">            self.spicemisc.append(&#39;simulator lang=spectre&#39;)</span>
+<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_spicemisc&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_spicemisc</span> <span class="o">=</span> <span class="p">[]</span>

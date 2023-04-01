@@ -136,8 +136,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">testbench_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot;The simulator specific operation is defined with an instance of </span>
+        <span class="sd">&quot;&quot;&quot; The simulator specific operation is defined with an instance of </span>
 <span class="sd">        simulator specific class. Properties and methods return values from that class.</span>
+
+<span class="sd">        :type: ngspice_testbench </span>
+<span class="sd">        :type: eldo_testbench</span>
+<span class="sd">        :type: spectre_testbench</span>
+
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_testbench_simulator&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">:</span>
@@ -150,7 +156,10 @@
        
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Design under test : spice_module</span>
+        <span class="sd">&quot;&quot;&quot; Design under test</span>
+<span class="sd">        </span>
+<span class="sd">        :type: spice_module</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dut&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dut</span> <span class="o">=</span> <span class="n">spice_module</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>

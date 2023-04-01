@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spice.eldo.eldo &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to TheSyDeKick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ads/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../spice.html">spice</a></li>
+      <li class="breadcrumb-item active">spice.eldo.eldo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for spice.eldo.eldo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">====</span>
+<span class="sd">Eldo</span>
+<span class="sd">====</span>
+<span class="sd">Eldo simulation interface package for TheSyDeKick.</span>
+
+<span class="sd">Initially written by Okko Järvinen, 2019</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="eldo"><a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo">[docs]</a><span class="k">class</span> <span class="nc">eldo</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class is used as instance in *spice_simulatormodule* property of </span>
+<span class="sd">    spice class. Contains simulator dependent definitions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent: object, None (mandatory to define). TheSyDeKick parent entity object for this simulator class.</span>
+
+<span class="sd">    **kwargs :</span>
+<span class="sd">       None</span>
+
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of simulator module not given&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Syntaxdict is obsoleted. Access properties directly&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_syntaxdict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cmdfile_ext&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdfile_ext</span><span class="p">,</span>
+                <span class="s2">&quot;resultfile_ext&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">resultfile_ext</span><span class="p">,</span>
+                <span class="s2">&quot;commentchar&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">commentchar</span><span class="p">,</span>
+                <span class="s2">&quot;commentline&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">commentline</span><span class="p">,</span>
+                <span class="s2">&quot;nprocflag&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nprocflag</span><span class="p">,</span>
+                <span class="s2">&quot;simulatorcmd&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulatorcmd</span><span class="p">,</span> 
+                <span class="s2">&quot;dcsource_declaration&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcsource_declaration</span><span class="p">,</span>
+                <span class="s2">&quot;parameter&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">,</span>
+                <span class="s2">&quot;option&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">option</span><span class="p">,</span>
+                <span class="s2">&quot;include&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">include</span><span class="p">,</span>
+                <span class="s2">&quot;dspfinclude&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dspfinclude</span><span class="p">,</span>
+                <span class="s2">&quot;subckt&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subckt</span><span class="p">,</span>
+                <span class="s2">&quot;lastline&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastline</span><span class="p">,</span>
+                <span class="s2">&quot;eventoutdelim&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">eventoutdelim</span><span class="p">,</span> <span class="c1"># Two spaces</span>
+                <span class="s2">&quot;csvskip&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">csvskip</span>
+                <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_syntaxdict</span>
+    <span class="nd">@syntaxdict</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_syntaxdict</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cmdfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extension of the command file : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.cir&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">resultfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extension of the result file : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.wdb&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">commentchar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Comment character of the simulator : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;*&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">commentline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Comment line for the simulator : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;***********************</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nprocflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String for defining multithread execution : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;-use_proc &#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">simulatorcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simulator execution command : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;eldo -64b&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dcsource_declaration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;DC source declaration : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Netlist parameter definition string : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.param&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Netlist option definition string : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.option&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">include</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Netlist include string : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.include&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dspfinclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Netlist dspf-file include string : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.include&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subcircuit include string : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.subckt&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lastline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Last line of the simulator command file : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.end&#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">eventoutdelim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delimiter for the events : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">csvskip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Needs documentation. Lines skipped in result file : int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Postlayout simulation accuracy/RC reduction flag.</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Postlayout flag unsupported for </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plflag&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span>
+
+    <span class="nd">@plflag</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Postlayout flag unsupported for Eldo&#39;</span><span class="p">)</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Simulation command string to be executed on the command line.</span>
+<span class="sd">        Automatically generated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_spicecmd&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">nproc</span><span class="p">:</span>
+                <span class="n">nprocflag</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nprocflag</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">nproc</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Enabling multithreading </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">nprocflag</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nprocflag</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">postlayout</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Post-layout optimization not suported for Eldo&#39;</span><span class="p">)</span>
+
+            <span class="n">spicesimcmd</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulatorcmd</span><span class="p">,</span> <span class="n">nprocflag</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_spicecmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spice_submission</span><span class="o">+</span><span class="n">spicesimcmd</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicetbsrc</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicecmd</span>
+
+<div class="viewcode-block" id="eldo.run_plotprogram"><a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.run_plotprogram">[docs]</a>    <span class="k">def</span> <span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
+
+<span class="sd">        The plotting program command can be set with &#39;plotprogram&#39;.</span>
+<span class="sd">        Tested for spectre and eldo.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Wait for database to appear.</span>
+        <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">tries</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spicedbpath</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">tries</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogcmd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Running external command: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cmd</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> returned with exit status </span><span class="si">%d</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">,</span> <span class="n">ret</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while launcing </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

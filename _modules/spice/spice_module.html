@@ -114,9 +114,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+        <span class="sd">&quot;&quot;&quot; Filepath to the entity&#39;s spice netlist source file </span>
+<span class="sd">        (i.e. &#39;./spice/entityname.scs&#39;).  </span>
 <span class="sd">        </span>
-<span class="sd">        Filepath to the entity&#39;s spice netlist source file (i.e. &#39;./spice/entityname.scs&#39;).</span>
+<span class="sd">        :type: str</span>
+<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_file&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">=</span><span class="kc">None</span>
@@ -127,27 +129,29 @@
     
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+        <span class="sd">&quot;&quot;&quot;Entity name</span>
 <span class="sd">        </span>
-<span class="sd">        Entity name.&quot;&quot;&quot;</span>
+<span class="sd">        :type: str</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">custom_subckt_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
-
-<span class="sd">        Custom name of the subcircuit to look from from the netlist file during parsing for </span>
+        <span class="sd">&quot;&quot;&quot;Custom name of the subcircuit to look from from the netlist file during parsing for </span>
 <span class="sd">        &#39;subckt&#39; property. Enables using compatible (in term sof IOs paremeters) netlists defined </span>
 <span class="sd">        for designs of different name.</span>
+
+<span class="sd">        :type: str</span>
 <span class="sd"> </span>
 <span class="sd">        Example:</span>
 <span class="sd">            Most common use case of module is a dut in a testbench. There you </span>
-<span class="sd">            can set this parameter before execution as</span>
-<span class="sd">            ``self.spice_tb.dut.custom_subckt_name = &#39;some_name&#39;</span>
-<span class="sd">             self.run_spice()</span>
-<span class="sd">            ``</span>
+<span class="sd">            can set this parameter before execution as::</span>
+
+<span class="sd">                self.spice_tb.dut.custom_subckt_name = &#39;some_name&#39;</span>
+<span class="sd">                self.run_spice()</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_custom_subckt_name&#39;</span><span class="p">):</span>
@@ -160,11 +164,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
-<span class="sd">        </span>
-<span class="sd">        String containing the contents of the subcircuit definition file of the entity.</span>
+        <span class="sd">&quot;&quot;&quot;The contents of the subcircuit definition file of the entity.</span>
 <span class="sd">        Extract the definitions form the source netlist. The source netlist when accessed. </span>
 <span class="sd">        Can be written to the subckt_file with export_subckt method. </span>
+
+<span class="sd">        :type: str</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_subckt&#39;</span><span class="p">):</span>
@@ -197,10 +201,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+        <span class="sd">&quot;&quot;&quot;The subcircuit instance to be placed in the testbench. Parsed from</span>
+<span class="sd">        the subckt property</span>
+
+<span class="sd">        :type: str</span>
 <span class="sd">        </span>
-<span class="sd">        String containing the subcircuit instance to be placed in the</span>
-<span class="sd">        testbench. Parsed from the subckt property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_instance&#39;</span><span class="p">):</span>
