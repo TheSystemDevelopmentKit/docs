@@ -95,6 +95,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicesubcktsrc"><code class="docutils literal notranslate"><span class="pre">spice.spicesubcktsrc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.spicetbsrc"><code class="docutils literal notranslate"><span class="pre">spice.spicetbsrc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.syntaxdict"><code class="docutils literal notranslate"><span class="pre">spice.syntaxdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.tb"><code class="docutils literal notranslate"><span class="pre">spice.tb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.write_spice_inputs"><code class="docutils literal notranslate"><span class="pre">spice.write_spice_inputs()</span></code></a></li>
 </ul>
 </li>
@@ -202,6 +203,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-module">Spice Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spice.spice_module.spice_module"><code class="docutils literal notranslate"><span class="pre">spice_module</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.custom_subckt_name"><code class="docutils literal notranslate"><span class="pre">spice_module.custom_subckt_name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.export_subckts"><code class="docutils literal notranslate"><span class="pre">spice_module.export_subckts()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.file"><code class="docutils literal notranslate"><span class="pre">spice_module.file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice_module.spice_module.instance"><code class="docutils literal notranslate"><span class="pre">spice_module.instance</span></code></a></li>
@@ -718,6 +720,17 @@ This shouldn’t be set manually.</p>
 <dd><p>Dictionary</p>
 <p>Internally used dictionary for common syntax conversions between
 Spectre, Eldo, and Ngspice.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.tb">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tb</span></span><a class="headerlink" href="#spice.spice.tb" title="Permalink to this definition"></a></dt>
+<dd><p>Testbench instance</p>
+<p>You can set the attributes of the testbench adn dut below it before you execute run_spice.
+if</p>
+<p class="rubric">Example</p>
+<p>self.tb.dut.custom_subckt_name=’custom_inverter’
+self.run_spice()</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1884,6 +1897,22 @@ simulator specific class. Properties and methods return values from that class.<
 <dd><p>This class parses source netlist for subcircuits and handles the generation
 of a separate pruned subckt_* -file. This class is internally utilized by
 the spice_testbench module.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice_module.spice_module.custom_subckt_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">custom_subckt_name</span></span><a class="headerlink" href="#spice.spice_module.spice_module.custom_subckt_name" title="Permalink to this definition"></a></dt>
+<dd><p>String</p>
+<p>Custom name of the subcircuit to look from from the netlist file during parsing for
+‘subckt’ property. Enables using compatible (in term sof IOs paremeters) netlists defined
+for designs of different name.</p>
+<p class="rubric">Example</p>
+<p>Set this parameter before execution
+<a href="#id1"><span class="problematic" id="id2">`</span></a>self.tb.dut.custom_subckt_neme = ‘some_name’</p>
+<blockquote>
+<div><p>self.run_spice()</p>
+</div></blockquote>
+<p><a href="#id3"><span class="problematic" id="id4">`</span></a></p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="spice.spice_module.spice_module.export_subckts">
 <span class="sig-name descname"><span class="pre">export_subckts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/spice_module.html#spice_module.export_subckts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_module.spice_module.export_subckts" title="Permalink to this definition"></a></dt>

@@ -135,6 +135,29 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">custom_subckt_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String</span>
+
+<span class="sd">        Custom name of the subcircuit to look from from the netlist file during parsing for </span>
+<span class="sd">        &#39;subckt&#39; property. Enables using compatible (in term sof IOs paremeters) netlists defined </span>
+<span class="sd">        for designs of different name.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            Set this parameter before execution </span>
+<span class="sd">            `self.tb.dut.custom_subckt_neme = &#39;some_name&#39;</span>
+<span class="sd">             self.run_spice()</span>
+<span class="sd">            `</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_custom_subckt_name&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_custom_subckt_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_subckt_name</span>
+
+    <span class="nd">@custom_subckt_name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">custom_subckt_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_subckt_name</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
@@ -149,7 +172,15 @@
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Parsing source netlist </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_subckt</span> <span class="o">+=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;sed -n </span><span class="se">\&#39;</span><span class="s1">/\.*[sS][uU][bB][cC][kK][tT]\s\s*/,/\.*[eE][nN][dD][sS]/p</span><span class="se">\&#39;</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_subckt_name</span><span class="p">:</span>
+                        <span class="c1">#Replace subcircuit_custom_name with parent.name</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_subckt</span> <span class="o">+=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
+                                <span class="s1">&#39;sed -n </span><span class="se">\&#39;</span><span class="s1">/\.*[sS][uU][bB][cC][kK][tT]\s\s*/,/\.*[eE][nN][dD][sS]/p</span><span class="se">\&#39;</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> | sed </span><span class="se">\&#39;</span><span class="s1">s/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/g</span><span class="se">\&#39;</span><span class="s1">&#39;</span> 
+                                <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_subckt_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_subckt</span> <span class="o">+=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
+                                <span class="s1">&#39;sed -n </span><span class="se">\&#39;</span><span class="s1">/\.*[sS][uU][bB][cC][kK][tT]\s\s*/,/\.*[eE][nN][dD][sS]/p</span><span class="se">\&#39;</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> 
+                                <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while parsing </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>

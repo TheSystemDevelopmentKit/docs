@@ -1072,12 +1072,27 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while extracting DC operating points.&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Testbench instance</span>
+
+<span class="sd">        You can set the attributes of the testbench adn dut below it before you execute run_spice.</span>
+<span class="sd">        if </span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            self.tb.dut.custom_subckt_name=&#39;custom_inverter&#39;</span>
+<span class="sd">            self.run_spice()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_tb&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tb</span> <span class="o">=</span> <span class="n">stb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tb</span>
+
 <div class="viewcode-block" id="spice.run_spice"><a class="viewcode-back" href="../spice/sections.html#spice.spice.run_spice">[docs]</a>    <span class="k">def</span> <span class="nf">run_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> 
             <span class="c1"># Loading a previously stored state</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_output_file</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tb</span> <span class="o">=</span> <span class="n">stb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">dcsources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcsource_bundle</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">simcmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span>
@@ -1093,7 +1108,6 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_read_state</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Normal execution of full simulation</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tb</span> <span class="o">=</span> <span class="n">stb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">dcsources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcsource_bundle</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">simcmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span>
