@@ -418,36 +418,47 @@ entity IOS Bundle items.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.dcsource_bundle">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcsource_bundle</span></span><a class="headerlink" href="#spice.spice.dcsource_bundle" title="Permalink to this definition"></a></dt>
-<dd><p>Bundle</p>
-<p>A thesdk.Bundle containing <cite>spice_dcsource</cite> objects. The <cite>spice_dcsource</cite>
+<dd><p>A thesdk.Bundle containing <cite>spice_dcsource</cite> objects. The <cite>spice_dcsource</cite>
 objects are automatically added to this Bundle, nothing should be
 manually added.</p>
 <p>This is to automate biasing and operation conditions of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Bundle</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="spice.spice.delete_spicesimpath">
 <span class="sig-name descname"><span class="pre">delete_spicesimpath</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice.html#spice.delete_spicesimpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice.delete_spicesimpath" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Method to clean up files from spicesimpath.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.distributed_run">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distributed_run</span></span><a class="headerlink" href="#spice.spice.distributed_run" title="Permalink to this definition"></a></dt>
-<dd><p>True | False (default)</p>
-<p>If True, distributes applicable simulations (currently DC sweep
+<dd><p>If True, distributes applicable simulations (currently DC sweep
 supported) into the LSF cluster. The number of subprocesses launched is
 set by self.num_processes.</p>
+<blockquote>
+<div><p>(Default False)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.dspf">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dspf</span></span><a class="headerlink" href="#spice.spice.dspf" title="Permalink to this definition"></a></dt>
-<dd><p>List of str</p>
-<p>List containing filenames for DSPF-files to be included for post-layout
+<dd><p>List containing filenames for DSPF-files to be included for post-layout
 simulations. The names given in this list are matched to dspf-files in
 ‘./spice/’ -directory. A postfix ‘.pex.dspf’ is automatically appended
 to the given names (this will probably change later).</p>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">dspf</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inv_v2&#39;</span><span class="p">,</span><span class="s1">&#39;switch_v3&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -456,17 +467,27 @@ to the given names (this will probably change later).</p>
 dspf-file contains definition matching the original design name of the
 top-level netlist, it gets also renamed to match the module name
 (dspf-file for top-level instance is possible).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.errpreset">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">errpreset</span></span><a class="headerlink" href="#spice.spice.errpreset" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Global accuracy parameter for Spectre simulations. Options include
+<dd><p>Global accuracy parameter for Spectre simulations. Options include
 ‘liberal’, ‘moderate’ and ‘conservative’, in order of rising accuracy.</p>
-<blockquote>
-<div><p>self.spice_simulator.errpreset=’conservative’</p>
-</div></blockquote>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">errpreset</span><span class="o">=</span><span class="s1">&#39;conservative&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -498,48 +519,73 @@ the respective <cite>spice_dcsource</cite> objects.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.extracts">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extracts</span></span><a class="headerlink" href="#spice.spice.extracts" title="Permalink to this definition"></a></dt>
-<dd><p>Bundle</p>
-<p>A thesdk.Bundle containing extracted quantities.</p>
+<dd><p>A thesdk.Bundle containing extracted quantities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Bundle</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.interactive_spice">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interactive_spice</span></span><a class="headerlink" href="#spice.spice.interactive_spice" title="Permalink to this definition"></a></dt>
-<dd><p>True | False (default)</p>
-<p>Launch simulator in interactive mode. A waveform viewer (ezwave by
+<dd><p>Launch simulator in interactive mode. A waveform viewer (ezwave by
 default) is opened during the simulation for debugging. See
 <cite>plotprogram</cite> for selecting waveform viewer program.</p>
+<blockquote>
+<div><p>( Default : False )</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.iofile_eventdict">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofile_eventdict</span></span><a class="headerlink" href="#spice.spice.iofile_eventdict" title="Permalink to this definition"></a></dt>
-<dd><p>Dictionary</p>
-<p>Dictionary to store event type output from the simulations. This should
+<dd><p>Dictionary to store event type output from the simulations. This should
 speed up reading the results.</p>
 <p>NOTE: Eldo seems to force output names to uppercase, let’s
 uppercase everything here to avoid key mismatches. (This should be changed).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.load_output_file">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_output_file</span></span><a class="headerlink" href="#spice.spice.load_output_file" title="Permalink to this definition"></a></dt>
-<dd><p>True | False (default)</p>
-<p>Whether to load the outputs from simulator output file.
+<dd><p>Whether to load the outputs from simulator output file.
 This only works if the file exists in the state directory, i.e.
 the simulator was run with save_output_file=True.
 WARNING: This will read the IOS from the output file, and REWRITE
 THE ENTITY STATE on disk.</p>
+<blockquote>
+<div><p>( Default : False )</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.load_state">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state</span></span><a class="headerlink" href="#spice.spice.load_state" title="Permalink to this definition"></a></dt>
-<dd><p>String (default ‘’)</p>
-<p>Feature for loading results of previous simulation. The Spice
+<dd><p>Feature for loading results of previous simulation. The Spice
 simulation is not re-executed, but the outputs will be read from
 existing files. The string value should be the <cite>runname</cite> of the desired
 simulation.</p>
+<blockquote>
+<div><p>( Default ‘’ )</p>
+</div></blockquote>
+<p class="rubric">Example</p>
 <p>Loading the most recent result automatically:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">=</span> <span class="s1">&#39;last&#39;</span>
 <span class="c1"># or</span>
@@ -554,47 +600,73 @@ simulation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">=</span> <span class="s1">&#39;this_does_not_exist&#39;</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spice.spice.name" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Name of the module.</p>
+<dd><p>Name of the module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.nproc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nproc</span></span><a class="headerlink" href="#spice.spice.nproc" title="Permalink to this definition"></a></dt>
-<dd><p>Integer</p>
-<p>Requested maximum number of threads for multithreaded simulations.</p>
+<dd><p>Requested maximum number of threads for multithreaded simulations.</p>
 <p>Eldo : maps to command line parameter ‘-nproc’</p>
-<p>Spectre :  maps to command line parameter ‘+mt’.
-Ngspice :  maps to ‘set num_threads=’ line in testbench.</p>
+<p>Spectre :  maps to command line parameter ‘+mt’.</p>
+<p>Ngspice :  maps to ‘set num_threads=’ line in testbench.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.num_processes">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_processes</span></span><a class="headerlink" href="#spice.spice.num_processes" title="Permalink to this definition"></a></dt>
-<dd><p>Integer</p>
-<p>Maximum number of spawned child processes for distributed runs.</p>
+<dd><p>Maximum number of spawned child processes for distributed runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.plflag">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plflag</span></span><a class="headerlink" href="#spice.spice.plflag" title="Permalink to this definition"></a></dt>
 <dd><p>Postlayout simulation accuracy/RC reduction flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.plotlist">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plotlist</span></span><a class="headerlink" href="#spice.spice.plotlist" title="Permalink to this definition"></a></dt>
-<dd><p>List of str</p>
-<p>List of net names to be saved in the waveform database.</p>
+<dd><p>List of net names to be saved in the waveform database.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Obsolete! Moved to <cite>spice_simcmd</cite> as a keyword argument.</p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>[ <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a> ]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -611,9 +683,13 @@ Ngspice :  maps to ‘set num_threads=’ line in testbench.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.plotprogram">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plotprogram</span></span><a class="headerlink" href="#spice.spice.plotprogram" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Sets the program to be used for visualizing waveform databases.
+<dd><p>Sets the program to be used for visualizing waveform databases.
 Options are ezwave (default) or viva.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -674,18 +750,32 @@ Tested for spectre and eldo.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.save_database">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_database</span></span><a class="headerlink" href="#spice.spice.save_database" title="Permalink to this definition"></a></dt>
-<dd><p>True | False (default)</p>
-<p>Whether to save the waveform database (.wdb-file for eldo, raw-database
+<dd><p>Whether to save the waveform database (.wdb-file for eldo, raw-database
 for spectre), when save_state=True.</p>
+<blockquote>
+<div><p>( Default : False)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.save_output_file">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_output_file</span></span><a class="headerlink" href="#spice.spice.save_output_file" title="Permalink to this definition"></a></dt>
-<dd><p>True | False (default)</p>
-<p>If True and save_state is True, copy the output file of simulator
+<dd><p>If True and save_state is True, copy the output file of simulator
 to entity statedir. Useful for scavenging results if simulator exited
 but state was not written to disk for some reason.</p>
+<blockquote>
+<div><p>( Default : False)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -694,7 +784,7 @@ but state was not written to disk for some reason.</p>
 <dd><p>Dictionary mapping SI-prefixes to multipliers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -702,10 +792,14 @@ but state was not written to disk for some reason.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.simcmd_bundle">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simcmd_bundle</span></span><a class="headerlink" href="#spice.spice.simcmd_bundle" title="Permalink to this definition"></a></dt>
-<dd><p>Bundle</p>
-<p>A thesdk.Bundle containing <cite>spice_simcmd</cite> objects. The <cite>spice_simcmd</cite>
+<dd><p>A thesdk.Bundle containing <cite>spice_simcmd</cite> objects. The <cite>spice_simcmd</cite>
 objects are automatically added to this Bundle, nothing should be
 manually added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Bundle</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -729,54 +823,77 @@ simulator specific class. Properties and methods return values from that class.<
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spice_submission">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spice_submission</span></span><a class="headerlink" href="#spice.spice.spice_submission" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Defines spice submission prefix from thesdk.GLOBALS[‘LSFSUBMISSION’]
+<dd><p>Defines spice submission prefix from thesdk.GLOBALS[‘LSFSUBMISSION’]
 and thesdk.GLOBALS[‘LSFINTERACTIVE’] for LSF submissions.</p>
 <p>Usually something like ‘bsub -K’ or ‘bsub -I’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spice_tb">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spice_tb</span></span><a class="headerlink" href="#spice.spice.spice_tb" title="Permalink to this definition"></a></dt>
-<dd><p>Testbench instance</p>
-<p>You can set the attributes of the testbench and dut below it before you execute run_spice.
+<dd><p>Testbench instance. You can set the attributes of the testbench and dut below it before you execute run_spice.
 if</p>
 <p class="rubric">Example</p>
-<p>self.spice_tb.dut.custom_subckt_name=’custom_inverter’
+<dl class="simple">
+<dt>::</dt><dd><p>self.spice_tb.dut.custom_subckt_name=’custom_inverter’
 self.run_spice()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#spice.spice_module.spice_module" title="spice.spice_module.spice_module">spice_module</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicecmd">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicecmd</span></span><a class="headerlink" href="#spice.spice.spicecmd" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Simulation command string to be executed on the command line.
+<dd><p>Simulation command string to be executed on the command line.
 Automatically generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicecorner">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicecorner</span></span><a class="headerlink" href="#spice.spice.spicecorner" title="Permalink to this definition"></a></dt>
-<dd><p>Dictionary</p>
-<p>Feature for specifying the ‘section’ of the model library file and
+<dd><p>Feature for specifying the ‘section’ of the model library file and
 simulation temperature. The path to model libraries should be set in
 TheSDK.config as either ELDOLIBFILE, SPECTRELIBFILE or NGSPICELIBFILE
 variable.</p>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">spicecorner</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;temp&#39;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
         <span class="s1">&#39;corner&#39;</span><span class="p">:</span> <span class="s1">&#39;top_tt&#39;</span>
         <span class="p">}</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicedbpath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicedbpath</span></span><a class="headerlink" href="#spice.spice.spicedbpath" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Path to output waveform database. (&lt;spicesimpath&gt;/tb_&lt;entityname&gt;.&lt;resultfile_ext&gt;)
+<dd><p>Path to output waveform database. (&lt;spicesimpath&gt;/tb_&lt;entityname&gt;.&lt;resultfile_ext&gt;)
 (For now only for spectre. HOW? should work for Eldo too)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -809,12 +926,11 @@ unchanged.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spiceoptions">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spiceoptions</span></span><a class="headerlink" href="#spice.spice.spiceoptions" title="Permalink to this definition"></a></dt>
-<dd><p>Dictionary</p>
-<p>Feature for specifying options for spice simulation. The key is the
+<dd><p>Feature for specifying options for spice simulation. The key is the
 name of the option (as in simulator manual specifies), and the value is
 the value given to said option. Valid key-value pairs can be found from
 the manual of the simulator (Eldo, Spectre or Ngspice).</p>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">spiceoptions</span> <span class="o">=</span> <span class="p">{</span>
            <span class="s1">&#39;save&#39;</span><span class="p">:</span> <span class="s1">&#39;lvlpub&#39;</span><span class="p">,</span>
            <span class="s1">&#39;nestlvl&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
@@ -823,16 +939,20 @@ the manual of the simulator (Eldo, Spectre or Ngspice).</p>
        <span class="p">}</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spiceparameters">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spiceparameters</span></span><a class="headerlink" href="#spice.spice.spiceparameters" title="Permalink to this definition"></a></dt>
-<dd><p>Dictionary</p>
-<p>Feature for specifying simulation parameters for spice simulation. The
+<dd><p>Feature for specifying simulation parameters for spice simulation. The
 key is the name of the parameter , and the value is the value given to
 said parameter.</p>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">spiceparameters</span> <span class="o">=</span> <span class="p">{</span>
            <span class="s1">&#39;nf_pmos&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
            <span class="s1">&#39;nf_nmos&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
@@ -840,21 +960,39 @@ said parameter.</p>
        <span class="p">}</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicesimpath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicesimpath</span></span><a class="headerlink" href="#spice.spice.spicesimpath" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Path to the directory where the simulation results are stored.</p>
+<p>( Default : self.simpath )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicesrc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicesrc</span></span><a class="headerlink" href="#spice.spice.spicesrc" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Path to the source netlist. Can be set manually to desired location.</p>
-<p>Default: ‘spice/entityname.scs’</p>
+<dd><p>Path to the source netlist. Can be set manually to desired location.</p>
+<blockquote>
+<div><p>( Default: ‘spice/entityname.scs’ )</p>
+</div></blockquote>
 <dl class="simple">
 <dt>N.B!:</dt><dd><p>Netlist has to contain the top-level design as a subcircuit definition!</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -862,26 +1000,40 @@ said parameter.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicesrcpath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicesrcpath</span></span><a class="headerlink" href="#spice.spice.spicesrcpath" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Path to the spice source of the entity. Can be set manually to desired location.
+<dd><p>Path to the spice source of the entity. Can be set manually to desired location.
 This variable provides the dspf-parasitic netlist filepath.</p>
-<p>Default: &lt;entity path&gt;/spice</p>
+<blockquote>
+<div><p>( Default: &lt;entity path&gt;/spice )</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicesubcktsrc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicesubcktsrc</span></span><a class="headerlink" href="#spice.spice.spicesubcktsrc" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Path to the parsed subcircuit file. (‘&lt;spicesimpath&gt;/subckt_entityname.&lt;suffix&gt;’).
+<dd><p>Path to the parsed subcircuit file. (‘&lt;spicesimpath&gt;/subckt_entityname.&lt;suffix&gt;’).
 This shouldn’t be set manually.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spice.spice.spicetbsrc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spicetbsrc</span></span><a class="headerlink" href="#spice.spice.spicetbsrc" title="Permalink to this definition"></a></dt>
-<dd><p>String</p>
-<p>Path to the spice testbench (‘&lt;spicesimpath&gt;/tb_entityname.&lt;suffix&gt;’).
+<dd><p>Path to the spice testbench (‘&lt;spicesimpath&gt;/tb_entityname.&lt;suffix&gt;’).
 This shouldn’t be set manually.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
