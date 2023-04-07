@@ -99,6 +99,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.write_spice_inputs"><code class="docutils literal notranslate"><span class="pre">spice.write_spice_inputs()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#spice-common">Spice Common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.spice_common.spice_common"><code class="docutils literal notranslate"><span class="pre">spice_common</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_common.spice_common.extracts"><code class="docutils literal notranslate"><span class="pre">spice_common.extracts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_common.spice_common.is_strobed"><code class="docutils literal notranslate"><span class="pre">spice_common.is_strobed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice_common.spice_common.strobe_indices"><code class="docutils literal notranslate"><span class="pre">spice_common.strobe_indices</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-testbench">Spice Testbench</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spice.testbench.testbench"><code class="docutils literal notranslate"><span class="pre">testbench</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.DEBUG"><code class="docutils literal notranslate"><span class="pre">testbench.DEBUG</span></code></a></li>
@@ -115,6 +122,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.plotcmd"><code class="docutils literal notranslate"><span class="pre">testbench.plotcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.simcmdstr"><code class="docutils literal notranslate"><span class="pre">testbench.simcmdstr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.testbench.testbench.testbench_simulator"><code class="docutils literal notranslate"><span class="pre">testbench.testbench_simulator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Spice Testbench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spice.testbench_common.testbench_common"><code class="docutils literal notranslate"><span class="pre">testbench_common</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench_common.testbench_common.dcsources"><code class="docutils literal notranslate"><span class="pre">testbench_common.dcsources</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench_common.testbench_common.esc_bus"><code class="docutils literal notranslate"><span class="pre">testbench_common.esc_bus()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench_common.testbench_common.header"><code class="docutils literal notranslate"><span class="pre">testbench_common.header</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench_common.testbench_common.iofiles"><code class="docutils literal notranslate"><span class="pre">testbench_common.iofiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench_common.testbench_common.options"><code class="docutils literal notranslate"><span class="pre">testbench_common.options</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.testbench_common.testbench_common.simcmds"><code class="docutils literal notranslate"><span class="pre">testbench_common.simcmds</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#spice-io-file">Spice IO-file</a></li>
@@ -888,6 +905,37 @@ iofile with direction ‘input’.</p>
 
 </dd></dl>
 
+<span class="target" id="module-spice.spice_common"></span><section id="spice-common">
+<h2>Spice Common<a class="headerlink" href="#spice-common" title="Permalink to this heading"></a></h2>
+<p>Mix-in class of ommon properties and methods for spice simulator classes</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="spice.spice_common.spice_common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.spice_common.</span></span><span class="sig-name descname"><span class="pre">spice_common</span></span><a class="reference internal" href="../_modules/spice/spice_common.html#spice_common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.spice_common.spice_common" title="Permalink to this definition"></a></dt>
+<dd><p>Common properties and methods for spice simulator tool classes.
+Most of these are overloaded in __init__.py</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice_common.spice_common.extracts">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extracts</span></span><a class="headerlink" href="#spice.spice_common.spice_common.extracts" title="Permalink to this definition"></a></dt>
+<dd><p>Bundle</p>
+<p>A thesdk.Bundle containing extracted quantities.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice_common.spice_common.is_strobed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_strobed</span></span><a class="headerlink" href="#spice.spice_common.spice_common.is_strobed" title="Permalink to this definition"></a></dt>
+<dd><p>Check if simulation was strobed or not</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice_common.spice_common.strobe_indices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strobe_indices</span></span><a class="headerlink" href="#spice.spice_common.spice_common.strobe_indices" title="Permalink to this definition"></a></dt>
+<dd><p>Internally set list of indices corresponding to time,amplitude pairs
+whose time value of is a multiple of the strobeperiod (see spice_simcmd).</p>
+</dd></dl>
+
+</dd></dl>
+
 <span class="target" id="module-spice.testbench"></span><section id="spice-testbench">
 <h2>Spice Testbench<a class="headerlink" href="#spice-testbench" title="Permalink to this heading"></a></h2>
 <p>Testbench generation class for spice simulations.</p>
@@ -1045,6 +1093,78 @@ simulator specific class. Properties and methods return values from that class.<
 </dd>
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.spectre.spectre_testbench.spectre_testbench" title="spice.spectre.spectre_testbench.spectre_testbench">spectre_testbench</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-spice.testbench_common"></span><section id="id1">
+<h2>Spice Testbench<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>Testbench generation class for spice simulations.</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spice.testbench_common.</span></span><span class="sig-name descname"><span class="pre">testbench_common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/testbench_common.html#testbench_common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.testbench_common.testbench_common" title="Permalink to this definition"></a></dt>
+<dd><p>This class generates all testbench contents.
+This class is utilized by the main spice class.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common.dcsources">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcsources</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.dcsources" title="Permalink to this definition"></a></dt>
+<dd><p>bundle of DC sources inherited from parent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bundle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common.esc_bus">
+<span class="sig-name descname"><span class="pre">esc_bus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">esc_colon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/testbench_common.html#testbench_common.esc_bus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.testbench_common.testbench_common.esc_bus" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to escape bus characters for Spectre simulations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="s1">&#39;bus&lt;3:0&gt;&#39;</span><span class="p">)</span>
+<span class="c1"># Returns &#39;bus\&lt;3\:0\&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common.header">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">header</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.header" title="Permalink to this definition"></a></dt>
+<dd><p>The header of the testbench</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common.iofiles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofiles</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.iofiles" title="Permalink to this definition"></a></dt>
+<dd><p>bundle of iofiles inherited from parent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bundle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common.options">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">options</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.options" title="Permalink to this definition"></a></dt>
+<dd><p>Spice options string parsed from self.spiceoptions -dictionary in the
+parent entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.testbench_common.testbench_common.simcmds">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simcmds</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.simcmds" title="Permalink to this definition"></a></dt>
+<dd><p>bundle of simulation commands inherited from parent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bundle</p>
 </dd>
 </dl>
 </dd></dl>

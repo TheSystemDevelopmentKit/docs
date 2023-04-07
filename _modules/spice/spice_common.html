@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spice.spice_common &mdash; TheSyDeKick 1.8_RC documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction to TheSyDeKick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thesdk/sections.html">Thesdk core classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ads/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../indices_and_tables.html">Indices and tables</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TheSyDeKick</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../spice.html">spice</a></li>
+      <li class="breadcrumb-item active">spice.spice_common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for spice.spice_common</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">============</span>
+<span class="sd">Spice Common</span>
+<span class="sd">============</span>
+
+<span class="sd">Mix-in class of ommon properties and methods for spice simulator classes</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">shlex</span>
+<span class="kn">import</span> <span class="nn">fileinput</span>
+<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">spice.spice_methods</span> <span class="kn">import</span> <span class="n">spice_methods</span>
+<span class="kn">import</span> <span class="nn">pdb</span>
+
+<div class="viewcode-block" id="spice_common"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_common.spice_common">[docs]</a><span class="k">class</span> <span class="nc">spice_common</span><span class="p">(</span><span class="n">spice_methods</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Common properties and methods for spice simulator tool classes.</span>
+<span class="sd">    Most of these are overloaded in __init__.py</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Bundle</span>
+
+<span class="sd">        A thesdk.Bundle containing extracted quantities.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_extracts&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_extracts</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracts</span>
+    <span class="nd">@extracts</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extracts</span><span class="o">=</span><span class="n">value</span>
+
+    <span class="c1">#### [TODO] To be relocated</span>
+    <span class="c1"># Strobing related stuff should not be in this class. Maybe spice_iofile or </span>
+    <span class="c1"># testbench also suposedly these are spectre specific</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internally set list of indices corresponding to time,amplitude pairs</span>
+<span class="sd">        whose time value of is a multiple of the strobeperiod (see spice_simcmd).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_strobe_indices&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span>
+
+    <span class="nd">@strobe_indices</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span><span class="o">=</span><span class="n">val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Cannot set strobe_indices to be of type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_strobed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if simulation was strobed or not</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_is_strobed&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_strobed</span><span class="o">=</span><span class="kc">False</span>
+            <span class="k">for</span> <span class="n">simtype</span><span class="p">,</span> <span class="n">simcmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">simtype</span><span class="o">==</span><span class="s1">&#39;tran&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">simcmd</span><span class="o">.</span><span class="n">strobeperiod</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_is_strobed</span><span class="o">=</span><span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_strobed</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 TheSyDeKick Community.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
