@@ -299,6 +299,15 @@ simulations. Useful for debugging the file IO</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pickle_excludes</span></span><a class="headerlink" href="#thesdk.thesdk.pickle_excludes" title="Permalink to this definition"></a></dt>
 <dd><p>Properties of entity to be excluded from pickling when saving entity state to disk.
 Useful for filtering out e.g. lambdas and other non-serializable objects.</p>
+<p>Default:</p>
+<blockquote>
+<div><p>[‘_par’, ‘_queue’, ‘generator’, ‘virtuoso_interface’]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
