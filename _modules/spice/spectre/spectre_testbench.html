@@ -234,11 +234,11 @@
                             <span class="c1"># Adding the source</span>
                             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">pos</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">neg</span><span class="p">:</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_inputsignals</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">source type=pwl file=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span> <span class="o">%</span> \
-                                        <span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sourcetype</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span>
+                                        <span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sourcetype</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">pos</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">neg</span><span class="p">),</span><span class="n">val</span><span class="o">.</span><span class="n">sourcetype</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">val</span><span class="o">.</span><span class="n">file</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                             <span class="k">else</span><span class="p">:</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_inputsignals</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> 0 </span><span class="si">%s</span><span class="s2">source type=pwl file=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span> <span class="o">%</span> \
-                                        <span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sourcetype</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span>
+                                        <span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sourcetype</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">esc_bus</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">val</span><span class="o">.</span><span class="n">sourcetype</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">val</span><span class="o">.</span><span class="n">file</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                     <span class="c1"># Sample signals are digital</span>
                     <span class="c1"># Presumably these are already converted to bitstrings</span>
@@ -522,6 +522,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span> <span class="o">+=</span> <span class="n">savestr</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span> <span class="o">+=</span> <span class="s1">&#39;simulator lang=spice</span><span class="se">\n</span><span class="s1">&#39;</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span> <span class="o">+=</span> <span class="s1">&#39;.option ingold 2</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="c1"># Format the output to same &quot;table&quot;, 15 bits per column</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span> <span class="o">+=</span> <span class="s1">&#39;.option co=</span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cols</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span> <span class="o">+=</span> <span class="n">plotstr</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span> <span class="o">+=</span> <span class="s1">&#39;simulator lang=spectre</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span>
@@ -530,7 +532,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@plotcmd</span><span class="o">.</span><span class="n">deleter</span>
     <span class="k">def</span> <span class="nf">plotcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span><span class="o">=</span><span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plotcmd</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Number of columns in the output file, when using Spectre.</span>
+<span class="sd">        Each signal takes 1 column (unless it is complex, then two).</span>
+<span class="sd">        Each column is 15 bit wide, hence number of columns is multiplied by 15.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_num_cols&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_num_cols</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;out&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">datatype</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;complex&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_num_cols</span> <span class="o">+=</span> <span class="mi">2</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_num_cols</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_cols</span> <span class="o">*=</span> <span class="mi">15</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_cols</span>
+
+    <span class="nd">@num_cols</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">num_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_cols</span><span class="o">=</span><span class="n">val</span></div>
 
 </pre></div>
 
