@@ -108,7 +108,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
             <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of simulator module not given&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -229,7 +228,7 @@
     <span class="nd">@plflag</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;upa&quot;</span><span class="p">,</span> <span class="s2">&quot;hpa&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s2">&quot;+postlayout&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s2">&quot;+postlayout=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported postlayout flag: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span><span class="p">)</span>
 
@@ -261,7 +260,10 @@
 <span class="sd">        Options are ezwave (default) or viva.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plotprogram&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span><span class="o">=</span><span class="s1">&#39;ezwave&#39;</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;plotprogram&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">plotprogram</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span><span class="o">=</span><span class="s1">&#39;ezwave&#39;</span> 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span>
     <span class="nd">@plotprogram</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -275,15 +277,14 @@
     <span class="k">def</span> <span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; str : Command to be run for interactive simulations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plotprogcmd&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span> <span class="o">==</span> <span class="s1">&#39;ezwave&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> -MAXWND -LOGfile </span><span class="si">%s</span><span class="s1">/ezwave.log </span><span class="si">%s</span><span class="s1"> &amp;&#39;</span> <span class="o">%</span> \
-                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span> <span class="o">==</span> <span class="s1">&#39;viva&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> -datadir </span><span class="si">%s</span><span class="s1"> -nocdsinit &amp;&#39;</span> <span class="o">%</span> \
-                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported plot program </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span> <span class="o">==</span> <span class="s1">&#39;ezwave&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> -MAXWND -LOGfile </span><span class="si">%s</span><span class="s1">/ezwave.log </span><span class="si">%s</span><span class="s1"> &amp;&#39;</span> <span class="o">%</span> \
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span> <span class="o">==</span> <span class="s1">&#39;viva&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> -datadir </span><span class="si">%s</span><span class="s1"> -nocdsinit &amp;&#39;</span> <span class="o">%</span> \
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported plot program </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span>
     <span class="nd">@plotprogcmd</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -355,14 +356,21 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;oppts&#39;</span> <span class="p">:</span> <span class="p">{}})</span>
                 <span class="c1"># Get dc simulation file name</span>
                 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">mc</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">mc</span>
                     <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;dc&#39;</span><span class="p">:</span>
                         <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
                         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)):</span>
                                 <span class="n">fname</span> <span class="o">+=</span> <span class="s1">&#39;Sweep</span><span class="si">%d</span><span class="s1">-[0-9]*_&#39;</span> <span class="o">%</span> <span class="n">i</span>
-                            <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;oppoint.dc&#39;</span>
+                            <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
+                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;mc_oppoint.dc&#39;</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;oppoint.dc&#39;</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;oppoint*.dc&#39;</span>
+                            <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
+                                <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;mc_oppoint*.dc&#39;</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;oppoint*.dc&#39;</span>
                         <span class="k">break</span>
                 <span class="c1"># For distributed runs</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
