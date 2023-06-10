@@ -229,7 +229,7 @@
     <span class="nd">@plflag</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;upa&quot;</span><span class="p">,</span> <span class="s2">&quot;hpa&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s2">&quot;+postlayout=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s2">&quot;+postlayout&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported postlayout flag: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span><span class="p">)</span>
 
@@ -355,21 +355,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;oppts&#39;</span> <span class="p">:</span> <span class="p">{}})</span>
                 <span class="c1"># Get dc simulation file name</span>
                 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">mc</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">mc</span>
                     <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;dc&#39;</span><span class="p">:</span>
                         <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
                         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)):</span>
                                 <span class="n">fname</span> <span class="o">+=</span> <span class="s1">&#39;Sweep</span><span class="si">%d</span><span class="s1">-[0-9]*_&#39;</span> <span class="o">%</span> <span class="n">i</span>
-                            <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
-                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;mc_oppoint.dc&#39;</span>
-                            <span class="k">else</span><span class="p">:</span>
-                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;oppoint.dc&#39;</span>
+                            <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;oppoint.dc&#39;</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
-                                <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;mc_oppoint*.dc&#39;</span>
-                            <span class="k">else</span><span class="p">:</span>
-                                <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;oppoint*.dc&#39;</span>
+                            <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;oppoint*.dc&#39;</span>
                         <span class="k">break</span>
                 <span class="c1"># For distributed runs</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
