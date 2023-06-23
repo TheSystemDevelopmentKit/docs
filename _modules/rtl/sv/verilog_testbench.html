@@ -92,6 +92,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pdb</span>
 <span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="n">indent</span>
 <span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">rtl_connector</span>
 <span class="kn">from</span> <span class="nn">rtl.testbench_common</span> <span class="kn">import</span> <span class="n">testbench_common</span>
@@ -111,7 +112,7 @@
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
         
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -149,6 +150,10 @@
         <span class="sd">&quot;&quot;&quot;Verilog register and wire definition strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#Update the language formatting. We are operating in verilog</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">val</span><span class="o">.</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;sv&#39;</span>
+
         <span class="c1"># Registers first</span>
         <span class="n">definitions</span><span class="o">=</span><span class="s1">&#39;//Register definitions</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -178,8 +183,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">iofile_defs</span><span class="o">=</span><span class="s1">&#39;//Variables for the io_files</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">verilog_statdef</span>
-            <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">verilog_fopen</span>
+            <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">rtl_statdef</span>
+            <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">rtl_fopen</span>
         <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="n">iofile_defs</span> 
 
@@ -201,9 +206,25 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">iofile_close</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">//Close the io_files</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">verilog_fclose</span>
+            <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">rtl_fclose</span>
         <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="n">iofile_close</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Verilog structure for custom finish of the simulation.</span>
+<span class="sd">        Default: &#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_end_condition&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;end_condition&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_end_condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">end_condition</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_end_condition</span> <span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end_condition</span>
+
+    <span class="nd">@end_condition</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_end_condition</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -264,7 +285,7 @@
         <span class="c1"># See controller.py</span>
         <span class="k">for</span> <span class="n">ioname</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">iotype</span> <span class="o">!=</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="o">=</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="o">=</span>\
                         <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span> 
                     <span class="c1"># Data must be properly shaped</span>
@@ -274,7 +295,7 @@
                     <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span> 
                         <span class="c1"># Adoption transfers parenthood of the files to this instance</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">bname</span><span class="p">]</span><span class="o">.</span><span class="n">adopt</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">bval</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">bval</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">connector</span>
                         <span class="c1"># Connect them to DUT</span>
                         <span class="k">try</span><span class="p">:</span> 
@@ -299,29 +320,30 @@
 <span class="sd">                self.iofile_definitions</span>
 <span class="sd">                self.misccmd</span>
 <span class="sd">                self.dumpfile</span>
-<span class="sd">                self.dut_instance.instance</span>
+<span class="sd">                self.dut_instance.verilog_instance</span>
 <span class="sd">                self.verilog_instance_members.items().instance (for all members)</span>
 <span class="sd">                self.connectors.verilog_inits()</span>
-<span class="sd">                self.iofiles.Members.items().verilog_io (for all members)</span>
+<span class="sd">                self.iofiles.Members.items().rtl_io (for all members)</span>
 <span class="sd">                self.iofile.close (for all members)</span>
 
 <span class="sd">             Addtional code may be currently injected by appending desired </span>
 <span class="sd">             strings (Verilog sytax) to the relevant string attributes.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-    <span class="c1"># Start the testbench contents</span>
+        <span class="c1"># Start the testbench contents</span>
         <span class="n">contents</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">//timescale 1ps this should probably be a global model parameter</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter_definitions</span><span class="o">+</span>\
 <span class="bp">self</span><span class="o">.</span><span class="n">connector_definitions</span><span class="o">+</span>\
-<span class="bp">self</span><span class="o">.</span><span class="n">assignments</span><span class="p">()</span> <span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">assignments</span><span class="p">()</span><span class="o">+</span>\
 <span class="bp">self</span><span class="o">.</span><span class="n">iofile_definitions</span><span class="o">+</span>\
 <span class="bp">self</span><span class="o">.</span><span class="n">misccmd</span><span class="o">+</span>\
+<span class="bp">self</span><span class="o">.</span><span class="n">end_condition</span><span class="o">+</span>\
 <span class="bp">self</span><span class="o">.</span><span class="n">dumpfile</span><span class="o">+</span>\
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">//DUT definition</span>
 <span class="sd">&quot;&quot;&quot;</span><span class="o">+</span>\
-<span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">instance</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">verilog_instance</span>
 
         <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_instances</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">contents</span><span class="o">+=</span><span class="n">module</span><span class="o">.</span><span class="n">instance</span>
@@ -333,7 +355,7 @@
 <span class="s2">&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
-                <span class="n">contents</span><span class="o">+=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span>
+                <span class="n">contents</span><span class="o">+=</span><span class="n">member</span><span class="o">.</span><span class="n">rtl_io</span>
         <span class="n">contents</span><span class="o">+=</span><span class="s2">&quot;&quot;&quot;</span>
 
 <span class="s2">//Execution with parallel fork-join and sequential begin-end sections</span>
@@ -349,9 +371,11 @@
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
-                <span class="n">contents</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">member</span><span class="o">.</span><span class="n">verilog_io</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">contents</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">member</span><span class="o">.</span><span class="n">rtl_io</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">join</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">$finish;</span><span class="se">\n</span><span class="s1">end</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">join</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;$finish;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;end</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="o">=</span><span class="n">contents</span></div></div>
 
 <span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>

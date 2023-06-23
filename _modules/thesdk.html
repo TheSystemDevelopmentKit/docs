@@ -281,7 +281,7 @@
     <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Simulation model to be used </span>
 
-<span class="sd">        &#39;py&#39; |  &#39;sv&#39; |  &#39;vhdl&#39; |  &#39;eldo&#39; |  &#39;spectre&#39; | &#39;ngspice&#39; | &#39;hw&#39; | &#39;icarus&#39;</span>
+<span class="sd">        &#39;py&#39; |  &#39;sv&#39; |  &#39;vhdl&#39; |  &#39;eldo&#39; |  &#39;spectre&#39; | &#39;ngspice&#39; | &#39;hw&#39; | &#39;icarus&#39; | &#39;ghdl&#39;</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_model&#39;</span><span class="p">):</span>
@@ -290,7 +290,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>
     <span class="nd">@model</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">,</span> <span class="s1">&#39;eldo&#39;</span><span class="p">,</span> <span class="s1">&#39;spectre&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">,</span> <span class="s1">&#39;hw&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">,</span> <span class="s1">&#39;eldo&#39;</span><span class="p">,</span> <span class="s1">&#39;spectre&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">,</span> <span class="s1">&#39;hw&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">,</span> <span class="s1">&#39;ghdl&#39;</span> <span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span> <span class="s1">&#39;Simulator model </span><span class="si">%s</span><span class="s1"> not supported.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">=</span><span class="n">val</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>

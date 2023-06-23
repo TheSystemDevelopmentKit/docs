@@ -83,26 +83,29 @@
 <span class="sd">RTL IOfile module </span>
 <span class="sd">======================</span>
 
-<span class="sd">Provides verilog- file-io related attributes and methods </span>
+<span class="sd">Provides Verilog- and VHDL file-io related attributes and methods </span>
 <span class="sd">for TheSyDeKick RTL intereface.</span>
 
-<span class="sd">Initially written by Marko Kosunen, marko.kosunen@aalto.fi,</span>
-<span class="sd">Yue Dai, 2018</span>
-
+<span class="sd">Restructured from verilog_iofile by Marko Kosunen, marko.kosunen@aalto.fi 2023</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pdb</span>
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
 <span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">thesdk.iofile</span> <span class="kn">import</span> <span class="n">iofile</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">sortedcontainers</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">from</span> <span class="nn">rtl.rtl_iofile_common</span> <span class="kn">import</span> <span class="n">rtl_iofile_common</span>
+<span class="kn">from</span> <span class="nn">rtl.sv.verilog_iofile</span> <span class="kn">import</span> <span class="n">verilog_iofile</span>
+<span class="kn">from</span> <span class="nn">rtl.sv.verilog_iofile_obsoletes</span> <span class="kn">import</span> <span class="n">verilog_iofile_obsoletes</span>
+<span class="kn">from</span> <span class="nn">rtl.vhdl.vhdl_iofile</span> <span class="kn">import</span> <span class="n">vhdl_iofile</span>
 <span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">indent</span>
 
-<div class="viewcode-block" id="rtl_iofile"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile">[docs]</a><span class="k">class</span> <span class="nc">rtl_iofile</span><span class="p">(</span><span class="n">iofile</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl_iofile"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile">[docs]</a><span class="k">class</span> <span class="nc">rtl_iofile</span><span class="p">(</span><span class="n">verilog_iofile_obsoletes</span><span class="p">,</span><span class="n">rtl_iofile_common</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Class to provide file IO for verilog simulations. When created, </span>
+<span class="sd">    Class to provide file IO for rtl simulations. When created, </span>
 <span class="sd">    adds a rtl_iofile object to the parents iofile_bundle attribute.</span>
 <span class="sd">    Accessible as self.iofile_bundle.Members[&#39;name&#39;].</span>
 
@@ -135,32 +138,45 @@
 <span class="sd">                ioformat : str, %d</span>
 <span class="sd">                   sets the ioformat attribute.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="c1">#This is a redundant check, but doens not hurt.to have it here too.</span>
+        <span class="c1">#This is a redundant check, but does not hurt.to have it here too.</span>
         <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of Verilog input file not given&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of RTL input file not given&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>  
-            <span class="nb">super</span><span class="p">(</span><span class="n">rtl_iofile</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">rtl_iofile_common</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rtlparent</span><span class="o">=</span><span class="n">parent</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">paramname</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;param&#39;</span><span class="p">,</span><span class="s1">&#39;-g g_file_&#39;</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_ioformat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ioformat&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#by default, the io values are decimal integer numbers</span>
 
         <span class="k">except</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Verilog IO file definition failed&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;RTL IO file definition failed&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_DictData</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># data structure for event-based IO data</span>
 
-
-    <span class="c1">#Overload from iofile package</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Name of the IO file to be read or written.</span>
+    <span class="k">def</span> <span class="nf">langmodule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_langmodule_verilog&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_verilog</span> <span class="o">=</span> <span class="n">verilog_iofile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_verilog</span><span class="o">.</span><span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_verilog</span><span class="o">.</span><span class="n">paramname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">paramname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_verilog</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_langmodule_vhdl&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_vhdl</span> <span class="o">=</span> <span class="n">vhdl_iofile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_vhdl</span><span class="o">.</span><span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_vhdl</span><span class="o">.</span><span class="n">paramname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">paramname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_vhdl</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">lang</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_verilog</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">lang</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule_vhdl</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Timescale for RTL simulations inherited from parent</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_file&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simpath</span> <span class="o">+</span><span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> \
-                    <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rndpart</span> <span class="o">+</span><span class="s1">&#39;.txt&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span>
-
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_rtl_timescale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timescale</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ioformat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -169,148 +185,111 @@
 <span class="sd">           integers.</span>
 <span class="sd">           </span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_ioformat&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ioformat</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ioformat</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ioformat</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">ioformat</span>
     
     <span class="nd">@ioformat</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">ioformat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ioformat</span><span class="o">=</span><span class="n">value</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">simparam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; String definition for parameter to be passed to the simulator</span>
-<span class="sd">        as a command line argument</span>
-
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_simparam</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">paramname</span> \
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simparam</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">ioformat</span><span class="o">=</span><span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlparam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Extracts the parameter name and value from simparam attribute. </span>
 <span class="sd">        Used to construct the parameter definitions for Verilog testbench. </span>
 
-<span class="sd">        Default {&#39;g_file_&lt;self.name&gt;&#39;, self.file }</span>
+<span class="sd">        Default {&#39;g_file_&lt;self.name&gt;&#39;, (&#39;string&#39;,self.file) }</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_rtlparam&#39;</span><span class="p">):</span>
-            <span class="n">key</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;-g &quot;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">simparam</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">val</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;-g &quot;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">simparam</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparam</span><span class="o">=</span><span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="s1">&#39;</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="p">)}</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparam</span>
+        <span class="c1">#This should be simulators, not lang dependent.</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtlparam</span>
     
     <span class="c1"># Status parameter</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Status variable name to be used in verilog testbench.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_stat&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_stat</span><span class="o">=</span><span class="s1">&#39;status_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_stat</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_stat</span>
 
-    <span class="nd">@verilog_stat</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">verilog_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_stat</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@rtl_stat</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_stat</span><span class="o">=</span><span class="n">value</span>
 
     <span class="c1">#Timestamp integers for control files</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_ctstamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_ctstamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Current time stamp variable name to be used in verilog testbench.</span>
 <span class="sd">        Used in event type file IO.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_ctstamp&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_ctstamp</span><span class="o">=</span><span class="s1">&#39;ctstamp_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_ctstamp</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_ctstamp</span>
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_ptstamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_pstamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Past time stamp variable for verilog testbench. Used in event type file IO.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_ptstamp&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_ptstamp</span><span class="o">=</span><span class="s1">&#39;ptstamp_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_ptstamp</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_pstamp</span>
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_tdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_tdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog time differencec variable. Used in event based file IO.</span>
 <span class="sd">        &#39;</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_diff&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_tdiff</span><span class="o">=</span><span class="s1">&#39;tdiff_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_tdiff</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_tdiff</span>
     
 
     <span class="c1"># Status integer verilog definitions</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_statdef</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_statdef</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog file read status integer variable definitions and initializations strings.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span><span class="o">=</span><span class="s1">&#39;integer </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;event&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span><span class="o">=</span><span class="s1">&#39;integer </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span><span class="o">+=</span><span class="s1">&#39;time </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ptstamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_tdiff</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span><span class="o">+=</span><span class="s1">&#39;initial </span><span class="si">%s</span><span class="s1">=0;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">)</span> 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span><span class="o">+=</span><span class="s1">&#39;initial </span><span class="si">%s</span><span class="s1">=0;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_ptstamp</span><span class="p">)</span> 
-            <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span><span class="o">+=</span><span class="s1">&#39;integer buffer_</span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_statdef</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_statdef</span>
+
+    <span class="c1">#Status integer verilog definitions</span>
 
     <span class="c1"># File pointer</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_fptr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_fptr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog file pointer name.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fptr</span><span class="o">=</span><span class="s1">&#39;f_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fptr</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_fptr</span>
 
-    <span class="nd">@verilog_fptr</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">verilog_fptr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fptr</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@rtl_fptr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_fptr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_fptr</span><span class="o">=</span><span class="n">value</span>
 
     <span class="c1"># File opening, direction dependent </span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_fopen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_fopen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog file open routine string.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fopen</span><span class="o">=</span><span class="s1">&#39;initial </span><span class="si">%s</span><span class="s1"> = $fopen(</span><span class="si">%s</span><span class="s1">,</span><span class="se">\&quot;</span><span class="s1">r</span><span class="se">\&quot;</span><span class="s1">);</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">,</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fopen</span><span class="o">=</span><span class="s1">&#39;initial </span><span class="si">%s</span><span class="s1"> = $fopen(</span><span class="si">%s</span><span class="s1">,</span><span class="se">\&quot;</span><span class="s1">w</span><span class="se">\&quot;</span><span class="s1">);</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">,</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fopen</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_fopen</span>
 
     <span class="c1"># File close</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_fclose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_fclose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog file close routine sting.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fclose</span><span class="o">=</span><span class="s1">&#39;$fclose(</span><span class="si">%s</span><span class="s1">);</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_fclose</span>
-    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_fclose</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; List for verilog connectors.</span>
 <span class="sd">        These are the verilog signals/regs associated with this file</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_connectors&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span><span class="o">=</span><span class="p">[]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_rtl_connectors&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_connectors</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_connectors</span>
 
-    <span class="nd">@verilog_connectors</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">verilog_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="nd">@rtl_connectors</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="c1">#Ordered list.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span><span class="o">=</span><span class="n">value</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_connectors</span><span class="o">=</span><span class="n">value</span>
+    
 <div class="viewcode-block" id="rtl_iofile.connector_datamap"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.connector_datamap">[docs]</a>    <span class="k">def</span> <span class="nf">connector_datamap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog_connectors is an ordered list. Order defines the assumed order of columns in the </span>
 <span class="sd">        file to be read or written. </span>
@@ -319,7 +298,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Connector undefined, can</span><span class="se">\&#39;</span><span class="s1">t access.&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span>
@@ -327,7 +306,7 @@
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;event&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connector_datamap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
             <span class="n">index</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">:</span>
                 <span class="n">index</span><span class="o">+=</span><span class="mi">1</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connector_datamap</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">):</span> <span class="n">index</span><span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connector_datamap</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
@@ -344,7 +323,7 @@
 <span class="sd">            name: str</span>
 <span class="sd">            val: type undefined</span>
 <span class="sd">            init: int, 0</span>
-<span class="sd">            vector of values to initialize the data. lenght should correpond to `self.verilog_connectors+1`</span>
+<span class="sd">            vector of values to initialize the data. lenght should correpond to `self.rtl_connectors+1`</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">time</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
@@ -359,8 +338,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">SortedDict</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">init</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span><span class="p">))</span><span class="o">*</span><span class="n">init</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">init</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">))</span><span class="o">*</span><span class="n">init</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">init</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
                 <span class="n">init_array</span> <span class="o">=</span> <span class="n">init</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">init_array</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -371,7 +350,7 @@
             <span class="c1"># add a new row if the time is not yet in the dictionary</span>
             <span class="k">if</span> <span class="n">time</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">:</span>
                 <span class="c1"># init diff as no change</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="n">time</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connectors</span><span class="p">))]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="n">time</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">))]</span>
 
             <span class="c1"># change corresponding value</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="n">time</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">connector_datamap</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span></div>
@@ -434,50 +413,19 @@
 
     <span class="c1"># Condition string for monitoring if the signals are unknown</span>
     <span class="nd">@property</span> 
-    <span class="k">def</span> <span class="nf">verilog_io_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Verilog condition string that must be true in ordedr to file IO read/write to occur.</span>
-
-<span class="sd">        Default for output file: `~$isunknown(connector.name)` for all connectors of the file.</span>
-<span class="sd">        Default for input file: `&#39;1&#39;` </span>
-<span class="sd">        file is always read with rising edge of the clock or in the time of an event defined in the file.</span>
+    <span class="k">def</span> <span class="nf">rtl_io_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Condition string that must be true in order to file IO read/write to occur.</span>
+<span class="sd">        See langmodules for details.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_io_condition&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
-                <span class="n">first</span><span class="o">=</span><span class="kc">True</span>
-                <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span><span class="o">=</span><span class="s1">&#39;~$isunknown(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                        <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&amp;&amp; ~$isunknown(</span><span class="si">%s</span><span class="s1">)&#39;</span> \
-                                <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span><span class="o">=</span> <span class="s1">&#39; 1 &#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_condition</span>
 
-    <span class="nd">@verilog_io_condition</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">verilog_io_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span><span class="o">=</span><span class="n">value</span>
+    <span class="nd">@rtl_io_condition</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_io_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_condition</span><span class="o">=</span><span class="n">value</span>
 
-    <span class="nd">@property</span> 
-    <span class="k">def</span> <span class="nf">verilog_io_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;File io synchronization condition for sample type input.</span>
-<span class="sd">        Default: `@(posedge clock)`</span>
-
-<span class="sd">        &#39;&#39;&#39;</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_verilog_io_sync&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_sync</span><span class="o">=</span> <span class="s1">&#39;@(posedge clock)</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_sync</span>
-
-    <span class="nd">@verilog_io_sync</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">verilog_io_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_sync</span><span class="o">=</span><span class="n">value</span>
-
-<div class="viewcode-block" id="rtl_iofile.verilog_io_condition_append"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_io_condition_append">[docs]</a>    <span class="k">def</span> <span class="nf">verilog_io_condition_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Append new condition string to `verilog_io_condition`</span>
+    <span class="k">def</span> <span class="nf">rtl_io_condition_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Append new condition string to `rtl_io_condition`</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -485,14 +433,35 @@
 <span class="sd">           cond : str</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">cond</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cond&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="ow">not</span> <span class="n">cond</span> <span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io_condition</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> \
-            <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_io_condition</span><span class="p">,</span><span class="n">cond</span><span class="p">)</span></div>
+        <span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_condition_append</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span> 
+    <span class="k">def</span> <span class="nf">rtl_io_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;File io synchronization condition for sample type input.</span>
+<span class="sd">        Default: `@(posedge clock)`</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_sync</span>
+
+    <span class="nd">@rtl_io_sync</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_io_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_sync</span><span class="o">=</span><span class="n">value</span>
+
+<div class="viewcode-block" id="rtl_iofile.rtl_io_condition_append"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io_condition_append">[docs]</a>    <span class="k">def</span> <span class="nf">rtl_io_condition_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Append new condition string to `rtl_io_condition`</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs :</span>
+<span class="sd">           cond : str</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_condition_append</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_io</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rtl_io</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Verilog  write/read construct for file IO depending on the direction and file type (event/sample).</span>
 
 <span class="sd">        Returns </span>
@@ -502,77 +471,7 @@
 
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">first</span><span class="o">=</span><span class="kc">True</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">=</span><span class="s1">&#39;always &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_io_sync</span> <span class="o">+</span><span class="s1">&#39;begin</span><span class="se">\n</span><span class="s1">&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;if ( </span><span class="si">%s</span><span class="s1"> ) begin</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_io_condition</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;$fwrite(</span><span class="si">%s</span><span class="s1">, &#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">=</span><span class="s1">&#39;while (!$feof(f_</span><span class="si">%s</span><span class="s1">)) begin</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_io_sync</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;if ( </span><span class="si">%s</span><span class="s1"> ) begin</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_io_condition</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> = $fscanf(</span><span class="si">%s</span><span class="s1">, &#39;</span> \
-                        <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
-                    <span class="n">iolines</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&quot;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">ioformat</span><span class="p">)</span>
-                    <span class="n">first</span><span class="o">=</span><span class="kc">False</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">iolines</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">iolines</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\\</span><span class="s1">t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">ioformat</span><span class="p">)</span>
-
-            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n</span><span class="se">\&quot;</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="nb">format</span><span class="o">+</span><span class="n">iolines</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">);&#39;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="c1">#Control files are handled differently</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;event&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;out&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Output writing for control files not supported&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">==</span><span class="s1">&#39;in&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">=</span><span class="s1">&#39;begin</span><span class="se">\n</span><span class="s1">while(!$feof(</span><span class="si">%s</span><span class="s1">)) begin</span><span class="se">\n</span><span class="s1">    &#39;</span> \
-                        <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">    #</span><span class="si">%s</span><span class="s1"> begin</span><span class="se">\n</span><span class="s1">    &#39;</span> \
-                        <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_tdiff</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ptstamp</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">verilog_tdiff</span><span class="p">)</span>    
-
-                <span class="c1"># Every control file requires status, diff, current_timestamp </span>
-                <span class="c1"># and past timestamp</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">    &#39;</span> \
-                        <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_ptstamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">)</span>
-
-                <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> = buffer_</span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">    &#39;</span> \
-                            <span class="o">%</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> = $fscanf(</span><span class="si">%s</span><span class="s1">, &#39;</span> \
-                        <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_stat</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_fptr</span><span class="p">)</span>
-
-            <span class="c1">#The first column is timestap</span>
-            <span class="n">iolines</span><span class="o">=</span><span class="s1">&#39;            </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">)</span> 
-            <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&quot;</span><span class="si">%d</span><span class="s1">&#39;</span>
-            <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
-                <span class="n">iolines</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="s1">            buffer_</span><span class="si">%s</span><span class="s1">&#39;</span> \
-                        <span class="o">%</span><span class="p">(</span><span class="n">iolines</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\\</span><span class="s1">t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">ioformat</span><span class="p">)</span>
-            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n</span><span class="se">\&quot;</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="nb">format</span><span class="o">+</span><span class="n">iolines</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">        );</span><span class="se">\n</span><span class="s1">    end</span><span class="se">\n</span><span class="s1">end</span><span class="se">\n</span><span class="s1">&#39;</span>
-
-            <span class="c1">#Repeat the last assignment outside the loop</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">#</span><span class="si">%s</span><span class="s1"> begin</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_tdiff</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ptstamp</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_tdiff</span><span class="p">)</span>    
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verilog_ptstamp</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">verilog_ctstamp</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;    </span><span class="si">%s</span><span class="s1"> = buffer_</span><span class="si">%s</span><span class="s1">;</span><span class="se">\n</span><span class="s1">&#39;</span> \
-                <span class="o">%</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span><span class="o">+=</span><span class="s1">&#39;end</span><span class="se">\n</span><span class="s1">end</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Iotype not defined&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_io</span></div>
-
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io</span></div>
 </pre></div>
 
            </div>

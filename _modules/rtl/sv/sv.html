@@ -95,6 +95,12 @@
 <div class="viewcode-block" id="sv"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.sv.sv">[docs]</a><span class="k">class</span> <span class="nc">sv</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogsimtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogext</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Search path for the verilogfiles</span>
 <span class="sd">            self.entitypath/sv</span>
@@ -197,7 +203,7 @@
                 <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">adopt</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)</span>
 
-                <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">connector</span>
                     <span class="c1"># Connect them to DUT</span>
                     <span class="k">try</span><span class="p">:</span> 
@@ -213,7 +219,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> 
                                 <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating non-existent IO connector </span><span class="si">%s</span><span class="s1"> for testbench&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">verilog_connectors</span><span class="o">=</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="o">=</span>\
                         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)</span>
         <span class="c1"># Define the iofiles of the testbench. &#39;</span>

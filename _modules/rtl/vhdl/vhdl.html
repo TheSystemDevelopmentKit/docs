@@ -94,6 +94,14 @@
 
 <div class="viewcode-block" id="vhdl"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.vhdl.vhdl.vhdl">[docs]</a><span class="k">class</span> <span class="nc">vhdl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlsimtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlext</span>
+
+
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; VHDL search path</span>
 <span class="sd">            self.entitypath/vhdl</span>
@@ -118,8 +126,23 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlsrc&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrcpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.vhd&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrcpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlext</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrc</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
+
+<span class="sd">            Default is &#39;.vhd&#39;, but this can be overridden.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlext&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlext</span> <span class="o">=</span> <span class="s1">&#39;.vhd&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlext</span>
+
+    <span class="nd">@vhdlext</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlext</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -147,8 +170,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="n">value</span>
     <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">deleter</span>
     <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="kc">None</span> </div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="kc">None</span> 
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Custom parameters for VHDL simulation</span>
+<span class="sd">        Provide as a list of strings</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdl_sim_args&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsimargs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsimargs</span>
+    <span class="nd">@vhdlsimargs</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simparam</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsimargs</span> <span class="o">=</span> <span class="n">simparam</span></div>
 
 </pre></div>
 

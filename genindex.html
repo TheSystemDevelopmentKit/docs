@@ -384,6 +384,10 @@
 </li>
         <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module.definition">(rtl.sv.verilog_module.verilog_module property)</a>
 </li>
+        <li><a href="rtl/sections.html#rtl.testbench.testbench.definition">(rtl.testbench.testbench property)</a>
+</li>
+        <li><a href="rtl/sections.html#rtl.vhdl.vhdl_entity.vhdl_entity.definition">(rtl.vhdl.vhdl_entity.vhdl_entity property)</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -423,20 +427,12 @@
       </ul></li>
       <li><a href="spice/sections.html#spice.testbench.testbench.dspfincludecmd">dspfincludecmd (spice.testbench.testbench property)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.testbench.testbench.dumpfile">dumpfile (rtl.testbench.testbench property)</a>
-
-      <ul>
-        <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.dumpfile">(rtl.testbench_common.testbench_common property)</a>
+      <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.dumpfile">dumpfile (rtl.testbench_common.testbench_common property)</a>
 </li>
-      </ul></li>
       <li><a href="spice/sections.html#spice.testbench.testbench.dut">dut (spice.testbench.testbench property)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.testbench.testbench.dut_instance">dut_instance (rtl.testbench.testbench property)</a>
-
-      <ul>
-        <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.dut_instance">(rtl.testbench_common.testbench_common property)</a>
+      <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.dut_instance">dut_instance (rtl.testbench_common.testbench_common property)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -453,6 +449,12 @@
 </li>
       <li><a href="ads/sections.html#ads.ads.emsetupsrcpath">emsetupsrcpath (ads.ads property)</a>
 </li>
+      <li><a href="rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.end_condition">end_condition (rtl.sv.verilog_testbench.verilog_testbench property)</a>
+
+      <ul>
+        <li><a href="rtl/sections.html#rtl.testbench.testbench.end_condition">(rtl.testbench.testbench property)</a>
+</li>
+      </ul></li>
       <li><a href="thesdk/sections.html#thesdk.thesdk.entitypath">entitypath (thesdk.thesdk property)</a>
 </li>
       <li><a href="spice/sections.html#spice.spectre.spectre.spectre.errpreset">errpreset (spice.spectre.spectre.spectre property)</a>
@@ -488,6 +490,8 @@
 </li>
         <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module.export">(rtl.sv.verilog_module.verilog_module method)</a>
 </li>
+        <li><a href="rtl/sections.html#rtl.vhdl.vhdl_entity.vhdl_entity.export">(rtl.vhdl.vhdl_entity.vhdl_entity method)</a>
+</li>
         <li><a href="spice/sections.html#spice.testbench.testbench.export">(spice.testbench.testbench method)</a>
 </li>
       </ul></li>
@@ -517,11 +521,9 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.file">file (rtl.rtl_iofile.rtl_iofile property)</a>
+      <li><a href="spice/sections.html#spice.spice_iofile.spice_iofile.file">file (spice.spice_iofile.spice_iofile property)</a>
 
       <ul>
-        <li><a href="spice/sections.html#spice.spice_iofile.spice_iofile.file">(spice.spice_iofile.spice_iofile property)</a>
-</li>
         <li><a href="spice/sections.html#spice.spice_module.spice_module.file">(spice.spice_module.spice_module property)</a>
 </li>
         <li><a href="thesdk/sections.html#thesdk.iofile.iofile.file">(thesdk.iofile.iofile property)</a>
@@ -585,10 +587,18 @@
         <li><a href="thesdk/sections.html#thesdk.thesdk.has_lsf">(thesdk.thesdk property)</a>
 </li>
       </ul></li>
+      <li><a href="rtl/sections.html#rtl.module.module.header">header (rtl.module.module property)</a>
+
+      <ul>
+        <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module.header">(rtl.sv.verilog_module.verilog_module property)</a>
+</li>
+        <li><a href="rtl/sections.html#rtl.vhdl.vhdl_entity.vhdl_entity.header">(rtl.vhdl.vhdl_entity.vhdl_entity property)</a>
+</li>
+        <li><a href="spice/sections.html#spice.testbench_common.testbench_common.header">(spice.testbench_common.testbench_common property)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="spice/sections.html#spice.testbench_common.testbench_common.header">header (spice.testbench_common.testbench_common property)</a>
-</li>
       <li><a href="thesdk/sections.html#thesdk.thesdk.HOME">HOME (thesdk.thesdk attribute)</a>
 </li>
   </ul></td>
@@ -598,6 +608,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rtl/sections.html#rtl.icarus.icarus.icarus">icarus (class in rtl.icarus.icarus)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.icarus.icarus.icarus.icarus_controlfilepaths">icarus_controlfilepaths (rtl.icarus.icarus.icarus property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.icarus.icarus.icarus.icarus_dofilepaths">icarus_dofilepaths (rtl.icarus.icarus.icarus property)</a>
 </li>
@@ -644,10 +656,6 @@
       <li><a href="rtl/sections.html#rtl.module.module.instance">instance (rtl.module.module property)</a>
 
       <ul>
-        <li><a href="rtl/sections.html#rtl.module_common.module_common.instance">(rtl.module_common.module_common property)</a>
-</li>
-        <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module.instance">(rtl.sv.verilog_module.verilog_module property)</a>
-</li>
         <li><a href="spice/sections.html#spice.spice_module.spice_module.instance">(spice.spice_module.spice_module property)</a>
 </li>
       </ul></li>
@@ -693,6 +701,8 @@
         <li><a href="rtl/sections.html#rtl.module_common.module_common.io_signals">(rtl.module_common.module_common property)</a>
 </li>
         <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module.io_signals">(rtl.sv.verilog_module.verilog_module property)</a>
+</li>
+        <li><a href="rtl/sections.html#rtl.vhdl.vhdl_entity.vhdl_entity.io_signals">(rtl.vhdl.vhdl_entity.vhdl_entity property)</a>
 </li>
       </ul></li>
       <li><a href="thesdk/sections.html#thesdk.iofile.iofile">iofile (class in thesdk.iofile)</a>
@@ -761,17 +771,19 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rtl/sections.html#rtl.module.module.lang">lang (rtl.module.module property)</a>
+      <li><a href="rtl/sections.html#rtl.module_common.module_common.lang">lang (rtl.module_common.module_common property)</a>
 
       <ul>
-        <li><a href="rtl/sections.html#rtl.module_common.module_common.lang">(rtl.module_common.module_common property)</a>
+        <li><a href="rtl/sections.html#rtl.rtl.lang">(rtl.rtl property)</a>
 </li>
-        <li><a href="rtl/sections.html#rtl.testbench.testbench.lang">(rtl.testbench.testbench property)</a>
+        <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.lang">(rtl.testbench_common.testbench_common property)</a>
 </li>
       </ul></li>
       <li><a href="rtl/sections.html#rtl.module.module.langmodule">langmodule (rtl.module.module property)</a>
 
       <ul>
+        <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.langmodule">(rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
         <li><a href="rtl/sections.html#rtl.testbench.testbench.langmodule">(rtl.testbench.testbench property)</a>
 </li>
       </ul></li>
@@ -1154,17 +1166,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim">questasim (class in rtl.questasim.questasim)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_dofilepaths">questasim_dofilepaths (rtl.questasim.questasim.questasim property)</a>
+      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_controlfilepaths">questasim_controlfilepaths (rtl.questasim.questasim.questasim property)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_simdut">questasim_simdut (rtl.questasim.questasim.questasim property)</a>
+      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_dofilepaths">questasim_dofilepaths (rtl.questasim.questasim.questasim property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_rtlcmd">questasim_rtlcmd (rtl.questasim.questasim.questasim property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_simdut">questasim_simdut (rtl.questasim.questasim.questasim property)</a>
+</li>
       <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_simtb">questasim_simtb (rtl.questasim.questasim.questasim property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_svcmd">questasim_svcmd (rtl.questasim.questasim.questasim property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_vhdlcmd">questasim_vhdlcmd (rtl.questasim.questasim.questasim property)</a>
 </li>
       <li><a href="thesdk/sections.html#thesdk.thesdk.queue">queue (thesdk.thesdk property)</a>
 </li>
@@ -1272,8 +1284,6 @@
         <li><a href="rtl/sections.html#module-rtl.sv.verilog_connector">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     rtl.sv.verilog_module
 
@@ -1302,6 +1312,8 @@
         <li><a href="rtl/sections.html#module-rtl.testbench_common">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     rtl.vhdl.vhdl
 
@@ -1316,10 +1328,42 @@
         <li><a href="rtl/sections.html#module-rtl.vhdl.vhdl_entity">module</a>
 </li>
       </ul></li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_connectors">rtl_connectors (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_ctstamp">rtl_ctstamp (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_fclose">rtl_fclose (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_fopen">rtl_fopen (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_fptr">rtl_fptr (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io">rtl_io (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io_condition">rtl_io_condition (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io_condition_append">rtl_io_condition_append() (rtl.rtl_iofile.rtl_iofile method)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io_sync">rtl_io_sync (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
       <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile">rtl_iofile (class in rtl.rtl_iofile)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.rtl.rtl_timescale">rtl_timescale (rtl.rtl property)</a>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_pstamp">rtl_pstamp (rtl.rtl_iofile.rtl_iofile property)</a>
 </li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_stat">rtl_stat (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_statdef">rtl_statdef (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_tdiff">rtl_tdiff (rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl.rtl_timescale">rtl_timescale (rtl.rtl property)</a>
+
+      <ul>
+        <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_timescale">(rtl.rtl_iofile.rtl_iofile property)</a>
+</li>
+        <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.rtl_timescale">(rtl.testbench_common.testbench_common property)</a>
+</li>
+      </ul></li>
       <li><a href="rtl/sections.html#rtl.rtl.rtlcmd">rtlcmd (rtl.rtl property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.rtl.rtlmisc">rtlmisc (rtl.rtl property)</a>
@@ -1408,11 +1452,13 @@
       </ul></li>
       <li><a href="rtl/sections.html#rtl.rtl.simdut">simdut (rtl.rtl property)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.simparam">simparam (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
       <li><a href="thesdk/sections.html#thesdk.thesdk.simpath">simpath (thesdk.thesdk property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.rtl.simtb">simtb (rtl.rtl property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl.simulator_control_contents">simulator_control_contents (rtl.rtl property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.rtl.simulator_controlfile">simulator_controlfile (rtl.rtl property)</a>
 </li>
       <li><a href="spice/sections.html#spice.eldo.eldo.eldo.simulatorcmd">simulatorcmd (spice.eldo.eldo.eldo property)</a>
 
@@ -1665,10 +1711,10 @@
         <li><a href="thesdk/sections.html#module-thesdk">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="thesdk/sections.html#thesdk.thesdk">thesdk (class in thesdk)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     thesdk.iofile
 
@@ -1687,6 +1733,8 @@
       <li><a href="spice/sections.html#spice.spice_iofile.spice_iofile.trise">trise (spice.spice_iofile.spice_iofile attribute)</a>
 </li>
       <li><a href="spice/sections.html#spice.spice_simcmd.spice_simcmd.tstop">tstop (spice.spice_simcmd.spice_simcmd attribute)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.sv.verilog_connector.verilog_connector.type">type (rtl.sv.verilog_connector.verilog_connector property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1716,16 +1764,12 @@
 </li>
       <li><a href="rtl/sections.html#rtl.sv.verilog_connector.verilog_connector">verilog_connector (class in rtl.sv.verilog_connector)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_connectors">verilog_connectors (rtl.rtl_iofile.rtl_iofile property)</a>
+      <li><a href="rtl/sections.html#rtl.module_common.module_common.verilog_instance">verilog_instance (rtl.module_common.module_common property)</a>
+
+      <ul>
+        <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module.verilog_instance">(rtl.sv.verilog_module.verilog_module property)</a>
 </li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_ctstamp">verilog_ctstamp (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_fclose">verilog_fclose (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_fopen">verilog_fopen (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_fptr">verilog_fptr (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
+      </ul></li>
       <li><a href="rtl/sections.html#rtl.testbench.testbench.verilog_instance_add">verilog_instance_add() (rtl.testbench.testbench method)</a>
 
       <ul>
@@ -1738,25 +1782,7 @@
         <li><a href="rtl/sections.html#rtl.testbench_common.testbench_common.verilog_instances">(rtl.testbench_common.testbench_common property)</a>
 </li>
       </ul></li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_io">verilog_io (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_io_condition">verilog_io_condition (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_io_condition_append">verilog_io_condition_append() (rtl.rtl_iofile.rtl_iofile method)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_io_sync">verilog_io_sync (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rtl/sections.html#rtl.sv.verilog_module.verilog_module">verilog_module (class in rtl.sv.verilog_module)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_ptstamp">verilog_ptstamp (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_stat">verilog_stat (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_statdef">verilog_statdef (rtl.rtl_iofile.rtl_iofile property)</a>
-</li>
-      <li><a href="rtl/sections.html#rtl.rtl_iofile.rtl_iofile.verilog_tdiff">verilog_tdiff (rtl.rtl_iofile.rtl_iofile property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench">verilog_testbench (class in rtl.sv.verilog_testbench)</a>
 </li>
@@ -1764,9 +1790,19 @@
 </li>
       <li><a href="rtl/sections.html#rtl.vhdl.vhdl_entity.vhdl_entity">vhdl_entity (class in rtl.vhdl.vhdl_entity)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="rtl/sections.html#rtl.module_common.module_common.vhdl_instance">vhdl_instance (rtl.module_common.module_common property)</a>
+</li>
       <li><a href="rtl/sections.html#rtl.vhdl.vhdl.vhdl.vhdlcompargs">vhdlcompargs (rtl.vhdl.vhdl.vhdl property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.vhdl.vhdl.vhdl.vhdlentityfiles">vhdlentityfiles (rtl.vhdl.vhdl.vhdl property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.vhdl.vhdl.vhdl.vhdlext">vhdlext (rtl.vhdl.vhdl.vhdl property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.vhdl.vhdl.vhdl.vhdlsimargs">vhdlsimargs (rtl.vhdl.vhdl.vhdl property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.vhdl.vhdl.vhdl.vhdlsimtb">vhdlsimtb (rtl.vhdl.vhdl.vhdl property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.vhdl.vhdl.vhdl.vhdlsrc">vhdlsrc (rtl.vhdl.vhdl.vhdl property)</a>
 </li>
@@ -1783,6 +1819,8 @@
       <li><a href="rtl/sections.html#rtl.sv.sv.sv.vlogmodulefiles">vlogmodulefiles (rtl.sv.sv.sv property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.sv.sv.sv.vlogsimargs">vlogsimargs (rtl.sv.sv.sv property)</a>
+</li>
+      <li><a href="rtl/sections.html#rtl.sv.sv.sv.vlogsimtb">vlogsimtb (rtl.sv.sv.sv property)</a>
 </li>
       <li><a href="rtl/sections.html#rtl.sv.sv.sv.vlogsrc">vlogsrc (rtl.sv.sv.sv property)</a>
 </li>
