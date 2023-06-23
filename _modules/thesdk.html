@@ -10,10 +10,9 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
       <li class="breadcrumb-item active">thesdk</li>
       <li class="wy-breadcrumbs-aside">
@@ -126,7 +129,7 @@
 <span class="c1">#be instantiated unless all of its abstract methods and properties are overridden.</span>
 <span class="kn">from</span> <span class="nn">thesdk.bundle</span> <span class="kn">import</span> <span class="n">Bundle</span>
 <div class="viewcode-block" id="thesdk"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk">[docs]</a><span class="k">class</span> <span class="nc">thesdk</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Following class attributes are set when this class imported</span>
 
 <span class="sd">    Attributes</span>
@@ -216,7 +219,7 @@
 
 <div class="viewcode-block" id="thesdk.initlog"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.initlog">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">initlog</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Initializes logging. logfile passed as a parameter</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initializes logging. logfile passed as a parameter</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="vm">__class__</span><span class="o">.</span><span class="n">logfile</span><span class="o">=</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -234,7 +237,7 @@
     <span class="c1">#Common properties</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">DEBUG</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Set this to True if you want the debug messages printed</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Set this to True if you want the debug messages printed</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_DEBUG&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
@@ -245,7 +248,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">print_relative_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; True (default) | False</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; True (default) | False</span>
 
 <span class="sd">        If True, print all paths relative to the entity path. If False, paths</span>
 <span class="sd">        are printed as is (typically absolute paths).</span>
@@ -259,7 +262,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Defines the location of the</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Defines the location of the</span>
 <span class="sd">        classfile. </span>
 
 <span class="sd">        Returns: &lt;path&gt;/Entities/&lt;entity&gt;/&lt;entity&gt;</span>
@@ -270,7 +273,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">entitypath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Path to entity. Extracted from the location of __init__.py file.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Path to entity. Extracted from the location of __init__.py file.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_entitypath&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_entitypath</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classfile</span><span class="p">))</span>
@@ -279,7 +282,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Simulation model to be used </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Simulation model to be used </span>
 
 <span class="sd">        &#39;py&#39; |  &#39;sv&#39; |  &#39;vhdl&#39; |  &#39;eldo&#39; |  &#39;spectre&#39; | &#39;ngspice&#39; | &#39;hw&#39; | &#39;icarus&#39; | &#39;ghdl&#39;</span>
 
@@ -297,7 +300,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 
 <span class="sd">        Simulation path. (./simulations/&lt;model&gt;/&lt;runname&gt;)</span>
 <span class="sd">        This is not meant to be set manually.</span>
@@ -319,7 +322,7 @@
    
     <span class="nd">@property</span> 
     <span class="k">def</span> <span class="nf">has_lsf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True | False (default)</span>
 
 <span class="sd">        True if LSFINTERACTIVE and LSFSUBMISSION global veriables are defined</span>
 <span class="sd">        in TheSDK.config.</span>
@@ -334,7 +337,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preserve_iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True | False (default)</span>
 
 <span class="sd">        If True, do not delete IO files after </span>
 <span class="sd">        simulations. Useful for debugging the file IO&quot;&quot;&quot;</span>
@@ -348,7 +351,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">pickle_excludes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; list : Properties of entity to be excluded from pickling when saving entity state to disk.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; list : Properties of entity to be excluded from pickling when saving entity state to disk.</span>
 <span class="sd">        Useful for filtering out e.g. lambdas and other non-serializable objects.</span>
 
 <span class="sd">        Default:</span>
@@ -367,7 +370,7 @@
 
     <span class="c1">#Common method to propagate system parameters</span>
 <div class="viewcode-block" id="thesdk.copy_propval"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.copy_propval">[docs]</a>    <span class="k">def</span> <span class="nf">copy_propval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Method to copy attributes form parent. </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Method to copy attributes form parent. </span>
 <span class="sd">        </span>
 <span class="sd">        Example::</span>
 
@@ -402,7 +405,7 @@
     <span class="c1">#Method for logging</span>
     <span class="c1">#This is a method because it uses the logfile property</span>
 <div class="viewcode-block" id="thesdk.print_log"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.print_log">[docs]</a>    <span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Method to print messages to &#39;logfile&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Method to print messages to &#39;logfile&#39;</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -501,7 +504,7 @@
             <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="thesdk.timer"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.timer">[docs]</a>    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Timer decorator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Timer decorator</span>
 
 <span class="sd">        Print execution time of member functions of classes inheriting</span>
 <span class="sd">        thesdk to the logfile.</span>
@@ -539,7 +542,7 @@
 
 <div class="viewcode-block" id="thesdk.silence"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.silence">[docs]</a>    <span class="nd">@cl</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">silence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">show_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Context manager to redirect stdout (and optional errors) to /dev/null.</span>
 <span class="sd">        Useful for cleaning up verbose function outputs. The silencing can be</span>
 <span class="sd">        bypassed by setting debug=True. Errors are let through by default, but</span>
@@ -568,7 +571,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True | False (default)</span>
 
 <span class="sd">        Property defines whether parallel run is intended or not&quot;&quot;&quot;</span>
 
@@ -583,7 +586,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;Property holding the queue for parallel run result</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Property holding the queue for parallel run result</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_queue&#39;</span><span class="p">):</span>
@@ -596,7 +599,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="thesdk.run_parallel"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.run_parallel">[docs]</a>    <span class="k">def</span> <span class="nf">run_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run instances in parallel and collect results</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run instances in parallel and collect results</span>
 
 <span class="sd">        Usage: Takes in a set of instances, runs a given method for them, and</span>
 <span class="sd">        saves result data to the original instances.</span>
@@ -667,7 +670,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">IOS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;Type: Bundle of IO&#39;s</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Type: Bundle of IO&#39;s</span>
 <span class="sd">        </span>
 <span class="sd">        Property holding the IOS</span>
 
@@ -687,7 +690,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;Bundle</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bundle</span>
 <span class="sd">        </span>
 <span class="sd">        Bundle for holding the returned results from simulations that are</span>
 <span class="sd">        not attributes or IOs. </span>
@@ -709,7 +712,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">netlist_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;List[string]</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List[string]</span>
 <span class="sd">        </span>
 <span class="sd">        List of strings containing the parameters of a netlist. List is populated by calling</span>
 <span class="sd">        ecd_methods.get_params(). Empty if no parameters were found in the netlist.</span>
@@ -726,7 +729,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">print_colors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;True (default) | False</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True (default) | False</span>
 <span class="sd">        </span>
 <span class="sd">        Enable color tags in log print messages.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -739,7 +742,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">runname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String </span>
 <span class="sd">        </span>
 <span class="sd">        Automatically generated name for the simulation. </span>
 <span class="sd">        </span>
@@ -763,7 +766,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">statepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Path where the entity state is stored and where existing states are</span>
 <span class="sd">        loaded from.</span>
@@ -777,7 +780,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">statedir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Path to the most recently stored state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -793,7 +796,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">save_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True | False (default)</span>
 <span class="sd">        </span>
 <span class="sd">        Save the entity state after simulation (including output data). Any</span>
 <span class="sd">        stored state can be loaded using the matching state name passed to the</span>
@@ -808,7 +811,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">load_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;String (default &#39;&#39;)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String (default &#39;&#39;)</span>
 
 <span class="sd">        Feature for loading results of previous simulation. When calling run()</span>
 <span class="sd">        with this property set, the simulation is not re-executed, but the</span>
@@ -838,7 +841,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">load_state_full</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;True (default) | False</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True (default) | False</span>
 <span class="sd">        </span>
 <span class="sd">        Whether to load the full entity state or not. If False, only IOs are</span>
 <span class="sd">        loaded in order to not override the entity state otherwise. In that</span>
@@ -852,7 +855,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_load_state_full</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="thesdk._write_state"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk._write_state">[docs]</a>    <span class="k">def</span> <span class="nf">_write_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write the entity state to a binary file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the entity state to a binary file.</span>
 
 <span class="sd">        This should be called after the simulation has finished.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -871,7 +874,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed saving state to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">statedir</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="thesdk._read_state"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk._read_state">[docs]</a>    <span class="k">def</span> <span class="nf">_read_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read the entity state from a binary file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the entity state from a binary file.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span>
@@ -918,7 +921,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Bundle</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bundle</span>
 
 <span class="sd">        A thesdk.Bundle containing `iofile` objects. The `iofile`</span>
 <span class="sd">        objects are automatically added to this Bundle, nothing should be</span>
@@ -933,7 +936,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_iofile_bundle</span><span class="o">=</span><span class="n">value</span>
 
 <div class="viewcode-block" id="thesdk.delete_iofile_bundle"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.thesdk.delete_iofile_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">delete_iofile_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Method to delete all files in iofile bundle</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to delete all files in iofile bundle</span>
 
 <span class="sd">        For each of the member of the bundle of type iofile, it calls &#39;remove&#39; method.</span>
 <span class="sd">        In case modifications are needed, define class for desired iofile type with remove method.</span>
@@ -950,7 +953,7 @@
                     <span class="n">val</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span></div></div>
 
 <div class="viewcode-block" id="IO"><a class="viewcode-back" href="../thesdk/sections.html#thesdk.IO">[docs]</a><span class="k">class</span> <span class="nc">IO</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; TheSyDeKick IO class. Child of thesdk to utilize logging method.</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; TheSyDeKick IO class. Child of thesdk to utilize logging method.</span>
 
 <span class="sd">    The IOs of an entity must be defined as:: </span>
 
@@ -967,7 +970,7 @@
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> 
-        <span class="sd">&#39;&#39;&#39; Parameters</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Parameters</span>
 <span class="sd">            ----------</span>
 <span class="sd">            **kwargs:  </span>
 
@@ -980,7 +983,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Data value of this IO</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Data value of this IO</span>
 <span class="sd">        </span>
 <span class="sd">        &#39;&#39;&#39;</span> 
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_Data&#39;</span><span class="p">):</span>

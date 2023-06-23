@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../rtl.html">rtl</a></li>
       <li class="breadcrumb-item active">rtl.module_common</li>
@@ -93,7 +96,7 @@
 
 <div class="viewcode-block" id="module_common"><a class="viewcode-back" href="../../rtl/sections.html#rtl.module_common.module_common">[docs]</a><span class="k">class</span> <span class="nc">module_common</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Parameters</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Parameters</span>
 <span class="sd">           ----------</span>
 <span class="sd">              **kwargs :</span>
 <span class="sd">                 file: str</span>
@@ -116,7 +119,7 @@
         
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Description language used.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Description language used.</span>
 
 <span class="sd">        Default: `sv`</span>
 
@@ -131,7 +134,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Name of the module. Derived from the file name.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Name of the module. Derived from the file name.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -141,7 +144,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">instname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Name of the instance, when instantiated inside other module.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Name of the instance, when instantiated inside other module.</span>
 
 <span class="sd">        Default: `self.name_DUT`</span>
 
@@ -156,7 +159,7 @@
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Connector bundle containing connectors for all module IOS.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Connector bundle containing connectors for all module IOS.</span>
 <span class="sd">           All the IOs are connected to signal connectors that </span>
 <span class="sd">           have the same name than the IOs. This is due to fact the we have decided </span>
 <span class="sd">           that all signals are connectors. </span>
@@ -167,7 +170,7 @@
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Parameters of the verilog module. Bundle of values of type string.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Parameters of the verilog module. Bundle of values of type string.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">parameters</span>
@@ -179,7 +182,7 @@
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Contents of the module. String containing the Verilog code after </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Contents of the module. String containing the Verilog code after </span>
 <span class="sd">        the module definition.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -188,7 +191,7 @@
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">io_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Bundle containing the signal connectors for IO connections.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Bundle containing the signal connectors for IO connections.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">io_signals</span>
@@ -196,7 +199,7 @@
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Module definition part extracted for the file. Contains parameters and </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Module definition part extracted for the file. Contains parameters and </span>
 <span class="sd">        IO definitions.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -205,7 +208,7 @@
     <span class="c1">#Methods</span>
 <div class="viewcode-block" id="module_common.export"><a class="viewcode-back" href="../../rtl/sections.html#rtl.module_common.module_common.export">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Method to export the module to a given file.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Method to export the module to a given file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -220,7 +223,7 @@
     <span class="c1"># Therefore it is always regenerated</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">verilog_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Instantioation string of the module/entity for use inside of verilog modules.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Instantioation string of the module/entity for use inside of verilog modules.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1">#First we write the parameter section</span>
@@ -257,7 +260,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdl_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Instantioation string of the module/entity for use inside of vhdl entities.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Instantioation string of the module/entity for use inside of vhdl entities.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1">#First we write the parameter section</span>

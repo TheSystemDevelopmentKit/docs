@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../spice.html">spice</a></li>
       <li class="breadcrumb-item active">spice.testbench_common</li>
@@ -104,7 +107,7 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <div class="viewcode-block" id="testbench_common"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench_common.testbench_common">[docs]</a><span class="k">class</span> <span class="nc">testbench_common</span><span class="p">(</span><span class="n">spice_module</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class generates all testbench contents.</span>
 <span class="sd">    This class is utilized by the main spice class.</span>
 
@@ -129,7 +132,7 @@
         
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The header of the testbench</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The header of the testbench</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_header&#39;</span><span class="p">):</span>
@@ -143,7 +146,7 @@
     <span class="c1"># Generating spice options string</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Spice options string parsed from self.spiceoptions -dictionary in the</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Spice options string parsed from self.spiceoptions -dictionary in the</span>
 <span class="sd">        parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_options&#39;</span><span class="p">):</span>
@@ -158,7 +161,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bundle :  bundle of iofiles inherited from parent</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bundle :  bundle of iofiles inherited from parent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_iofiles&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_iofiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span>
@@ -167,7 +170,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dcsources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bundle :  bundle of DC sources inherited from parent</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bundle :  bundle of DC sources inherited from parent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dcsources&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_dcsources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">dcsource_bundle</span>
@@ -175,14 +178,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simcmds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bundle :  bundle of simulation commands inherited from parent</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bundle :  bundle of simulation commands inherited from parent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_simcmds&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simcmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simcmds</span>
 
 <div class="viewcode-block" id="testbench_common.esc_bus"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench_common.testbench_common.esc_bus">[docs]</a>    <span class="k">def</span> <span class="nf">esc_bus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">esc_colon</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper function to escape bus characters for Spectre simulations::</span>
 
 <span class="sd">            self.esc_bus(&#39;bus&lt;3:0&gt;&#39;) </span>

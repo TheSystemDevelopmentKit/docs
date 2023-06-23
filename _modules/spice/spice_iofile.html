@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../spice.html">spice</a></li>
       <li class="breadcrumb-item active">spice.spice_iofile</li>
@@ -105,7 +108,7 @@
 <span class="kn">from</span> <span class="nn">bitstring</span> <span class="kn">import</span> <span class="n">BitArray</span>
 
 <div class="viewcode-block" id="spice_iofile"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile">[docs]</a><span class="k">class</span> <span class="nc">spice_iofile</span><span class="p">(</span><span class="n">iofile</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to provide file IO for spice simulations. When created, </span>
 <span class="sd">    adds a spice_iofile object to the parents iofile_bundle property.</span>
 <span class="sd">    Accessible as iofile_bundle.Members[&#39;name&#39;].</span>
@@ -238,7 +241,7 @@
     <span class="c1"># Overloading file property to contain a list</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;List&lt;str&gt;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List&lt;str&gt;</span>
 
 <span class="sd">        List containing filepaths to files associated with this spice_iofile.</span>
 <span class="sd">        For digital buses or arrays of signals, the list contains multiple</span>
@@ -278,7 +281,7 @@
     <span class="c1"># Overloading ionames property to contain a list</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ionames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;List&lt;str&gt;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List&lt;str&gt;</span>
 
 <span class="sd">        Set by argument &#39;ionames&#39;. This property casts the given argument to a</span>
 <span class="sd">        list if needed.</span>
@@ -293,14 +296,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">DEBUG</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This fixes DEBUG prints in spice_iofile, by propagating the DEBUG</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; This fixes DEBUG prints in spice_iofile, by propagating the DEBUG</span>
 <span class="sd">        flag of the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">DEBUG</span> 
 
     <span class="c1"># Overloaded write from thesdk.iofile</span>
 <div class="viewcode-block" id="spice_iofile.write"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to write files associated with this spice_iofile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span> <span class="o">==</span> <span class="s1">&#39;event&#39;</span><span class="p">:</span>
@@ -369,7 +372,7 @@
             <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="spice_iofile.parse_io_from_file"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.parse_io_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">parse_io_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">,</span><span class="n">dtype</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">queue</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Parse specific lines from a spectre print file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse specific lines from a spectre print file.</span>
 
 <span class="sd">        This is wrapped to a function to allow parallelism.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -416,22 +419,15 @@
 
     <span class="c1"># Overloaded read from thesdk.iofile</span>
 <div class="viewcode-block" id="spice_iofile.read"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to read files associated with this spice_iofile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iotype</span><span class="o">==</span><span class="s1">&#39;event&#39;</span><span class="p">:</span>
             <span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># File is the same for all event type outputs</span>
             <span class="n">label_match</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\(([^)]+)\)&#39;</span><span class="p">)</span> <span class="c1"># Match one or more characters that are not ) and capture.</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;spectre&#39;</span><span class="p">,</span><span class="s1">&#39;ngspice&#39;</span><span class="p">]:</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-                    <span class="c1"># Try to find the lines of print file where data headers are defined. The file may contain multiple header lines, depending on the number of save statements</span>
-                    <span class="n">block_count</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;grep -n </span><span class="se">\&quot;</span><span class="s1">time\|freq</span><span class="se">\&quot;</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> | sed </span><span class="se">\&#39;</span><span class="s1">s/^\([0-9]\+\):/</span><span class="se">\\</span><span class="s1">1|/</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">file</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                    <span class="c1"># If not found, wait 2 sec, try again (it may take some time for the file to show up on disk)</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">block_count</span><span class="p">:</span>
-                        <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;.print file not found </span><span class="si">%s</span><span class="s1"> after </span><span class="si">%d</span><span class="s1"> seconds, trying again in 2 seconds.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
-                    <span class="k">else</span><span class="p">:</span> <span class="c1"># Found the block count</span>
-                        <span class="k">break</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;sync </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">)</span>
+                <span class="n">block_count</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;grep -n </span><span class="se">\&quot;</span><span class="s1">time\|freq</span><span class="se">\&quot;</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> | sed </span><span class="se">\&#39;</span><span class="s1">s/^\([0-9]\+\):/</span><span class="se">\\</span><span class="s1">1|/</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">file</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">block_count</span><span class="p">:</span> 
                     <span class="c1"># We couldn&#39;t find the block count, exit</span>
                     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
@@ -620,7 +616,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Failed while reading files for </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="spice_iofile.interp_crossings"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.interp_crossings">[docs]</a>    <span class="k">def</span> <span class="nf">interp_crossings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">vth</span><span class="p">,</span><span class="n">nint</span><span class="p">,</span><span class="n">edgetype</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Helper method called for &#39;time&#39; and &#39;sample&#39; type outputs.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Helper method called for &#39;time&#39; and &#39;sample&#39; type outputs.</span>
 
 <span class="sd">        Interpolates the requested threshold crossings (rising or falling) from</span>
 <span class="sd">        the &#39;event&#39; type input signal. Returns the time-stamps of the crossing</span>
@@ -674,7 +670,7 @@
         <span class="k">return</span> <span class="n">tcross</span><span class="p">[</span><span class="n">tcross</span><span class="o">&gt;=</span><span class="bp">self</span><span class="o">.</span><span class="n">after</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="spice_iofile.sample_signal"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.sample_signal">[docs]</a>    <span class="k">def</span> <span class="nf">sample_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">signal</span><span class="p">,</span><span class="n">trigger</span><span class="p">,</span><span class="n">nint</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Helper method called for &#39;sample&#39; type outputs.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Helper method called for &#39;sample&#39; type outputs.</span>
 
 <span class="sd">        Finds the signal y-values at time instants defined by the clock signal</span>
 <span class="sd">        (trigger).</span>
@@ -709,7 +705,7 @@
         <span class="k">return</span> <span class="n">sampled</span></div>
 
     <span class="k">def</span> <span class="nf">_bin2int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">binary</span><span class="p">,</span><span class="n">big_endian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Helper method to convert binary string to integer.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Helper method to convert binary string to integer.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="n">big_endian</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">signed</span><span class="p">:</span>
@@ -723,7 +719,7 @@
                 <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">binary</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
 
 <div class="viewcode-block" id="spice_iofile.append_to_data"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.append_to_data">[docs]</a>    <span class="k">def</span> <span class="nf">append_to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">buswidth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Helper method to append array to self.Data.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Helper method to append array to self.Data.</span>
 <span class="sd">        </span>
 <span class="sd">        The array(s) are padded with np.nan when bits=False, and &#39;UUUU&#39; when</span>
 <span class="sd">        bits=True. This is called automatically for time and sample type IOs.</span>
@@ -753,7 +749,7 @@
 
     <span class="c1"># Remove the file when no longer needed</span>
 <div class="viewcode-block" id="spice_iofile.remove"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Remove the files</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Remove the files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve</span><span class="p">:</span>

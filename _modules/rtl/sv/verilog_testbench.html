@@ -10,10 +10,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../../rtl.html">rtl</a></li>
       <li class="breadcrumb-item active">rtl.sv.verilog_testbench</li>
@@ -98,11 +101,11 @@
 <span class="kn">from</span> <span class="nn">rtl.testbench_common</span> <span class="kn">import</span> <span class="n">testbench_common</span>
 
 <div class="viewcode-block" id="verilog_testbench"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench">[docs]</a><span class="k">class</span> <span class="nc">verilog_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Verilog testbench class.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Verilog testbench class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
 <span class="sd">        parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -116,7 +119,7 @@
         
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parameter  and variable definition strings of the testbench</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parameter  and variable definition strings of the testbench</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">definitions</span><span class="o">=</span><span class="s1">&#39;//Parameter definitions</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -126,7 +129,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Parameters used inside the testbench</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Parameters used inside the testbench</span>
 <span class="sd">            </span>
 <span class="sd">            Dict :  {name: (type,value)}</span>
 <span class="sd">            </span>
@@ -147,7 +150,7 @@
     
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">connector_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Verilog register and wire definition strings</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verilog register and wire definition strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#Update the language formatting. We are operating in verilog</span>
@@ -167,7 +170,7 @@
         <span class="k">return</span> <span class="n">definitions</span>
 
 <div class="viewcode-block" id="verilog_testbench.assignments"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.assignments">[docs]</a>    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wire assingment strings</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wire assingment strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">matchlist</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;matchlist&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">assignment_matchlist</span><span class="p">)</span>
@@ -178,7 +181,7 @@
      
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;IOfile definition strings</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;IOfile definition strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">iofile_defs</span><span class="o">=</span><span class="s1">&#39;//Variables for the io_files</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -190,7 +193,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">clock_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clock definition string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clock definition string</span>
 
 <span class="sd">        Todo</span>
 <span class="sd">        Create append mechanism to add more clocks.</span>
@@ -201,7 +204,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;File close procedure for all IO files.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;File close procedure for all IO files.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">iofile_close</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">//Close the io_files</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -212,7 +215,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Verilog structure for custom finish of the simulation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Verilog structure for custom finish of the simulation.</span>
 <span class="sd">        Default: &#39;&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_end_condition&#39;</span><span class="p">):</span>
@@ -228,7 +231,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Miscellaneous command string corresponding to self.rtlmisc -list in</span>
 <span class="sd">        the parent entity.</span>
@@ -248,7 +251,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="verilog_testbench.define_testbench"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.define_testbench">[docs]</a>    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Dut is creted automaticaly, if verilog file for it exists</span>
@@ -278,7 +281,7 @@
     
     <span class="c1"># Automate this based in dir</span>
 <div class="viewcode-block" id="verilog_testbench.connect_inputs"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Define connections to DUT inputs.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define connections to DUT inputs.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Create TB connectors from the control file</span>
@@ -310,7 +313,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
 
 <div class="viewcode-block" id="verilog_testbench.generate_contents"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This is the method to generate testbench contents. Override if needed</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; This is the method to generate testbench contents. Override if needed</span>
 <span class="sd">            Contents of the testbench is constructed from attributes in the </span>
 <span class="sd">            following order ::</span>
 <span class="sd">            </span>

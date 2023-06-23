@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RTL interface classes &mdash; TheSyDeKick 1.8_RC documentation</title>
@@ -11,10 +11,9 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -29,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -283,7 +286,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">RTL interface classes</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/rtl/sections.rst.txt" rel="nofollow"> View page source</a>
@@ -344,7 +347,7 @@ self.iofile_bundle.Members[ioname].Data</p>
 <dd><p>If the source is a symlink, create the target as a link to original target.
 otherwise, copy the file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to source file</p></li>
 <li><p><strong>dst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to destination file.</p></li>
@@ -447,7 +450,7 @@ read from this file path. Default path is
 <dd><p>Language of the testbench to support multilanguage simulators.
 Default vhdl | sv (default)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -526,7 +529,7 @@ during the simulation invocation.</p>
 <dd><p>HDL source directory for rtl simulations
 self.simpath + ‘/rtl’</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>self.simpath + ‘/rtl’</p>
 </dd>
 </dl>
@@ -538,7 +541,7 @@ self.simpath + ‘/rtl’</p>
 <dd><p>Work library directory for rtl compilations
 self.simpath +’/work’</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>self.simpath +’/work’</p>
 </dd>
 </dl>
@@ -572,7 +575,7 @@ and debugging the testbench.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simdut</span></span><a class="headerlink" href="#rtl.rtl.simdut" title="Permalink to this definition"></a></dt>
 <dd><p>Source file for Device Under Test in simulations directory</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><em>self.rtlsimpath + self.name + self.vlogext for ‘sv’ model</em></p></li>
 <li><p><em>self.rtlsimpath + self.name + ‘.vhd’ for ‘vhdl’ model</em></p></li>
@@ -649,7 +652,7 @@ file io routines, file io format strings and read/write conditions.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a>) – The parent object initializing the
 rtl_iofile instance. Default None</p></li>
@@ -737,10 +740,10 @@ Used in event type file IO.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_io</span></span><a class="headerlink" href="#rtl.rtl_iofile.rtl_iofile.rtl_io" title="Permalink to this definition"></a></dt>
 <dd><p>Verilog  write/read construct for file IO depending on the direction and file type (event/sample).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Verilog code for file IO to read/write the IO file.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -758,7 +761,7 @@ See langmodules for details.</p>
 <span class="sig-name descname"><span class="pre">rtl_io_condition_append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/rtl_iofile.html#rtl_iofile.rtl_io_condition_append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl_iofile.rtl_iofile.rtl_io_condition_append" title="Permalink to this definition"></a></dt>
 <dd><p>Append new condition string to <cite>rtl_io_condition</cite></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – cond : str</p>
 </dd>
 </dl>
@@ -817,7 +820,7 @@ Used to construct the parameter definitions for Verilog testbench.</p>
 Uses a python dictionary instead of a numpy array for more efficient insertions.
 The ‘time’ column acts as the dictionary key, the remaining columns are stored as the value.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – time: int, 0
 name: str
 val: type undefined
@@ -840,7 +843,7 @@ Refactored from ‘testbench’ by Marko Kosunen 20221119, <a class="reference e
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.testbench_common.</span></span><span class="sig-name descname"><span class="pre">testbench_common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench_common.html#testbench_common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench_common.testbench_common" title="Permalink to this definition"></a></dt>
 <dd><p>Testbench class. Extends <cite>module</cite></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this testbench.</em>) – </p></li>
 <li><p><strong>**kwargs</strong> – None</p></li>
@@ -888,7 +891,7 @@ This dumpfile can be used with gtkwave.</p>
 <span class="sig-name descname"><span class="pre">verilog_instance_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench_common.html#testbench_common.verilog_instance_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench_common.testbench_common.verilog_instance_add" title="Permalink to this definition"></a></dt>
 <dd><p>Add verilog instance to the Bundle fro a file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
 <dt>name<span class="classifier">str</span></dt><dd><p>name of the module</p>
 </dd>
@@ -926,7 +929,7 @@ Refactored from ‘testbench’ by Marko Kosunen 20221119, <a class="reference e
 <p>Executes init of testbench_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module testbench_common</p>
 </dd>
 </dl>
@@ -1045,7 +1048,7 @@ the parent entity.</p>
 <span class="sig-name descname"><span class="pre">verilog_instance_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench.html#testbench.verilog_instance_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench.testbench.verilog_instance_add" title="Permalink to this definition"></a></dt>
 <dd><p>Add verilog instance to the Bundle fro a file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
 <dt>name<span class="classifier">str</span></dt><dd><p>name of the module</p>
 </dd>
@@ -1076,7 +1079,7 @@ Need to handle VHDL instance too.</p>
 <dt class="sig sig-object py" id="rtl.module_common.module_common">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.module_common.</span></span><span class="sig-name descname"><span class="pre">module_common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module_common.html#module_common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module_common.module_common" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – <dl class="simple">
 <dt>file: str</dt><dd><p>Verilog file containing the module</p>
 </dd>
@@ -1109,7 +1112,7 @@ IO definitions.</p>
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module_common.html#module_common.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module_common.module_common.export" title="Permalink to this definition"></a></dt>
 <dd><p>Method to export the module to a given file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – force: Bool</p>
 </dd>
 </dl>
@@ -1186,7 +1189,7 @@ python environment.</p>
 <p>Executes init of module_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module module_common</p>
 </dd>
 </dl>
@@ -1209,7 +1212,7 @@ IO definitions.</p>
 <span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/module.html#module.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.module.module.export" title="Permalink to this definition"></a></dt>
 <dd><p>Method to export the module to a given file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – force: Bool</p>
 </dd>
 </dl>
@@ -1315,7 +1318,7 @@ Provide as a list of strings</p>
 <dd><p>Verilog source file
 self.vlogsrcpath/self.name.sv</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>self.vlogsrcpath + ‘/’ + self.name + self.vlogext</p>
 </dd>
 </dl>
@@ -1327,7 +1330,7 @@ self.vlogsrcpath/self.name.sv</p>
 <dd><p>Search path for the verilogfiles
 self.entitypath/sv</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>self.entitypath/sv</p>
 </dd>
 </dl>
@@ -1367,7 +1370,7 @@ b) to arbitrary name vector.</p></li>
 <p>Executes init of module_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module module_common</p>
 </dd>
 </dl>
@@ -1390,7 +1393,7 @@ IO definitions.</p>
 <span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/sv/verilog_module.html#verilog_module.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.sv.verilog_module.verilog_module.export" title="Permalink to this definition"></a></dt>
 <dd><p>Method to export the module. Exports self.headers+self.definition to a given file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – force: Bool</p>
 </dd>
 </dl>
@@ -1445,7 +1448,7 @@ Refactored from ‘testbench’ by Marko Kosunen 20221119, <a class="reference e
 <p>Executes init of testbench_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module module_common</p>
 </dd>
 </dl>
@@ -1562,7 +1565,7 @@ the parent entity.</p>
 <dd><p>Executes init of connector_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module module_common</p>
 </dd>
 </dl>
@@ -1651,7 +1654,7 @@ Provide as a list of strings</p>
 <dd><p>VHDL source file
 self.vhdlsrcpath/self.name.vhd’</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>self.vhdlsrcpath + ‘/’ + self.name + ‘.vhd’</p>
 </dd>
 </dl>
@@ -1663,7 +1666,7 @@ self.vhdlsrcpath/self.name.vhd’</p>
 <dd><p>VHDL search path
 self.entitypath/vhdl</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>self.entitypath/vhdl</p>
 </dd>
 </dl>
@@ -1705,7 +1708,7 @@ b) to arbitrary name vector.</p></li>
 <p>Executes init of module_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module module_common</p>
 </dd>
 </dl>
@@ -1727,7 +1730,7 @@ IO definitions.</p>
 <span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/vhdl/vhdl_entity.html#vhdl_entity.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.vhdl.vhdl_entity.vhdl_entity.export" title="Permalink to this definition"></a></dt>
 <dd><p>Method to export the module. Exports self.headers+self.definition to a given file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – force: Bool</p>
 </dd>
 </dl>
@@ -1788,7 +1791,7 @@ properties and methods for RTL class</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icarus_simdut</span></span><a class="headerlink" href="#rtl.icarus.icarus.icarus.icarus_simdut" title="Permalink to this definition"></a></dt>
 <dd><p>Source file for Device Under Test in simulations directory</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><em>self.rtlsimpath + self.name + self.vlogext for ‘sv’ model</em></p></li>
 <li><p><em>self.rtlsimpath + self.name + ‘.vhd’ for ‘vhdl’ model</em></p></li>
@@ -1834,7 +1837,7 @@ properties and methods for RTL class</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">questasim_simdut</span></span><a class="headerlink" href="#rtl.questasim.questasim.questasim.questasim_simdut" title="Permalink to this definition"></a></dt>
 <dd><p>Source file for Device Under Test in simulations directory</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><em>self.rtlsimpath + self.name + self.vlogext for ‘sv’ model</em></p></li>
 <li><p><em>self.rtlsimpath + self.name + ‘.vhd’ for ‘vhdl’ model</em></p></li>

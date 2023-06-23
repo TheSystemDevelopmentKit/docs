@@ -10,10 +10,9 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
       <li class="breadcrumb-item active">inverter</li>
       <li class="wy-breadcrumbs-aside">
@@ -125,7 +128,7 @@
 <div class="viewcode-block" id="inverter"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter">[docs]</a><span class="k">class</span> <span class="nc">inverter</span><span class="p">(</span><span class="n">rtl</span><span class="p">,</span><span class="n">spice</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
 
 <div class="viewcode-block" id="inverter.__init__"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot; Inverter parameters and attributes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Inverter parameters and attributes</span>
 <span class="sd">            Parameters</span>
 <span class="sd">            ----------</span>
 <span class="sd">                *arg : </span>
@@ -183,13 +186,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="inverter.init"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Method to re-initialize the structure if the attribute values are changed after creation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to re-initialize the structure if the attribute values are changed after creation.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span> <span class="c1">#Currently nothing to add</span></div>
 
 <div class="viewcode-block" id="inverter.main"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; The main python description of the operation. Contents fully up to designer, however, the </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; The main python description of the operation. Contents fully up to designer, however, the </span>
 <span class="sd">        IO&#39;s should be handled bu following this guideline:</span>
 <span class="sd">        </span>
 <span class="sd">        To isolate the internal processing from IO connection assigments, </span>
@@ -206,7 +209,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="n">out</span></div>
 
 <div class="viewcode-block" id="inverter.run"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; The default name of the method to be executed. This means: parameters and attributes </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; The default name of the method to be executed. This means: parameters and attributes </span>
 <span class="sd">            control what is executed if run method is executed. By this we aim to avoid the need of </span>
 <span class="sd">            documenting what is the execution method. It is always self.run. </span>
 
@@ -233,10 +236,10 @@
 <span class="s2">                &quot;&quot;&quot;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">interactive_control_contents</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">                    add wave </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                    sim/:tb_inverter:A </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                    sim/:tb_inverter:initdone </span><span class="se">\\</span><span class="s2"></span>
-<span class="s2">                    sim/:tb_inverter:clock </span><span class="se">\\</span><span class="s2"></span>
+<span class="s2">                    add wave </span><span class="se">\\</span>
+<span class="s2">                    sim/:tb_inverter:A </span><span class="se">\\</span>
+<span class="s2">                    sim/:tb_inverter:initdone </span><span class="se">\\</span>
+<span class="s2">                    sim/:tb_inverter:clock </span><span class="se">\\</span>
 <span class="s2">                    sim/:tb_inverter:Z</span>
 <span class="s2">                    run -all</span>
 <span class="s2">                    wave zoom full</span>
@@ -355,7 +358,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="inverter.define_io_conditions"><a class="viewcode-back" href="../inverter_tests/sections.html#inverter.inverter.define_io_conditions">[docs]</a>    <span class="k">def</span> <span class="nf">define_io_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;This overloads the method called by run_rtl method. It defines the read/write conditions for the files</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This overloads the method called by run_rtl method. It defines the read/write conditions for the files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
@@ -397,7 +400,7 @@
     <span class="n">controller</span><span class="o">.</span><span class="n">start_datafeed</span><span class="p">()</span>
     <span class="c1">#models=[&#39;py&#39;,&#39;sv&#39;,&#39;icarus&#39;, &#39;ghdl&#39;, &#39;vhdl&#39;,&#39;eldo&#39;,&#39;spectre&#39;, &#39;ngspice&#39;]</span>
     <span class="c1">#By default, we set only open souce simulators</span>
-    <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">]</span>
+    <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">,</span> <span class="s1">&#39;ghdl&#39;</span><span class="p">,</span> <span class="s1">&#39;ngspice&#39;</span><span class="p">]</span>
     <span class="c1"># Here we instantiate the signal source</span>
     <span class="n">duts</span><span class="o">=</span><span class="p">[]</span>
     <span class="n">plotters</span><span class="o">=</span><span class="p">[]</span>
@@ -408,7 +411,10 @@
         <span class="n">d</span><span class="o">=</span><span class="n">inverter</span><span class="p">()</span>
         <span class="n">duts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> 
         <span class="n">d</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="n">model</span>
-        <span class="n">d</span><span class="o">.</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span>
+        <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;ghdl&#39;</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;vhdl&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span>
         <span class="n">d</span><span class="o">.</span><span class="n">Rs</span><span class="o">=</span><span class="n">rs</span>
         <span class="c1">#d.preserve_rtlfiles = True</span>
         <span class="c1"># Enable debug messages</span>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spice simulator interface classess &mdash; TheSyDeKick 1.8_RC documentation</title>
@@ -11,10 +11,9 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -29,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -362,7 +365,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Spice simulator interface classess</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/spice/sections.rst.txt" rel="nofollow"> View page source</a>
@@ -424,7 +427,7 @@ objects are automatically added to this Bundle, nothing should be
 manually added.</p>
 <p>This is to automate biasing and operation conditions of the circuit.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Bundle</p>
 </dd>
 </dl>
@@ -446,7 +449,7 @@ set by self.num_processes.</p>
 <div><p>(Default False)</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -469,7 +472,7 @@ dspf-file contains definition matching the original design name of the
 top-level netlist, it gets also renamed to match the module name
 (dspf-file for top-level instance is possible).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
@@ -485,7 +488,7 @@ top-level netlist, it gets also renamed to match the module name
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -522,7 +525,7 @@ the respective <cite>spice_dcsource</cite> objects.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extracts</span></span><a class="headerlink" href="#spice.spice.extracts" title="Permalink to this definition"></a></dt>
 <dd><p>A thesdk.Bundle containing extracted quantities.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Bundle</p>
 </dd>
 </dl>
@@ -538,7 +541,7 @@ default) is opened during the simulation for debugging. See
 <div><p>( Default : False )</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -552,7 +555,7 @@ speed up reading the results.</p>
 <p>NOTE: Eldo seems to force output names to uppercase, let’s
 uppercase everything here to avoid key mismatches. (This should be changed).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
@@ -570,7 +573,7 @@ THE ENTITY STATE on disk.</p>
 <div><p>( Default : False )</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -602,7 +605,7 @@ simulation.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -613,7 +616,7 @@ simulation.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spice.spice.name" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the module.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -627,7 +630,7 @@ simulation.</p>
 <p>Spectre :  maps to command line parameter ‘+mt’.</p>
 <p>Ngspice :  maps to ‘set num_threads=’ line in testbench.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
@@ -638,7 +641,7 @@ simulation.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_processes</span></span><a class="headerlink" href="#spice.spice.num_processes" title="Permalink to this definition"></a></dt>
 <dd><p>Maximum number of spawned child processes for distributed runs.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
@@ -649,7 +652,7 @@ simulation.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plflag</span></span><a class="headerlink" href="#spice.spice.plflag" title="Permalink to this definition"></a></dt>
 <dd><p>Postlayout simulation accuracy/RC reduction flag.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -664,7 +667,7 @@ simulation.</p>
 <p>Obsolete! Moved to <cite>spice_simcmd</cite> as a keyword argument.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[ <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a> ]</p>
 </dd>
 </dl>
@@ -675,7 +678,7 @@ simulation.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plotprogcmd</span></span><a class="headerlink" href="#spice.spice.plotprogcmd" title="Permalink to this definition"></a></dt>
 <dd><p>Command to be run for interactive simulations.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -687,7 +690,7 @@ simulation.</p>
 <dd><p>Sets the program to be used for visualizing waveform databases.
 Options are ezwave (default) or viva.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -699,7 +702,7 @@ Options are ezwave (default) or viva.</p>
 <dd><p>Enables post-layout optimizations in the simulator command options.
 (Default : False )</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -714,7 +717,7 @@ etc.) after simulations.  Useful for debugging.</p>
 <div><p>(Default : False )</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -757,7 +760,7 @@ for spectre), when save_state=True.</p>
 <div><p>( Default : False)</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -773,7 +776,7 @@ but state was not written to disk for some reason.</p>
 <div><p>( Default : False)</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -784,7 +787,7 @@ but state was not written to disk for some reason.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">si_prefix_mult</span></span><a class="headerlink" href="#spice.spice.si_prefix_mult" title="Permalink to this definition"></a></dt>
 <dd><p>Dictionary mapping SI-prefixes to multipliers.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
@@ -797,7 +800,7 @@ but state was not written to disk for some reason.</p>
 objects are automatically added to this Bundle, nothing should be
 manually added.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Bundle</p>
 </dd>
 </dl>
@@ -809,13 +812,13 @@ manually added.</p>
 <dd><p>The simulator specific operation is defined with an instance of
 simulator specific class. Properties and methods return values from that class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.ngspice.ngspice.ngspice" title="spice.ngspice.ngspice.ngspice">ngspice</a></p>
 </dd>
-<dt class="field-even">Type</dt>
+<dt class="field-even">Type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#spice.eldo.eldo.eldo" title="spice.eldo.eldo.eldo">eldo</a></p>
 </dd>
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.spectre.spectre.spectre" title="spice.spectre.spectre.spectre">spectre</a></p>
 </dd>
 </dl>
@@ -828,7 +831,7 @@ simulator specific class. Properties and methods return values from that class.<
 and thesdk.GLOBALS[‘LSFINTERACTIVE’] for LSF submissions.</p>
 <p>Usually something like ‘bsub -K’ or ‘bsub -I’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -846,7 +849,7 @@ self.run_spice()</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.spice_module.spice_module" title="spice.spice_module.spice_module">spice_module</a></p>
 </dd>
 </dl>
@@ -858,7 +861,7 @@ self.run_spice()</p>
 <dd><p>Simulation command string to be executed on the command line.
 Automatically generated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -879,7 +882,7 @@ variable.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
@@ -891,7 +894,7 @@ variable.</p>
 <dd><p>Path to output waveform database. (&lt;spicesimpath&gt;/tb_&lt;entityname&gt;.&lt;resultfile_ext&gt;)
 (For now only for spectre. HOW? should work for Eldo too)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -918,7 +921,7 @@ unchanged.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
@@ -941,7 +944,7 @@ the manual of the simulator (Eldo, Spectre or Ngspice).</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
@@ -962,7 +965,7 @@ said parameter.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
@@ -974,7 +977,7 @@ said parameter.</p>
 <dd><p>Path to the directory where the simulation results are stored.</p>
 <p>( Default : self.simpath )</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -992,7 +995,7 @@ said parameter.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1007,7 +1010,7 @@ This variable provides the dspf-parasitic netlist filepath.</p>
 <div><p>( Default: &lt;entity path&gt;/spice )</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1019,7 +1022,7 @@ This variable provides the dspf-parasitic netlist filepath.</p>
 <dd><p>Path to the parsed subcircuit file. (‘&lt;spicesimpath&gt;/subckt_entityname.&lt;suffix&gt;’).
 This shouldn’t be set manually.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1031,7 +1034,7 @@ This shouldn’t be set manually.</p>
 <dd><p>Path to the spice testbench (‘&lt;spicesimpath&gt;/tb_entityname.&lt;suffix&gt;’).
 This shouldn’t be set manually.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1043,7 +1046,7 @@ This shouldn’t be set manually.</p>
 <dd><p>Internally used dictionary for common syntax conversions between
 Spectre, Eldo, and Ngspice.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
@@ -1101,7 +1104,7 @@ This class is utilized by the main spice class.</p>
 <p>Executes init of testbench_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module testbench_common</p>
 </dd>
 </dl>
@@ -1118,7 +1121,7 @@ flag of the parent entity.</p>
 <dd><p>DC source definitions parsed from spice_dcsource objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1137,7 +1140,7 @@ in the parent entity.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dut</span></span><a class="headerlink" href="#spice.testbench.testbench.dut" title="Permalink to this definition"></a></dt>
 <dd><p>Design under test</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.spice_module.spice_module" title="spice.spice_module.spice_module">spice_module</a></p>
 </dd>
 </dl>
@@ -1148,7 +1151,7 @@ in the parent entity.</p>
 <span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spice/testbench.html#testbench.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spice.testbench.testbench.export" title="Permalink to this definition"></a></dt>
 <dd><p>Internally called function to write the testbench to a file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>force</strong> (<em>Bool</em><em>, </em><em>False</em>) – </p>
 </dd>
 </dl>
@@ -1173,7 +1176,7 @@ in the parent entity.</p>
 <dd><p>Input signal definitions parsed from spice_iofile objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1186,7 +1189,7 @@ in the parent entity.</p>
 the parent entity, as well as ‘ELDOLIBFILE’ or ‘SPECTRELIBFILE’ global
 variables in TheSDK.config.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1214,7 +1217,7 @@ the parent entity.</p>
 <dd><p>All output IOs are mapped to plot or print statements in the testbench.
 Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1226,7 +1229,7 @@ Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled
 <dd><p>Simulation command definition parsed from spice_simcmd object
 instantiated in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1238,13 +1241,13 @@ instantiated in the parent entity.</p>
 <dd><p>The simulator specific operation is defined with an instance of
 simulator specific class. Properties and methods return values from that class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.ngspice.ngspice_testbench.ngspice_testbench" title="spice.ngspice.ngspice_testbench.ngspice_testbench">ngspice_testbench</a></p>
 </dd>
-<dt class="field-even">Type</dt>
+<dt class="field-even">Type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#spice.eldo.eldo_testbench.eldo_testbench" title="spice.eldo.eldo_testbench.eldo_testbench">eldo_testbench</a></p>
 </dd>
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#spice.spectre.spectre_testbench.spectre_testbench" title="spice.spectre.spectre_testbench.spectre_testbench">spectre_testbench</a></p>
 </dd>
 </dl>
@@ -1266,7 +1269,7 @@ This class is utilized by the main spice class.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcsources</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.dcsources" title="Permalink to this definition"></a></dt>
 <dd><p>bundle of DC sources inherited from parent</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bundle</p>
 </dd>
 </dl>
@@ -1293,7 +1296,7 @@ This class is utilized by the main spice class.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofiles</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.iofiles" title="Permalink to this definition"></a></dt>
 <dd><p>bundle of iofiles inherited from parent</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bundle</p>
 </dd>
 </dl>
@@ -1305,7 +1308,7 @@ This class is utilized by the main spice class.</p>
 <dd><p>Spice options string parsed from self.spiceoptions -dictionary in the
 parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1316,7 +1319,7 @@ parent entity.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simcmds</span></span><a class="headerlink" href="#spice.testbench_common.testbench_common.simcmds" title="Permalink to this definition"></a></dt>
 <dd><p>bundle of simulation commands inherited from parent</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bundle</p>
 </dd>
 </dl>
@@ -1341,7 +1344,7 @@ Accessible as iofile_bundle.Members[‘name’].</p>
 <span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.parent" title="Permalink to this definition"></a></dt>
 <dd><p>The parent object initializing the spice_iofile instance. Default None</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)">object</a></p>
 </dd>
 </dl>
@@ -1352,7 +1355,7 @@ Accessible as iofile_bundle.Members[‘name’].</p>
 <span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.name" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the IO.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1363,7 +1366,7 @@ Accessible as iofile_bundle.Members[‘name’].</p>
 <span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.dir" title="Permalink to this definition"></a></dt>
 <dd><p>Direction of the IO.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘in’ or ‘out’</p>
 </dd>
 </dl>
@@ -1379,7 +1382,7 @@ continuous amplitude outputs (sampled voltage for example), by setting
 iotype=’sample’ and ioformat=’volt’. Time type signals return a vector
 of timestamps corresponding to threshold crossings.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘event’, ‘sample’ or ‘time’</p>
 </dd>
 </dl>
@@ -1395,7 +1398,7 @@ ioformat = ‘volt’, the output signal is sampled at the clock and the
 floating point value is returned. Voltage sampling is only supported
 for non-bus signals.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘dec’, ‘bin’ or ‘volt’</p>
 </dd>
 </dl>
@@ -1406,7 +1409,7 @@ for non-bus signals.</p>
 <span class="sig-name descname"><span class="pre">sourcetype</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.sourcetype" title="Permalink to this definition"></a></dt>
 <dd><p>Type of the source associated to a file. Default ‘V’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘V’, ‘I’ or ‘ISUB’</p>
 </dd>
 </dl>
@@ -1419,7 +1422,7 @@ for non-bus signals.</p>
 complex signal. Currently implemented only for writing the ouputs in
 testbenches and reading them in.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1433,7 +1436,7 @@ is given, the same clock signal is used for all bits/buses. If a list
 is given, and the length matches ionames list length, each ioname will
 be assigned its own clock. Applies only to sample type outputs.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>)</p>
 </dd>
 </dl>
@@ -1445,7 +1448,7 @@ be assigned its own clock. Applies only to sample type outputs.</p>
 <dd><p>Threshold voltage of the trigger signal and the bit rounding. Applies
 only to sample type outputs.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1458,7 +1461,7 @@ only to sample type outputs.</p>
 values can define the extraction type as ‘risetime’ or ‘falltime’
 additionally. Default ‘rising’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘rising’, ‘falling’ or ‘both’</p>
 </dd>
 </dl>
@@ -1471,7 +1474,7 @@ additionally. Default ‘rising’.</p>
 (time). Useful for ignoring inital settling, for example. Applies only
 to sample and time outputs. Default 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1483,7 +1486,7 @@ to sample and time outputs. Default 0.</p>
 <dd><p>Flag to read the extracted bus as big-endian. Applies only to sample
 type outputs. Default False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -1494,7 +1497,7 @@ type outputs. Default False.</p>
 <span class="sig-name descname"><span class="pre">rs</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.rs" title="Permalink to this definition"></a></dt>
 <dd><p>Sample rate of the sample type input. Default None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1505,7 +1508,7 @@ type outputs. Default False.</p>
 <span class="sig-name descname"><span class="pre">vhi</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.vhi" title="Permalink to this definition"></a></dt>
 <dd><p>High bit value of sample type input. Default 1.0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1516,7 +1519,7 @@ type outputs. Default False.</p>
 <span class="sig-name descname"><span class="pre">vlo</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.vlo" title="Permalink to this definition"></a></dt>
 <dd><p>Low bit value of sample type input. Default 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1527,7 +1530,7 @@ type outputs. Default False.</p>
 <span class="sig-name descname"><span class="pre">tfall</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.tfall" title="Permalink to this definition"></a></dt>
 <dd><p>Falltime of sample type input. Default 5e-12.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1538,7 +1541,7 @@ type outputs. Default False.</p>
 <span class="sig-name descname"><span class="pre">trise</span></span><a class="headerlink" href="#spice.spice_iofile.spice_iofile.trise" title="Permalink to this definition"></a></dt>
 <dd><p>Risetime of sample type input. Default 5e-12.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -1550,7 +1553,7 @@ type outputs. Default False.</p>
 <dd><p>True if the event type IO uses only the strobe filtered values. False if the IO contains
 all of the values simulated values (not consistently strobed). Default False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -1595,7 +1598,7 @@ example.:</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
 <li><p><strong>**kwargs</strong> – <dl class="simple">
@@ -1643,7 +1646,7 @@ automatically.</p>
 the ‘event’ type input signal. Returns the time-stamps of the crossing
 instants in a 1D-vector.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>ndarray</em>) – Input data array. Expected an ‘event’ type 2D-vector where first
 column is time and second is voltage.</p></li>
@@ -1655,10 +1658,10 @@ threshold crossing as possible.</p></li>
 <li><p><strong>edgetype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Direction of the crossing: ‘rising’, ‘falling’ or ‘both’.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1D-vector with time-stamps of interpolated threshold crossings.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -1698,7 +1701,7 @@ list if needed.</p>
 <p>Finds the signal y-values at time instants defined by the clock signal
 (trigger).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>ndarray</em>) – Input data array. Expected an ‘event’ type 2D-vector where first
 column is time and second is voltage.</p></li>
@@ -1710,10 +1713,10 @@ threshold crossing as possible.</p></li>
 <li><p><strong>edgetype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Direction of the crossing: ‘rising’, ‘falling’ or ‘both’.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1D-vector with time-stamps of interpolated threshold crossings.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -1743,7 +1746,7 @@ attaches spice_simcmd objects to simcmd_bundle -bundle in testbench.</p>
 <span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.parent" title="Permalink to this definition"></a></dt>
 <dd><p>The parent object initializing the spice_simcmd instance. Default None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)">object</a></p>
 </dd>
 </dl>
@@ -1754,7 +1757,7 @@ attaches spice_simcmd objects to simcmd_bundle -bundle in testbench.</p>
 <span class="sig-name descname"><span class="pre">sim</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.sim" title="Permalink to this definition"></a></dt>
 <dd><p>Simulation type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘tran’ or ‘dc’</p>
 </dd>
 </dl>
@@ -1795,7 +1798,7 @@ from the output to reduce file size. Examples of such devices are
 RC-parasitics (include option savefilter=’rc’ in self.spiceoptions to
 exclude them) and dummy transistors. See excludelist below.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>)</p>
 </dd>
 </dl>
@@ -1814,7 +1817,7 @@ exclude all dummy transistors with:</p>
 </div>
 <p>where DUMMY_ID is extraction tool / runset specific dummy identifier.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>)</p>
 </dd>
 </dl>
@@ -1833,7 +1836,7 @@ For example:</p>
 <p>sweeps the top-level parameter temp (temperature) from 27 to 87 in 10
 degree increments.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
@@ -1851,7 +1854,7 @@ subcircuit given by this property. For example:</p>
 <p>sweeps the Vb parameter from subcircuit XSUBCKT from 0.1 volts to 1.5
 volts with 0.05 volt increments.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
@@ -1869,7 +1872,7 @@ device given by this property. For example:</p>
 <p>sweeps the width of transistor XNMOS of subckt XSUBCKT from 10u to 14u
 in 0.1u increments.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
 </dd>
 </dl>
@@ -1880,7 +1883,7 @@ in 0.1u increments.</p>
 <span class="sig-name descname"><span class="pre">swpstart</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.swpstart" title="Permalink to this definition"></a></dt>
 <dd><p>Starting point of DC sweep. Default 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1891,7 +1894,7 @@ in 0.1u increments.</p>
 <span class="sig-name descname"><span class="pre">swpstop</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.swpstop" title="Permalink to this definition"></a></dt>
 <dd><p>Stop point of DC sweep. Default 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1902,7 +1905,7 @@ in 0.1u increments.</p>
 <span class="sig-name descname"><span class="pre">swpstep</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.swpstep" title="Permalink to this definition"></a></dt>
 <dd><p>Step size of the sweep simulation. Default 10.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1913,7 +1916,7 @@ in 0.1u increments.</p>
 <span class="sig-name descname"><span class="pre">tprint</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.tprint" title="Permalink to this definition"></a></dt>
 <dd><p>Print interval. Default 1e-12 (same as ‘1p’).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1925,7 +1928,7 @@ in 0.1u increments.</p>
 <dd><p>Transient simulation duration. When not defined, the simulation time is
 the duration of the longest input signal.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1936,7 +1939,7 @@ the duration of the longest input signal.</p>
 <span class="sig-name descname"><span class="pre">uic</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.uic" title="Permalink to this definition"></a></dt>
 <dd><p>Use initial conditions flag. Default False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -1947,7 +1950,7 @@ the duration of the longest input signal.</p>
 <span class="sig-name descname"><span class="pre">noise</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.noise" title="Permalink to this definition"></a></dt>
 <dd><p>Noise transient flag. Default False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -1958,7 +1961,7 @@ the duration of the longest input signal.</p>
 <span class="sig-name descname"><span class="pre">fmin</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.fmin" title="Permalink to this definition"></a></dt>
 <dd><p>Minimum noise frequency. Default 1 (Hz).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1969,7 +1972,7 @@ the duration of the longest input signal.</p>
 <span class="sig-name descname"><span class="pre">fmax</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.fmax" title="Permalink to this definition"></a></dt>
 <dd><p>Maximum noise frequency. Default 5e9.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -1980,7 +1983,7 @@ the duration of the longest input signal.</p>
 <span class="sig-name descname"><span class="pre">fscale</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.fscale" title="Permalink to this definition"></a></dt>
 <dd><p>Logarithmic or linear scale for frequency. Default ‘log’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘log’ or ‘lin’</p>
 </dd>
 </dl>
@@ -1991,7 +1994,7 @@ the duration of the longest input signal.</p>
 <span class="sig-name descname"><span class="pre">fpoints</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.fpoints" title="Permalink to this definition"></a></dt>
 <dd><p>Number of points for frequency analysis. Default 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
@@ -2003,7 +2006,7 @@ the duration of the longest input signal.</p>
 <dd><p>Step size for AC analysis, if scale if ‘lin’. If fscale is ‘log’, this
 parameter gives number of points per decade. Default 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
@@ -2014,7 +2017,7 @@ parameter gives number of points per decade. Default 0.</p>
 <span class="sig-name descname"><span class="pre">seed</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.seed" title="Permalink to this definition"></a></dt>
 <dd><p>Random generator seed for noise transient. Default None (random).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
@@ -2026,7 +2029,7 @@ parameter gives number of points per decade. Default 0.</p>
 <dd><p>Transient integration method. Default None (Spectre takes
 method from errpreset).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2038,7 +2041,7 @@ method from errpreset).</p>
 <dd><p>Spectre cmin parameter: this much cap from each node to ground.
 Might speed up simulation. Default None (not used).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -2054,7 +2057,7 @@ group of entities in the testbench with each having mc=True,
 simulating them in parallel (see run_parallel() of thesdk-class),
 post-processing results in Python.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -2065,7 +2068,7 @@ post-processing results in Python.</p>
 <span class="sig-name descname"><span class="pre">mc_seed</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.mc_seed" title="Permalink to this definition"></a></dt>
 <dd><p>Random seed for the Monte Carlo instance. Default None (random seed).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
@@ -2076,7 +2079,7 @@ post-processing results in Python.</p>
 <span class="sig-name descname"><span class="pre">model_info</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.model_info" title="Permalink to this definition"></a></dt>
 <dd><p>For Spectre only! If true, print model parameters to raw-file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -2087,7 +2090,7 @@ post-processing results in Python.</p>
 <span class="sig-name descname"><span class="pre">maxstep</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.maxstep" title="Permalink to this definition"></a></dt>
 <dd><p>Maximum time step Spectre simulator will use during transient analysis</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -2098,7 +2101,7 @@ post-processing results in Python.</p>
 <span class="sig-name descname"><span class="pre">step</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.step" title="Permalink to this definition"></a></dt>
 <dd><p>According to Spectre: minimum time step used by the simulator solely to maintain the aesthetics of the computed waveforms.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -2111,7 +2114,7 @@ post-processing results in Python.</p>
 by this parameter. Note that the simulator still outputs points between the sampling
 points.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -2123,7 +2126,7 @@ points.</p>
 <dd><p>For Spectre only! Delay between start of transient simulation and first strobed output,
 if strobedelay is None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -2134,7 +2137,7 @@ if strobedelay is None.</p>
 <span class="sig-name descname"><span class="pre">strobedelay</span></span><a class="headerlink" href="#spice.spice_simcmd.spice_simcmd.strobedelay" title="Permalink to this definition"></a></dt>
 <dd><p>For Spectre only! Delay between skipstart and the first strobe point.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -2169,7 +2172,7 @@ the spice_testbench module.</p>
 ‘subckt’ property. Enables using compatible (in term sof IOs paremeters) netlists defined
 for designs of different name.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2188,7 +2191,7 @@ can set this parameter before execution as:</p>
 <dd><p>Internally called function to write the parsed subcircuit definitions
 to a file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Path to file where to write.</p></li>
 <li><p><strong>force</strong> (<em>Bool</em><em>, </em><em>False</em>) – Force writing</p></li>
@@ -2203,7 +2206,7 @@ to a file.</p>
 <dd><p>Filepath to the entity’s spice netlist source file
 (i.e. ‘./spice/entityname.scs’).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2215,7 +2218,7 @@ to a file.</p>
 <dd><p>The subcircuit instance to be placed in the testbench. Parsed from
 the subckt property</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2226,7 +2229,7 @@ the subckt property</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spice.spice_module.spice_module.name" title="Permalink to this definition"></a></dt>
 <dd><p>Entity name</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2239,7 +2242,7 @@ the subckt property</p>
 Extract the definitions form the source netlist. The source netlist when accessed.
 Can be written to the subckt_file with export_subckt method.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2258,7 +2261,7 @@ Can be written to the subckt_file with export_subckt method.</p>
 <dd><p>This class is used as instance in simulatormodule property of
 spice class. Contains language dependent definitions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this simulator class.</em>) – </p></li>
 <li><p><strong>**kwargs</strong> – None</p></li>
@@ -2270,7 +2273,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cmdfile_ext</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.cmdfile_ext" title="Permalink to this definition"></a></dt>
 <dd><p>Extension of the command file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2281,7 +2284,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentchar</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.commentchar" title="Permalink to this definition"></a></dt>
 <dd><p>Comment character of the simulator</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2292,7 +2295,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentline</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.commentline" title="Permalink to this definition"></a></dt>
 <dd><p>Comment line for the simulator</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2303,7 +2306,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">csvskip</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.csvskip" title="Permalink to this definition"></a></dt>
 <dd><p>int</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Needs documentation. Lines skipped in result file</p>
 </dd>
 </dl>
@@ -2314,7 +2317,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcsource_declaration</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.dcsource_declaration" title="Permalink to this definition"></a></dt>
 <dd><p>DC source declaration</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2325,7 +2328,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dspfinclude</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.dspfinclude" title="Permalink to this definition"></a></dt>
 <dd><p>Netlist dspf-file include string</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2336,7 +2339,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">eventoutdelim</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.eventoutdelim" title="Permalink to this definition"></a></dt>
 <dd><p>Delimiter for the events</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2347,7 +2350,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.include" title="Permalink to this definition"></a></dt>
 <dd><p>Netlist include string</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2358,7 +2361,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lastline</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.lastline" title="Permalink to this definition"></a></dt>
 <dd><p>Last line of the simulator command file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2369,7 +2372,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nprocflag</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.nprocflag" title="Permalink to this definition"></a></dt>
 <dd><p>String for defining multithread execution</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2380,7 +2383,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">option</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.option" title="Permalink to this definition"></a></dt>
 <dd><p>Netlist option definition string</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2391,7 +2394,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.parameter" title="Permalink to this definition"></a></dt>
 <dd><p>Netlist parameter definition string</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2408,7 +2411,7 @@ spice class. Contains language dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plotprogcmd</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.plotprogcmd" title="Permalink to this definition"></a></dt>
 <dd><p>Command to be run for interactive simulations.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2433,7 +2436,7 @@ TODO: Implement for Eldo as well.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resultfile_ext</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.resultfile_ext" title="Permalink to this definition"></a></dt>
 <dd><p>Extension of the result file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2453,7 +2456,7 @@ Tested for spectre and eldo.</p>
 <dd><p>Simulator execution command
 (Default: ‘ngspice’)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2465,7 +2468,7 @@ Tested for spectre and eldo.</p>
 <dd><p>Simulation command string to be executed on the command line.
 Automatically generated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2476,7 +2479,7 @@ Automatically generated.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subckt</span></span><a class="headerlink" href="#spice.ngspice.ngspice.ngspice.subckt" title="Permalink to this definition"></a></dt>
 <dd><p>Subcircuit include string</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2502,7 +2505,7 @@ Automatically generated.</p>
 <dd><p>This class is used as instance in <em>spice_simulatormodule</em> property of
 spice class. Contains simulator dependent definitions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this simulator class.</em>) – </p></li>
 <li><p><strong>**kwargs</strong> – None</p></li>
@@ -2514,7 +2517,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cmdfile_ext</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.cmdfile_ext" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Extension of the command file</p>
 </dd>
 </dl>
@@ -2525,7 +2528,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentchar</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.commentchar" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Comment character of the simulator</p>
 </dd>
 </dl>
@@ -2536,7 +2539,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentline</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.commentline" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Comment line for the simulator</p>
 </dd>
 </dl>
@@ -2547,7 +2550,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">csvskip</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.csvskip" title="Permalink to this definition"></a></dt>
 <dd><p>int</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Needs documentation. Lines skipped in result file</p>
 </dd>
 </dl>
@@ -2558,7 +2561,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcsource_declaration</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.dcsource_declaration" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>DC source declaration</p>
 </dd>
 </dl>
@@ -2569,7 +2572,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dspfinclude</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.dspfinclude" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist dspf-file include string</p>
 </dd>
 </dl>
@@ -2580,7 +2583,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">eventoutdelim</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.eventoutdelim" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Delimiter for the events</p>
 </dd>
 </dl>
@@ -2591,7 +2594,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.include" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist include string</p>
 </dd>
 </dl>
@@ -2602,7 +2605,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lastline</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.lastline" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Last line of the simulator command file</p>
 </dd>
 </dl>
@@ -2613,7 +2616,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nprocflag</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.nprocflag" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>String for defining multithread execution</p>
 </dd>
 </dl>
@@ -2624,7 +2627,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">option</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.option" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist option definition string</p>
 </dd>
 </dl>
@@ -2635,7 +2638,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.parameter" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist parameter definition string</p>
 </dd>
 </dl>
@@ -2652,7 +2655,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plotprogcmd</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.plotprogcmd" title="Permalink to this definition"></a></dt>
 <dd><p>Command to be run for interactive simulations.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2678,7 +2681,7 @@ TODO: Implement for Eldo as well.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resultfile_ext</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.resultfile_ext" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Extension of the result file</p>
 </dd>
 </dl>
@@ -2697,7 +2700,7 @@ Tested for spectre and eldo.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simulatorcmd</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.simulatorcmd" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Simulator execution command</p>
 </dd>
 </dl>
@@ -2716,7 +2719,7 @@ Automatically generated.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subckt</span></span><a class="headerlink" href="#spice.eldo.eldo.eldo.subckt" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Subcircuit include string</p>
 </dd>
 </dl>
@@ -2740,7 +2743,7 @@ Automatically generated.</p>
 <dd><p>This class is used as instance in spice_simulatormodule property of
 spice class. Contains simulator dependent definitions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this simulator class.</em>) – </p></li>
 <li><p><strong>**kwargs</strong> – None</p></li>
@@ -2752,7 +2755,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cmdfile_ext</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.cmdfile_ext" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Extension of the command file</p>
 </dd>
 </dl>
@@ -2763,7 +2766,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentchar</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.commentchar" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Comment character of the simulator</p>
 </dd>
 </dl>
@@ -2774,7 +2777,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentline</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.commentline" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Comment line for the simulator</p>
 </dd>
 </dl>
@@ -2785,7 +2788,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">csvskip</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.csvskip" title="Permalink to this definition"></a></dt>
 <dd><p>int</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Needs documentation. Lines skipped in result file</p>
 </dd>
 </dl>
@@ -2796,7 +2799,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcsource_declaration</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.dcsource_declaration" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>DC source declaration</p>
 </dd>
 </dl>
@@ -2807,7 +2810,7 @@ spice class. Contains simulator dependent definitions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dspfinclude</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.dspfinclude" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist dspf-file include string</p>
 </dd>
 </dl>
@@ -2829,7 +2832,7 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">eventoutdelim</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.eventoutdelim" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Delimiter for the events</p>
 </dd>
 </dl>
@@ -2840,7 +2843,7 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.include" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist include string</p>
 </dd>
 </dl>
@@ -2851,7 +2854,7 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lastline</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.lastline" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Last line of the simulator command file</p>
 </dd>
 </dl>
@@ -2862,7 +2865,7 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nprocflag</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.nprocflag" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>String for defining multithread execution</p>
 </dd>
 </dl>
@@ -2873,7 +2876,7 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">option</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.option" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist option definition string</p>
 </dd>
 </dl>
@@ -2884,7 +2887,7 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.parameter" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Netlist parameter definition string</p>
 </dd>
 </dl>
@@ -2902,7 +2905,7 @@ See: <a class="reference external" href="https://community.cadence.com/cadence_b
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plotprogcmd</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.plotprogcmd" title="Permalink to this definition"></a></dt>
 <dd><p>Command to be run for interactive simulations.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -2928,7 +2931,7 @@ TODO: Implement for Eldo as well.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resultfile_ext</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.resultfile_ext" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Extension of the result file</p>
 </dd>
 </dl>
@@ -2946,7 +2949,7 @@ TODO: Implement for Eldo as well.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simulatorcmd</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.simulatorcmd" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Simulator execution command</p>
 </dd>
 </dl>
@@ -2965,7 +2968,7 @@ Automatically generated.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subckt</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.subckt" title="Permalink to this definition"></a></dt>
 <dd><p>str</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Subcircuit include string</p>
 </dd>
 </dl>
@@ -2988,7 +2991,7 @@ Automatically generated.</p>
 <dd><p>Executes init of testbench_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module testbench_common</p>
 </dd>
 </dl>
@@ -2998,7 +3001,7 @@ parameters.</p>
 <dd><p>DC source definitions parsed from spice_dcsource objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3010,7 +3013,7 @@ in the parent entity.</p>
 <dd><p>Input signal definitions parsed from spice_iofile objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3023,7 +3026,7 @@ in the parent entity.</p>
 the parent entity, as well as ‘ELDOLIBFILE’ or ‘SPECTRELIBFILE’ global
 variables in TheSDK.config.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3043,7 +3046,7 @@ parent entity.</p>
 <dd><p>All output IOs are mapped to plot or print statements in the testbench.
 Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3069,7 +3072,7 @@ instantiated in the parent entity.</p>
 <dd><p>Executes init of testbench_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module testbench_common</p>
 </dd>
 </dl>
@@ -3087,7 +3090,7 @@ in the parent entity.</p>
 <dd><p>Input signal definitions parsed from spice_iofile objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3100,7 +3103,7 @@ in the parent entity.</p>
 the parent entity, as well as ‘ELDOLIBFILE’ or ‘SPECTRELIBFILE’ global
 variables in TheSDK.config.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3120,7 +3123,7 @@ parent entity.</p>
 <dd><p>All output IOs are mapped to plot or print statements in the testbench.
 Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3132,7 +3135,7 @@ Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled
 <dd><p>Simulation command definition parsed from spice_simcmd object
 instantiated in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3150,7 +3153,7 @@ instantiated in the parent entity.</p>
 <dd><p>Executes init of testbench_common, thus having the same attributes and
 parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – See module testbench_common</p>
 </dd>
 </dl>
@@ -3160,7 +3163,7 @@ parameters.</p>
 <dd><p>DC source definitions parsed from spice_dcsource objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3172,7 +3175,7 @@ in the parent entity.</p>
 <dd><p>Input signal definitions parsed from spice_iofile objects instantiated
 in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3185,7 +3188,7 @@ in the parent entity.</p>
 the parent entity, as well as ‘ELDOLIBFILE’ or ‘SPECTRELIBFILE’ global
 variables in TheSDK.config.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3213,7 +3216,7 @@ parent entity.</p>
 <dd><p>All output IOs are mapped to plot or print statements in the testbench.
 Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3225,7 +3228,7 @@ Also manual plot commands through <cite>spice_simcmd.plotlist</cite> are handled
 <dd><p>Simulation command definition parsed from spice_simcmd object
 instantiated in the parent entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3251,7 +3254,7 @@ spice_dcsource objects to dcsource_bundle -bundle in testbench.</p>
 <dd><p>The parent object initializing the spice_dcsource instance. Default
 None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)">object</a></p>
 </dd>
 </dl>
@@ -3262,7 +3265,7 @@ None.</p>
 <span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#spice.spice_dcsource.spice_dcsource.name" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the source.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3273,7 +3276,7 @@ None.</p>
 <span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#spice.spice_dcsource.spice_dcsource.value" title="Permalink to this definition"></a></dt>
 <dd><p>Value of the source.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -3286,7 +3289,7 @@ None.</p>
 The parameter will be automatically added to spiceparameters with the
 default value of self.value.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3297,7 +3300,7 @@ default value of self.value.</p>
 <span class="sig-name descname"><span class="pre">sourcetype</span></span><a class="headerlink" href="#spice.spice_dcsource.spice_dcsource.sourcetype" title="Permalink to this definition"></a></dt>
 <dd><p>Type of the DC source. Either ‘V’ for voltage or ‘I’ for current.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>‘V’ or ‘I’</p>
 </dd>
 </dl>
@@ -3308,7 +3311,7 @@ default value of self.value.</p>
 <span class="sig-name descname"><span class="pre">pos</span></span><a class="headerlink" href="#spice.spice_dcsource.spice_dcsource.pos" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the positive net in the netlist.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3319,7 +3322,7 @@ default value of self.value.</p>
 <span class="sig-name descname"><span class="pre">neg</span></span><a class="headerlink" href="#spice.spice_dcsource.spice_dcsource.neg" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the negative net in the netlist.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
@@ -3332,7 +3335,7 @@ default value of self.value.</p>
 Extracted currents and powers are accessible through dictionaries
 self.currents and self.powers in the parent object. Default False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -3344,7 +3347,7 @@ self.currents and self.powers in the parent object. Default False.</p>
 <dd><p>Time to start extracting average transient power consumption. Default
 is 0.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -3356,7 +3359,7 @@ is 0.</p>
 <dd><p>Time to stop extracting average transient power consumption. Default
 is simulation end time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
@@ -3368,7 +3371,7 @@ is simulation end time.</p>
 <dd><p>Enable the noise contribution of this source (only when transient noise
 is enabled). Default is True.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
@@ -3380,7 +3383,7 @@ is enabled). Default is True.</p>
 <dd><p>Ramp up the source from 0 to value in ramp seconds. Default is 0 (no
 ramping).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>

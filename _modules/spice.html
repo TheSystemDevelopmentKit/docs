@@ -10,10 +10,9 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
       <li class="breadcrumb-item active">spice</li>
       <li class="wy-breadcrumbs-aside">
@@ -141,7 +144,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">si_prefix_mult</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;dict : Dictionary mapping SI-prefixes to multipliers.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict : Dictionary mapping SI-prefixes to multipliers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_si_prefix_mult&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_si_prefix_mult</span>
@@ -164,7 +167,7 @@
    
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spice_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot;The simulator specific operation is defined with an instance of </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The simulator specific operation is defined with an instance of </span>
 <span class="sd">        simulator specific class. Properties and methods return values from that class.</span>
 
 <span class="sd">        :type: ngspice</span>
@@ -184,7 +187,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;dict : Internally used dictionary for common syntax conversions between</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict : Internally used dictionary for common syntax conversions between</span>
 <span class="sd">        Spectre, Eldo, and Ngspice.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_syntaxdict&#39;</span><span class="p">):</span>
@@ -196,7 +199,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preserve_spicefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;bool : If True, do not delete generated Spice files (testbench, subcircuit,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : If True, do not delete generated Spice files (testbench, subcircuit,</span>
 <span class="sd">        etc.) after simulations.  Useful for debugging.</span>
 
 <span class="sd">            (Default : False )</span>
@@ -212,7 +215,7 @@
 
     <span class="nd">@property</span> 
     <span class="k">def</span> <span class="nf">spicesimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; str : Path to the directory where the simulation results are stored.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; str : Path to the directory where the simulation results are stored.</span>
 
 <span class="sd">          ( Default : self.simpath )</span>
 
@@ -222,7 +225,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesimpath</span>
 
 <div class="viewcode-block" id="spice.delete_spicesimpath"><a class="viewcode-back" href="../spice/sections.html#spice.spice.delete_spicesimpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_spicesimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Method to clean up files from spicesimpath.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to clean up files from spicesimpath.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">):</span>
@@ -276,7 +279,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">distributed_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bool : If True, distributes applicable simulations (currently DC sweep</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : If True, distributes applicable simulations (currently DC sweep</span>
 <span class="sd">        supported) into the LSF cluster. The number of subprocesses launched is</span>
 <span class="sd">        set by self.num_processes.</span>
 
@@ -294,7 +297,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;int :  Maximum number of spawned child processes for distributed runs.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int :  Maximum number of spawned child processes for distributed runs.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_num_processes&#39;</span><span class="p">):</span>
@@ -308,7 +311,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">load_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;str : Feature for loading results of previous simulation. The Spice</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Feature for loading results of previous simulation. The Spice</span>
 <span class="sd">        simulation is not re-executed, but the outputs will be read from</span>
 <span class="sd">        existing files. The string value should be the `runname` of the desired</span>
 <span class="sd">        simulation.</span>
@@ -342,7 +345,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicecorner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;dict : Feature for specifying the &#39;section&#39; of the model library file and</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict : Feature for specifying the &#39;section&#39; of the model library file and</span>
 <span class="sd">        simulation temperature. The path to model libraries should be set in</span>
 <span class="sd">        TheSDK.config as either ELDOLIBFILE, SPECTRELIBFILE or NGSPICELIBFILE</span>
 <span class="sd">        variable.</span>
@@ -371,7 +374,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spiceoptions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;dict : Feature for specifying options for spice simulation. The key is the</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict : Feature for specifying options for spice simulation. The key is the</span>
 <span class="sd">        name of the option (as in simulator manual specifies), and the value is</span>
 <span class="sd">        the value given to said option. Valid key-value pairs can be found from</span>
 <span class="sd">        the manual of the simulator (Eldo, Spectre or Ngspice).</span>
@@ -399,7 +402,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spiceparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot;dict : Feature for specifying simulation parameters for spice simulation. The</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict : Feature for specifying simulation parameters for spice simulation. The</span>
 <span class="sd">        key is the name of the parameter , and the value is the value given to</span>
 <span class="sd">        said parameter.</span>
 
@@ -423,7 +426,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interactive_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bool : Launch simulator in interactive mode. A waveform viewer (ezwave by</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : Launch simulator in interactive mode. A waveform viewer (ezwave by</span>
 <span class="sd">        default) is opened during the simulation for debugging. See</span>
 <span class="sd">        `plotprogram` for selecting waveform viewer program.</span>
 <span class="sd">         </span>
@@ -442,7 +445,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nproc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;int : Requested maximum number of threads for multithreaded simulations.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int : Requested maximum number of threads for multithreaded simulations.</span>
 
 <span class="sd">        Eldo : maps to command line parameter &#39;-nproc&#39;</span>
 
@@ -464,7 +467,7 @@
     <span class="c1"># DSPF filenames</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dspf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;[str] : List containing filenames for DSPF-files to be included for post-layout</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;[str] : List containing filenames for DSPF-files to be included for post-layout</span>
 <span class="sd">        simulations. The names given in this list are matched to dspf-files in</span>
 <span class="sd">        &#39;./spice/&#39; -directory. A postfix &#39;.pex.dspf&#39; is automatically appended</span>
 <span class="sd">        to the given names (this will probably change later).</span>
@@ -491,7 +494,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">postlayout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bool : Enables post-layout optimizations in the simulator command options. </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : Enables post-layout optimizations in the simulator command options. </span>
 <span class="sd">            (Default : False )</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -515,7 +518,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_eventdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;dict : Dictionary to store event type output from the simulations. This should</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict : Dictionary to store event type output from the simulations. This should</span>
 <span class="sd">        speed up reading the results.</span>
 
 <span class="sd">        NOTE: Eldo seems to force output names to uppercase, let&#39;s</span>
@@ -535,7 +538,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dcsource_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Bundle : A thesdk.Bundle containing `spice_dcsource` objects. The `spice_dcsource`</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bundle : A thesdk.Bundle containing `spice_dcsource` objects. The `spice_dcsource`</span>
 <span class="sd">        objects are automatically added to this Bundle, nothing should be</span>
 <span class="sd">        manually added.</span>
 
@@ -551,7 +554,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simcmd_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Bundle : A thesdk.Bundle containing `spice_simcmd` objects. The `spice_simcmd`</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Bundle : A thesdk.Bundle containing `spice_simcmd` objects. The `spice_simcmd`</span>
 <span class="sd">        objects are automatically added to this Bundle, nothing should be</span>
 <span class="sd">        manually added.</span>
 
@@ -565,7 +568,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Bundle : A thesdk.Bundle containing extracted quantities.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Bundle : A thesdk.Bundle containing extracted quantities.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">extracts</span>
@@ -575,7 +578,7 @@
 
     <span class="nd">@property</span> 
     <span class="k">def</span> <span class="nf">spice_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Defines spice submission prefix from thesdk.GLOBALS[&#39;LSFSUBMISSION&#39;]</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Defines spice submission prefix from thesdk.GLOBALS[&#39;LSFSUBMISSION&#39;]</span>
 <span class="sd">        and thesdk.GLOBALS[&#39;LSFINTERACTIVE&#39;] for LSF submissions.</span>
 
 <span class="sd">        Usually something like &#39;bsub -K&#39; or &#39;bsub -I&#39;.</span>
@@ -607,7 +610,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicemisc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot; [str] : List of manual commands to be pasted to the testbench. The strings are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; [str] : List of manual commands to be pasted to the testbench. The strings are</span>
 <span class="sd">        pasted to their own lines (no linebreaks needed), and the syntax is</span>
 <span class="sd">        unchanged.</span>
 
@@ -636,7 +639,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Name of the module.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Name of the module.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classfile</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
@@ -644,7 +647,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicesrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Path to the spice source of the entity. Can be set manually to desired location.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Path to the spice source of the entity. Can be set manually to desired location.</span>
 <span class="sd">        This variable provides the dspf-parasitic netlist filepath.</span>
 
 <span class="sd">            ( Default: &lt;entity path&gt;/spice )</span>
@@ -665,7 +668,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicesrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Path to the source netlist. Can be set manually to desired location.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Path to the source netlist. Can be set manually to desired location.</span>
 <span class="sd">        </span>
 <span class="sd">            ( Default: &#39;spice/entityname.scs&#39; )</span>
 
@@ -685,7 +688,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicetbsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Path to the spice testbench (&#39;&lt;spicesimpath&gt;/tb_entityname.&lt;suffix&gt;&#39;).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Path to the spice testbench (&#39;&lt;spicesimpath&gt;/tb_entityname.&lt;suffix&gt;&#39;).</span>
 <span class="sd">        This shouldn&#39;t be set manually.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -695,7 +698,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicesubcktsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Path to the parsed subcircuit file. (&#39;&lt;spicesimpath&gt;/subckt_entityname.&lt;suffix&gt;&#39;).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Path to the parsed subcircuit file. (&#39;&lt;spicesimpath&gt;/subckt_entityname.&lt;suffix&gt;&#39;).</span>
 <span class="sd">        This shouldn&#39;t be set manually.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -706,7 +709,7 @@
     
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; str : Postlayout simulation accuracy/RC reduction flag.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; str : Postlayout simulation accuracy/RC reduction flag.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plflag&#39;</span><span class="p">):</span>
@@ -718,7 +721,7 @@
             
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Simulation command string to be executed on the command line.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulation command string to be executed on the command line.</span>
 <span class="sd">        Automatically generated.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -732,7 +735,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicedbpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Path to output waveform database. (&lt;spicesimpath&gt;/tb_&lt;entityname&gt;.&lt;resultfile_ext&gt;)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Path to output waveform database. (&lt;spicesimpath&gt;/tb_&lt;entityname&gt;.&lt;resultfile_ext&gt;)</span>
 <span class="sd">        (For now only for spectre. HOW? should work for Eldo too)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -747,7 +750,7 @@
     <span class="c1">### These are simuator related i.e. ezwave does not work for ngspice.</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Sets the program to be used for visualizing waveform databases.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Sets the program to be used for visualizing waveform databases.</span>
 <span class="sd">        Options are ezwave (default) or viva.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -761,7 +764,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; str : Command to be run for interactive simulations.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; str : Command to be run for interactive simulations.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">plotprogcmd</span>
@@ -772,7 +775,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">save_database</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot;bool : Whether to save the waveform database (.wdb-file for eldo, raw-database</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : Whether to save the waveform database (.wdb-file for eldo, raw-database</span>
 <span class="sd">        for spectre), when save_state=True.</span>
 
 <span class="sd">            ( Default : False)</span>
@@ -788,7 +791,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">save_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;bool : If True and save_state is True, copy the output file of simulator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : If True and save_state is True, copy the output file of simulator</span>
 <span class="sd">        to entity statedir. Useful for scavenging results if simulator exited</span>
 <span class="sd">        but state was not written to disk for some reason.</span>
 
@@ -806,7 +809,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">load_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot;bool : Whether to load the outputs from simulator output file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool : Whether to load the outputs from simulator output file.</span>
 <span class="sd">        This only works if the file exists in the state directory, i.e.</span>
 <span class="sd">        the simulator was run with save_output_file=True.</span>
 <span class="sd">        WARNING: This will read the IOS from the output file, and REWRITE</span>
@@ -825,7 +828,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="n">value</span>
 
 <div class="viewcode-block" id="spice.connect_spice_inputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (inputs) to top</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (inputs) to top</span>
 <span class="sd">        entity IOS Bundle items.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -839,7 +842,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span></div>
 
 <div class="viewcode-block" id="spice.connect_spice_outputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (outputs) to top</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (outputs) to top</span>
 <span class="sd">        entity IOS Bundle items.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -848,7 +851,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span></div>
 
 <div class="viewcode-block" id="spice.write_spice_inputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.write_spice_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">write_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Automatically called function to call write() functions of each</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to call write() functions of each</span>
 <span class="sd">        iofile with direction &#39;input&#39;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -862,7 +865,7 @@
 
 
 <div class="viewcode-block" id="spice.read_spice_outputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.read_spice_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">read_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Automatically called function to call read() functions of each</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to call read() functions of each</span>
 <span class="sd">        iofile with direction &#39;output&#39;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -919,7 +922,7 @@
                         <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]))</span></div>
     
 <div class="viewcode-block" id="spice.execute_spice_sim"><a class="viewcode-back" href="../spice/sections.html#spice.spice.execute_spice_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_spice_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Automatically called function to execute spice simulation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to execute spice simulation.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Running external command </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spicecmd</span><span class="p">)</span> <span class="p">)</span>
@@ -927,16 +930,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Simulator (</span><span class="si">%s</span><span class="s2">) returned non-zero exit code.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="spice.run_plotprogram"><a class="viewcode-back" href="../spice/sections.html#spice.spice.run_plotprogram">[docs]</a>    <span class="k">def</span> <span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
 <span class="sd">        The plotting program command can be set with &#39;plotprogram&#39;.</span>
 <span class="sd">        Tested for spectre and eldo.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">run_plotprogram</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">run_plotprogram</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Waveform viewer </span><span class="si">%s</span><span class="s1"> not launched due to distributed run.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="spice.extract_powers"><a class="viewcode-back" href="../spice/sections.html#spice.spice.extract_powers">[docs]</a>    <span class="k">def</span> <span class="nf">extract_powers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Automatically called function to extract transient power and current</span>
 <span class="sd">        consumptions. The consumptions are extracted for spice_dcsource objects</span>
 <span class="sd">        with the attribute extract=True.</span>
@@ -994,7 +1000,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while extracting power consumptions.&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="spice.read_oppts"><a class="viewcode-back" href="../spice/sections.html#spice.spice.read_oppts">[docs]</a>    <span class="k">def</span> <span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1004,7 +1010,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spice_tb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;spice_module : Testbench instance. You can set the attributes of the testbench and dut below it before you execute run_spice.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;spice_module : Testbench instance. You can set the attributes of the testbench and dut below it before you execute run_spice.</span>
 <span class="sd">        if </span>
 
 <span class="sd">        Example</span>
@@ -1028,7 +1034,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_spice_tb</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="spice.run_spice"><a class="viewcode-back" href="../spice/sections.html#spice.spice.run_spice">[docs]</a>    <span class="k">def</span> <span class="nf">run_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_state</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> 
@@ -1090,7 +1096,7 @@
     <span class="c1"># Obsolete stuff</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot; [ str ] : List of net names to be saved in the waveform database.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; [ str ] : List of net names to be saved in the waveform database.</span>
 
 <span class="sd">        .. note:: </span>
 <span class="sd">            Obsolete! Moved to `spice_simcmd` as a keyword argument.</span>
@@ -1106,7 +1112,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">errpreset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Global accuracy parameter for Spectre simulations. Options include</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Global accuracy parameter for Spectre simulations. Options include</span>
 <span class="sd">        &#39;liberal&#39;, &#39;moderate&#39; and &#39;conservative&#39;, in order of rising accuracy.</span>
 
 <span class="sd">        Example</span>

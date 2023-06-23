@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../spice.html">spice</a></li>
       <li class="breadcrumb-item active">spice.testbench</li>
@@ -106,13 +109,13 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <div class="viewcode-block" id="testbench"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench">[docs]</a><span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class generates all testbench contents.</span>
 <span class="sd">    This class is utilized by the main spice class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
 <span class="sd">        parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -129,14 +132,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">DEBUG</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This fixes DEBUG prints in spice_iofile, by propagating the DEBUG</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; This fixes DEBUG prints in spice_iofile, by propagating the DEBUG</span>
 <span class="sd">        flag of the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">DEBUG</span> 
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">testbench_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="sd">&quot;&quot;&quot; The simulator specific operation is defined with an instance of </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; The simulator specific operation is defined with an instance of </span>
 <span class="sd">        simulator specific class. Properties and methods return values from that class.</span>
 
 <span class="sd">        :type: ngspice_testbench </span>
@@ -156,7 +159,7 @@
        
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Design under test</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Design under test</span>
 <span class="sd">        </span>
 <span class="sd">        :type: spice_module</span>
 
@@ -168,7 +171,7 @@
     <span class="c1"># Generating eldo/spectre parameters string</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Spice parameters string parsed from self.spiceparameters -dictionary in</span>
 <span class="sd">        the parent entity.</span>
@@ -188,7 +191,7 @@
     <span class="c1"># Generating eldo/spectre library inclusion string</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">libcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Library inclusion string. Parsed from self.spicecorner -dictionary in</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Library inclusion string. Parsed from self.spicecorner -dictionary in</span>
 <span class="sd">        the parent entity, as well as &#39;ELDOLIBFILE&#39; or &#39;SPECTRELIBFILE&#39; global</span>
 <span class="sd">        variables in TheSDK.config.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -202,7 +205,7 @@
     <span class="c1"># Generating netlist inclusion string</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Subcircuit inclusion string pointing to generated subckt_* -file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -220,7 +223,7 @@
     <span class="c1"># DSPF include commands</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        DSPF-file inclusion string pointing to files corresponding to self.dspf</span>
 <span class="sd">        in the parent entity.</span>
@@ -277,7 +280,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Miscellaneous command string corresponding to self.spicemisc -list in</span>
 <span class="sd">        the parent entity.</span>
@@ -297,7 +300,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dcsourcestr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : DC source definitions parsed from spice_dcsource objects instantiated</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : DC source definitions parsed from spice_dcsource objects instantiated</span>
 <span class="sd">        in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -309,7 +312,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inputsignals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Input signal definitions parsed from spice_iofile objects instantiated</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Input signal definitions parsed from spice_iofile objects instantiated</span>
 <span class="sd">        in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -317,7 +320,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simcmdstr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Simulation command definition parsed from spice_simcmd object</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulation command definition parsed from spice_simcmd object</span>
 <span class="sd">        instantiated in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     
@@ -326,7 +329,7 @@
     <span class="c1"># Generating plot and print commands</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : All output IOs are mapped to plot or print statements in the testbench.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : All output IOs are mapped to plot or print statements in the testbench.</span>
 <span class="sd">        Also manual plot commands through `spice_simcmd.plotlist` are handled here.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -334,7 +337,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">plotcmd</span>
 
 <div class="viewcode-block" id="testbench.export"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to write the testbench to a file.</span>
 
 <span class="sd">        Parameters</span>
@@ -363,7 +366,7 @@
                 <span class="n">module_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="testbench.generate_contents"><a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to generate testbench contents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

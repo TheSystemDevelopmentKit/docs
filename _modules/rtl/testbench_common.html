@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../rtl.html">rtl</a></li>
       <li class="breadcrumb-item active">rtl.testbench_common</li>
@@ -97,12 +100,12 @@
 <span class="kn">from</span> <span class="nn">rtl.vhdl.vhdl_entity</span> <span class="kn">import</span> <span class="n">vhdl_entity</span>
 
 <div class="viewcode-block" id="testbench_common"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench_common.testbench_common">[docs]</a><span class="k">class</span> <span class="nc">testbench_common</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Testbench class. Extends `module`</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Testbench class. Extends `module`</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Parameters</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Parameters</span>
 <span class="sd">           ----------</span>
 <span class="sd">           parent: object, None (mandatory to define). TheSyDeKick parent entity object for this testbench.</span>
 <span class="sd">           **kwargs :</span>
@@ -161,7 +164,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;RTL module parsed from the verilog or VHDL file of the parent depending on `parent.model`</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;RTL module parsed from the verilog or VHDL file of the parent depending on `parent.model`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dut_instance&#39;</span><span class="p">):</span>
@@ -185,7 +188,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">verilog_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Verilog instances Bundle to be added to tesbench</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verilog instances Bundle to be added to tesbench</span>
 <span class="sd">        </span>
 <span class="sd">        Todo </span>
 <span class="sd">        Need to handle VHDL instance too.</span>
@@ -196,7 +199,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_instances</span>
 
 <div class="viewcode-block" id="testbench_common.verilog_instance_add"><a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench_common.testbench_common.verilog_instance_add">[docs]</a>    <span class="k">def</span> <span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add verilog instance to the Bundle fro a file</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add verilog instance to the Bundle fro a file</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -216,7 +219,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dumpfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Code that generates a VCD dumpfile when running the testbench with icarus verilog.</span>
 <span class="sd">        This dumpfile can be used with gtkwave. </span>

@@ -10,10 +10,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../../spice.html">spice</a></li>
       <li class="breadcrumb-item active">spice.ngspice.ngspice</li>
@@ -95,7 +98,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <div class="viewcode-block" id="ngspice"><a class="viewcode-back" href="../../../spice/sections.html#spice.ngspice.ngspice.ngspice">[docs]</a><span class="k">class</span> <span class="nc">ngspice</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This class is used as instance in simulatormodule property of </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is used as instance in simulatormodule property of </span>
 <span class="sd">    spice class. Contains language dependent definitions.</span>
 
 <span class="sd">    Parameters</span>
@@ -117,7 +120,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Dictionary</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Dictionary</span>
 <span class="sd">        </span>
 <span class="sd">        Internally used dictionary for syntax conversions</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -146,85 +149,85 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cmdfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Extension of the command file</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Extension of the command file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.ngcir&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">resultfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Extension of the result file</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Extension of the result file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">commentchar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Comment character of the simulator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Comment character of the simulator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;*&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">commentline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Comment line for the simulator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Comment line for the simulator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;***********************</span><span class="se">\n</span><span class="s1">&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nprocflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : String for defining multithread execution</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : String for defining multithread execution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;set num_threads=&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simulatorcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Simulator execution command </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulator execution command </span>
 <span class="sd">            (Default: &#39;ngspice&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;ngspice&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dcsource_declaration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : DC source declaration</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : DC source declaration</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#self.print_log(type=&#39;F&#39;, msg=&#39;DC source declaration not defined for ngspice&#39;)</span>
         <span class="k">return</span> <span class="s1">&#39;&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Netlist parameter definition string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist parameter definition string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.param&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Netlist option definition string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist option definition string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.option&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">include</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Netlist include string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist include string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.include&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dspfinclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Netlist dspf-file include string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist dspf-file include string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.include&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Subcircuit include string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Subcircuit include string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.subckt&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lastline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Last line of the simulator command file</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Last line of the simulator command file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.end&#39;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">eventoutdelim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Delimiter for the events</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Delimiter for the events</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;  &#39;</span> <span class="c1">#Two spaces</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">csvskip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Needs documentation. Lines skipped in result file : int</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Needs documentation. Lines skipped in result file : int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">1</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Postlayout simulation accuracy/RC reduction flag.</span>
 <span class="sd">        </span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -239,7 +242,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; String</span>
 
 <span class="sd">        Sets the program to be used for visualizing waveform databases.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -256,7 +259,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; str : Command to be run for interactive simulations.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; str : Command to be run for interactive simulations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plotprogcmd&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span> <span class="o">==</span> <span class="s1">&#39;ezwave&#39;</span><span class="p">:</span>
@@ -274,7 +277,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Simulation command string to be executed on the command line.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulation command string to be executed on the command line.</span>
 <span class="sd">        Automatically generated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_ngspice_spicecmd&#39;</span><span class="p">):</span>
@@ -297,7 +300,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ngspice_spicecmd</span>
 
 <div class="viewcode-block" id="ngspice.run_plotprogram"><a class="viewcode-back" href="../../../spice/sections.html#spice.ngspice.ngspice.ngspice.run_plotprogram">[docs]</a>    <span class="k">def</span> <span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
 <span class="sd">        The plotting program command can be set with &#39;plotprogram&#39;.</span>
 <span class="sd">        Tested for spectre and eldo.</span>
@@ -306,7 +309,7 @@
         <span class="k">return</span> <span class="mi">0</span></div>
 
 <div class="viewcode-block" id="ngspice.read_oppts"><a class="viewcode-back" href="../../../spice/sections.html#spice.ngspice.ngspice.ngspice.read_oppts">[docs]</a>    <span class="k">def</span> <span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

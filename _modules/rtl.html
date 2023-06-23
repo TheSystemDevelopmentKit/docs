@@ -10,10 +10,9 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
       <li class="breadcrumb-item active">rtl</li>
       <li class="wy-breadcrumbs-aside">
@@ -111,7 +114,7 @@
 <span class="kn">from</span> <span class="nn">rtl.ghdl.ghdl</span> <span class="kn">import</span> <span class="n">ghdl</span> <span class="k">as</span> <span class="n">ghdl</span>
 
 <div class="viewcode-block" id="rtl"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl">[docs]</a><span class="k">class</span> <span class="nc">rtl</span><span class="p">(</span><span class="n">questasim</span><span class="p">,</span><span class="n">icarus</span><span class="p">,</span><span class="n">ghdl</span><span class="p">,</span><span class="n">vhdl</span><span class="p">,</span><span class="n">sv</span><span class="p">,</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Adding this class as a superclass enforces the definitions</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adding this class as a superclass enforces the definitions</span>
 <span class="sd">    for rtl simulations in the subclasses.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -121,7 +124,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; str : Language of the testbench to support multilanguage simulators.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; str : Language of the testbench to support multilanguage simulators.</span>
 <span class="sd">        Default vhdl | sv (default)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_lang&#39;</span><span class="p">):</span>
@@ -139,7 +142,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preserve_rtlfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;True | False (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True | False (default)</span>
 
 <span class="sd">        If True, do not delete testbench and copy of DUT after simulations. Useful for</span>
 <span class="sd">        debugging testbench generation.</span>
@@ -154,7 +157,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interactive_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; True | False (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; True | False (default)</span>
 
 <span class="sd">        Launch simulator in local machine with GUI.&quot;&quot;&quot;</span>
 
@@ -167,7 +170,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lsf_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines submission prefix from thesdk.GLOBALS[&#39;LSFSUBMISSION&#39;].</span>
 <span class="sd">        [ ToDo ] Transfer definition to thesdk entity.</span>
 
@@ -183,7 +186,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the rtl timescale. Default &#39;1ps&#39;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -196,7 +199,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Name of the entity</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Name of the entity</span>
 <span class="sd">            Extracted from the _classfile attribute</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -206,7 +209,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlmisc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;List&lt;String&gt;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List&lt;String&gt;</span>
 
 <span class="sd">        List of manual commands to be pasted to the testbench. The strings are</span>
 <span class="sd">        pasted to their own lines (no linebreaks needed), and the syntax is</span>
@@ -228,7 +231,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;HDL source directory for rtl simulations</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;HDL source directory for rtl simulations</span>
 <span class="sd">           self.simpath + &#39;/rtl&#39;</span>
 
 <span class="sd">           Returns</span>
@@ -246,7 +249,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span>
 
 <div class="viewcode-block" id="rtl.delete_rtlsimpath"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.delete_rtlsimpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Deletes all files in rtlsimpath</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Deletes all files in rtlsimpath</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">):</span>
@@ -273,7 +276,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simdut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Source file for Device Under Test in simulations directory</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Source file for Device Under Test in simulations directory</span>
 
 <span class="sd">            Returns</span>
 <span class="sd">            -------</span>
@@ -295,7 +298,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Testbench source file in simulations directory.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Testbench source file in simulations directory.</span>
 
 <span class="sd">        This file and it&#39;s format is dependent on the language(s)</span>
 <span class="sd">        supported by the simulator. Currently we have support only for verilog testbenches.</span>
@@ -312,7 +315,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Work library directory for rtl compilations</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Work library directory for rtl compilations</span>
 <span class="sd">           self.simpath +&#39;/work&#39;</span>
 
 <span class="sd">           Returns</span>
@@ -325,7 +328,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlworkpath</span>
 
 <div class="viewcode-block" id="rtl.delete_rtlworkpath"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.delete_rtlworkpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Deletes compilation directory</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Deletes compilation directory</span>
 <span class="sd">            Not a deleter decorator, because does not delete</span>
 <span class="sd">            the property.</span>
 
@@ -339,7 +342,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Dictionary of parameters passed to the simulator</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Dictionary of parameters passed to the simulator</span>
 <span class="sd">        during the simulation invocation.</span>
 
 <span class="sd">        Example:</span>
@@ -359,7 +362,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interactive_control_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Content of the interactive rtl control file (.do -file).</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Content of the interactive rtl control file (.do -file).</span>
 
 <span class="sd">        If this property is set, a new dofile gets written to the simulation</span>
 <span class="sd">        path. This takes precedence over the file pointed by</span>
@@ -386,7 +389,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simulator_control_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Content of the simulator rtl control file.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Content of the simulator rtl control file.</span>
 
 <span class="sd">        If this property is set, a new controlfile is written to the simulation</span>
 <span class="sd">        path. This takes precedence over the file pointed by</span>
@@ -410,7 +413,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simulator_controlfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Path to simulator control file.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Path to simulator control file.</span>
 
 <span class="sd">        Different simulators use different ways to control the simulation. In simulators</span>
 <span class="sd">        with integrated waveform viewer, there is only one control,file e.g &#39;dofile&#39; and</span>
@@ -456,7 +459,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interactive_controlfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Path to interactive rtl control file (.do -file).</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Path to interactive rtl control file (.do -file).</span>
 
 <span class="sd">        The content of the file can be defined in `interactive_control`. If the</span>
 <span class="sd">        content is not set in `interactive_control` -property, the do-file is</span>
@@ -510,7 +513,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Command used for simulation invocation</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Command used for simulation invocation</span>
 <span class="sd">           Compiled from various parameters. See source for details.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -536,7 +539,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="rtl.create_connectors"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.create_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">create_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Creates connector definitions from</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Creates connector definitions from</span>
 <span class="sd">           1) From a iofile that is provided in the Data</span>
 <span class="sd">           attribute of an IO.</span>
 <span class="sd">           2) IOS of the verilog DUT</span>
@@ -546,7 +549,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sv_create_connectors</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="rtl.connect_inputs"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Assigns all IOS.Members[name].Data to</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Assigns all IOS.Members[name].Data to</span>
 <span class="sd">           self.iofile_bundle.Members[ioname].Data</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -562,7 +565,7 @@
     <span class="c1"># Define if the signals are signed or not</span>
     <span class="c1"># Can these be deducted?</span>
 <div class="viewcode-block" id="rtl.format_ios"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.format_ios">[docs]</a>    <span class="k">def</span> <span class="nf">format_ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Verilog module does not contain information if</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Verilog module does not contain information if</span>
 <span class="sd">        the bus is signed or not.</span>
 <span class="sd">        Prior to writing output file, the type of the</span>
 <span class="sd">        connecting wire defines how the bus values are interpreted.</span>
@@ -580,7 +583,7 @@
                     <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;List of associated ionames not defined for IO </span><span class="si">%s</span><span class="se">\n</span><span class="s1">. Provide it as list of strings&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">ioname</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="rtl.copy_or_relink"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.copy_or_relink">[docs]</a>    <span class="k">def</span> <span class="nf">copy_or_relink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; If the source is a symlink, create the target as a link to original target.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; If the source is a symlink, create the target as a link to original target.</span>
 <span class="sd">        otherwise, copy the file.</span>
 
 <span class="sd">        Parameters</span>
@@ -598,7 +601,7 @@
             <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">follow_symlinks</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="rtl.copy_rtl_sources"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.copy_rtl_sources">[docs]</a>    <span class="k">def</span> <span class="nf">copy_rtl_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Copy rtl sources to self.rtlsimpath</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Copy rtl sources to self.rtlsimpath</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># I think these should not be model dependent MK</span>
@@ -689,7 +692,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="rtl.execute_rtl_sim"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.execute_rtl_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_rtl_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Runs the rtl simulation in external simulator</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Runs the rtl simulation in external simulator</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">filetimeout</span><span class="o">=</span><span class="mi">60</span> <span class="c1">#File appearance timeout in seconds</span>
@@ -740,7 +743,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;List, which signals are connected in assignment stage during testbench generation</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List, which signals are connected in assignment stage during testbench generation</span>
 <span class="sd">        Should be a list of strings, where a string is the signal name</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_assignment_matchlist&#39;</span><span class="p">):</span>
@@ -752,7 +755,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">custom_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Custom connectors to be added to the testbench</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Custom connectors to be added to the testbench</span>
 <span class="sd">        Should be a e.g. a rtl_connector_bundle</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_custom_connectors&#39;</span><span class="p">):</span>
@@ -763,7 +766,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_custom_connectors</span> <span class="o">=</span> <span class="n">bundle</span>
 
 <div class="viewcode-block" id="rtl.add_connectors"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.add_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">add_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Adds custom connectors to the testbench.</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Adds custom connectors to the testbench.</span>
 <span class="sd">        Also connects rtl matchlist to testbench matchlist.</span>
 <span class="sd">        Custom connectors should be saved in self.custom_connectors</span>
 <span class="sd">        Matchlist for these connectors should be saved in self.assignment_matchlist</span>
@@ -772,7 +775,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">assignment_matchlist</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assignment_matchlist</span></div>
 
 <div class="viewcode-block" id="rtl.run_rtl"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.run_rtl">[docs]</a>    <span class="k">def</span> <span class="nf">run_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;1) Copies rtl sources to a temporary simulation directory</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;1) Copies rtl sources to a temporary simulation directory</span>
 <span class="sd">           2) Creates a testbench</span>
 <span class="sd">           3) Defines the contens of the testbench</span>
 <span class="sd">           4) Creates connectors</span>
@@ -822,7 +825,7 @@
 
     <span class="c1">#This writes all infile</span>
 <div class="viewcode-block" id="rtl.write_infile"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.write_infile">[docs]</a>    <span class="k">def</span> <span class="nf">write_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Writes the input files</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Writes the input files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -831,7 +834,7 @@
 
     <span class="c1">#This reads all outfiles</span>
 <div class="viewcode-block" id="rtl.read_outfile"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.read_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">read_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Reads the oputput files</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Reads the oputput files</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -839,7 +842,7 @@
                  <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="rtl.connect_outputs"><a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.connect_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Connects the ouput data from files to corresponding output IOs</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Connects the ouput data from files to corresponding output IOs</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>

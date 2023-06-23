@@ -10,10 +10,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../../rtl.html">rtl</a></li>
       <li class="breadcrumb-item active">rtl.vhdl.vhdl</li>
@@ -95,7 +98,7 @@
 <div class="viewcode-block" id="vhdl"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.vhdl.vhdl.vhdl">[docs]</a><span class="k">class</span> <span class="nc">vhdl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlsimtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlext</span>
 
@@ -103,7 +106,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; VHDL search path</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; VHDL search path</span>
 <span class="sd">            self.entitypath/vhdl</span>
 
 <span class="sd">            Returns</span>
@@ -117,7 +120,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;VHDL source file</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;VHDL source file</span>
 <span class="sd">           self.vhdlsrcpath/self.name.vhd&#39;</span>
 
 <span class="sd">           Returns</span>
@@ -131,7 +134,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
 
 <span class="sd">            Default is &#39;.vhd&#39;, but this can be overridden.</span>
 
@@ -146,7 +149,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; List of arguments passed to the simulator</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; List of arguments passed to the simulator</span>
 <span class="sd">        during VHDL compilation</span>
 <span class="sd">        </span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -159,7 +162,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;List of VHDL entity files to be compiled in addition to DUT</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List of VHDL entity files to be compiled in addition to DUT</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlentityfiles&#39;</span><span class="p">):</span>
@@ -174,7 +177,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Custom parameters for VHDL simulation</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Custom parameters for VHDL simulation</span>
 <span class="sd">        Provide as a list of strings</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdl_sim_args&#39;</span><span class="p">):</span>

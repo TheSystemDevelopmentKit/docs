@@ -10,10 +10,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../../spice.html">spice</a></li>
       <li class="breadcrumb-item active">spice.eldo.eldo_testbench</li>
@@ -103,7 +106,7 @@
 
 <div class="viewcode-block" id="eldo_testbench"><a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo_testbench.eldo_testbench">[docs]</a><span class="k">class</span> <span class="nc">eldo_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Executes init of testbench_common, thus having the same attributes and </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Executes init of testbench_common, thus having the same attributes and </span>
 <span class="sd">        parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -117,7 +120,7 @@
     <span class="c1"># Generating spice options string</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Spice options string parsed from self.spiceoptions -dictionary in the</span>
 <span class="sd">        parent entity.</span>
@@ -139,7 +142,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">libcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Library inclusion string. Parsed from self.spicecorner -dictionary in</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Library inclusion string. Parsed from self.spicecorner -dictionary in</span>
 <span class="sd">        the parent entity, as well as &#39;ELDOLIBFILE&#39; or &#39;SPECTRELIBFILE&#39; global</span>
 <span class="sd">        variables in TheSDK.config.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -174,7 +177,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dcsourcestr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        DC source definitions parsed from spice_dcsource objects instantiated</span>
 <span class="sd">        in the parent entity.</span>
@@ -204,7 +207,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inputsignals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Input signal definitions parsed from spice_iofile objects instantiated</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Input signal definitions parsed from spice_iofile objects instantiated</span>
 <span class="sd">        in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_inputsignals&#39;</span><span class="p">):</span>
@@ -264,7 +267,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">simcmdstr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : Simulation command definition parsed from spice_simcmd object</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulation command definition parsed from spice_simcmd object</span>
 <span class="sd">        instantiated in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_simcmdstr&#39;</span><span class="p">):</span>
@@ -297,7 +300,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;str : All output IOs are mapped to plot or print statements in the testbench.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : All output IOs are mapped to plot or print statements in the testbench.</span>
 <span class="sd">        Also manual plot commands through `spice_simcmd.plotlist` are handled here.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>

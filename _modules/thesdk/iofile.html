@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../thesdk.html">thesdk</a></li>
       <li class="breadcrumb-item active">thesdk.iofile</li>
@@ -109,7 +112,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <div class="viewcode-block" id="iofile"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile">[docs]</a><span class="k">class</span> <span class="nc">iofile</span><span class="p">(</span><span class="n">IO</span><span class="p">):</span>
-     <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">     </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">     Class to provide file IO for external simulators. </span>
 <span class="sd">     </span>
 <span class="sd">     When created, adds an iofile object to the parents iofile_bundle attribute.</span>
@@ -122,7 +125,7 @@
 <span class="sd">     </span>
 <span class="sd">     &#39;&#39;&#39;</span>
      <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">         Parameters</span>
 <span class="sd">         -----------</span>
 <span class="sd">         parent: object, None </span>
@@ -179,7 +182,7 @@
      <span class="c1"># Must be defined separately</span>
      <span class="nd">@property</span> 
      <span class="k">def</span> <span class="nf">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39; Direction of the iofile, in | out</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39; Direction of the iofile, in | out</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
          <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dir&#39;</span><span class="p">):</span>
@@ -194,7 +197,7 @@
  
      <span class="nd">@property</span>
      <span class="k">def</span> <span class="nf">iotype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># sample | event</span>
-         <span class="sd">&#39;&#39;&#39; Type of the IO: sample | event</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39; Type of the IO: sample | event</span>
 
 <span class="sd">             sample</span>
 <span class="sd">                 IO is synchronized with a sampling clock. Each of the rows represents the data valua at known sample insatnce</span>
@@ -211,7 +214,7 @@
  
      <span class="nd">@property</span>
      <span class="k">def</span> <span class="nf">datatype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1">#          </span>
-         <span class="sd">&#39;&#39;&#39; Type of the data. Controls the reading and writing of the data</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39; Type of the data. Controls the reading and writing of the data</span>
 <span class="sd">              &#39;complex&#39; | &#39;int&#39; | &#39;scomplex&#39; | &#39;sint&#39; | object</span>
 
 <span class="sd">              int | sint:</span>
@@ -240,7 +243,7 @@
  
      <span class="nd">@property</span>
      <span class="k">def</span> <span class="nf">ionames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># list of associated ionames</span>
-         <span class="sd">&#39;&#39;&#39; Names of the DUT signals represented by the colums of the data. </span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39; Names of the DUT signals represented by the colums of the data. </span>
 <span class="sd">             Two elements per colums should be given, if the type is complex or scomplex.</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
@@ -257,7 +260,7 @@
  
      <span class="nd">@property</span>
      <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39; Name of the IO file to be read or written.</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39; Name of the IO file to be read or written.</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
          <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_file&#39;</span><span class="p">):</span>
@@ -275,7 +278,7 @@
      <span class="c1"># probably this could be automated</span>
      <span class="c1"># by using properties</span>
 <div class="viewcode-block" id="iofile.adopt"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.adopt">[docs]</a>     <span class="k">def</span> <span class="nf">adopt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39;Redefine the parent entity of the file. Afrects where the file is written during the simulation</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39;Redefine the parent entity of the file. Afrects where the file is written during the simulation</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
          <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
@@ -286,7 +289,7 @@
  
      <span class="c1"># File writing</span>
 <div class="viewcode-block" id="iofile.write"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.write">[docs]</a>     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39;Method to write the file</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39;Method to write the file</span>
 
 <span class="sd">         Sets the &#39;dir&#39; attribute to &#39;in&#39;, because only input files are written.</span>
 <span class="sd">         </span>
@@ -378,7 +381,7 @@
          
      <span class="c1"># Reading</span>
 <div class="viewcode-block" id="iofile.read"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.read">[docs]</a>     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39; Method to read the file</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39; Method to read the file</span>
 
 <span class="sd">         Parameters</span>
 <span class="sd">         ----------</span>
@@ -421,7 +424,7 @@
  
      <span class="c1"># Remove the file when no longer needed</span>
 <div class="viewcode-block" id="iofile.remove"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.remove">[docs]</a>     <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-         <span class="sd">&#39;&#39;&#39;Remove the file</span>
+<span class="w">         </span><span class="sd">&#39;&#39;&#39;Remove the file</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve</span><span class="p">:</span>

@@ -10,10 +10,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../spice.html">spice</a></li>
       <li class="breadcrumb-item active">spice.spice_module</li>
@@ -97,7 +100,7 @@
 <span class="kn">import</span> <span class="nn">traceback</span>
 
 <div class="viewcode-block" id="spice_module"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_module.spice_module">[docs]</a><span class="k">class</span> <span class="nc">spice_module</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class parses source netlist for subcircuits and handles the generation</span>
 <span class="sd">    of a separate pruned subckt_* -file. This class is internally utilized by</span>
 <span class="sd">    the spice_testbench module.</span>
@@ -114,7 +117,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Filepath to the entity&#39;s spice netlist source file </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Filepath to the entity&#39;s spice netlist source file </span>
 <span class="sd">        (i.e. &#39;./spice/entityname.scs&#39;).  </span>
 <span class="sd">        </span>
 <span class="sd">        :type: str</span>
@@ -129,7 +132,7 @@
     
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Entity name</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Entity name</span>
 <span class="sd">        </span>
 <span class="sd">        :type: str</span>
 
@@ -140,7 +143,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">custom_subckt_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Custom name of the subcircuit to look from from the netlist file during parsing for </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Custom name of the subcircuit to look from from the netlist file during parsing for </span>
 <span class="sd">        &#39;subckt&#39; property. Enables using compatible (in term sof IOs paremeters) netlists defined </span>
 <span class="sd">        for designs of different name.</span>
 
@@ -164,7 +167,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The contents of the subcircuit definition file of the entity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The contents of the subcircuit definition file of the entity.</span>
 <span class="sd">        Extract the definitions form the source netlist. The source netlist when accessed. </span>
 <span class="sd">        Can be written to the subckt_file with export_subckt method. </span>
 
@@ -201,7 +204,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The subcircuit instance to be placed in the testbench. Parsed from</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The subcircuit instance to be placed in the testbench. Parsed from</span>
 <span class="sd">        the subckt property</span>
 
 <span class="sd">        :type: str</span>
@@ -279,7 +282,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="spice_module.export_subckts"><a class="viewcode-back" href="../../spice/sections.html#spice.spice_module.spice_module.export_subckts">[docs]</a>    <span class="k">def</span> <span class="nf">export_subckts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to write the parsed subcircuit definitions</span>
 <span class="sd">        to a file.</span>
 

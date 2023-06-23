@@ -10,10 +10,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> TheSyDeKick
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TheSyDeKick
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../../rtl.html">rtl</a></li>
       <li class="breadcrumb-item active">rtl.sv.sv</li>
@@ -96,13 +99,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogsimtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogext</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Search path for the verilogfiles</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Search path for the verilogfiles</span>
 <span class="sd">            self.entitypath/sv</span>
 
 <span class="sd">            Returns</span>
@@ -118,7 +121,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Verilog source file</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Verilog source file</span>
 <span class="sd">           self.vlogsrcpath/self.name.sv</span>
 
 <span class="sd">           Returns</span>
@@ -133,7 +136,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
 
 <span class="sd">            Default is &#39;.sv&#39;, but this can be overridden to support, e.g.</span>
 <span class="sd">            generators like Chisel that always use the &#39;.v&#39; prefix.</span>
@@ -148,7 +151,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; List of arguments passed to the simulator</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; List of arguments passed to the simulator</span>
 <span class="sd">        during the verilog compilation &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogcompargs&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_vlogcompargs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -159,7 +162,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;List of verilog modules to be compiled in addition of DUT</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List of verilog modules to be compiled in addition of DUT</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogmodulefiles&#39;</span><span class="p">):</span>
@@ -174,7 +177,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">vlogsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Custom parameters for verilog simulation</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Custom parameters for verilog simulation</span>
 <span class="sd">        Provide as a list of strings</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_verilog_sim_args&#39;</span><span class="p">):</span>
@@ -185,7 +188,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_sim_args</span> <span class="o">=</span> <span class="n">simparam</span>
 
 <div class="viewcode-block" id="sv.sv_create_connectors"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.sv.sv.sv_create_connectors">[docs]</a>    <span class="k">def</span> <span class="nf">sv_create_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Cretes verilog connector definitions from </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Cretes verilog connector definitions from </span>
 <span class="sd">           1) From a iofile that is provided in the Data </span>
 <span class="sd">           attribute of an IO.</span>
 <span class="sd">           2) IOS of the verilog DUT</span>
