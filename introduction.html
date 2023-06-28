@@ -173,8 +173,9 @@ design optimization and desing exploration with real hardware.</p>
 <ul class="simple">
 <li><p>A Roadshow slideset demostrating some use cases can be found at <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick-roadshow/raw/master/pdffiles/TheSyDeKick-roadshow.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick-roadshow/raw/master/pdffiles/TheSyDeKick-roadshow.pdf</a></p></li>
 <li><p>A tutorial for very basic use of TheSyDeKick is provided at: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial</a> .
-See the slide set forr details: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf</a></p></li>
-<li><p>Site <a class="reference external" href="https://github.com/TheSDK-blocks">https://github.com/TheSDK-blocks</a> is a intended to distribute TheSDK-compatible, relatively general circuit models.</p></li>
+See the slide set for details: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf</a></p></li>
+<li><p>Site <a class="reference external" href="https://github.com/TheSDK-blocks">https://github.com/TheSDK-blocks</a> is a intended to distribute TheSDK-compatible, relatively general circuit models.
+and method entities.</p></li>
 </ul>
 </section>
 <section id="project-status-and-releases">
@@ -198,6 +199,23 @@ See the slide set forr details: <a class="reference external" href="https://gith
 </section>
 <section id="release-history">
 <h4>Release history<a class="headerlink" href="#release-history" title="Permalink to this heading"></a></h4>
+<p><strong>Release v1.10 (28.6.2023)</strong></p>
+<ul class="simple">
+<li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
+<li><p>Suport for python 3.10</p></li>
+<li><p>Support for VHDL testbenches and introduction of lang-parameter to select between System Verilog or VHDL testbenches.</p></li>
+<li><p>Support for GHDL open source VHDL simulator.</p></li>
+<li><p>Optional custom end condition for RTL simulation through end_condition property.</p></li>
+<li><dl class="simple">
+<dt>Changes possibly causing backwards-compatibility issues:</dt><dd><ul>
+<li><p>Simulator specific controlfile not executed for batch runs (original intented form of operation).</p></li>
+<li><p>Python parameter interactive_control_file_contents overrides the file contents</p></li>
+<li><p>All verilog_&lt;name&gt; attributes have been changed to rtl_&lt;name&gt; attributes, as attributes are now language agnostic.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p><strong>Release v1.9 (7.4.2023)</strong></p>
 <ul class="simple">
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
