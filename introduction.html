@@ -182,19 +182,17 @@ and method entities.</p></li>
 <h3>Project status and releases<a class="headerlink" href="#project-status-and-releases" title="Permalink to this heading"></a></h3>
 <section id="release-schedule">
 <h4>Release schedule<a class="headerlink" href="#release-schedule" title="Permalink to this heading"></a></h4>
-<p>Two annual release dates are currently planned: January 16, and June 14. Current release candidate branches for next release are named ‘v1.9_RC’</p>
+<p>Two annual release dates are currently planned: January 16, and June 14. Current release candidate branches for next release are named ‘v1.xx_RC’</p>
 <p><strong>Roadmap for the next release is roughly</strong></p>
 <ul class="simple">
-<li><p>Suport for python 3.10</p></li>
 <li><p>Support for Verilator</p></li>
 <li><p>Suport for CoCoTb</p></li>
 </ul>
 <p>For details, check the “Release” projects</p>
 <p><strong>A bit longer term roadmap</strong></p>
 <ul class="simple">
-<li><p>Server based RTL simulation enabling single-sample push-pull and multi-tool feedback simulations.</p></li>
+<li><p>Server based RTL and analog simulation enabling single-sample push-pull and multi-tool feedback simulations as in CoCoTb.</p></li>
 <li><p>Interface class for Chisel3 RTL generator</p></li>
-<li><p>Interface classes for Berkeley Analog Generator (currently works without)</p></li>
 </ul>
 </section>
 <section id="release-history">
@@ -203,13 +201,14 @@ and method entities.</p></li>
 <ul class="simple">
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
 <li><p>Suport for python 3.10</p></li>
-<li><p>Support for VHDL testbenches and introduction of lang-parameter to select between System Verilog or VHDL testbenches.</p></li>
+<li><p>Support for VHDL testbenches and introduction of lang attribute to select between System Verilog or VHDL testbenches.</p></li>
 <li><p>Support for GHDL open source VHDL simulator.</p></li>
 <li><p>Optional custom end condition for RTL simulation through end_condition property.</p></li>
+<li><p>Attribute simulator_cotrolfile and simulator_controlfile_contents for additional noninteractive simulation control.</p></li>
 <li><dl class="simple">
 <dt>Changes possibly causing backwards-compatibility issues:</dt><dd><ul>
 <li><p>Simulator specific controlfile not executed for batch runs (original intented form of operation).</p></li>
-<li><p>Python parameter interactive_control_file_contents overrides the file contents</p></li>
+<li><p>Python parameter interactive_control_file_contents overrides the file contents.</p></li>
 <li><p>All verilog_&lt;name&gt; attributes have been changed to rtl_&lt;name&gt; attributes, as attributes are now language agnostic.</p></li>
 </ul>
 </dd>
