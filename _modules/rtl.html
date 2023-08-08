@@ -198,6 +198,22 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">add_tb_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bool : Defines if timescale directive is added to testbench. Can</span>
+<span class="sd">        be used in cases where submodules have timescale directives, and </span>
+<span class="sd">        you wish to control that from the testbench toplevel. Effective only for </span>
+<span class="sd">        elf.lang = &#39;sv&#39;</span>
+
+<span class="sd">        Default: False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_add_tb_timescale&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_tb_timescale</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_tb_timescale</span>
+    <span class="nd">@add_tb_timescale</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">add_tb_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_tb_timescale</span> <span class="o">=</span> <span class="n">val</span> 
+        
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Name of the entity</span>
 <span class="sd">            Extracted from the _classfile attribute</span>

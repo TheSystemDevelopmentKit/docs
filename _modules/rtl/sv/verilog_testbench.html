@@ -115,7 +115,31 @@
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">add_tb_timescale</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">=</span><span class="s1">&#39;`timescale &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; / &#39;</span><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># For some reason unknown to me, overloading he property here is not effective</span>
+    <span class="c1">#@property</span>
+    <span class="c1">#def header(self):</span>
+    <span class="c1">#    &quot;&quot;&quot; str : Header line of the verilog testbench file.</span>
+    <span class="c1">#    Default: If self.add_tb_timescale = True, adds the timescale directive to the testbench top.</span>
+    <span class="c1">#    according ot self.rtl_timescale attribute.   </span>
+    <span class="c1">#    &quot;&quot;&quot;</span>
+    <span class="c1">#    </span>
+    <span class="c1">#    if not hasattr (self, &#39;_header&#39;):</span>
+    <span class="c1">#        if self.parent.add_tb_timescale:</span>
+    <span class="c1">#            self._defheader=&#39;`timescale &#39; + self.rtl_timescale + &#39; / &#39;+ self.rtl_timescale+&#39;\n&#39;</span>
+    <span class="c1">#        else:</span>
+    <span class="c1">#            self._defheader=&#39;&#39;</span>
+    <span class="c1">#        return self._defheader    </span>
+    <span class="c1">#    else:</span>
+    <span class="c1">#        return self._header</span>
+
+    <span class="c1">#@header.setter</span>
+    <span class="c1">#def header(self,val):</span>
+    <span class="c1">#    self._header = val</span>
         
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

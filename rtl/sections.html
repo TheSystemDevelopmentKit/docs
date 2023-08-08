@@ -50,6 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#rtl-package">RTL package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rtl.rtl"><code class="docutils literal notranslate"><span class="pre">rtl</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.add_connectors"><code class="docutils literal notranslate"><span class="pre">rtl.add_connectors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.add_tb_timescale"><code class="docutils literal notranslate"><span class="pre">rtl.add_tb_timescale</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.assignment_matchlist"><code class="docutils literal notranslate"><span class="pre">rtl.assignment_matchlist</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.connect_inputs"><code class="docutils literal notranslate"><span class="pre">rtl.connect_inputs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.connect_outputs"><code class="docutils literal notranslate"><span class="pre">rtl.connect_outputs()</span></code></a></li>
@@ -319,6 +320,21 @@ for rtl simulations in the subclasses.</p>
 Also connects rtl matchlist to testbench matchlist.
 Custom connectors should be saved in self.custom_connectors
 Matchlist for these connectors should be saved in self.assignment_matchlist</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.add_tb_timescale">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_tb_timescale</span></span><a class="headerlink" href="#rtl.rtl.add_tb_timescale" title="Permalink to this definition"></a></dt>
+<dd><p>Defines if timescale directive is added to testbench. Can
+be used in cases where submodules have timescale directives, and
+you wish to control that from the testbench toplevel. Effective only for
+elf.lang = ‘sv’</p>
+<p>Default: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -988,8 +1004,7 @@ Create append mechanism to add more clocks.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">definition</span></span><a class="headerlink" href="#rtl.testbench.testbench.definition" title="Permalink to this definition"></a></dt>
 <dd><p>Entity definition part extracted for the file. Contains generics and
 IO definitions.</p>
-<p>Overloads the property inherited from ‘module’, as wish to control whan we generate the headers.
-[TO BE RECONSIDERED]</p>
+<p>Overloads the property inherited from ‘module’, as wish to control whan we generate the headers.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1602,7 +1617,9 @@ parameters.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.sv.verilog_connector.verilog_connector.type">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#rtl.sv.verilog_connector.verilog_connector.type" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Type defaults to None mening that all signals are handled as unsigned integers.
+Can be explicitly set to ‘signed’ if needed.</p>
+</dd></dl>
 
 </dd></dl>
 
