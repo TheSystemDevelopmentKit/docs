@@ -10,11 +10,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -111,7 +111,9 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<div class="viewcode-block" id="iofile"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile">[docs]</a><span class="k">class</span> <span class="nc">iofile</span><span class="p">(</span><span class="n">IO</span><span class="p">):</span>
+<div class="viewcode-block" id="iofile">
+<a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile">[docs]</a>
+<span class="k">class</span> <span class="nc">iofile</span><span class="p">(</span><span class="n">IO</span><span class="p">):</span>
 <span class="w">     </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">     Class to provide file IO for external simulators. </span>
 <span class="sd">     </span>
@@ -277,7 +279,9 @@
      <span class="c1"># Relocate i.e. change parent. </span>
      <span class="c1"># probably this could be automated</span>
      <span class="c1"># by using properties</span>
-<div class="viewcode-block" id="iofile.adopt"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.adopt">[docs]</a>     <span class="k">def</span> <span class="nf">adopt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="iofile.adopt">
+<a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.adopt">[docs]</a>
+     <span class="k">def</span> <span class="nf">adopt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">         </span><span class="sd">&#39;&#39;&#39;Redefine the parent entity of the file. Afrects where the file is written during the simulation</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
@@ -286,9 +290,12 @@
          <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span>
          <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;iofile_bundle&#39;</span><span class="p">):</span>
              <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+
  
      <span class="c1"># File writing</span>
-<div class="viewcode-block" id="iofile.write"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.write">[docs]</a>     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="iofile.write">
+<a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.write">[docs]</a>
+     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">         </span><span class="sd">&#39;&#39;&#39;Method to write the file</span>
 
 <span class="sd">         Sets the &#39;dir&#39; attribute to &#39;in&#39;, because only input files are written.</span>
@@ -378,9 +385,12 @@
          <span class="c1"># Flush cached file system writes</span>
          <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
              <span class="n">os</span><span class="o">.</span><span class="n">fsync</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span></div>
+
          
      <span class="c1"># Reading</span>
-<div class="viewcode-block" id="iofile.read"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.read">[docs]</a>     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="iofile.read">
+<a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.read">[docs]</a>
+     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">         </span><span class="sd">&#39;&#39;&#39; Method to read the file</span>
 
 <span class="sd">         Parameters</span>
@@ -421,9 +431,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;IOFile was empty! </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Data</span> <span class="o">=</span> <span class="kc">None</span>
          <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
  
      <span class="c1"># Remove the file when no longer needed</span>
-<div class="viewcode-block" id="iofile.remove"><a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.remove">[docs]</a>     <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="iofile.remove">
+<a class="viewcode-back" href="../../thesdk/sections.html#thesdk.iofile.iofile.remove">[docs]</a>
+     <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">         </span><span class="sd">&#39;&#39;&#39;Remove the file</span>
 
 <span class="sd">         &#39;&#39;&#39;</span>
@@ -434,7 +447,9 @@
              <span class="k">try</span><span class="p">:</span>
                  <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
              <span class="k">except</span><span class="p">:</span>
-                 <span class="k">pass</span></div></div>
+                 <span class="k">pass</span></div>
+</div>
+
  
  
 </pre></div>

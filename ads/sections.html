@@ -11,11 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -137,15 +137,15 @@
            <div itemprop="articleBody">
              
   <section id="ads-interface">
-<h1>ADS interface<a class="headerlink" href="#ads-interface" title="Permalink to this heading"></a></h1>
+<h1>ADS interface<a class="headerlink" href="#ads-interface" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="initial_setup_tutorial.html">ADS interface Initial setup tutorial</a></li>
 </ul>
 </div>
-<span class="target" id="module-ads"></span><section id="ads-interface-class">
-<h2>ADS Interface class<a class="headerlink" href="#ads-interface-class" title="Permalink to this heading"></a></h2>
+<section id="ads-interface-class">
+<span id="module-ads"></span><h2>ADS Interface class<a class="headerlink" href="#ads-interface-class" title="Link to this heading"></a></h2>
 <p>ADS Momentum simulation interface package for The System Development Kit</p>
 <p>Provides utilities to import ads modules to python environment and
 automatically generate testbenches for the most common simulation cases.</p>
@@ -153,17 +153,17 @@ automatically generate testbenches for the most common simulation cases.</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="ads.ads">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads.</span></span><span class="sig-name descname"><span class="pre">ads</span></span><a class="reference internal" href="../_modules/ads.html#ads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads.</span></span><span class="sig-name descname"><span class="pre">ads</span></span><a class="reference internal" href="../_modules/ads.html#ads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads" title="Link to this definition"></a></dt>
 <dd><dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.TL_mesh_cells">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TL_mesh_cells</span></span><a class="headerlink" href="#ads.ads.TL_mesh_cells" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TL_mesh_cells</span></span><a class="headerlink" href="#ads.ads.TL_mesh_cells" title="Link to this definition"></a></dt>
 <dd><p>Integer</p>
 <p>Defines the transmission line mesh density. Cells per line width</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.ads_submission">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ads_submission</span></span><a class="headerlink" href="#ads.ads.ads_submission" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ads_submission</span></span><a class="headerlink" href="#ads.ads.ads_submission" title="Link to this definition"></a></dt>
 <dd><p>Defines ads submission prefix from thesdk.GLOBALS[‘LSFSUBMISSION’]
 for LSF submissions.</p>
 <p>Usually something like ‘bsub -K’ and ‘bsub -I’.</p>
@@ -171,7 +171,7 @@ for LSF submissions.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.adscmd">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adscmd</span></span><a class="headerlink" href="#ads.ads.adscmd" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adscmd</span></span><a class="headerlink" href="#ads.ads.adscmd" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>ADS Momentum simulation command string to be executed on the command line.
 Automatically generated.</p>
@@ -179,14 +179,14 @@ Automatically generated.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.adssimpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adssimpath</span></span><a class="headerlink" href="#ads.ads.adssimpath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adssimpath</span></span><a class="headerlink" href="#ads.ads.adssimpath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Simulation path. (./Simulations/adssim/&lt;runname&gt;)</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.adssrc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adssrc</span></span><a class="headerlink" href="#ads.ads.adssrc" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adssrc</span></span><a class="headerlink" href="#ads.ads.adssrc" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the input/configuration files generated (‘./ads/simulation’)</p>
 <p>Automatically created by init.ael upon running the AEL program.</p>
@@ -194,14 +194,14 @@ Automatically generated.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.adssrcpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adssrcpath</span></span><a class="headerlink" href="#ads.ads.adssrcpath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adssrcpath</span></span><a class="headerlink" href="#ads.ads.adssrcpath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the ads source of the entity (‘./ads’).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.distributed_run">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distributed_run</span></span><a class="headerlink" href="#ads.ads.distributed_run" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distributed_run</span></span><a class="headerlink" href="#ads.ads.distributed_run" title="Link to this definition"></a></dt>
 <dd><p>Boolean (default False)</p>
 <p>If True, distributes simulations
 into the LSF cluster. The number of subprocesses launched is
@@ -210,67 +210,67 @@ set by self.num_processes.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.edge_mesh_enable">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edge_mesh_enable</span></span><a class="headerlink" href="#ads.ads.edge_mesh_enable" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edge_mesh_enable</span></span><a class="headerlink" href="#ads.ads.edge_mesh_enable" title="Link to this definition"></a></dt>
 <dd><p>Boolean (True or False)</p>
 <p>Enables edge mesh</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.emsetupsrcpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emsetupsrcpath</span></span><a class="headerlink" href="#ads.ads.emsetupsrcpath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emsetupsrcpath</span></span><a class="headerlink" href="#ads.ads.emsetupsrcpath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the emSetup source of the virtuoso entity (‘VIRTUOSO_DIR/&lt;sourcelib&gt;/&lt;name&gt;/emSetup’).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.ads.execute_ads_sim">
-<span class="sig-name descname"><span class="pre">execute_ads_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.execute_ads_sim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.execute_ads_sim" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">execute_ads_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.execute_ads_sim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.execute_ads_sim" title="Link to this definition"></a></dt>
 <dd><p>Automatically called function to execute ADS momentum simulation.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.fstep">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstep</span></span><a class="headerlink" href="#ads.ads.fstep" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstep</span></span><a class="headerlink" href="#ads.ads.fstep" title="Link to this definition"></a></dt>
 <dd><p>Integer or float</p>
 <p>Frequency step for the simulation.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.fstep_unit">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstep_unit</span></span><a class="headerlink" href="#ads.ads.fstep_unit" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstep_unit</span></span><a class="headerlink" href="#ads.ads.fstep_unit" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Frequency unit for fstep</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.fstop">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstop</span></span><a class="headerlink" href="#ads.ads.fstop" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstop</span></span><a class="headerlink" href="#ads.ads.fstop" title="Link to this definition"></a></dt>
 <dd><p>Integer or float</p>
 <p>Maximum frequency of the simulation.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.fstop_unit">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstop_unit</span></span><a class="headerlink" href="#ads.ads.fstop_unit" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstop_unit</span></span><a class="headerlink" href="#ads.ads.fstop_unit" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Frequency unit for fstop</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.ads.generate_input_files">
-<span class="sig-name descname"><span class="pre">generate_input_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.generate_input_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.generate_input_files" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">generate_input_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.generate_input_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.generate_input_files" title="Link to this definition"></a></dt>
 <dd><p>Automatically called function to generate the input/configuration files using AEL</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.has_lsf">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_lsf</span></span><a class="headerlink" href="#ads.ads.has_lsf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_lsf</span></span><a class="headerlink" href="#ads.ads.has_lsf" title="Link to this definition"></a></dt>
 <dd><p>Returs True if LSF submissions are properly defined. Default False</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.interactive_ads">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interactive_ads</span></span><a class="headerlink" href="#ads.ads.interactive_ads" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interactive_ads</span></span><a class="headerlink" href="#ads.ads.interactive_ads" title="Link to this definition"></a></dt>
 <dd><p>True | False (default)</p>
 <p>Launch simulator in interactive mode, which means that the simulation
 progress is displayed on the screen.</p>
@@ -278,28 +278,28 @@ progress is displayed on the screen.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.mesh_cells">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_cells</span></span><a class="headerlink" href="#ads.ads.mesh_cells" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_cells</span></span><a class="headerlink" href="#ads.ads.mesh_cells" title="Link to this definition"></a></dt>
 <dd><p>Integer</p>
 <p>Defines the mesh density. Cells per fstop wavelength</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#ads.ads.name" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#ads.ads.name" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Name of the module.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.num_processes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_processes</span></span><a class="headerlink" href="#ads.ads.num_processes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_processes</span></span><a class="headerlink" href="#ads.ads.num_processes" title="Link to this definition"></a></dt>
 <dd><p>integer</p>
 <p>Maximum number of spawned child processes for distributed runs.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.preserve_adsfiles">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preserve_adsfiles</span></span><a class="headerlink" href="#ads.ads.preserve_adsfiles" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preserve_adsfiles</span></span><a class="headerlink" href="#ads.ads.preserve_adsfiles" title="Link to this definition"></a></dt>
 <dd><p>True | False (default)</p>
 <p>If True, do not delete file IO files (proj) after simulations. Useful for
 debugging the file IO</p>
@@ -307,13 +307,13 @@ debugging the file IO</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.ads.run_ads">
-<span class="sig-name descname"><span class="pre">run_ads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.run_ads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.run_ads" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_ads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.run_ads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.run_ads" title="Link to this definition"></a></dt>
 <dd><p>Externally called function to execute ads simulation.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.runname">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runname</span></span><a class="headerlink" href="#ads.ads.runname" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runname</span></span><a class="headerlink" href="#ads.ads.runname" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Automatically generated name for the simulation.</p>
 <p>Formatted as timestamp_randomtag, i.e. ‘20201002103638_tmpdbw11nr4’.
@@ -322,14 +322,14 @@ Can be overridden by assigning self.runname = ‘myname’.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.ads.set_simulation_options">
-<span class="sig-name descname"><span class="pre">set_simulation_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.set_simulation_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.set_simulation_options" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_simulation_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads.html#ads.set_simulation_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.ads.set_simulation_options" title="Link to this definition"></a></dt>
 <dd><p>Automatically called function to set the simulation settings</p>
 <p>When changing settings, always run ./configure first.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.sourcelib">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sourcelib</span></span><a class="headerlink" href="#ads.ads.sourcelib" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sourcelib</span></span><a class="headerlink" href="#ads.ads.sourcelib" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Sourcelib name. Currently defaults to nameofthemodule_generated, which is a BAG assumption</p>
 <p>Can (and should) be set externally, if the sourcelib name is different than &lt;entityname&gt;_generated.</p>
@@ -337,14 +337,14 @@ Can be overridden by assigning self.runname = ‘myname’.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.sourcelibpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sourcelibpath</span></span><a class="headerlink" href="#ads.ads.sourcelibpath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sourcelibpath</span></span><a class="headerlink" href="#ads.ads.sourcelibpath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the virtuoso entity (‘VIRTUOSO_DIR/&lt;sourcelib&gt;’).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.ads.sparam_filename">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sparam_filename</span></span><a class="headerlink" href="#ads.ads.sparam_filename" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sparam_filename</span></span><a class="headerlink" href="#ads.ads.sparam_filename" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Changes the S-parameter output file name. Defaults to proj&lt;i&gt;, where i corresponds to
 the simulation repetition. E.g 0 -&gt; first simulation, 1 -&gt; 2nd. etc.</p>
@@ -355,8 +355,8 @@ by citi_to_touchstone.</p>
 
 </dd></dl>
 
-<span class="target" id="module-ads.citi_to_touchstone"></span><section id="citi-to-touchstone">
-<h2>Citi to Touchstone<a class="headerlink" href="#citi-to-touchstone" title="Permalink to this heading"></a></h2>
+<section id="citi-to-touchstone">
+<span id="module-ads.citi_to_touchstone"></span><h2>Citi to Touchstone<a class="headerlink" href="#citi-to-touchstone" title="Link to this heading"></a></h2>
 <p>Citifile to Touchstone fileformat converter</p>
 <p>Currently tested with 1, 2, 3, 4, 10 and 17-port citifile generated by Momentum.
 The generated Touchstone .sNp files have been tested using Python scikit-rf library and
@@ -369,12 +369,12 @@ ADS data file tool.</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads.citi_to_touchstone.</span></span><span class="sig-name descname"><span class="pre">citi_to_touchstone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ads.citi_to_touchstone.</span></span><span class="sig-name descname"><span class="pre">citi_to_touchstone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone" title="Link to this definition"></a></dt>
 <dd><p>This class parses a citifile (.cti) file and writes the data to a Touchstone (.sNp) file.
 This class is utilized by the main ads class.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.comments">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comments</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.comments" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comments</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.comments" title="Link to this definition"></a></dt>
 <dd><p>List</p>
 <p>List of comments in the CITIfile. Automatically read from the citifile.
 This can not be changed manually.</p>
@@ -382,7 +382,7 @@ This can not be changed manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.data" title="Link to this definition"></a></dt>
 <dd><p>Dictionary</p>
 <p>Contains all the information about the data. The dictionary key is the data name, that can be
 retreived using self.data_names.</p>
@@ -397,7 +397,7 @@ retreived using self.data_names.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.data_names">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_names</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.data_names" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_names</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.data_names" title="Link to this definition"></a></dt>
 <dd><p>List</p>
 <p>List containing all of the S-parameter and Port data names.
 The order is important, because Momentum does not return any data headers
@@ -407,13 +407,13 @@ on the CITIfile, so this is used to determine which data vector corresponds to w
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.generate_contents">
-<span class="sig-name descname"><span class="pre">generate_contents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone.generate_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.generate_contents" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">generate_contents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone.generate_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.generate_contents" title="Link to this definition"></a></dt>
 <dd><p>Externally called function to read the citifile data and generate the touchstone file.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.input_file">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_file</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.input_file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_file</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.input_file" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the CITIfile to convert (‘self.adssrc/proj.cti’)</p>
 <p>Should be given in run_ads!</p>
@@ -421,7 +421,7 @@ on the CITIfile, so this is used to determine which data vector corresponds to w
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.lines">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lines</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.lines" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lines</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.lines" title="Link to this definition"></a></dt>
 <dd><p>List</p>
 <p>Contains all of the lines in the citifile. If the citifile can not be found,
 it gives 5 tries with one second delays. IF the citifile is not found after the 5
@@ -431,7 +431,7 @@ tries, the citifile is not converted to touchstone.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.nbr_of_ports">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nbr_of_ports</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.nbr_of_ports" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nbr_of_ports</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.nbr_of_ports" title="Link to this definition"></a></dt>
 <dd><p>Integer</p>
 <p>Number of ports in the layout. Automatically read from the citifile.
 This should not be set manually.</p>
@@ -439,7 +439,7 @@ This should not be set manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.normalization">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normalization</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.normalization" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normalization</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.normalization" title="Link to this definition"></a></dt>
 <dd><p>Integer</p>
 <p>Normalization value. Automatically read from the citifile.
 This should not be set manually.</p>
@@ -447,7 +447,7 @@ This should not be set manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.output_file">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_file</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.output_file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_file</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.output_file" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the output touchstone file to be generated (‘self.adssimpath/self.sparam_filename’)</p>
 <p>Should be given in run_ads!</p>
@@ -457,7 +457,7 @@ of ports in the layout! This is automatically generated in self.output_file_exte
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.output_file_extension">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_file_extension</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.output_file_extension" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_file_extension</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.output_file_extension" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Output file extension. Always in the format .sNp, where N depends on the number of ports.
 Automatically read from the citifile. This should not be changed manually.</p>
@@ -465,13 +465,13 @@ Automatically read from the citifile. This should not be changed manually.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.parse_citi">
-<span class="sig-name descname"><span class="pre">parse_citi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone.parse_citi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.parse_citi" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse_citi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone.parse_citi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.parse_citi" title="Link to this definition"></a></dt>
 <dd><p>Automatically called function to parse through the citifile.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.var_data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_data</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_data</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_data" title="Link to this definition"></a></dt>
 <dd><p>Numpy array</p>
 <p>Frequency data read from the CITIfile. The lenght of this array is self.var_nbr_of_points.</p>
 <p>Automatically read from the citifile. This should not be changed manually.</p>
@@ -479,7 +479,7 @@ Automatically read from the citifile. This should not be changed manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.var_format">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_format</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_format" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_format</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_format" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>CITIfile VAR format. Should always be “MAG” after reading. Raises error if not.
 Automatically read from the citifile. This should not be changed manually.</p>
@@ -487,7 +487,7 @@ Automatically read from the citifile. This should not be changed manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.var_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_name</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_name" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_name</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_name" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>CITIfile VAR name. Should always be “freq” from Momentum.
 Automatically read from the citifile. This should not be changed manually.</p>
@@ -495,7 +495,7 @@ Automatically read from the citifile. This should not be changed manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.var_nbr_of_points">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_nbr_of_points</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_nbr_of_points" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">var_nbr_of_points</span></span><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.var_nbr_of_points" title="Link to this definition"></a></dt>
 <dd><p>Integer</p>
 <p>Number of frequency points in the CITIfile. This parameter is VERY important,
 since it is also used to determine the lenghts of the data vectors.</p>
@@ -504,7 +504,7 @@ since it is also used to determine the lenghts of the data vectors.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ads.citi_to_touchstone.citi_to_touchstone.write_touchstone">
-<span class="sig-name descname"><span class="pre">write_touchstone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone.write_touchstone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.write_touchstone" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write_touchstone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ads/citi_to_touchstone.html#citi_to_touchstone.write_touchstone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ads.citi_to_touchstone.citi_to_touchstone.write_touchstone" title="Link to this definition"></a></dt>
 <dd><p>Automatically called function to generate a Touchstone .sNp file from the data
 read from the CITIfile.</p>
 </dd></dl>

@@ -10,11 +10,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -140,7 +140,9 @@
 <span class="kn">from</span> <span class="nn">spice.eldo.eldo</span> <span class="kn">import</span> <span class="n">eldo</span>
 <span class="kn">from</span> <span class="nn">spice.spectre.spectre</span> <span class="kn">import</span> <span class="n">spectre</span>
 
-<div class="viewcode-block" id="spice"><a class="viewcode-back" href="../spice/sections.html#spice.spice">[docs]</a><span class="k">class</span> <span class="nc">spice</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
+<div class="viewcode-block" id="spice">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice">[docs]</a>
+<span class="k">class</span> <span class="nc">spice</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">si_prefix_mult</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -224,7 +226,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_spicesimpath</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesimpath</span>
 
-<div class="viewcode-block" id="spice.delete_spicesimpath"><a class="viewcode-back" href="../spice/sections.html#spice.spice.delete_spicesimpath">[docs]</a>    <span class="k">def</span> <span class="nf">delete_spicesimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="spice.delete_spicesimpath">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.delete_spicesimpath">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_spicesimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to clean up files from spicesimpath.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -275,6 +279,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Removing </span><span class="si">%s</span><span class="s1">/&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">)</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not remove </span><span class="si">%s</span><span class="s1">/&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">)</span></div>
+
 
 
     <span class="nd">@property</span>
@@ -827,7 +832,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;load_output_file set to True! This will rewrite the entity state on disk!&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="n">value</span>
 
-<div class="viewcode-block" id="spice.connect_spice_inputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="spice.connect_spice_inputs">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_inputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">connect_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (inputs) to top</span>
 <span class="sd">        entity IOS Bundle items.</span>
 
@@ -841,7 +848,10 @@
                     <span class="c1"># Data must be properly shaped</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span></div>
 
-<div class="viewcode-block" id="spice.connect_spice_outputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="spice.connect_spice_outputs">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_outputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">connect_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (outputs) to top</span>
 <span class="sd">        entity IOS Bundle items.</span>
 
@@ -850,7 +860,10 @@
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;out&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span></div>
 
-<div class="viewcode-block" id="spice.write_spice_inputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.write_spice_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">write_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="spice.write_spice_inputs">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.write_spice_inputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to call write() functions of each</span>
 <span class="sd">        iofile with direction &#39;input&#39;.</span>
 
@@ -864,7 +877,10 @@
                         <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]))</span></div>
 
 
-<div class="viewcode-block" id="spice.read_spice_outputs"><a class="viewcode-back" href="../spice/sections.html#spice.spice.read_spice_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">read_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="spice.read_spice_outputs">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_spice_outputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to call read() functions of each</span>
 <span class="sd">        iofile with direction &#39;output&#39;.</span>
 
@@ -920,8 +936,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> 
                     <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Direction indicator for </span><span class="si">%s</span><span class="s1"> of should be </span><span class="se">\&#39;</span><span class="s1">out</span><span class="se">\&#39;</span><span class="s1"> and you are the one to fix your code.&#39;</span> 
                         <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">name</span><span class="p">]))</span></div>
+
     
-<div class="viewcode-block" id="spice.execute_spice_sim"><a class="viewcode-back" href="../spice/sections.html#spice.spice.execute_spice_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_spice_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="spice.execute_spice_sim">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.execute_spice_sim">[docs]</a>
+    <span class="k">def</span> <span class="nf">execute_spice_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to execute spice simulation.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -929,7 +948,10 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spicecmd</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Simulator (</span><span class="si">%s</span><span class="s2">) returned non-zero exit code.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="spice.run_plotprogram"><a class="viewcode-back" href="../spice/sections.html#spice.spice.run_plotprogram">[docs]</a>    <span class="k">def</span> <span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="spice.run_plotprogram">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.run_plotprogram">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
 <span class="sd">        The plotting program command can be set with &#39;plotprogram&#39;.</span>
@@ -941,7 +963,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Waveform viewer </span><span class="si">%s</span><span class="s1"> not launched due to distributed run.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="spice.extract_powers"><a class="viewcode-back" href="../spice/sections.html#spice.spice.extract_powers">[docs]</a>    <span class="k">def</span> <span class="nf">extract_powers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="spice.extract_powers">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.extract_powers">[docs]</a>
+    <span class="k">def</span> <span class="nf">extract_powers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Automatically called function to extract transient power and current</span>
 <span class="sd">        consumptions. The consumptions are extracted for spice_dcsource objects</span>
@@ -999,13 +1024,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while extracting power consumptions.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="spice.read_oppts"><a class="viewcode-back" href="../spice/sections.html#spice.spice.read_oppts">[docs]</a>    <span class="k">def</span> <span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="spice.read_oppts">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_oppts">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">read_oppts</span><span class="p">()</span></div>
+
 
 
     <span class="nd">@property</span>
@@ -1033,7 +1062,9 @@
     <span class="k">def</span> <span class="nf">spice_tb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_spice_tb</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="spice.run_spice"><a class="viewcode-back" href="../spice/sections.html#spice.spice.run_spice">[docs]</a>    <span class="k">def</span> <span class="nf">run_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="spice.run_spice">
+<a class="viewcode-back" href="../spice/sections.html#spice.spice.run_spice">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1093,6 +1124,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">delete_iofile_bundle</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">delete_spicesimpath</span><span class="p">()</span></div>
 
+
     <span class="c1"># Obsolete stuff</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">plotlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
@@ -1130,6 +1162,7 @@
     <span class="nd">@errpreset</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">errpreset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">errpreset</span><span class="o">=</span><span class="n">value</span></div>
+
 
 </pre></div>
 

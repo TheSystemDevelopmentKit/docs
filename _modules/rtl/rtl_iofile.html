@@ -10,11 +10,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -106,7 +106,9 @@
 <span class="kn">from</span> <span class="nn">rtl.vhdl.vhdl_iofile</span> <span class="kn">import</span> <span class="n">vhdl_iofile</span>
 <span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">indent</span>
 
-<div class="viewcode-block" id="rtl_iofile"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile">[docs]</a><span class="k">class</span> <span class="nc">rtl_iofile</span><span class="p">(</span><span class="n">verilog_iofile_obsoletes</span><span class="p">,</span><span class="n">rtl_iofile_common</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl_iofile">
+<a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile">[docs]</a>
+<span class="k">class</span> <span class="nc">rtl_iofile</span><span class="p">(</span><span class="n">verilog_iofile_obsoletes</span><span class="p">,</span><span class="n">rtl_iofile_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to provide file IO for rtl simulations. When created, </span>
 <span class="sd">    adds a rtl_iofile object to the parents iofile_bundle attribute.</span>
@@ -293,7 +295,9 @@
         <span class="c1">#Ordered list.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_connectors</span><span class="o">=</span><span class="n">value</span>
     
-<div class="viewcode-block" id="rtl_iofile.connector_datamap"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.connector_datamap">[docs]</a>    <span class="k">def</span> <span class="nf">connector_datamap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="rtl_iofile.connector_datamap">
+<a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.connector_datamap">[docs]</a>
+    <span class="k">def</span> <span class="nf">connector_datamap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Verilog_connectors is an ordered list. Order defines the assumed order of columns in the </span>
 <span class="sd">        file to be read or written. </span>
 <span class="sd">        This datamap provides {&#39;name&#39; : index } dictionary to assing data to </span>
@@ -314,7 +318,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connector_datamap</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">):</span> <span class="n">index</span><span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verilog_connector_datamap</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="rtl_iofile.set_control_data"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.set_control_data">[docs]</a>    <span class="k">def</span> <span class="nf">set_control_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="rtl_iofile.set_control_data">
+<a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.set_control_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_control_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Method to define event based data value with name, time, and value.</span>
 <span class="sd">        Uses a python dictionary instead of a numpy array for more efficient insertions.</span>
 <span class="sd">        The &#39;time&#39; column acts as the dictionary key, the remaining columns are stored as the value.</span>
@@ -357,6 +364,7 @@
 
             <span class="c1"># change corresponding value</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">DictData</span><span class="p">[</span><span class="n">time</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">connector_datamap</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span></div>
+
 
     <span class="c1"># Overload self.Data accessors to keep them consistent with the assumption of using numpy arrays</span>
     <span class="c1"># To hold IO data. These methods convert to and from the diff-based data structure used in this</span>
@@ -451,7 +459,9 @@
     <span class="k">def</span> <span class="nf">rtl_io_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_sync</span><span class="o">=</span><span class="n">value</span>
 
-<div class="viewcode-block" id="rtl_iofile.rtl_io_condition_append"><a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io_condition_append">[docs]</a>    <span class="k">def</span> <span class="nf">rtl_io_condition_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+<div class="viewcode-block" id="rtl_iofile.rtl_io_condition_append">
+<a class="viewcode-back" href="../../rtl/sections.html#rtl.rtl_iofile.rtl_iofile.rtl_io_condition_append">[docs]</a>
+    <span class="k">def</span> <span class="nf">rtl_io_condition_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Append new condition string to `rtl_io_condition`</span>
 
 <span class="sd">        Parameters</span>
@@ -461,6 +471,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io_condition_append</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 
 
     <span class="nd">@property</span>
@@ -475,6 +486,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">rtl_io</span></div>
+
 </pre></div>
 
            </div>

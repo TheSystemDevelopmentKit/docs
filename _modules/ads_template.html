@@ -10,11 +10,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -106,7 +106,9 @@
 <span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">ads</span> <span class="kn">import</span> <span class="o">*</span>
 
-<div class="viewcode-block" id="ads_template"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template">[docs]</a><span class="k">class</span> <span class="nc">ads_template</span><span class="p">(</span><span class="n">ads</span><span class="p">,</span> <span class="n">thesdk</span><span class="p">):</span>
+<div class="viewcode-block" id="ads_template">
+<a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template">[docs]</a>
+<span class="k">class</span> <span class="nc">ads_template</span><span class="p">(</span><span class="n">ads</span><span class="p">,</span> <span class="n">thesdk</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
@@ -128,10 +130,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">copy_propval</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">proplist</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span><span class="n">parent</span><span class="p">;</span>
 
-<div class="viewcode-block" id="ads_template.init"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ads_template.init">
+<a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.init">[docs]</a>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span> <span class="c1">#Currently nohing to add</span></div>
 
-<div class="viewcode-block" id="ads_template.main"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ads_template.main">
+<a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.main">[docs]</a>
+    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Guideline. Isolate python processing to main method.</span>
 <span class="sd">        </span>
 <span class="sd">        To isolate the interna processing from IO connection assigments, </span>
@@ -143,7 +150,10 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="ads_template.configure_ads"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.configure_ads">[docs]</a>    <span class="k">def</span> <span class="nf">configure_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ads_template.configure_ads">
+<a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.configure_ads">[docs]</a>
+    <span class="k">def</span> <span class="nf">configure_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ads_template_gen&#39;</span>
         <span class="c1"># Momentum Simulation settings example</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interactive_ads</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Print the progress of simulation even with LSF</span>
@@ -154,7 +164,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh_cells</span> <span class="o">=</span> <span class="mi">20</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run_ads</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ads_template.run"><a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ads_template.run">
+<a class="viewcode-back" href="../ads_template/sections.html#ads_template.ads_template.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Guideline: Define model depencies of executions in `run` method.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -164,7 +177,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;py&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;ads&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">configure_ads</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">configure_ads</span><span class="p">()</span></div>
+</div>
+
 
 </pre></div>
 

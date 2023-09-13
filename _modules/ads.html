@@ -10,11 +10,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -107,7 +107,9 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 
-<div class="viewcode-block" id="ads"><a class="viewcode-back" href="../ads/sections.html#ads.ads">[docs]</a><span class="k">class</span> <span class="nc">ads</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="ads">
+<a class="viewcode-back" href="../ads/sections.html#ads.ads">[docs]</a>
+<span class="k">class</span> <span class="nc">ads</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
@@ -469,7 +471,9 @@
     <span class="k">def</span> <span class="nf">TL_mesh_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_TL_mesh_cells</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="ads.set_simulation_options"><a class="viewcode-back" href="../ads/sections.html#ads.ads.set_simulation_options">[docs]</a>    <span class="k">def</span> <span class="nf">set_simulation_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ads.set_simulation_options">
+<a class="viewcode-back" href="../ads/sections.html#ads.ads.set_simulation_options">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_simulation_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Automatically called function to set the simulation settings</span>
 
 <span class="sd">        When changing settings, always run ./configure first.</span>
@@ -518,7 +522,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">emsetupsrcpath</span><span class="si">}</span><span class="s2"> folder does not exist, run configure&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ads.generate_input_files"><a class="viewcode-back" href="../ads/sections.html#ads.ads.generate_input_files">[docs]</a>    <span class="k">def</span> <span class="nf">generate_input_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ads.generate_input_files">
+<a class="viewcode-back" href="../ads/sections.html#ads.ads.generate_input_files">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate_input_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Automatically called function to generate the input/configuration files using AEL &quot;&quot;&quot;</span>
         <span class="n">aelpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrcpath</span><span class="o">+</span><span class="s1">&#39;/init.ael&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">aelpath</span><span class="p">):</span>
@@ -527,12 +534,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Running external command </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="p">)</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ads.execute_ads_sim"><a class="viewcode-back" href="../ads/sections.html#ads.ads.execute_ads_sim">[docs]</a>    <span class="k">def</span> <span class="nf">execute_ads_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ads.execute_ads_sim">
+<a class="viewcode-back" href="../ads/sections.html#ads.ads.execute_ads_sim">[docs]</a>
+    <span class="k">def</span> <span class="nf">execute_ads_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to execute ADS momentum simulation.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Running external command </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adscmd</span><span class="p">)</span> <span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adscmd</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ads.run_ads"><a class="viewcode-back" href="../ads/sections.html#ads.ads.run_ads">[docs]</a>    <span class="k">def</span> <span class="nf">run_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ads.run_ads">
+<a class="viewcode-back" href="../ads/sections.html#ads.ads.run_ads">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_ads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Externally called function to execute ads simulation.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_simulation_options</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generate_input_files</span><span class="p">()</span>
@@ -541,7 +554,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span><span class="si">}</span><span class="s1">/proj.cti&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">output_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">adssimpath</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sparam_filename</span><span class="si">}</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">generate_contents</span><span class="p">()</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span></div></div>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">adssrc</span></div>
+</div>
+
 </pre></div>
 
            </div>

@@ -10,11 +10,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -100,7 +100,9 @@
 <span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">rtl_connector</span>
 <span class="kn">from</span> <span class="nn">rtl.testbench_common</span> <span class="kn">import</span> <span class="n">testbench_common</span>
 
-<div class="viewcode-block" id="verilog_testbench"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench">[docs]</a><span class="k">class</span> <span class="nc">verilog_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
+<div class="viewcode-block" id="verilog_testbench">
+<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench">[docs]</a>
+<span class="k">class</span> <span class="nc">verilog_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Verilog testbench class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -193,7 +195,9 @@
                 <span class="n">definitions</span><span class="o">=</span><span class="n">definitions</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">definition</span>
         <span class="k">return</span> <span class="n">definitions</span>
 
-<div class="viewcode-block" id="verilog_testbench.assignments"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.assignments">[docs]</a>    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="verilog_testbench.assignments">
+<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.assignments">[docs]</a>
+    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Wire assingment strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -202,6 +206,7 @@
         <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matchlist</span><span class="p">:</span>
             <span class="n">assigns</span><span class="o">=</span><span class="n">assigns</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">match</span><span class="o">=</span><span class="n">match</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">assigns</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div>
+
      
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -274,7 +279,9 @@
     <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
 
-<div class="viewcode-block" id="verilog_testbench.define_testbench"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.define_testbench">[docs]</a>    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="verilog_testbench.define_testbench">
+<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.define_testbench">[docs]</a>
+    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -302,9 +309,12 @@
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dut_instance</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
                 <span class="n">val</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span></div>
+
     
     <span class="c1"># Automate this based in dir</span>
-<div class="viewcode-block" id="verilog_testbench.connect_inputs"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.connect_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="verilog_testbench.connect_inputs">
+<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.connect_inputs">[docs]</a>
+    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Define connections to DUT inputs.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -336,7 +346,10 @@
         <span class="c1"># Needed for creating file io routines </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
 
-<div class="viewcode-block" id="verilog_testbench.generate_contents"><a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.generate_contents">[docs]</a>    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="verilog_testbench.generate_contents">
+<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.generate_contents">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; This is the method to generate testbench contents. Override if needed</span>
 <span class="sd">            Contents of the testbench is constructed from attributes in the </span>
 <span class="sd">            following order ::</span>
@@ -403,7 +416,9 @@
         <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">join</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;$finish;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">contents</span><span class="o">+=</span><span class="s1">&#39;end</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="o">=</span><span class="n">contents</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span><span class="o">=</span><span class="n">contents</span></div>
+</div>
+
 
 <span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="k">pass</span>

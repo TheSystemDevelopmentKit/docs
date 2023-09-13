@@ -11,11 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bc1173f4"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -144,9 +144,9 @@
            <div itemprop="articleBody">
              
   <section id="module-thesdk">
-<span id="thesdk-core-classes"></span><h1>Thesdk core classes<a class="headerlink" href="#module-thesdk" title="Permalink to this heading"></a></h1>
+<span id="thesdk-core-classes"></span><h1>Thesdk core classes<a class="headerlink" href="#module-thesdk" title="Link to this heading"></a></h1>
 <section id="thesdk">
-<h2>Thesdk<a class="headerlink" href="#thesdk" title="Permalink to this heading"></a></h2>
+<h2>Thesdk<a class="headerlink" href="#thesdk" title="Link to this heading"></a></h2>
 <p>Superclass class of TheSyDeKick - universal System Development Kit. Provides
 commmon methods and utility classes for other classes in TheSyDeKick.</p>
 <p>Created by Marko Kosunen, <a class="reference external" href="mailto:marko&#46;kosunen&#37;&#52;&#48;aalto&#46;fi">marko<span>&#46;</span>kosunen<span>&#64;</span>aalto<span>&#46;</span>fi</a>, 2017.</p>
@@ -160,11 +160,11 @@ and in every way we are getting better and better :).</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="thesdk.thesdk">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">thesdk</span></span><a class="reference internal" href="../_modules/thesdk.html#thesdk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">thesdk</span></span><a class="reference internal" href="../_modules/thesdk.html#thesdk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk" title="Link to this definition"></a></dt>
 <dd><p>Following class attributes are set when this class imported</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="thesdk.thesdk.HOME">
-<span class="sig-name descname"><span class="pre">HOME</span></span><a class="headerlink" href="#thesdk.thesdk.HOME" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">HOME</span></span><a class="headerlink" href="#thesdk.thesdk.HOME" title="Link to this definition"></a></dt>
 <dd><p>Directory ../../../ counting from location __init__.py file of
 thesdkclass. Used as a reference point for other locations</p>
 <dl class="field-list simple">
@@ -176,7 +176,7 @@ thesdkclass. Used as a reference point for other locations</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="thesdk.thesdk.CONFIGFILE">
-<span class="sig-name descname"><span class="pre">CONFIGFILE</span></span><a class="headerlink" href="#thesdk.thesdk.CONFIGFILE" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">CONFIGFILE</span></span><a class="headerlink" href="#thesdk.thesdk.CONFIGFILE" title="Link to this definition"></a></dt>
 <dd><p>HOME/TheSDK.config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -187,7 +187,7 @@ thesdkclass. Used as a reference point for other locations</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="thesdk.thesdk.MODULEPATHS">
-<span class="sig-name descname"><span class="pre">MODULEPATHS</span></span><a class="headerlink" href="#thesdk.thesdk.MODULEPATHS" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">MODULEPATHS</span></span><a class="headerlink" href="#thesdk.thesdk.MODULEPATHS" title="Link to this definition"></a></dt>
 <dd><p>List of directories under HOME/Entities  that contain __init__.py file.
 Appended to sys.path to locate TheSyDeKick system modules</p>
 <dl class="field-list simple">
@@ -199,7 +199,7 @@ Appended to sys.path to locate TheSyDeKick system modules</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="thesdk.thesdk.logfile">
-<span class="sig-name descname"><span class="pre">logfile</span></span><a class="headerlink" href="#thesdk.thesdk.logfile" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">logfile</span></span><a class="headerlink" href="#thesdk.thesdk.logfile" title="Link to this definition"></a></dt>
 <dd><p>Default logfile:  /tmp/TheSDK_randomstr_uname_YYYYMMDDHHMM.log
 Override with initlog if you want something else</p>
 <dl class="field-list simple">
@@ -211,7 +211,7 @@ Override with initlog if you want something else</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="thesdk.thesdk.global_parameters">
-<span class="sig-name descname"><span class="pre">global_parameters</span></span><a class="headerlink" href="#thesdk.thesdk.global_parameters" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">global_parameters</span></span><a class="headerlink" href="#thesdk.thesdk.global_parameters" title="Link to this definition"></a></dt>
 <dd><p>List of global parameters to be read to GLOBALS dictionary from CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -222,7 +222,7 @@ Override with initlog if you want something else</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="thesdk.thesdk.GLOBALS">
-<span class="sig-name descname"><span class="pre">GLOBALS</span></span><a class="headerlink" href="#thesdk.thesdk.GLOBALS" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">GLOBALS</span></span><a class="headerlink" href="#thesdk.thesdk.GLOBALS" title="Link to this definition"></a></dt>
 <dd><p>Dictionary of global parameters, keys defined by global_parameters,
 values defined in CONFIGFILE</p>
 <dl class="field-list simple">
@@ -234,19 +234,19 @@ values defined in CONFIGFILE</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.initlog">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.initlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.initlog" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.initlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.initlog" title="Link to this definition"></a></dt>
 <dd><p>Initializes logging. logfile passed as a parameter</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.DEBUG">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DEBUG</span></span><a class="headerlink" href="#thesdk.thesdk.DEBUG" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DEBUG</span></span><a class="headerlink" href="#thesdk.thesdk.DEBUG" title="Link to this definition"></a></dt>
 <dd><p>Set this to True if you want the debug messages printed</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.print_relative_path">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_relative_path</span></span><a class="headerlink" href="#thesdk.thesdk.print_relative_path" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_relative_path</span></span><a class="headerlink" href="#thesdk.thesdk.print_relative_path" title="Link to this definition"></a></dt>
 <dd><p>True (default) | False</p>
 <p>If True, print all paths relative to the entity path. If False, paths
 are printed as is (typically absolute paths).</p>
@@ -254,7 +254,7 @@ are printed as is (typically absolute paths).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk._classfile">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.thesdk._classfile" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.thesdk._classfile" title="Link to this definition"></a></dt>
 <dd><p>Defines the location of the
 classfile.</p>
 <p>Returns: &lt;path&gt;/Entities/&lt;entity&gt;/&lt;entity&gt;</p>
@@ -262,20 +262,20 @@ classfile.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.entitypath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entitypath</span></span><a class="headerlink" href="#thesdk.thesdk.entitypath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entitypath</span></span><a class="headerlink" href="#thesdk.thesdk.entitypath" title="Link to this definition"></a></dt>
 <dd><p>Path to entity. Extracted from the location of __init__.py file.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.model">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#thesdk.thesdk.model" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#thesdk.thesdk.model" title="Link to this definition"></a></dt>
 <dd><p>Simulation model to be used</p>
 <p>‘py’ |  ‘sv’ |  ‘vhdl’ |  ‘eldo’ |  ‘spectre’ | ‘ngspice’ | ‘hw’ | ‘icarus’ | ‘ghdl’</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.simpath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simpath</span></span><a class="headerlink" href="#thesdk.thesdk.simpath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simpath</span></span><a class="headerlink" href="#thesdk.thesdk.simpath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Simulation path. (./simulations/&lt;model&gt;/&lt;runname&gt;)
 This is not meant to be set manually.</p>
@@ -283,7 +283,7 @@ This is not meant to be set manually.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.has_lsf">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_lsf</span></span><a class="headerlink" href="#thesdk.thesdk.has_lsf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_lsf</span></span><a class="headerlink" href="#thesdk.thesdk.has_lsf" title="Link to this definition"></a></dt>
 <dd><p>True | False (default)</p>
 <p>True if LSFINTERACTIVE and LSFSUBMISSION global veriables are defined
 in TheSDK.config.</p>
@@ -291,7 +291,7 @@ in TheSDK.config.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.preserve_iofiles">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preserve_iofiles</span></span><a class="headerlink" href="#thesdk.thesdk.preserve_iofiles" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preserve_iofiles</span></span><a class="headerlink" href="#thesdk.thesdk.preserve_iofiles" title="Link to this definition"></a></dt>
 <dd><p>True | False (default)</p>
 <p>If True, do not delete IO files after
 simulations. Useful for debugging the file IO</p>
@@ -299,7 +299,7 @@ simulations. Useful for debugging the file IO</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.pickle_excludes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pickle_excludes</span></span><a class="headerlink" href="#thesdk.thesdk.pickle_excludes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pickle_excludes</span></span><a class="headerlink" href="#thesdk.thesdk.pickle_excludes" title="Link to this definition"></a></dt>
 <dd><p>Properties of entity to be excluded from pickling when saving entity state to disk.
 Useful for filtering out e.g. lambdas and other non-serializable objects.</p>
 <p>Default:</p>
@@ -315,7 +315,7 @@ Useful for filtering out e.g. lambdas and other non-serializable objects.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.copy_propval">
-<span class="sig-name descname"><span class="pre">copy_propval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.copy_propval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.copy_propval" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">copy_propval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.copy_propval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.copy_propval" title="Link to this definition"></a></dt>
 <dd><p>Method to copy attributes form parent.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">some_thesdk_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -335,7 +335,7 @@ of every entity:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.print_log">
-<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.print_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.print_log" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.print_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.print_log" title="Link to this definition"></a></dt>
 <dd><p>Method to print messages to ‘logfile’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -357,7 +357,7 @@ of every entity:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.timer">
-<span class="sig-name descname"><span class="pre">timer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.timer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.timer" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">timer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.timer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.timer" title="Link to this definition"></a></dt>
 <dd><p>Timer decorator</p>
 <p>Print execution time of member functions of classes inheriting
 thesdk to the logfile.</p>
@@ -385,7 +385,7 @@ calculator(thesdk), would print the following:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.silence">
-<span class="sig-name descname"><span class="pre">silence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.silence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.silence" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">silence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.silence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.silence" title="Link to this definition"></a></dt>
 <dd><p>Context manager to redirect stdout (and optional errors) to /dev/null.
 Useful for cleaning up verbose function outputs. The silencing can be
 bypassed by setting debug=True. Errors are let through by default, but
@@ -403,20 +403,20 @@ still write to stdout).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.par">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">par</span></span><a class="headerlink" href="#thesdk.thesdk.par" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">par</span></span><a class="headerlink" href="#thesdk.thesdk.par" title="Link to this definition"></a></dt>
 <dd><p>True | False (default)</p>
 <p>Property defines whether parallel run is intended or not</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.queue">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">queue</span></span><a class="headerlink" href="#thesdk.thesdk.queue" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">queue</span></span><a class="headerlink" href="#thesdk.thesdk.queue" title="Link to this definition"></a></dt>
 <dd><p>Property holding the queue for parallel run result</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.run_parallel">
-<span class="sig-name descname"><span class="pre">run_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.run_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.run_parallel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.run_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.run_parallel" title="Link to this definition"></a></dt>
 <dd><p>Run instances in parallel and collect results</p>
 <p>Usage: Takes in a set of instances, runs a given method for them, and
 saves result data to the original instances.</p>
@@ -457,7 +457,7 @@ following example can be used:</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.IOS">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IOS</span></span><a class="headerlink" href="#thesdk.thesdk.IOS" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IOS</span></span><a class="headerlink" href="#thesdk.thesdk.IOS" title="Link to this definition"></a></dt>
 <dd><p>Bundle of IO’s</p>
 <p>Property holding the IOS</p>
 <p class="rubric">Example</p>
@@ -471,7 +471,7 @@ following example can be used:</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.extracts">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extracts</span></span><a class="headerlink" href="#thesdk.thesdk.extracts" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extracts</span></span><a class="headerlink" href="#thesdk.thesdk.extracts" title="Link to this definition"></a></dt>
 <dd><p>Bundle</p>
 <p>Bundle for holding the returned results from simulations that are
 not attributes or IOs.</p>
@@ -483,7 +483,7 @@ not attributes or IOs.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.netlist_params">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">netlist_params</span></span><a class="headerlink" href="#thesdk.thesdk.netlist_params" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">netlist_params</span></span><a class="headerlink" href="#thesdk.thesdk.netlist_params" title="Link to this definition"></a></dt>
 <dd><p>List[string]</p>
 <p>List of strings containing the parameters of a netlist. List is populated by calling
 ecd_methods.get_params(). Empty if no parameters were found in the netlist.</p>
@@ -491,14 +491,14 @@ ecd_methods.get_params(). Empty if no parameters were found in the netlist.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.print_colors">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_colors</span></span><a class="headerlink" href="#thesdk.thesdk.print_colors" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_colors</span></span><a class="headerlink" href="#thesdk.thesdk.print_colors" title="Link to this definition"></a></dt>
 <dd><p>True (default) | False</p>
 <p>Enable color tags in log print messages.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.runname">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runname</span></span><a class="headerlink" href="#thesdk.thesdk.runname" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runname</span></span><a class="headerlink" href="#thesdk.thesdk.runname" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Automatically generated name for the simulation.</p>
 <p>Formatted as timestamp_randomtag, i.e. ‘20201002103638_tmpdbw11nr4’.
@@ -512,7 +512,7 @@ Can be overridden by assigning self.runname = ‘myname’.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.statepath">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statepath</span></span><a class="headerlink" href="#thesdk.thesdk.statepath" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statepath</span></span><a class="headerlink" href="#thesdk.thesdk.statepath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path where the entity state is stored and where existing states are
 loaded from.</p>
@@ -520,14 +520,14 @@ loaded from.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.statedir">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statedir</span></span><a class="headerlink" href="#thesdk.thesdk.statedir" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statedir</span></span><a class="headerlink" href="#thesdk.thesdk.statedir" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Path to the most recently stored state.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.save_state">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_state</span></span><a class="headerlink" href="#thesdk.thesdk.save_state" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_state</span></span><a class="headerlink" href="#thesdk.thesdk.save_state" title="Link to this definition"></a></dt>
 <dd><p>True | False (default)</p>
 <p>Save the entity state after simulation (including output data). Any
 stored state can be loaded using the matching state name passed to the
@@ -536,7 +536,7 @@ stored state can be loaded using the matching state name passed to the
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.load_state">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state</span></span><a class="headerlink" href="#thesdk.thesdk.load_state" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state</span></span><a class="headerlink" href="#thesdk.thesdk.load_state" title="Link to this definition"></a></dt>
 <dd><p>String (default ‘’)</p>
 <p>Feature for loading results of previous simulation. When calling run()
 with this property set, the simulation is not re-executed, but the
@@ -560,7 +560,7 @@ string value should be the <cite>runname</cite> of the desired simulation.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.load_state_full">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state_full</span></span><a class="headerlink" href="#thesdk.thesdk.load_state_full" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_state_full</span></span><a class="headerlink" href="#thesdk.thesdk.load_state_full" title="Link to this definition"></a></dt>
 <dd><p>True (default) | False</p>
 <p>Whether to load the full entity state or not. If False, only IOs are
 loaded in order to not override the entity state otherwise. In that
@@ -569,20 +569,20 @@ case, bundles <cite>IOS</cite> and <cite>extracts</cite> are updated.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk._write_state">
-<span class="sig-name descname"><span class="pre">_write_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk._write_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk._write_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_write_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk._write_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk._write_state" title="Link to this definition"></a></dt>
 <dd><p>Write the entity state to a binary file.</p>
 <p>This should be called after the simulation has finished.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk._read_state">
-<span class="sig-name descname"><span class="pre">_read_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk._read_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk._read_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_read_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk._read_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk._read_state" title="Link to this definition"></a></dt>
 <dd><p>Read the entity state from a binary file.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.iofile_bundle">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofile_bundle</span></span><a class="headerlink" href="#thesdk.thesdk.iofile_bundle" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iofile_bundle</span></span><a class="headerlink" href="#thesdk.thesdk.iofile_bundle" title="Link to this definition"></a></dt>
 <dd><p>Bundle</p>
 <p>A thesdk.Bundle containing <cite>iofile</cite> objects. The <cite>iofile</cite>
 objects are automatically added to this Bundle, nothing should be
@@ -591,7 +591,7 @@ manually added.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.thesdk.delete_iofile_bundle">
-<span class="sig-name descname"><span class="pre">delete_iofile_bundle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.delete_iofile_bundle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.delete_iofile_bundle" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">delete_iofile_bundle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#thesdk.delete_iofile_bundle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.thesdk.delete_iofile_bundle" title="Link to this definition"></a></dt>
 <dd><p>Method to delete all files in iofile bundle</p>
 <p>For each of the member of the bundle of type iofile, it calls ‘remove’ method.
 In case modifications are needed, define class for desired iofile type with remove method.</p>
@@ -601,7 +601,7 @@ In case modifications are needed, define class for desired iofile type with remo
 
 <dl class="py class">
 <dt class="sig sig-object py" id="thesdk.IO">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">IO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#IO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.IO" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.</span></span><span class="sig-name descname"><span class="pre">IO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk.html#IO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.IO" title="Link to this definition"></a></dt>
 <dd><p>TheSyDeKick IO class. Child of thesdk to utilize logging method.</p>
 <p>The IOs of an entity must be defined as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
@@ -623,7 +623,7 @@ In case modifications are needed, define class for desired iofile type with remo
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.IO._classfile">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.IO._classfile" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_classfile</span></span><a class="headerlink" href="#thesdk.IO._classfile" title="Link to this definition"></a></dt>
 <dd><p>Defines the location of the
 classfile.</p>
 <p>Returns: &lt;path&gt;/Entities/&lt;entity&gt;/&lt;entity&gt;</p>
@@ -631,14 +631,14 @@ classfile.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.IO.Data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#thesdk.IO.Data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#thesdk.IO.Data" title="Link to this definition"></a></dt>
 <dd><p>Data value of this IO</p>
 </dd></dl>
 
 </dd></dl>
 
-<span class="target" id="module-thesdk.iofile"></span><section id="iofile-package">
-<h2>Iofile package<a class="headerlink" href="#iofile-package" title="Permalink to this heading"></a></h2>
+<section id="iofile-package">
+<span id="module-thesdk.iofile"></span><h2>Iofile package<a class="headerlink" href="#iofile-package" title="Link to this heading"></a></h2>
 <p>Provides Common file-io related attributes and methods
 for TheSyDeKinck</p>
 <p>This package defines the CSF IO-file format and methods for all supported simulators.
@@ -652,7 +652,7 @@ Yue Dai, 2018</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.iofile.</span></span><span class="sig-name descname"><span class="pre">iofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thesdk.iofile.</span></span><span class="sig-name descname"><span class="pre">iofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile" title="Link to this definition"></a></dt>
 <dd><p>Class to provide file IO for external simulators.</p>
 <p>When created, adds an iofile object to the parents iofile_bundle attribute.
 Accessible as iofile_bundle.Members[‘name’].</p>
@@ -679,13 +679,13 @@ passed to the simulator at command line.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.adopt">
-<span class="sig-name descname"><span class="pre">adopt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.adopt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.adopt" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">adopt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.adopt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.adopt" title="Link to this definition"></a></dt>
 <dd><p>Redefine the parent entity of the file. Afrects where the file is written during the simulation</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.datatype">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">datatype</span></span><a class="headerlink" href="#thesdk.iofile.iofile.datatype" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">datatype</span></span><a class="headerlink" href="#thesdk.iofile.iofile.datatype" title="Link to this definition"></a></dt>
 <dd><p>Type of the data. Controls the reading and writing of the data
 ‘complex’ | ‘int’ | ‘scomplex’ | ‘sint’ | object</p>
 <dl class="simple">
@@ -704,26 +704,26 @@ of the read method. Default is object.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.dir">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#thesdk.iofile.iofile.dir" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#thesdk.iofile.iofile.dir" title="Link to this definition"></a></dt>
 <dd><p>Direction of the iofile, in | out</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.file">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#thesdk.iofile.iofile.file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#thesdk.iofile.iofile.file" title="Link to this definition"></a></dt>
 <dd><p>Name of the IO file to be read or written.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.ionames">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ionames</span></span><a class="headerlink" href="#thesdk.iofile.iofile.ionames" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ionames</span></span><a class="headerlink" href="#thesdk.iofile.iofile.ionames" title="Link to this definition"></a></dt>
 <dd><p>Names of the DUT signals represented by the colums of the data.
 Two elements per colums should be given, if the type is complex or scomplex.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.iotype">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iotype</span></span><a class="headerlink" href="#thesdk.iofile.iofile.iotype" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iotype</span></span><a class="headerlink" href="#thesdk.iofile.iofile.iotype" title="Link to this definition"></a></dt>
 <dd><p>sample | event</p>
 <dl class="simple">
 <dt>sample</dt><dd><p>IO is synchronized with a sampling clock. Each of the rows represents the data valua at known sample insatnce</p>
@@ -740,7 +740,7 @@ Two elements per colums should be given, if the type is complex or scomplex.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.read" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.read" title="Link to this definition"></a></dt>
 <dd><p>Method to read the file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -759,13 +759,13 @@ This is a help parameter to give more control over reading.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.remove" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.remove" title="Link to this definition"></a></dt>
 <dd><p>Remove the file</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="thesdk.iofile.iofile.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.write" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/thesdk/iofile.html#iofile.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thesdk.iofile.iofile.write" title="Link to this definition"></a></dt>
 <dd><p>Method to write the file</p>
 <p>Sets the ‘dir’ attribute to ‘in’, because only input files are written.</p>
 <dl class="field-list simple">
