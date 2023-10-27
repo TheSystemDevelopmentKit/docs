@@ -60,6 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk._classfile"><code class="docutils literal notranslate"><span class="pre">thesdk._classfile</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.entitypath"><code class="docutils literal notranslate"><span class="pre">thesdk.entitypath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.model"><code class="docutils literal notranslate"><span class="pre">thesdk.model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.simpathroot"><code class="docutils literal notranslate"><span class="pre">thesdk.simpathroot</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.simpath"><code class="docutils literal notranslate"><span class="pre">thesdk.simpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.has_lsf"><code class="docutils literal notranslate"><span class="pre">thesdk.has_lsf</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.preserve_iofiles"><code class="docutils literal notranslate"><span class="pre">thesdk.preserve_iofiles</span></code></a></li>
@@ -169,7 +170,7 @@ and in every way we are getting better and better :).</p>
 thesdkclass. Used as a reference point for other locations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -180,7 +181,7 @@ thesdkclass. Used as a reference point for other locations</p>
 <dd><p>HOME/TheSDK.config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -192,7 +193,7 @@ thesdkclass. Used as a reference point for other locations</p>
 Appended to sys.path to locate TheSyDeKick system modules</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -204,7 +205,7 @@ Appended to sys.path to locate TheSyDeKick system modules</p>
 Override with initlog if you want something else</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -215,7 +216,7 @@ Override with initlog if you want something else</p>
 <dd><p>List of global parameters to be read to GLOBALS dictionary from CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>)</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -227,7 +228,7 @@ Override with initlog if you want something else</p>
 values defined in CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -274,11 +275,20 @@ classfile.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.simpathroot">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simpathroot</span></span><a class="headerlink" href="#thesdk.thesdk.simpathroot" title="Link to this definition"></a></dt>
+<dd><p>String</p>
+<p>Simulation path root.</p>
+<p>Default self.entitypath</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.simpath">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simpath</span></span><a class="headerlink" href="#thesdk.thesdk.simpath" title="Link to this definition"></a></dt>
 <dd><p>String</p>
 <p>Simulation path. (./simulations/&lt;model&gt;/&lt;runname&gt;)
-This is not meant to be set manually.</p>
+This is not meant to be set manually. Use ‘simpathroot’
+to relocate.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -308,7 +318,7 @@ Useful for filtering out e.g. lambdas and other non-serializable objects.</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -664,7 +674,7 @@ Accessible as iofile_bundle.Members[‘name’].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
 <li><p><strong>**kwargs</strong> – <dl class="simple">
 <dt>name: str</dt><dd><p>Name of the file. Appended with
 random string during the simulation.</p>
