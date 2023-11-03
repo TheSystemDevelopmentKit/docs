@@ -265,7 +265,15 @@
                 <span class="o">+</span> <span class="s2">&quot;/tb_inverter/A</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="o">+</span> <span class="s2">&quot;/tb_inverter/Z</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="o">+</span> <span class="s2">&quot;/tb_inverter/clock</span><span class="se">\n</span><span class="s2">&quot;</span>
-                                                 <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">simulator_control_contents</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;vcd file </span><span class="si">%s</span><span class="s2">/inverter_dump.vcd</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;vcd add -r *</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;vcd on</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;run -all</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;quit</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;icarus&#39;</span><span class="p">]:</span>
                 <span class="c1"># Verilog simulation options here</span>
