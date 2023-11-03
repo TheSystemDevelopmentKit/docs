@@ -189,7 +189,8 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the rtl timescale. Default &#39;1ps&#39;</span>
+<span class="sd">        Defines the rtl timescal. This is the time unit shown by the simulator</span>
+<span class="sd">        and used in testbench delays. Default &#39;1ps&#39;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtl_timescale&#39;</span><span class="p">):</span>
@@ -200,11 +201,40 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timescale</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtl_timeunit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines rtl time unit. OBSOLETE: use rtl_timescale.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtl_timeunit&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Use `rtl_timescale` and `rtl_timeprecision` instead&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timeunit</span> <span class="o">=</span> <span class="s1">&#39;1 ps&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timeunit</span>
+    <span class="nd">@rtl_timeunit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_timeunit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Use `rtl_timescale` and `rtl_timeprecision` instead&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timeunit</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtl_timeprecision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines rtl time precision. This is the smallest time step representable in simulation.</span>
+<span class="sd">        This should be less than equal to ``rtl_timeunit``. Default &#39;1 ps&#39;. </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_rtl_timeprecision&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timeprecision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timeprecision</span>
+    <span class="nd">@rtl_timeprecision</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtl_timeprecision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtl_timeprecision</span> <span class="o">=</span> <span class="n">val</span>
+
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">add_tb_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Bool : Defines if timescale directive is added to testbench. Can</span>
-<span class="sd">        be used in cases where submodules have timescale directives, and </span>
+<span class="sd">        be used in cases where submodules have timescale directives, and</span>
 <span class="sd">        you wish to control that from the testbench toplevel. Effective only for </span>
-<span class="sd">        elf.lang = &#39;sv&#39;</span>
+<span class="sd">        self.lang = &#39;sv&#39;</span>
 
 <span class="sd">        Default: False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -213,7 +243,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_tb_timescale</span>
     <span class="nd">@add_tb_timescale</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">add_tb_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_tb_timescale</span> <span class="o">=</span> <span class="n">val</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_tb_timescale</span> <span class="o">=</span> <span class="n">val</span>
         
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -383,6 +413,93 @@
     <span class="nd">@rtlparameters</span><span class="o">.</span><span class="n">deleter</span>
     <span class="k">def</span> <span class="nf">rtlparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_rtlparameters</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List of verilog modules to be compiled in addition of DUT</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vlogmodulefiles&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span> <span class="o">=</span><span class="nb">list</span><span class="p">([])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span>
+    <span class="nd">@vlogmodulefiles</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@vlogmodulefiles</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">vlogmodulefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vlogmodulefiles</span> <span class="o">=</span> <span class="kc">None</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vloglibfilemodules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List of verilog modules to be compiled in addition to DUT</span>
+<span class="sd">        provided in a file given by the &#39;VLOGLIBFILE&#39; global variable in TheSDK.config</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vloglibfilemodules&#39;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">libfile</span> <span class="o">=</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;VLOGLIBFILE&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">libfile</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_vloglibfilemodules</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">libfile</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable VLOGLIBFILE not set.&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Using VLOGLIBFILE: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">libfile</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">libfile</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                                <span class="n">modulefiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fd</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_vloglibfilemodules</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">modulefiles</span><span class="p">)</span>
+                        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not read verilog module files from VLOGLIBFILE:</span><span class="se">\n\t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">_vloglibfilemodules</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vloglibfilemodules</span>
+    <span class="nd">@vloglibfilemodules</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vloglibfilemodules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vloglibfilemodules</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@vloglibfilemodules</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">vloglibfilemodules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vloglibfilemodules</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List of VHDL entity files to be compiled in addition to DUT</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdlentityfiles&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span><span class="nb">list</span><span class="p">([])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span>
+    <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="kc">None</span> 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vhdllibfileentities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;List of VHDL entities to be compiled in addition to DUT</span>
+<span class="sd">        provided in a file given by the &#39;VHDLLIBFILE&#39; global variable in TheSDK.config</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_vhdllibfileentities&#39;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">libfile</span> <span class="o">=</span> <span class="n">thesdk</span><span class="o">.</span><span class="n">GLOBALS</span><span class="p">[</span><span class="s1">&#39;VHDLLIBFILE&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">libfile</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_vhdllibfileentities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">libfile</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Global TheSDK variable VHDLLIBFILE not set.&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Using VHDLLIBFILE: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">libfile</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">libfile</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                                <span class="n">modulefiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fd</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_vhdllibfileentities</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">modulefiles</span><span class="p">)</span>
+                        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Could not read verilog module files from VHDLLIBFILE:</span><span class="se">\n\t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">_vhdllibfileentities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdllibfileentities</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interactive_control_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -671,7 +788,7 @@
                         <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span><span class="p">))</span>
 
             <span class="c1"># copy other verilog files</span>
-            <span class="k">for</span> <span class="n">modfile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">modfile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">vloglibfilemodules</span><span class="p">:</span>
                 <span class="n">srcfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsrcpath</span><span class="p">,</span> <span class="n">modfile</span><span class="p">)</span>
                 <span class="n">dstfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span> <span class="n">modfile</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dstfile</span><span class="p">):</span>

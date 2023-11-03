@@ -171,7 +171,14 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Config file of TheSDK is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">CONFIGFILE</span><span class="p">))</span>
 
     <span class="c1">#This variable becomes redundant after the GLOBALS dictionary is created</span>
-    <span class="n">global_parameters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LSFSUBMISSION&#39;</span><span class="p">,</span><span class="s1">&#39;LSFINTERACTIVE&#39;</span><span class="p">,</span><span class="s1">&#39;ELDOLIBFILE&#39;</span><span class="p">,</span><span class="s1">&#39;SPECTRELIBFILE&#39;</span><span class="p">]</span>
+    <span class="n">global_parameters</span><span class="o">=</span><span class="p">[</span>
+            <span class="s1">&#39;LSFSUBMISSION&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;LSFINTERACTIVE&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ELDOLIBFILE&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;SPECTRELIBFILE&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;VLOGLIBFILE&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;VHDLLIBFILE&#39;</span>
+            <span class="p">]</span>
 
     <span class="c1"># Append all SDK python modules to path. Strategy: </span>
     <span class="c1"># 1. iterate over paths starting from Entities directory</span>
@@ -714,7 +721,11 @@
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">duts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Parallel run </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1"> failed or returned dict was empty!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">duts</span><span class="p">)))</span>
+                    <span class="k">if</span> <span class="n">duts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">load_state</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="n">name</span> <span class="o">=</span> <span class="n">duts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">runname</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">name</span> <span class="o">=</span> <span class="n">duts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">load_state</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Parallel run </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1"> failed (with name: </span><span class="si">%s</span><span class="s1">). Returned dict was empty!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">duts</span><span class="p">),</span> <span class="n">name</span><span class="p">))</span>
                 <span class="n">proc</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
                 <span class="n">n</span><span class="o">+=</span><span class="mi">1</span></div>
 

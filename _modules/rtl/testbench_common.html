@@ -134,6 +134,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timescale</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtl_timeprecision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timeprecision</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_lang&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lang</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">lang</span>
@@ -229,7 +233,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
             <span class="n">dump_str</span><span class="o">=</span><span class="s2">&quot;// Generates dumpfile with iverilog</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="n">dump_str</span> <span class="o">+=</span> <span class="s2">&quot;initial begin</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="n">dump_str</span> <span class="o">+=</span> <span class="s1">&#39;  $dumpfile(&quot;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dump.vcd&quot;);</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">dump_str</span> <span class="o">+=</span> <span class="s1">&#39;  $dumpfile(&quot;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dump.vcd&quot;);</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="n">dump_str</span> <span class="o">+=</span> <span class="s2">&quot;  $dumpvars(0, tb_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;);</span><span class="se">\n</span><span class="s2">end </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dump_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>

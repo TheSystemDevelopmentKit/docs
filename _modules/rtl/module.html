@@ -170,6 +170,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">ios</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">directives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Verilog directives affecting the whole module.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_directives&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_directives</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_directives</span>
+    <span class="nd">@directives</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">directives</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_directives</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Parameters of the verilog module. Bundle of values of type string.</span>
 
@@ -212,6 +223,88 @@
 <span class="sd">        IO definitions.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
+<span class="c1">#&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Check where to transfer</span>
+<span class="c1">#        if not hasattr(self,&#39;_definition&#39;):</span>
+<span class="c1">#            self._definition = &#39;&#39;</span>
+<span class="c1">#            # module-wide directives</span>
+<span class="c1">#            self._definition += &#39;\n&#39;.join(self.directives) + &#39;\n&#39;</span>
+<span class="c1">#            # module parameters</span>
+<span class="c1">#            if self.parameters.Members:</span>
+<span class="c1">#                parameters=&#39;&#39;</span>
+<span class="c1">#                first=True</span>
+<span class="c1">#                for name, val in self.parameters.Members.items():</span>
+<span class="c1">#                    if first:</span>
+<span class="c1">#                        parameters=&#39;#(\n    parameter %s = %s&#39; %(name,val)</span>
+<span class="c1">#                        first=False</span>
+<span class="c1">#                    else:</span>
+<span class="c1">#                        parameters=parameters+&#39;,\n    parameter %s = %s&#39; %(name,val)</span>
+<span class="c1">#                parameters=parameters+&#39;\n)&#39;</span>
+<span class="c1">#                self._definition+=&#39;module %s %s&#39; %(self.name, parameters)</span>
+<span class="c1">#            else:</span>
+<span class="c1">#                self._definition+=&#39;module %s &#39; %(self.name)</span>
+<span class="c1">#            # module io</span>
+<span class="c1">#            first=True</span>
+<span class="c1">#            if self.ios.Members:</span>
+<span class="c1">#                for ioname, io in self.ios.Members.items():</span>
+<span class="c1">#                    if first:</span>
+<span class="c1">#                        self._definition=self._definition+&#39;(\n&#39;</span>
+<span class="c1">#                        first=False</span>
+<span class="c1">#                    else:</span>
+<span class="c1">#                        self._definition=self._definition+&#39;,\n&#39;</span>
+<span class="c1">#                    if io.cls in [ &#39;input&#39;, &#39;output&#39;, &#39;inout&#39; ]:</span>
+<span class="c1">#                        if io.width==1:</span>
+<span class="c1">#                            self._definition=(self._definition+</span>
+<span class="c1">#                                    (&#39;    %s %s&#39; %(io.cls, io.name)))</span>
+<span class="c1">#                        else:</span>
+<span class="c1">#                            self._definition=(self._definition+</span>
+<span class="c1">#                                    (&#39;    %s [%s:%s] %s&#39; %(io.cls, io.ll, io.rl, io.name)))</span>
+<span class="c1">#                    else:</span>
+<span class="c1">#                        self.print_log(type=&#39;F&#39;, msg=&#39;Assigning signal direction %s to verilog module IO.&#39; %(io.cls))</span>
+<span class="c1">#                self._definition=self._definition+&#39;\n)&#39;</span>
+<span class="c1">#            self._definition=self._definition+&#39;;&#39;</span>
+<span class="c1">#            # module body</span>
+<span class="c1">#            if self.contents:</span>
+<span class="c1">#                self._definition=self._definition+self.contents+&#39;\nendmodule&#39;</span>
+<span class="c1">#        return self._definition</span>
+<span class="c1">#||||||| 30941e9</span>
+<span class="c1">#        if not hasattr(self,&#39;_definition&#39;):</span>
+<span class="c1">#            #First we print the parameter section</span>
+<span class="c1">#            if self.parameters.Members:</span>
+<span class="c1">#                parameters=&#39;&#39;</span>
+<span class="c1">#                first=True</span>
+<span class="c1">#                for name, val in self.parameters.Members.items():</span>
+<span class="c1">#                    if first:</span>
+<span class="c1">#                        parameters=&#39;#(\n    parameter %s = %s&#39; %(name,val)</span>
+<span class="c1">#                        first=False</span>
+<span class="c1">#                    else:</span>
+<span class="c1">#                        parameters=parameters+&#39;,\n    parameter %s = %s&#39; %(name,val)</span>
+<span class="c1">#                parameters=parameters+&#39;\n)&#39;</span>
+<span class="c1">#                self._definition=&#39;module %s %s&#39; %(self.name, parameters)</span>
+<span class="c1">#            else:</span>
+<span class="c1">#                self._definition=&#39;module %s &#39; %(self.name)</span>
+<span class="c1">#            first=True</span>
+<span class="c1">#            if self.ios.Members:</span>
+<span class="c1">#                for ioname, io in self.ios.Members.items():</span>
+<span class="c1">#                    if first:</span>
+<span class="c1">#                        self._definition=self._definition+&#39;(\n&#39;</span>
+<span class="c1">#                        first=False</span>
+<span class="c1">#                    else:</span>
+<span class="c1">#                        self._definition=self._definition+&#39;,\n&#39;</span>
+<span class="c1">#                    if io.cls in [ &#39;input&#39;, &#39;output&#39;, &#39;inout&#39; ]:</span>
+<span class="c1">#                        if io.width==1:</span>
+<span class="c1">#                            self._definition=(self._definition+</span>
+<span class="c1">#                                    (&#39;    %s %s&#39; %(io.cls, io.name)))</span>
+<span class="c1">#                        else:</span>
+<span class="c1">#                            self._definition=(self._definition+</span>
+<span class="c1">#                                    (&#39;    %s [%s:%s] %s&#39; %(io.cls, io.ll, io.rl, io.name)))</span>
+<span class="c1">#                    else:</span>
+<span class="c1">#                        self.print_log(type=&#39;F&#39;, msg=&#39;Assigning signal direction %s to verilog module IO.&#39; %(io.cls))</span>
+<span class="c1">#                self._definition=self._definition+&#39;\n)&#39;</span>
+<span class="c1">#            self._definition=self._definition+&#39;;&#39;</span>
+<span class="c1">#            if self.contents:</span>
+<span class="c1">#                self._definition=self._definition+self.contents+&#39;\nendmodule&#39;</span>
+<span class="c1">#        return self._definition</span>
+<span class="c1">#=======</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">definition</span>
 
     <span class="nd">@property</span>
