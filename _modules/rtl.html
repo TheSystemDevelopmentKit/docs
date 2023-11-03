@@ -592,6 +592,7 @@
                     <span class="n">fileptr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulator_control_contents</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span> <span class="o">=</span> <span class="n">generatedcontrolfile</span>
             <span class="c1"># Use default control file location</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span> <span class="o">=</span> <span class="n">controlfile</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span>
     <span class="nd">@simulator_controlfile</span><span class="o">.</span><span class="n">setter</span>
