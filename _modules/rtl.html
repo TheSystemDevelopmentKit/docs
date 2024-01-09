@@ -577,6 +577,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported model </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
 
+
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_simulator_controlfile&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">controlfiledir</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">controlfiledir</span><span class="p">)</span>
@@ -592,6 +593,11 @@
                     <span class="n">fileptr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulator_control_contents</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span> <span class="o">=</span> <span class="n">generatedcontrolfile</span>
             <span class="c1"># Use default control file location</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">controlfile</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span> <span class="o">=</span> <span class="n">controlfile</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span> <span class="o">=</span> <span class="n">controlfile</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_controlfile</span>
@@ -648,8 +654,9 @@
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">generateddofile</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dofileptr</span><span class="p">:</span>
                     <span class="n">dofileptr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interactive_control_contents</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="n">generateddofile</span>
+
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_interactive_controlfile&#39;</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interactive_controlfile</span>
     <span class="nd">@interactive_controlfile</span><span class="o">.</span><span class="n">setter</span>

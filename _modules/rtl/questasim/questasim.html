@@ -102,6 +102,11 @@
         <span class="n">vhdlmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdllibfileentities</span> <span class="o">+</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
             <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlentityfiles</span><span class="p">])</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_tb_timescale</span><span class="p">:</span>
+            <span class="n">timescalestring</span> <span class="o">=</span> <span class="s1">&#39; -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">timescalestring</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
         <span class="c1"># The following cases are possible</span>
         <span class="c1"># Testbench is sv OR testbench is vhdl, identified with &#39;lang&#39;</span>
         <span class="c1"># source is verilog OR source is vhdl, identified by &#39;model</span>
@@ -174,13 +179,13 @@
 
         <span class="c1"># Choose command </span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
-            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -voptargs=+acc &#39;</span> 
+            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch&#39;</span> <span class="o">+</span> <span class="n">timescalestring</span> <span class="o">+</span> <span class="s1">&#39; -voptargs=+acc &#39;</span> 
                     <span class="o">+</span> <span class="n">fileparams</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span>
                     <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogsimargs</span> <span class="o">+</span> <span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  
                     <span class="o">+</span> <span class="n">controlstring</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">submission</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="c1">#Local execution</span>
-            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span> <span class="o">+</span> <span class="s1">&#39; -novopt &#39;</span> <span class="o">+</span> <span class="n">fileparams</span> 
+            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 &#39;</span> <span class="o">+</span> <span class="n">timescalestring</span> <span class="o">+</span> <span class="s1">&#39; -novopt &#39;</span> <span class="o">+</span> <span class="n">fileparams</span> 
                     <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogsimargs</span> <span class="o">+</span> <span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> 
                          <span class="o">+</span> <span class="n">interactive_string</span> <span class="p">)</span>
 
