@@ -75,6 +75,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">spice.plotprogcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.plotprogram"><code class="docutils literal notranslate"><span class="pre">spice.plotprogram</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.postlayout"><code class="docutils literal notranslate"><span class="pre">spice.postlayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spice.postlayout_subckts"><code class="docutils literal notranslate"><span class="pre">spice.postlayout_subckts</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.preserve_spicefiles"><code class="docutils literal notranslate"><span class="pre">spice.preserve_spicefiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.read_oppts"><code class="docutils literal notranslate"><span class="pre">spice.read_oppts()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spice.read_spice_outputs"><code class="docutils literal notranslate"><span class="pre">spice.read_spice_outputs()</span></code></a></li>
@@ -282,6 +283,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.option"><code class="docutils literal notranslate"><span class="pre">spectre.option</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.parameter"><code class="docutils literal notranslate"><span class="pre">spectre.parameter</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.plflag"><code class="docutils literal notranslate"><span class="pre">spectre.plflag</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.plflag_simcmd_prefix"><code class="docutils literal notranslate"><span class="pre">spectre.plflag_simcmd_prefix</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">spectre.plotprogcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.plotprogram"><code class="docutils literal notranslate"><span class="pre">spectre.plotprogram</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spice.spectre.spectre.spectre.read_oppts"><code class="docutils literal notranslate"><span class="pre">spectre.read_oppts()</span></code></a></li>
@@ -464,11 +466,11 @@ simulations. The names given in this list are matched to dspf-files in
 ‘./spice/’ -directory. A postfix ‘.pex.dspf’ is automatically appended
 to the given names (this will probably change later).</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">dspf</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inv_v2&#39;</span><span class="p">,</span><span class="s1">&#39;switch_v3&#39;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">dspf</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;adc_top_level&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>would include files ‘./spice/inv_v2.pex.dspf’ and
-‘./spice/switch_v3.pex.dspf’ as dspf-files in the testbench. If the
+<p>would include files ‘./spice/adc_top_level.pex.dspf’ as
+a top level dspf-file in the testbench. If the
 dspf-file contains definition matching the original design name of the
 top-level netlist, it gets also renamed to match the module name
 (dspf-file for top-level instance is possible).</p>
@@ -705,6 +707,29 @@ Options are ezwave (default) or viva.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spice.postlayout_subckts">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">postlayout_subckts</span></span><a class="headerlink" href="#spice.spice.postlayout_subckts" title="Link to this definition"></a></dt>
+<dd><p>List containing filenames for subcircuit DSPF-files to be included for
+post-layout simulations. The names given in this list are matched to dspf-files in
+‘./spice/’ -directory. A postfix ‘.pex.dspf’ is automatically appended
+to the given names (this will probably change later).</p>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">postlayout_subckts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inv_v2&#39;</span><span class="p">,</span><span class="s1">&#39;switch_v3&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>would include files ‘./spice/inv_v2.pex.dspf’ and
+‘./spice/switch_v3.pex.dspf’ as postlayout_subckts-files in the testbench. If top level
+dspf (self.dspf) is given these are omitted. Otherwise simulator will replace
+subcircuits with corresponding name with the postlayout netlist defined in the
+dspf file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2904,6 +2929,13 @@ You can set this by accesssing spice langmodule</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plflag</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.plflag" title="Link to this definition"></a></dt>
 <dd><p>Postlayout simulation accuracy/RC reduction flag.
 See: <a class="reference external" href="https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance">https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance</a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spice.spectre.spectre.spectre.plflag_simcmd_prefix">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plflag_simcmd_prefix</span></span><a class="headerlink" href="#spice.spectre.spectre.spectre.plflag_simcmd_prefix" title="Link to this definition"></a></dt>
+<dd><p>Simulator specific prefix for enabling postlayout optimization
+Postfix comes from self.plflag (user defined)</p>
 </dd></dl>
 
 <dl class="py property">

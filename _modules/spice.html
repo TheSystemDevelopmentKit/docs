@@ -468,6 +468,35 @@
     <span class="k">def</span> <span class="nf">nproc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_nproc</span><span class="o">=</span><span class="n">value</span>
 
+    
+    <span class="c1"># DSPF filenames</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">postlayout_subckts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;[str] : List containing filenames for subcircuit DSPF-files to be included for </span>
+<span class="sd">        post-layout simulations. The names given in this list are matched to dspf-files in</span>
+<span class="sd">        &#39;./spice/&#39; -directory. A postfix &#39;.pex.dspf&#39; is automatically appended</span>
+<span class="sd">        to the given names (this will probably change later).</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            self.postlayout_subckts = [&#39;inv_v2&#39;,&#39;switch_v3&#39;]</span>
+
+<span class="sd">        would include files &#39;./spice/inv_v2.pex.dspf&#39; and</span>
+<span class="sd">        &#39;./spice/switch_v3.pex.dspf&#39; as postlayout_subckts-files in the testbench. If top level </span>
+<span class="sd">        dspf (self.dspf) is given these are omitted. Otherwise simulator will replace </span>
+<span class="sd">        subcircuits with corresponding name with the postlayout netlist defined in the </span>
+<span class="sd">        dspf file. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_postlayout_subckts&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout_subckts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout_subckts</span>
+    <span class="nd">@postlayout_subckts</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">postlayout_subckts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postlayout_subckts</span><span class="o">=</span><span class="n">value</span>
+    
+
 
     <span class="c1"># DSPF filenames</span>
     <span class="nd">@property</span>
@@ -481,10 +510,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        ::</span>
 
-<span class="sd">            self.dspf = [&#39;inv_v2&#39;,&#39;switch_v3&#39;]</span>
+<span class="sd">            self.dspf = [&#39;adc_top_level&#39;]</span>
 
-<span class="sd">        would include files &#39;./spice/inv_v2.pex.dspf&#39; and</span>
-<span class="sd">        &#39;./spice/switch_v3.pex.dspf&#39; as dspf-files in the testbench. If the</span>
+<span class="sd">        would include files &#39;./spice/adc_top_level.pex.dspf&#39; as </span>
+<span class="sd">        a top level dspf-file in the testbench. If the</span>
 <span class="sd">        dspf-file contains definition matching the original design name of the</span>
 <span class="sd">        top-level netlist, it gets also renamed to match the module name</span>
 <span class="sd">        (dspf-file for top-level instance is possible).</span>
@@ -723,6 +752,7 @@
     <span class="nd">@plflag</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">plflag</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span> <span class="o">=</span> <span class="n">val</span>
             
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
