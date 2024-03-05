@@ -112,12 +112,12 @@
 <section id="what-is-the-thesydekick">
 <h2>What is the TheSydeKick<a class="headerlink" href="#what-is-the-thesydekick" title="Link to this heading"></a></h2>
 <p>TheSyDeKick is a development and testing framework for electronic systems. It
-is primarily targeted for design and testing of integrated circuits and Systems
-on Chip (SoC’s). The operation principle of TheSDK is depicted below.</p>
+is primarily targeted for design and testing of integrated microelectronic designs, circuits and systems.
+The operation principle of TheSDK is depicted below.</p>
 <img alt="TheSDK block diagram" src="_images/TheSDK_block_diagram.png" />
-<p>This is the master documentation of TheSystem development kit. These pages
+<p>This is the master documentation of TheSyDeKick. These pages
 provide an introduction and browsable documentation for the core Entities:
-thesdk, rtl, spice and ads.</p>
+thesdk, RTL, spice and ads.</p>
 <section id="operation-principle">
 <h3>Operation principle<a class="headerlink" href="#operation-principle" title="Link to this heading"></a></h3>
 <p>TheSyDeKick supports the system design by “testing first” principle. Design is
@@ -125,7 +125,7 @@ started by writing a system test bench and simple model for the design under
 test with Python. Gradually the implementation details are added to the DUT by
 introducing analog circuit model or RTL level descriptions of digital
 circuitry. Circuit level simulations are executed by calling external
-simulators like Spectre, Eldo or Questasim. This makes it possible to write the
+simulators like Spectre, Eldo, NGSpice or Questasim, Icarus, and GHDL. This makes it possible to write the
 test cases and analyses for the system only once, and carry out the circuit
 development with those tests from beginning to end.</p>
 <p>It targets to using a single control environment to simulate, design and measure
@@ -137,7 +137,7 @@ sources and analyzers of TheSDK model are replaced with measurement equipment,
 and the same tests are carried out for the actual hardware within the same
 framework. This requires a measurement hardware driver libraries that
 are to be developed and released independently from TheSyDeKick core modules to
-follow the key principple of TheSyDekick: modularity.</p>
+follow the key principle of TheSyDeKick: modularity.</p>
 </section>
 <section id="modular-system-description-with-objects">
 <h3>Modular system description with objects<a class="headerlink" href="#modular-system-description-with-objects" title="Link to this heading"></a></h3>
@@ -147,36 +147,37 @@ piece of equipment or hardware, as depicted below</p>
 <p>The entity object can contain almost anything, but it should follow two principles.</p>
 <ol class="arabic simple">
 <li><p>Inputs and outputs are pointers defined by TheSyDeKick IO class.</p></li>
-<li><p>Entity object, i.e. intance of thesdk class has a method that takes the
+<li><p>Entity object, i.e. instance of thesdk class has a method that takes the
 value of an input pointer, manipulates it and assigns it to the value
 of the output pointer.</p></li>
 </ol>
 <p>This make is possible to first implement the connections between the objects,
 i.e. system components, and then pass the signals by calling the run methods of
-the objects in controlled order. The call sequence control of the the
+the objects in controlled order. The call sequence control of the
 components ultimately form a scheduler, but currently this control is up to
 user.</p>
-<p>Reader is strongly encouraged to clone the repository and to run the
-simulations as described in the README. That is a simple example case in were a
-chain of inverters is simulated with python, verilog, vhdl, and Eldo, analog
-circuit simulator. Even you would not have access to rtl simulator or eldo, the
-python example is sufficient to demonstrate the operation principles of
-TheSyDeKick.</p>
+<p>Read this introduction first, and after that, we strongly encourage you to
+clone the repository and study the tutorial
+<a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial</a> , and take time
+to get acquainted with <cite>Entities/inverter</cite>, <cite>Entities/inverter_testbench</cite>, and
+<cite>Entities/inverter_tests</cite> .</p>
+<p>Later on you may study the
+documentation of <em>thesdk</em>, <em>rtl</em> and <em>spice</em> presented in this manual.</p>
+<p>These should give you a picture how the things work.</p>
 </section>
 <section id="system-modeling-and-design-exploration">
 <h3>System modeling and design exploration<a class="headerlink" href="#system-modeling-and-design-exploration" title="Link to this heading"></a></h3>
-<p>It is evident that high level programming lanquages provide good tools for
+<p>It is evident that high level programming languages provide good tools for
 system modeling. In addition, it is intended to develop interface classes for
-Berkeley Analog Generator BAG and Chisel3 RTL generators to enable closed-loop
-design optimization and desing exploration with real hardware.</p>
+Berkeley Analog Generator BAG and Chisel RTL generators to enable closed-loop
+design optimization and design exploration with real hardware.</p>
 </section>
 <section id="further-reading-and-related-information">
 <h3>Further reading and related information<a class="headerlink" href="#further-reading-and-related-information" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>A Roadshow slideset demostrating some use cases can be found at <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick-roadshow/raw/master/pdffiles/TheSyDeKick-roadshow.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick-roadshow/raw/master/pdffiles/TheSyDeKick-roadshow.pdf</a></p></li>
-<li><p>A tutorial for very basic use of TheSyDeKick is provided at: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial</a> .
-See the slide set for details: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf</a></p></li>
-<li><p>Site <a class="reference external" href="https://github.com/TheSDK-blocks">https://github.com/TheSDK-blocks</a> is a intended to distribute TheSDK-compatible, relatively general circuit models.
+<li><p>A Roadshow slide set demonstrating some use cases can be found at <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick-roadshow/raw/master/pdffiles/TheSyDeKick-roadshow.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick-roadshow/raw/master/pdffiles/TheSyDeKick-roadshow.pdf</a></p></li>
+<li><p>A tutorial for very basic use of TheSyDeKick is provided at: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial/raw/master/pdffiles/TheSyDeKick_tutorial.pdf</a></p></li>
+<li><p>Site <a class="reference external" href="https://github.com/TheSDK-blocks">https://github.com/TheSDK-blocks</a> is a intended to distribute TheSDK-compatible, relatively general circuit models
 and method entities.</p></li>
 </ul>
 </section>
@@ -188,7 +189,7 @@ and method entities.</p></li>
 <p><strong>Roadmap for the next release is roughly</strong></p>
 <ul class="simple">
 <li><p>Support for Verilator</p></li>
-<li><p>Suport for CoCoTb</p></li>
+<li><p>Support for CoCoTb</p></li>
 </ul>
 <p>For details, check the “Release” projects</p>
 <p><strong>A bit longer term roadmap</strong></p>
@@ -201,27 +202,27 @@ and method entities.</p></li>
 <p><strong>Release v1.11 (15.2.2024)</strong></p>
 <ul class="simple">
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
-<li><p>Possibbility to define custom simulation result paths.</p></li>
+<li><p>Possibility to define custom simulation result paths.</p></li>
 <li><p>Fixes for simulation path handling.</p></li>
 <li><p>Improved failure handling for parallel runs.</p></li>
-<li><p>Fixes for RTL controlfile handling.</p></li>
-<li><p>Improved timescale handling in verilog simulations.</p></li>
-<li><p>Possiblity to define Verilog and VHDL libray files.</p></li>
-<li><p>Improved postlayout simulation handling for spice.</p></li>
+<li><p>Fixes for RTL control file handling.</p></li>
+<li><p>Improved timescale handling in Verilog simulations.</p></li>
+<li><p>Possibility to define Verilog and VHDL library files.</p></li>
+<li><p>Improved post layout simulation handling for spice.</p></li>
 </ul>
 <p><strong>Release v1.10 (28.6.2023)</strong></p>
 <ul class="simple">
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
-<li><p>Suport for python 3.10</p></li>
-<li><p>Support for VHDL testbenches and introduction of lang attribute to select between System Verilog or VHDL testbenches.</p></li>
+<li><p>Support for python 3.10</p></li>
+<li><p>Support for VHDL testbenches and introduction of ‘lang’ attribute to select between System Verilog or VHDL testbenches.</p></li>
 <li><p>Support for GHDL open source VHDL simulator.</p></li>
 <li><p>Optional custom end condition for RTL simulation through end_condition property.</p></li>
-<li><p>Attribute simulator_cotrolfile and simulator_controlfile_contents for additional noninteractive simulation control.</p></li>
+<li><p>Attribute simulator_control file and simulator_control file_contents for additional non-interactive simulation control.</p></li>
 <li><dl class="simple">
 <dt>Changes possibly causing backwards-compatibility issues:</dt><dd><ul>
-<li><p>Simulator specific controlfile not executed for batch runs (original intented form of operation).</p></li>
+<li><p>Simulator specific control file not executed for batch runs (original intended form of operation).</p></li>
 <li><p>Python parameter interactive_control_file_contents overrides the file contents.</p></li>
-<li><p>All verilog_&lt;name&gt; attributes have been changed to rtl_&lt;name&gt; attributes, as attributes are now language agnostic.</p></li>
+<li><p>All Verilog_&lt;name&gt; attributes have been changed to RTL_&lt;name&gt; attributes, as attributes are now language agnostic.</p></li>
 </ul>
 </dd>
 </dl>
@@ -230,9 +231,9 @@ and method entities.</p></li>
 <p><strong>Release v1.9 (7.4.2023)</strong></p>
 <ul class="simple">
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
-<li><p>Major refactoring of rtl module to separate handling of different simulators and alleviate future development for additional simulator interfaces.</p></li>
+<li><p>Major refactoring of RTL module to separate handling of different simulators and alleviate future development for additional simulator interfaces.</p></li>
 <li><p>Major refactoring of spice module to separate handling of different simulators.</p></li>
-<li><p>Faster result parsing of spice netlists and subcircuit definition files.</p></li>
+<li><p>Faster result parsing of spice netlists and sub-circuit definition files.</p></li>
 <li><p>Faster parsing of spice simulation results.</p></li>
 <li><p>Uniformly sampled outputs from spice simulations</p></li>
 </ul>
@@ -243,7 +244,7 @@ and method entities.</p></li>
 <li><p>ADS simulator interface module.</p></li>
 <li><p>Speedup for module addition to Python path</p></li>
 <li><p>Support for parametrized netlists</p></li>
-<li><p>Custom source locatoins for RTL simulations</p></li>
+<li><p>Custom source locations for RTL simulations</p></li>
 <li><p>Bugfixes for VHDL simulations</p></li>
 <li><p>Several bugfixes for spice simulations</p></li>
 </ul>
@@ -252,42 +253,42 @@ and method entities.</p></li>
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
 <li><p>Improved documentation in spice</p></li>
 <li><p>Unified IO file handling in all analog simulators</p></li>
-<li><p>Speed up of event-bsed IO file handling.</p></li>
+<li><p>Speed up of event-based IO file handling.</p></li>
 <li><p>Improved intermediate file cleanups.</p></li>
 <li><p>Possibility to save the state of an entity to a binary file and read it back.</p></li>
 <li><p>Colored log messages for improved clarity.</p></li>
-<li><p>File cache flushing speeds up rtl simulations.</p></li>
-<li><p>Custom rtl simulator dofile locations and possibility to control the content of the dofile from Entity.</p></li>
+<li><p>File cache flushing speeds up RTL simulations.</p></li>
+<li><p>Custom RTL simulator do-file locations and possibility to control the content of the do-file from Entity.</p></li>
 <li><p>Improved parallel run execution.</p></li>
 </ul>
 <p><strong>Release v1.6 (11.8.2021)</strong></p>
 <ul class="simple">
 <li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
 <li><p>Support for NGSpice</p></li>
-<li><p>Support for AC simulations in spectre, eldo, and ngspice through modifications in IO file handling. Less tested with eldo.</p></li>
+<li><p>Support for AC simulations in spectre, Eldo, and NGSpice through modifications in IO file handling. Less tested with Eldo.</p></li>
 <li><p>Model ‘hw’ for measurement equipment driver support.</p></li>
-<li><p>Currently supported models: Python, verilog, VHDL, eldo, spectre and ngspice netlists.</p></li>
+<li><p>Currently supported models: Python, Verilog, VHDL, Eldo, Spectre and NGSpice netlists.</p></li>
 <li><p>Simulation speed up for RTL event type IOs through with sorted dicts.</p></li>
 <li><p>Development has been carried out for Python v3.6, runs also with python 3.9</p></li>
 </ul>
 <p><strong>Release v1.5 (16.1.2021)</strong></p>
 <ul class="simple">
 <li><p>Main progress: This is mainly an bugfix and documentation improvement release. ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)
-initentity now initializes the minimum barebone buffer. Use of more complex template is optional.</p></li>
+initentity now initializes the minimum bare-bone buffer. Use of more complex template is optional.</p></li>
 <li><p>Python dependency installations now optionally upgrade already installed packages.
-* Currently supported models: Python, verilog, VHDL, eldo and spectre netlists.
+* Currently supported models: Python, Verilog, VHDL, Eldo and Spectre netlists.
 * Development has been carried out for Python v3.6</p></li>
 </ul>
 <p><strong>Release v1.4 (14.6.2020-&gt;7.10.2020)</strong></p>
 <ul class="simple">
-<li><p>Main progress: Support for Mentor graphics eldo and Cadence spectre merged to common ‘spice’ module ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/inverter">https://github.com/TheSystemDevelopmentKit/inverter</a> or the thesdk_template)</p></li>
-<li><p>Currently supported models: Python, verilog, VHDL, eldo and spectre netlists.</p></li>
+<li><p>Main progress: Support for Mentor graphics Eldo and Cadence spectre merged to common ‘spice’ module ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/inverter">https://github.com/TheSystemDevelopmentKit/inverter</a> or the thesdk_template)</p></li>
+<li><p>Currently supported models: Python, Verilog, VHDL, Eldo and spectre netlists.</p></li>
 <li><p>Development has been carried out for Python v3.6</p></li>
 </ul>
 <p><strong>Release v1.3 (16.1.2020-&gt;24.1.2020)</strong></p>
 <ul class="simple">
 <li><p>Main progress: Verilog and VHDL modules merged to RTL module. VHDL entities are now simulated with Verilog testbenches.</p></li>
-<li><p>Support for Mentor Graphics Eldo analog simulator through eldo module. See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/inverter">https://github.com/TheSystemDevelopmentKit/inverter</a></p></li>
+<li><p>Support for Mentor Graphics Eldo analog simulator through Eldo module. See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/inverter">https://github.com/TheSystemDevelopmentKit/inverter</a></p></li>
 <li><p>Initiated documentation with docstrings. Html documentation provided for entities with ./configure &amp;&amp; make doc, or by running make html in entities doc directory.</p></li>
 </ul>
 </section>
@@ -297,12 +298,12 @@ initentity now initializes the minimum barebone buffer. Use of more complex temp
 <h2>Configuration quickstart<a class="headerlink" href="#configuration-quickstart" title="Link to this heading"></a></h2>
 <p><strong>OBS</strong>
 THE SCRIPTS TO BE SOURCED ARE WRITTEN FOR T-SHELL</p>
-<p>if you’re using some other shell, change to tcsh or modify the scripts to be
+<p>If you’re using some other shell, change to tcsh or modify the scripts to be
 compliant with your shell.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tcsh</span>
 </pre></div>
 </div>
-<p>TheSyDeKick release 1.8 has been tested with Python v3.6</p>
+<p>TheSyDeKick release 1.11 has been tested with Python v3.11</p>
 <ul>
 <li><p>Go to TheSDK directory and run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">init_submodules</span><span class="o">.</span><span class="n">sh</span>
@@ -355,7 +356,7 @@ Entities/inverter/inverter/__init__.py and Change the line:</p>
 </section>
 <section id="how-to-use-thesydekick">
 <h2>How to use TheSyDeKick<a class="headerlink" href="#how-to-use-thesydekick" title="Link to this heading"></a></h2>
-<p>TheSyDeKick is a multi-tool simulation and developement environment for developing systems.
+<p>TheSyDeKick is a multi-tool simulation and development environment for developing systems.
 It targets to using a single control environment to simulate,design and measure the
 system components with various tools by using a single “Control environment” for
 control, analysis, and visualization of the results.</p>
@@ -395,7 +396,9 @@ interfaces to measurement equipment..</p>
                 <span class="n">work</span>
 </pre></div>
 </div>
-<p>Naming convention is strict. The placeholder string ‘entity1’ above identifies the name of the Entity and it’s netllists ans testbenches. User is not allowed to freely name the files. This is the basic configuration.</p>
+<p>Naming convention is strict. The placeholder string ‘entity1’ above identifies
+the name of the Entity and it’s netllists and testbenches. User is not allowed
+to freely name the files. This is the basic configuration.</p>
 </section>
 <section id="guidelines-to-follow">
 <h3>Guidelines to follow<a class="headerlink" href="#guidelines-to-follow" title="Link to this heading"></a></h3>
@@ -413,7 +416,7 @@ never need to document how to do configurations and executions.</p></li>
 - IO’s are pointers to a Data field of an IO class instance.
 - Drivers write to that data field.
 - Input read from that data field.</p>
-<p>Following this guideline your entities retain compatibility with othe TheSyDeKick entities.
+<p>Following this guideline your entities retain compatibility with the TheSyDeKick entities.
 See <cite>Entities/inv_sim/inv_sim/__init__.py</cite> for reference.</p>
 <ul>
 <li><p>Entities are documented with docstrings. To read the entity documentation, do:</p>
@@ -424,7 +427,7 @@ See <cite>Entities/inv_sim/inv_sim/__init__.py</cite> for reference.</p>
 </div>
 </li>
 </ul>
-<p>Documentation is NEVER comlete or good enough. Feel free to improve.</p>
+<p>Documentation is NEVER compete or good enough. Feel free to improve.</p>
 </section>
 <section id="how-to-create-and-test-new-entity">
 <h3>How to create and test new entity<a class="headerlink" href="#how-to-create-and-test-new-entity" title="Link to this heading"></a></h3>
@@ -442,7 +445,7 @@ The new entity is created as a git project. Push it to your favourite repository
 </section>
 <section id="class-organization-guideline">
 <h3>Class organization guideline<a class="headerlink" href="#class-organization-guideline" title="Link to this heading"></a></h3>
-<p>This is not a strict ruleset, rather a guideline how to alleviate your modeling tasks and support modularity.</p>
+<p>This is not a strict rule set, rather a guideline how to alleviate your modeling tasks and support modularity.</p>
 <p>The Entities and simulation setups are implemented as classes that
 cross-reference to each other without restrictions. (Hardware) modules are
 instantiated as object of that class.</p>
@@ -450,14 +453,14 @@ instantiated as object of that class.</p>
 <li><p>TheSyDeKick classes are intended to collect methods common to
 “TheSyDeKick”-framework.  They should NOT contain anything specific to a
 particular design.</p></li>
-<li><p>Rtl class defines properties and methods that are required to run verilog and
+<li><p>RTL class defines properties and methods that are required to run Verilog and
 vhdl simulations.</p></li>
 <li><p>Spice class defines properties and methods that are required to run eldo and
 spectre simulations.</p></li>
-<li><p>If component has an  rtl model, it should  be a a subclass of rtl. If
-component does not have rtl as a superclass, rtl-requirements do not apply.</p></li>
+<li><p>If component has an  RTL model, it should  be a subclass of RTL. If
+component does not have RTL as a superclass, RTL-requirements do not apply.</p></li>
 <li><p>Design specific classes are freely defined by the designer</p></li>
-<li><p>A “system_paramemeter_class” may used as super class for the “system_tests”
+<li><p>A “system_parameter_class” may used as super class for the “system_tests”
 and “system_testbench” (not subcomponent entities) to define the properties
 that typically</p>
 <blockquote>
@@ -481,30 +484,31 @@ propagated through property inheritance.</p>
 <span class="s2">&quot;entity3&quot;</span>
 </pre></div>
 </div>
-<ul class="simple">
+<ul>
 <li><p>Typically a simulation is controlled by “system_testbench” class that
 controls the simulation providing (or using) methods like  “run” and  “plot”.
 This class usually contains a “design under test”, which is a instance of
-“system” class, and methods requiered to run the simulations.  See:
+“system” class, and methods required to run the simulations.  See:
 <cite>Entities/inverter_testbench/inverter_testbench/__init__py</cite>.</p></li>
 <li><p>System is described in “system” class that determines the sub-components and
 the interconnections in between them, and methods to “run” the “system”, i.e.
 how the signals propagate and in which order the methods of components are
 executed. Take  a look at <cite>Entities/inverter/inverter/__init__.py</cite> and
-<cite>Entities/inverter_testbench/inverter_testbench/__init__.py</cite></p></li>
-</ul>
-<p>As the test cases for inverter_testbench is extremely simple, the DUT is consturucted inside the testbench
-is constructed inside it with ‘parallel’ and ‘serial’ methods. For more complex systems this is not preferred way.
-This construction shoul happen in ‘system’ class that creates the top level descrption of the system.</p>
-<ul class="simple">
+<cite>Entities/inverter_testbench/inverter_testbench/__init__.py</cite></p>
+<p>As the test cases for inverter_testbench is extremely simple, the DUT is
+constructed inside the testbench is constructed inside it with ‘parallel’ and
+‘serial’ methods. For more complex systems this is not preferred way.  This
+construction should happen in ‘system’ class that creates the top level
+description of the system.</p>
+</li>
 <li><p>Class attributes are controlled and propagated by class constructor by
 copying the  selected properties from immediate “parent”. The properties that
 are to be copied are determined  by “proplist” attribute. By doing this
-isntead of using inherited classes, we keep entities independent of  their
-use environment i.e. they can be used freely in other desings. Still we can
+instead of using inherited classes, we keep entities independent of  their
+use environment i.e. they can be used freely in other designs. Still we can
 automate the propagation  of the parameters.</p></li>
 <li><p>Component entities Entity1-Entity-3 are not subclasses to sim or system class
-as they should be independent of each other and transferrable between systems.</p></li>
+as they should be independent of each other and transferable between systems.</p></li>
 <li><p>The “system_tests” and “system_testbench”  class should not be a parent class
 to system class, as the “system” definitions are independent of how it is
 simulated.</p></li>
@@ -512,11 +516,12 @@ simulated.</p></li>
 </section>
 <section id="what-next">
 <h3>What next?<a class="headerlink" href="#what-next" title="Link to this heading"></a></h3>
-<p>Take yout time to get acquainted with <cite>Entities/inverter</cite>,
+<p>Take your time to get acquainted with <cite>Entities/inverter</cite>,
 <cite>Entities/inverter_testbench</cite>, and <cite>Entities/inverter_tests</cite> together with the
 documentation of <em>thesdk</em>, <em>rtl</em> and <em>spice</em> presented in this manual. Those
 should  give you a picture how the things work. Create a new entity, and start
-playing a round with it. See also: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial</a></p>
+playing a round with it.</p>
+<p>See also: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial">https://github.com/TheSystemDevelopmentKit/TheSyDeKick_tutorial</a></p>
 </section>
 </section>
 </section>
