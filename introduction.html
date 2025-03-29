@@ -9,6 +9,7 @@
   <title>Introduction to TheSyDeKick &mdash; TheSyDeKick 1.12_RC documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7b0eb991" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -75,7 +76,7 @@
 <li class="toctree-l1"><a class="reference internal" href="inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="momem/sections.html">Momem interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -114,7 +115,8 @@
 <p>TheSyDeKick is a development and testing framework for electronic systems. It
 is primarily targeted for design and testing of integrated microelectronic designs, circuits and systems.
 The operation principle of TheSDK is depicted below.</p>
-<img alt="TheSDK block diagram" src="_images/TheSDK_block_diagram.png" />
+<a class="reference internal image-reference" href="_images/TheSDK_block_diagram.png"><img alt="TheSDK block diagram" src="_images/TheSDK_block_diagram.png" style="width: 1024px;" />
+</a>
 <p>This is the master documentation of TheSyDeKick. These pages
 provide an introduction and browsable documentation for the core Entities:
 thesdk, RTL, spice and ads.</p>
@@ -143,7 +145,8 @@ follow the key principle of TheSyDeKick: modularity.</p>
 <h3>Modular system description with objects<a class="headerlink" href="#modular-system-description-with-objects" title="Link to this heading"></a></h3>
 <p>As TheSyDeKick targets hardware modeling, every instance can be thought as a
 piece of equipment or hardware, as depicted below</p>
-<img alt="TheSDK operation principle" src="_images/TheSDK_operation_principle.png" />
+<a class="reference internal image-reference" href="_images/TheSDK_operation_principle.png"><img alt="TheSDK operation principle" src="_images/TheSDK_operation_principle.png" style="width: 1024px;" />
+</a>
 <p>The entity object can contain almost anything, but it should follow two principles.</p>
 <ol class="arabic simple">
 <li><p>Inputs and outputs are pointers defined by TheSyDeKick IO class.</p></li>
@@ -221,7 +224,7 @@ Decision to drop the January release date for future developments, as the enviro
 <li><dl class="simple">
 <dt>Ads</dt><dd><ul>
 <li><p>Ads entity was renamed to ‘momem’ to better reflect the nature of the interface: ADS momentum electromagnetic simulator.</p></li>
-<li><p>Suppoer added for EMX simulator.</p></li>
+<li><p>Support added for EMX simulator.</p></li>
 <li><p>Electromagnetic simulation features and documentation improved.</p></li>
 </ul>
 </dd>
