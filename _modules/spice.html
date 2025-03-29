@@ -44,7 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter tests class</a></li>
@@ -113,6 +114,7 @@
 <span class="sd">    related methods should be provided in *spice_methods* module.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
@@ -125,11 +127,14 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">timeit</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span> 
-<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">genfromtxt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="c1">#TheSyDeKick modules</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">))</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">spice.spice_common</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">spice.testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">testbench</span> <span class="k">as</span> <span class="n">stb</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">spice.spice_simcmd</span><span class="w"> </span><span class="kn">import</span> <span class="n">spice_simcmd</span> <span class="k">as</span> <span class="n">spice_simcmd</span>
@@ -143,7 +148,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">spice.spectre.spectre</span><span class="w"> </span><span class="kn">import</span> <span class="n">spectre</span>
 
 <div class="viewcode-block" id="spice">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">spice</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
 
     <span class="nd">@property</span>
@@ -231,7 +236,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicesimpath</span>
 
 <div class="viewcode-block" id="spice.delete_spicesimpath">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.delete_spicesimpath">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.delete_spicesimpath">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delete_spicesimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to clean up files from spicesimpath.</span>
 
@@ -867,7 +872,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_load_output_file</span><span class="o">=</span><span class="n">value</span>
 
 <div class="viewcode-block" id="spice.connect_spice_inputs">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_inputs">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.connect_spice_inputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (inputs) to top</span>
 <span class="sd">        entity IOS Bundle items.</span>
@@ -884,7 +889,7 @@
 
 
 <div class="viewcode-block" id="spice.connect_spice_outputs">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.connect_spice_outputs">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.connect_spice_outputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to connect iofiles (outputs) to top</span>
 <span class="sd">        entity IOS Bundle items.</span>
@@ -896,7 +901,7 @@
 
 
 <div class="viewcode-block" id="spice.write_spice_inputs">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.write_spice_inputs">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.write_spice_inputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">write_spice_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to call write() functions of each</span>
 <span class="sd">        iofile with direction &#39;input&#39;.</span>
@@ -913,7 +918,7 @@
 
 
 <div class="viewcode-block" id="spice.read_spice_outputs">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_spice_outputs">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.read_spice_outputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_spice_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to call read() functions of each</span>
 <span class="sd">        iofile with direction &#39;output&#39;.</span>
@@ -981,7 +986,7 @@
 
     
 <div class="viewcode-block" id="spice.execute_spice_sim">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.execute_spice_sim">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.execute_spice_sim">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">execute_spice_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically called function to execute spice simulation.</span>
 
@@ -995,7 +1000,7 @@
 
 
 <div class="viewcode-block" id="spice.run_plotprogram">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.run_plotprogram">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.run_plotprogram">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
@@ -1010,7 +1015,7 @@
 
 
 <div class="viewcode-block" id="spice.extract_powers">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.extract_powers">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.extract_powers">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extract_powers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Automatically called function to extract transient power and current</span>
@@ -1071,7 +1076,7 @@
 
 
 <div class="viewcode-block" id="spice.read_stb_result">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_stb_result">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.read_stb_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_stb_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Internally called function to read the PSF output files</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -1079,7 +1084,7 @@
 
 
 <div class="viewcode-block" id="spice.read_noise_result">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_noise_result">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.read_noise_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_noise_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the PSF output files</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
@@ -1090,7 +1095,7 @@
 
 
 <div class="viewcode-block" id="spice.read_oppts">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_oppts">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.read_oppts">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
@@ -1100,7 +1105,7 @@
 
 
 <div class="viewcode-block" id="spice.read_sparams">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.read_sparams">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.read_sparams">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_sparams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Internally called function to read S-parameter simulation results.</span>
 <span class="sd">        </span>
@@ -1150,7 +1155,7 @@
 
 
 <div class="viewcode-block" id="spice.run_spice">
-<a class="viewcode-back" href="../spice/sections.html#spice.spice.run_spice">[docs]</a>
+<a class="viewcode-back" href="../spice/interface_classes.html#spice.spice.run_spice">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_spice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Externally called function to execute spice simulation.</span>
 

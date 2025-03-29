@@ -44,7 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spice/interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
@@ -98,7 +99,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <div class="viewcode-block" id="eldo">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">eldo</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is used as instance in *spice_simulatormodule* property of</span>
 <span class="sd">    spice class. Contains simulator dependent definitions.</span>
@@ -305,7 +306,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicecmd</span>
 
 <div class="viewcode-block" id="eldo.run_plotprogram">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.run_plotprogram">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo.run_plotprogram">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
@@ -332,7 +333,7 @@
 
 
 <div class="viewcode-block" id="eldo.read_sp_result">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.read_sp_result">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo.read_sp_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_sp_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the S-parameter simulation results</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -342,7 +343,7 @@
 
 
 <div class="viewcode-block" id="eldo.read_stb_result">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.read_stb_result">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo.read_stb_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_stb_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Internally called function to read the stb simulation results</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -353,7 +354,7 @@
 
 
 <div class="viewcode-block" id="eldo.read_noise_result">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.read_noise_result">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo.read_noise_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_noise_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the noise simulation results</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -363,7 +364,7 @@
 
 
 <div class="viewcode-block" id="eldo.create_nested_sweepresult_dict">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.create_nested_sweepresult_dict">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo.create_nested_sweepresult_dict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_nested_sweepresult_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">fileptr</span><span class="p">,</span> <span class="n">sweeps_ran_dict</span><span class="p">,</span>
             <span class="n">files</span><span class="p">,</span><span class="n">read_type</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Documentation missing</span>
@@ -373,7 +374,7 @@
 
 
 <div class="viewcode-block" id="eldo.read_oppts">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.eldo.eldo.eldo.read_oppts">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.eldo.eldo.eldo.read_oppts">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">        &quot;&quot;&quot;</span>

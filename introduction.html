@@ -70,7 +70,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spice/interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter_tests/sections.html">Inverter tests class</a></li>
@@ -184,12 +185,9 @@ and method entities.</p></li>
 <h3>Project status and releases<a class="headerlink" href="#project-status-and-releases" title="Link to this heading"></a></h3>
 <section id="release-schedule">
 <h4>Release schedule<a class="headerlink" href="#release-schedule" title="Link to this heading"></a></h4>
-<p>Two annual release dates are currently planned: January 16, and June 14. Current release candidate branches for next release are named ‘v1.xx_RC’</p>
+<p>Annual release date currently planned: June 14. Current release candidate branches for next release are named ‘v1.xx_RC’</p>
 <p><strong>Projected roadmap for the next release</strong></p>
 <ul class="simple">
-<li><p>Support for pole-zero extraction in spice.</p></li>
-<li><p>Supoprt for harmonic balance simulations in spice.</p></li>
-<li><p>More support for Electromagnetic simulators.</p></li>
 <li><p>Argparser in thesdk class to provide the most common command line arguments for simulation control.</p></li>
 <li><p>Support for CoCoTb.</p></li>
 </ul>
@@ -202,25 +200,20 @@ and method entities.</p></li>
 <h4>Release history<a class="headerlink" href="#release-history" title="Link to this heading"></a></h4>
 <p><strong>Release v1.13 (moved to 30.3.2025)</strong></p>
 <ul class="simple">
-<li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)</p></li>
+<li><p>Main progress: ( See: <a class="reference external" href="https://github.com/TheSystemDevelopmentKit/thesdk_template">https://github.com/TheSystemDevelopmentKit/thesdk_template</a>)
+Decision to drop the January release date for future developments, as the environment is quite stable already.</p></li>
 <li><dl class="simple">
 <dt>RTL</dt><dd><ul>
-<li></li>
+<li><p>More freedom to control design names and simulator call directory location.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt>Spice</dt><dd><ul>
-<li></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Design entities</dt><dd><ul>
-<li></li>
-<li></li>
+<li><p>Steady state, S-parameter, noise analysis, and periodic AC simulations for spectre.</p></li>
+<li><p>Stability analysis for spectre.</p></li>
+<li><p>Pole-Zero analysis for spectre.</p></li>
 </ul>
 </dd>
 </dl>
@@ -228,6 +221,7 @@ and method entities.</p></li>
 <li><dl class="simple">
 <dt>Ads</dt><dd><ul>
 <li><p>Ads entity was renamed to ‘momem’ to better reflect the nature of the interface: ADS momentum electromagnetic simulator.</p></li>
+<li><p>Electromagnetic simulation features and documentation improved.</p></li>
 </ul>
 </dd>
 </dl>

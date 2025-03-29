@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>- Introduction to TheSyDeKick-Part-4 &mdash; TheSyDeKick 1.12_RC documentation</title>
+  <title>Spice simulation examples &mdash; TheSyDeKick 1.12_RC documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples" href="../examples.html" />
-    <link rel="prev" title="- Introduction to TheSyDeKick-Part-3" href="Issue-3.html" /> 
+    <link rel="next" title="Inverter class" href="../inverter/sections.html" />
+    <link rel="prev" title="Spice simulator interface classess" href="interface_classes.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,21 +47,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spice/interface_classes.html">Spice simulator interface classess</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spice/examples.html">Spice simulation examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spice simulation examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#transient-simulation">Transient simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ac-simulation">AC Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#noise-simulation">Noise simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stability-analysis">Stability analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pole-zero-analysis">Pole-Zero analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequency-domain-analysis">Frequency domain analysis</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter tests class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../momem/sections.html">ADS interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../shell_scripts.html">Shell scripts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="bootcamp.html">Bootcamp</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Issue-0.html"><UNAME> -  Introduction to TheSyDeKick-Part-0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Issue-1.html"><UNAME> - Introduction to TheSyDeKick-Part-1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Issue-2.html"><UNAME> - Introduction to TheSyDeKick-Part-2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Issue-3.html"><UNAME> - Introduction to TheSyDeKick-Part-3</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><UNAME> - Introduction to TheSyDeKick-Part-4</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../indices_and_tables.html">Indices and tables</a></li>
@@ -81,10 +82,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="bootcamp.html">Bootcamp</a></li>
-      <li class="breadcrumb-item active"><UNAME> - Introduction to TheSyDeKick-Part-4</li>
+          <li class="breadcrumb-item"><a href="sections.html">&lt;no title&gt;</a></li>
+      <li class="breadcrumb-item active">Spice simulation examples</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/bootcamp/Issue-4.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/spice/examples.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -92,20 +93,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="introduction-to-thesydekick-part-4">
-<h1><UNAME> - Introduction to TheSyDeKick-Part-4<a class="headerlink" href="#introduction-to-thesydekick-part-4" title="Link to this heading"></a></h1>
-<p>After closing Introduction to TheSyDeKick-Part-3, study the structure of Entities/register_template
-and execute the simulation of it, both in interactive and non-interactive mode.
-Study also the structure of controller.py</p>
-<p>This is the basis of the TheSyDeKick rtl verifications.</p>
+  <section id="spice-simulation-examples">
+<h1>Spice simulation examples<a class="headerlink" href="#spice-simulation-examples" title="Link to this heading"></a></h1>
+<p>In TheSyDeKick, ‘inverter’ entity contains example setups for simple transient
+simulation with spice-type simulators. In the following, more complex examples
+are presented to support the designers willing to learn the awesome feartures
+of this great toool.</p>
+<p>In the very unlikely and unfortunate case there is no example that you are looking for, please
+provide it once you have figured out how to do what you were looking for. The source of this
+information is ‘spice/doc/source/examples.rst’</p>
+<p>With love,
+TheSyDeKick developers.</p>
+<section id="transient-simulation">
+<h2>Transient simulation<a class="headerlink" href="#transient-simulation" title="Link to this heading"></a></h2>
+</section>
+<section id="ac-simulation">
+<h2>AC Simulation<a class="headerlink" href="#ac-simulation" title="Link to this heading"></a></h2>
+</section>
+<section id="noise-simulation">
+<h2>Noise simulation<a class="headerlink" href="#noise-simulation" title="Link to this heading"></a></h2>
+</section>
+<section id="stability-analysis">
+<h2>Stability analysis<a class="headerlink" href="#stability-analysis" title="Link to this heading"></a></h2>
+</section>
+<section id="pole-zero-analysis">
+<h2>Pole-Zero analysis<a class="headerlink" href="#pole-zero-analysis" title="Link to this heading"></a></h2>
+</section>
+<section id="frequency-domain-analysis">
+<h2>Frequency domain analysis<a class="headerlink" href="#frequency-domain-analysis" title="Link to this heading"></a></h2>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Issue-3.html" class="btn btn-neutral float-left" title="- Introduction to TheSyDeKick-Part-3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="interface_classes.html" class="btn btn-neutral float-left" title="Spice simulator interface classess" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../inverter/sections.html" class="btn btn-neutral float-right" title="Inverter class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

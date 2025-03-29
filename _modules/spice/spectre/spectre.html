@@ -44,7 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spice/interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
@@ -102,7 +103,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">psf_utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">psfu</span>
 
 <div class="viewcode-block" id="spectre">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">spectre</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is used as instance in spice_simulatormodule property of</span>
 <span class="sd">    spice class. Contains simulator dependent definitions.</span>
@@ -338,7 +339,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spicecmd</span>
 
 <div class="viewcode-block" id="spectre.run_plotprogram">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.run_plotprogram">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.run_plotprogram">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
@@ -372,7 +373,7 @@
 
 
 <div class="viewcode-block" id="spectre.read_sp_result">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_sp_result">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.read_sp_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_sp_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the S-parameter simulation results</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -460,7 +461,7 @@
                
 
 <div class="viewcode-block" id="spectre.read_stb_result">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_stb_result">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.read_stb_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_stb_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Internally called function to read the stb simulation results</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -540,7 +541,7 @@
 
     
 <div class="viewcode-block" id="spectre.get_ocnPrint_data">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.get_ocnPrint_data">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.get_ocnPrint_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_ocnPrint_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file_name</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">file_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
@@ -549,7 +550,7 @@
 
     
 <div class="viewcode-block" id="spectre.get_input_noise_data">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.get_input_noise_data">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.get_input_noise_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_input_noise_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_in&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">]</span>
@@ -560,7 +561,7 @@
 
     
 <div class="viewcode-block" id="spectre.get_output_noise_data">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.get_output_noise_data">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.get_output_noise_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_output_noise_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_out&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;out&#39;</span><span class="p">]</span>
@@ -571,7 +572,7 @@
 
 
 <div class="viewcode-block" id="spectre.read_noise_result">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_noise_result">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.read_noise_result">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_noise_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the noise simulation results</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
@@ -689,7 +690,7 @@
 
 
 <div class="viewcode-block" id="spectre.create_nested_sweepresult_dict">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.create_nested_sweepresult_dict">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.create_nested_sweepresult_dict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_nested_sweepresult_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">fileptr</span><span class="p">,</span> <span class="n">sweeps_ran_dict</span><span class="p">,</span>
             <span class="n">files</span><span class="p">,</span><span class="n">read_type</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Documentation missing</span>
@@ -711,7 +712,7 @@
 
 
 <div class="viewcode-block" id="spectre.read_oppts">
-<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_oppts">[docs]</a>
+<a class="viewcode-back" href="../../../spice/interface_classes.html#spice.spectre.spectre.spectre.read_oppts">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>

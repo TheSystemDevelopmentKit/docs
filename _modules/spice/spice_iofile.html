@@ -44,7 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
@@ -111,7 +112,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
 
 <div class="viewcode-block" id="spice_iofile">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">spice_iofile</span><span class="p">(</span><span class="n">iofile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to provide file IO for spice simulations. When created, </span>
@@ -316,7 +317,7 @@
 
     <span class="c1"># Overloaded write from thesdk.iofile</span>
 <div class="viewcode-block" id="spice_iofile.write">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.write">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.write">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to write files associated with this spice_iofile.</span>
@@ -388,7 +389,7 @@
 
 
 <div class="viewcode-block" id="spice_iofile.parse_io_from_file">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.parse_io_from_file">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.parse_io_from_file">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">parse_io_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">,</span><span class="n">dtype</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">queue</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parse specific lines from a spectre print file.</span>
 
@@ -461,7 +462,7 @@
 
     <span class="c1"># Overloaded read from thesdk.iofile</span>
 <div class="viewcode-block" id="spice_iofile.read">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.read">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.read">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to read files associated with this spice_iofile.</span>
@@ -699,7 +700,7 @@
 
 
 <div class="viewcode-block" id="spice_iofile.interp_crossings">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.interp_crossings">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.interp_crossings">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">interp_crossings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">vth</span><span class="p">,</span><span class="n">nint</span><span class="p">,</span><span class="n">edgetype</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Helper method called for &#39;time&#39; and &#39;sample&#39; type outputs.</span>
 
@@ -756,7 +757,7 @@
 
 
 <div class="viewcode-block" id="spice_iofile.sample_signal">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.sample_signal">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.sample_signal">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">sample_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">signal</span><span class="p">,</span><span class="n">trigger</span><span class="p">,</span><span class="n">nint</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Helper method called for &#39;sample&#39; type outputs.</span>
 
@@ -808,7 +809,7 @@
                 <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">binary</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
 
 <div class="viewcode-block" id="spice_iofile.append_to_data">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.append_to_data">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.append_to_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">append_to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">buswidth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Helper method to append array to self.Data.</span>
 <span class="sd">        </span>
@@ -841,7 +842,7 @@
 
     <span class="c1"># Remove the file when no longer needed</span>
 <div class="viewcode-block" id="spice_iofile.remove">
-<a class="viewcode-back" href="../../spice/sections.html#spice.spice_iofile.spice_iofile.remove">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.spice_iofile.spice_iofile.remove">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Remove the files</span>
 

@@ -44,7 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../thesdk/sections.html">Thesdk core classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../rtl/sections.html">RTL interface classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../spice/sections.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/interface_classes.html">Spice simulator interface classess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
@@ -108,7 +109,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <div class="viewcode-block" id="testbench_common">
-<a class="viewcode-back" href="../../spice/sections.html#spice.testbench_common.testbench_common">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.testbench_common.testbench_common">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">testbench_common</span><span class="p">(</span><span class="n">spice_module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class generates all testbench contents.</span>
@@ -188,7 +189,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simcmds</span>
 
 <div class="viewcode-block" id="testbench_common.esc_bus">
-<a class="viewcode-back" href="../../spice/sections.html#spice.testbench_common.testbench_common.esc_bus">[docs]</a>
+<a class="viewcode-back" href="../../spice/interface_classes.html#spice.testbench_common.testbench_common.esc_bus">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">esc_bus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">esc_colon</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper function to escape bus characters for Spectre simulations::</span>
