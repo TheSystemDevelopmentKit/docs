@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -5,19 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TheSyDeKick - Complete kit for Sytem-on-Chip development &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=d8314b78"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d8314b78"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,8 +50,8 @@
 <li class="toctree-l1"><a class="reference internal" href="inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_instructions.html">Documentation instructions</a></li>
@@ -130,6 +128,8 @@
 <li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.preserve_iofiles"><code class="docutils literal notranslate"><span class="pre">thesdk.preserve_iofiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.pickle_excludes"><code class="docutils literal notranslate"><span class="pre">thesdk.pickle_excludes</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.copy_propval"><code class="docutils literal notranslate"><span class="pre">thesdk.copy_propval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.copy_propval_verbosity"><code class="docutils literal notranslate"><span class="pre">thesdk.copy_propval_verbosity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.supress_output"><code class="docutils literal notranslate"><span class="pre">thesdk.supress_output</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.print_log"><code class="docutils literal notranslate"><span class="pre">thesdk.print_log()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.timer"><code class="docutils literal notranslate"><span class="pre">thesdk.timer()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="thesdk/sections.html#thesdk.thesdk.silence"><code class="docutils literal notranslate"><span class="pre">thesdk.silence()</span></code></a></li>
@@ -187,6 +187,8 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.delete_rtlsimpath"><code class="docutils literal notranslate"><span class="pre">rtl.delete_rtlsimpath()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.delete_rtlworkpath"><code class="docutils literal notranslate"><span class="pre">rtl.delete_rtlworkpath()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.execute_rtl_sim"><code class="docutils literal notranslate"><span class="pre">rtl.execute_rtl_sim()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.extract_vhdlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.extract_vhdlfiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.extract_vlogfiles"><code class="docutils literal notranslate"><span class="pre">rtl.extract_vlogfiles()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.format_ios"><code class="docutils literal notranslate"><span class="pre">rtl.format_ios()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.interactive_control_contents"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_control_contents</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.interactive_controlfile"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_controlfile</span></code></a></li>
@@ -197,14 +199,19 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.preserve_rtlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.preserve_rtlfiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.read_outfile"><code class="docutils literal notranslate"><span class="pre">rtl.read_outfile()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtl_timeprecision"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timeprecision</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtl_timeprecision_num"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timeprecision_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtl_timescale"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timescale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtl_timescale_num"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timescale_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtl_timeunit"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timeunit</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtlcmd"><code class="docutils literal notranslate"><span class="pre">rtl.rtlcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.rtlfiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtlmisc"><code class="docutils literal notranslate"><span class="pre">rtl.rtlmisc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtlparameters"><code class="docutils literal notranslate"><span class="pre">rtl.rtlparameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtlsimpath"><code class="docutils literal notranslate"><span class="pre">rtl.rtlsimpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.rtlworkpath"><code class="docutils literal notranslate"><span class="pre">rtl.rtlworkpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.run_rtl"><code class="docutils literal notranslate"><span class="pre">rtl.run_rtl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.sim_opt_dict"><code class="docutils literal notranslate"><span class="pre">rtl.sim_opt_dict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.sim_optimization"><code class="docutils literal notranslate"><span class="pre">rtl.sim_optimization</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.simdut"><code class="docutils literal notranslate"><span class="pre">rtl.simdut</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.simtb"><code class="docutils literal notranslate"><span class="pre">rtl.simtb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.simulator_control_contents"><code class="docutils literal notranslate"><span class="pre">rtl.simulator_control_contents</span></code></a></li>
@@ -213,6 +220,7 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.vhdllibfileentities"><code class="docutils literal notranslate"><span class="pre">rtl.vhdllibfileentities</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.vloglibfilemodules"><code class="docutils literal notranslate"><span class="pre">rtl.vloglibfilemodules</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.vlogmodulefiles"><code class="docutils literal notranslate"><span class="pre">rtl.vlogmodulefiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.workdir"><code class="docutils literal notranslate"><span class="pre">rtl.workdir</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.rtl.write_infile"><code class="docutils literal notranslate"><span class="pre">rtl.write_infile()</span></code></a></li>
 </ul>
 </li>
@@ -249,7 +257,9 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.dut_instance"><code class="docutils literal notranslate"><span class="pre">testbench_common.dut_instance</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.lang"><code class="docutils literal notranslate"><span class="pre">testbench_common.lang</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.rtl_timeprecision"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timeprecision</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.rtl_timeprecision_num"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timeprecision_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.rtl_timescale"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timescale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.rtl_timescale_num"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timescale_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.verilog_instance_add"><code class="docutils literal notranslate"><span class="pre">testbench_common.verilog_instance_add()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench_common.testbench_common.verilog_instances"><code class="docutils literal notranslate"><span class="pre">testbench_common.verilog_instances</span></code></a></li>
 </ul>
@@ -264,7 +274,6 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.connectors"><code class="docutils literal notranslate"><span class="pre">testbench.connectors</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.content_parameters"><code class="docutils literal notranslate"><span class="pre">testbench.content_parameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.define_testbench"><code class="docutils literal notranslate"><span class="pre">testbench.define_testbench()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.definition"><code class="docutils literal notranslate"><span class="pre">testbench.definition</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.end_condition"><code class="docutils literal notranslate"><span class="pre">testbench.end_condition</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.generate_contents"><code class="docutils literal notranslate"><span class="pre">testbench.generate_contents()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.testbench.testbench.iofile_close"><code class="docutils literal notranslate"><span class="pre">testbench.iofile_close</span></code></a></li>
@@ -379,6 +388,7 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.vhdl.vhdl_entity.vhdl_entity.parameters"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.parameters</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="rtl/sections.html#icarus">Icarus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rtl/sections.html#rtl.icarus.icarus.icarus"><code class="docutils literal notranslate"><span class="pre">icarus</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.icarus.icarus.icarus.icarus_controlfilepaths"><code class="docutils literal notranslate"><span class="pre">icarus.icarus_controlfilepaths</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.icarus.icarus.icarus.icarus_dofilepaths"><code class="docutils literal notranslate"><span class="pre">icarus.icarus_dofilepaths</span></code></a></li>
@@ -387,10 +397,12 @@
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.icarus.icarus.icarus.icarus_simtb"><code class="docutils literal notranslate"><span class="pre">icarus.icarus_simtb</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="rtl/sections.html#questasim">Questasim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim"><code class="docutils literal notranslate"><span class="pre">questasim</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_controlfilepaths"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_controlfilepaths</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_dofilepaths"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_dofilepaths</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_rtlcmd"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_rtlcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_sim_opt_dict"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_sim_opt_dict</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_simdut"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_simdut</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="rtl/sections.html#rtl.questasim.questasim.questasim.questasim_simtb"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_simtb</span></code></a></li>
 </ul>
@@ -427,14 +439,18 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.postlayout"><code class="docutils literal notranslate"><span class="pre">spice.postlayout</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.postlayout_subckts"><code class="docutils literal notranslate"><span class="pre">spice.postlayout_subckts</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.preserve_spicefiles"><code class="docutils literal notranslate"><span class="pre">spice.preserve_spicefiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.read_noise_result"><code class="docutils literal notranslate"><span class="pre">spice.read_noise_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.read_oppts"><code class="docutils literal notranslate"><span class="pre">spice.read_oppts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.read_sparams"><code class="docutils literal notranslate"><span class="pre">spice.read_sparams()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.read_spice_outputs"><code class="docutils literal notranslate"><span class="pre">spice.read_spice_outputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.read_stb_result"><code class="docutils literal notranslate"><span class="pre">spice.read_stb_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.run_plotprogram"><code class="docutils literal notranslate"><span class="pre">spice.run_plotprogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.run_spice"><code class="docutils literal notranslate"><span class="pre">spice.run_spice()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.save_database"><code class="docutils literal notranslate"><span class="pre">spice.save_database</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.save_output_file"><code class="docutils literal notranslate"><span class="pre">spice.save_output_file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.si_prefix_mult"><code class="docutils literal notranslate"><span class="pre">spice.si_prefix_mult</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.simcmd_bundle"><code class="docutils literal notranslate"><span class="pre">spice.simcmd_bundle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.spice_ports"><code class="docutils literal notranslate"><span class="pre">spice.spice_ports</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.spice_simulator"><code class="docutils literal notranslate"><span class="pre">spice.spice_simulator</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.spice_submission"><code class="docutils literal notranslate"><span class="pre">spice.spice_submission</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice.spice_tb"><code class="docutils literal notranslate"><span class="pre">spice.spice_tb</span></code></a></li>
@@ -475,6 +491,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.testbench.testbench.misccmd"><code class="docutils literal notranslate"><span class="pre">testbench.misccmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.testbench.testbench.parameters"><code class="docutils literal notranslate"><span class="pre">testbench.parameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.testbench.testbench.plotcmd"><code class="docutils literal notranslate"><span class="pre">testbench.plotcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.testbench.testbench.portsrcstr"><code class="docutils literal notranslate"><span class="pre">testbench.portsrcstr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.testbench.testbench.simcmdstr"><code class="docutils literal notranslate"><span class="pre">testbench.simcmdstr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.testbench.testbench.testbench_simulator"><code class="docutils literal notranslate"><span class="pre">testbench.testbench_simulator</span></code></a></li>
 </ul>
@@ -537,8 +554,11 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.tstop"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.tstop</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.uic"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.uic</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.noise"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.noise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.harmonics"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.harmonics</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fmin"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fmin</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fmax"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fmax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fsig"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fsig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fc"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fscale"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fscale</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fpoints"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fpoints</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.fstepsize"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.fstepsize</span></code></a></li>
@@ -553,6 +573,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.strobeperiod"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.strobeperiod</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.skipstart"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.skipstart</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.strobedelay"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.strobedelay</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.sprobes"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.sprobes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spice_simcmd.spice_simcmd.iprobe"><code class="docutils literal notranslate"><span class="pre">spice_simcmd.iprobe</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="spice/sections.html#spice-module">Spice Module</a></li>
@@ -570,6 +592,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.cmdfile_ext"><code class="docutils literal notranslate"><span class="pre">ngspice.cmdfile_ext</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.commentchar"><code class="docutils literal notranslate"><span class="pre">ngspice.commentchar</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.commentline"><code class="docutils literal notranslate"><span class="pre">ngspice.commentline</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.create_nested_sweepresult_dict"><code class="docutils literal notranslate"><span class="pre">ngspice.create_nested_sweepresult_dict()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.csvskip"><code class="docutils literal notranslate"><span class="pre">ngspice.csvskip</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.dcsource_declaration"><code class="docutils literal notranslate"><span class="pre">ngspice.dcsource_declaration</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.dspfinclude"><code class="docutils literal notranslate"><span class="pre">ngspice.dspfinclude</span></code></a></li>
@@ -580,9 +603,13 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.option"><code class="docutils literal notranslate"><span class="pre">ngspice.option</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.parameter"><code class="docutils literal notranslate"><span class="pre">ngspice.parameter</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.plflag"><code class="docutils literal notranslate"><span class="pre">ngspice.plflag</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.plflag_simcmd_prefix"><code class="docutils literal notranslate"><span class="pre">ngspice.plflag_simcmd_prefix</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">ngspice.plotprogcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.plotprogram"><code class="docutils literal notranslate"><span class="pre">ngspice.plotprogram</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.read_noise_result"><code class="docutils literal notranslate"><span class="pre">ngspice.read_noise_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.read_oppts"><code class="docutils literal notranslate"><span class="pre">ngspice.read_oppts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.read_sp_result"><code class="docutils literal notranslate"><span class="pre">ngspice.read_sp_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.read_stb_result"><code class="docutils literal notranslate"><span class="pre">ngspice.read_stb_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.resultfile_ext"><code class="docutils literal notranslate"><span class="pre">ngspice.resultfile_ext</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.run_plotprogram"><code class="docutils literal notranslate"><span class="pre">ngspice.run_plotprogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice.ngspice.simulatorcmd"><code class="docutils literal notranslate"><span class="pre">ngspice.simulatorcmd</span></code></a></li>
@@ -596,6 +623,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.cmdfile_ext"><code class="docutils literal notranslate"><span class="pre">eldo.cmdfile_ext</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.commentchar"><code class="docutils literal notranslate"><span class="pre">eldo.commentchar</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.commentline"><code class="docutils literal notranslate"><span class="pre">eldo.commentline</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.create_nested_sweepresult_dict"><code class="docutils literal notranslate"><span class="pre">eldo.create_nested_sweepresult_dict()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.csvskip"><code class="docutils literal notranslate"><span class="pre">eldo.csvskip</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.dcsource_declaration"><code class="docutils literal notranslate"><span class="pre">eldo.dcsource_declaration</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.dspfinclude"><code class="docutils literal notranslate"><span class="pre">eldo.dspfinclude</span></code></a></li>
@@ -606,9 +634,13 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.option"><code class="docutils literal notranslate"><span class="pre">eldo.option</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.parameter"><code class="docutils literal notranslate"><span class="pre">eldo.parameter</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.plflag"><code class="docutils literal notranslate"><span class="pre">eldo.plflag</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.plflag_simcmd_prefix"><code class="docutils literal notranslate"><span class="pre">eldo.plflag_simcmd_prefix</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">eldo.plotprogcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.plotprogram"><code class="docutils literal notranslate"><span class="pre">eldo.plotprogram</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.read_noise_result"><code class="docutils literal notranslate"><span class="pre">eldo.read_noise_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.read_oppts"><code class="docutils literal notranslate"><span class="pre">eldo.read_oppts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.read_sp_result"><code class="docutils literal notranslate"><span class="pre">eldo.read_sp_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.read_stb_result"><code class="docutils literal notranslate"><span class="pre">eldo.read_stb_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.resultfile_ext"><code class="docutils literal notranslate"><span class="pre">eldo.resultfile_ext</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.run_plotprogram"><code class="docutils literal notranslate"><span class="pre">eldo.run_plotprogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo.eldo.simulatorcmd"><code class="docutils literal notranslate"><span class="pre">eldo.simulatorcmd</span></code></a></li>
@@ -622,11 +654,15 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.cmdfile_ext"><code class="docutils literal notranslate"><span class="pre">spectre.cmdfile_ext</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.commentchar"><code class="docutils literal notranslate"><span class="pre">spectre.commentchar</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.commentline"><code class="docutils literal notranslate"><span class="pre">spectre.commentline</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.create_nested_sweepresult_dict"><code class="docutils literal notranslate"><span class="pre">spectre.create_nested_sweepresult_dict()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.csvskip"><code class="docutils literal notranslate"><span class="pre">spectre.csvskip</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.dcsource_declaration"><code class="docutils literal notranslate"><span class="pre">spectre.dcsource_declaration</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.dspfinclude"><code class="docutils literal notranslate"><span class="pre">spectre.dspfinclude</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.errpreset"><code class="docutils literal notranslate"><span class="pre">spectre.errpreset</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.eventoutdelim"><code class="docutils literal notranslate"><span class="pre">spectre.eventoutdelim</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.get_input_noise_data"><code class="docutils literal notranslate"><span class="pre">spectre.get_input_noise_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.get_ocnPrint_data"><code class="docutils literal notranslate"><span class="pre">spectre.get_ocnPrint_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.get_output_noise_data"><code class="docutils literal notranslate"><span class="pre">spectre.get_output_noise_data()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.include"><code class="docutils literal notranslate"><span class="pre">spectre.include</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.lastline"><code class="docutils literal notranslate"><span class="pre">spectre.lastline</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.nprocflag"><code class="docutils literal notranslate"><span class="pre">spectre.nprocflag</span></code></a></li>
@@ -636,7 +672,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.plflag_simcmd_prefix"><code class="docutils literal notranslate"><span class="pre">spectre.plflag_simcmd_prefix</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.plotprogcmd"><code class="docutils literal notranslate"><span class="pre">spectre.plotprogcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.plotprogram"><code class="docutils literal notranslate"><span class="pre">spectre.plotprogram</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.read_noise_result"><code class="docutils literal notranslate"><span class="pre">spectre.read_noise_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.read_oppts"><code class="docutils literal notranslate"><span class="pre">spectre.read_oppts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.read_sp_result"><code class="docutils literal notranslate"><span class="pre">spectre.read_sp_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.read_stb_result"><code class="docutils literal notranslate"><span class="pre">spectre.read_stb_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.resultfile_ext"><code class="docutils literal notranslate"><span class="pre">spectre.resultfile_ext</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.run_plotprogram"><code class="docutils literal notranslate"><span class="pre">spectre.run_plotprogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre.spectre.simulatorcmd"><code class="docutils literal notranslate"><span class="pre">spectre.simulatorcmd</span></code></a></li>
@@ -652,6 +691,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice_testbench.ngspice_testbench.libcmd"><code class="docutils literal notranslate"><span class="pre">ngspice_testbench.libcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice_testbench.ngspice_testbench.options"><code class="docutils literal notranslate"><span class="pre">ngspice_testbench.options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice_testbench.ngspice_testbench.plotcmd"><code class="docutils literal notranslate"><span class="pre">ngspice_testbench.plotcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice_testbench.ngspice_testbench.portsrcstr"><code class="docutils literal notranslate"><span class="pre">ngspice_testbench.portsrcstr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.ngspice.ngspice_testbench.ngspice_testbench.simcmdstr"><code class="docutils literal notranslate"><span class="pre">ngspice_testbench.simcmdstr</span></code></a></li>
 </ul>
 </li>
@@ -662,6 +702,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo_testbench.eldo_testbench.libcmd"><code class="docutils literal notranslate"><span class="pre">eldo_testbench.libcmd</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo_testbench.eldo_testbench.options"><code class="docutils literal notranslate"><span class="pre">eldo_testbench.options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo_testbench.eldo_testbench.plotcmd"><code class="docutils literal notranslate"><span class="pre">eldo_testbench.plotcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo_testbench.eldo_testbench.portsrcstr"><code class="docutils literal notranslate"><span class="pre">eldo_testbench.portsrcstr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.eldo.eldo_testbench.eldo_testbench.simcmdstr"><code class="docutils literal notranslate"><span class="pre">eldo_testbench.simcmdstr</span></code></a></li>
 </ul>
 </li>
@@ -673,6 +714,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre_testbench.spectre_testbench.num_cols"><code class="docutils literal notranslate"><span class="pre">spectre_testbench.num_cols</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre_testbench.spectre_testbench.options"><code class="docutils literal notranslate"><span class="pre">spectre_testbench.options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre_testbench.spectre_testbench.plotcmd"><code class="docutils literal notranslate"><span class="pre">spectre_testbench.plotcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre_testbench.spectre_testbench.portsrcstr"><code class="docutils literal notranslate"><span class="pre">spectre_testbench.portsrcstr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="spice/sections.html#spice.spectre.spectre_testbench.spectre_testbench.simcmdstr"><code class="docutils literal notranslate"><span class="pre">spectre_testbench.simcmdstr</span></code></a></li>
 </ul>
 </li>
@@ -707,11 +749,6 @@
 <li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#inverter.inverter.IOS"><code class="docutils literal notranslate"><span class="pre">inverter.IOS</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#inverter.inverter.model"><code class="docutils literal notranslate"><span class="pre">inverter.model</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#inverter.inverter.__init__"><code class="docutils literal notranslate"><span class="pre">inverter.__init__()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#id0"><code class="docutils literal notranslate"><span class="pre">inverter.proplist</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#id1"><code class="docutils literal notranslate"><span class="pre">inverter.Rs</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#id2"><code class="docutils literal notranslate"><span class="pre">inverter.vdd</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#id3"><code class="docutils literal notranslate"><span class="pre">inverter.IOS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#id4"><code class="docutils literal notranslate"><span class="pre">inverter.model</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#inverter.inverter.define_io_conditions"><code class="docutils literal notranslate"><span class="pre">inverter.define_io_conditions()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#inverter.inverter.init"><code class="docutils literal notranslate"><span class="pre">inverter.init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter/sections.html#inverter.inverter.main"><code class="docutils literal notranslate"><span class="pre">inverter.main()</span></code></a></li>
@@ -745,11 +782,6 @@
 <li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#inverter.inverter.IOS"><code class="docutils literal notranslate"><span class="pre">inverter.IOS</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#inverter.inverter.model"><code class="docutils literal notranslate"><span class="pre">inverter.model</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#inverter.inverter.__init__"><code class="docutils literal notranslate"><span class="pre">inverter.__init__()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#id0"><code class="docutils literal notranslate"><span class="pre">inverter.proplist</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#id1"><code class="docutils literal notranslate"><span class="pre">inverter.Rs</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#id2"><code class="docutils literal notranslate"><span class="pre">inverter.vdd</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#id3"><code class="docutils literal notranslate"><span class="pre">inverter.IOS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#id4"><code class="docutils literal notranslate"><span class="pre">inverter.model</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#inverter.inverter.define_io_conditions"><code class="docutils literal notranslate"><span class="pre">inverter.define_io_conditions()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#inverter.inverter.init"><code class="docutils literal notranslate"><span class="pre">inverter.init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="inverter_tests/sections.html#inverter.inverter.main"><code class="docutils literal notranslate"><span class="pre">inverter.main()</span></code></a></li>
@@ -758,68 +790,13 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ads/sections.html">ADS interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ads/initial_setup_tutorial.html">ADS interface Initial setup tutorial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ads/sections.html#ads-interface-class">ADS Interface class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ads/sections.html#ads.ads"><code class="docutils literal notranslate"><span class="pre">ads</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.TL_mesh_cells"><code class="docutils literal notranslate"><span class="pre">ads.TL_mesh_cells</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.ads_submission"><code class="docutils literal notranslate"><span class="pre">ads.ads_submission</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.adscmd"><code class="docutils literal notranslate"><span class="pre">ads.adscmd</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.adssimpath"><code class="docutils literal notranslate"><span class="pre">ads.adssimpath</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.adssrc"><code class="docutils literal notranslate"><span class="pre">ads.adssrc</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.adssrcpath"><code class="docutils literal notranslate"><span class="pre">ads.adssrcpath</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.distributed_run"><code class="docutils literal notranslate"><span class="pre">ads.distributed_run</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.edge_mesh_enable"><code class="docutils literal notranslate"><span class="pre">ads.edge_mesh_enable</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.emsetupsrcpath"><code class="docutils literal notranslate"><span class="pre">ads.emsetupsrcpath</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.execute_ads_sim"><code class="docutils literal notranslate"><span class="pre">ads.execute_ads_sim()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.fstep"><code class="docutils literal notranslate"><span class="pre">ads.fstep</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.fstep_unit"><code class="docutils literal notranslate"><span class="pre">ads.fstep_unit</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.fstop"><code class="docutils literal notranslate"><span class="pre">ads.fstop</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.fstop_unit"><code class="docutils literal notranslate"><span class="pre">ads.fstop_unit</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.generate_input_files"><code class="docutils literal notranslate"><span class="pre">ads.generate_input_files()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.has_lsf"><code class="docutils literal notranslate"><span class="pre">ads.has_lsf</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.interactive_ads"><code class="docutils literal notranslate"><span class="pre">ads.interactive_ads</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.mesh_cells"><code class="docutils literal notranslate"><span class="pre">ads.mesh_cells</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.name"><code class="docutils literal notranslate"><span class="pre">ads.name</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.num_processes"><code class="docutils literal notranslate"><span class="pre">ads.num_processes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.preserve_adsfiles"><code class="docutils literal notranslate"><span class="pre">ads.preserve_adsfiles</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.run_ads"><code class="docutils literal notranslate"><span class="pre">ads.run_ads()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.runname"><code class="docutils literal notranslate"><span class="pre">ads.runname</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.set_simulation_options"><code class="docutils literal notranslate"><span class="pre">ads.set_simulation_options()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.sourcelib"><code class="docutils literal notranslate"><span class="pre">ads.sourcelib</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.sourcelibpath"><code class="docutils literal notranslate"><span class="pre">ads.sourcelibpath</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.ads.sparam_filename"><code class="docutils literal notranslate"><span class="pre">ads.sparam_filename</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="momem/sections.html">ADS interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="momem/initial_setup_tutorial.html">ADS interface Initial setup tutorial</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ads/sections.html#citi-to-touchstone">Citi to Touchstone</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.comments"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.comments</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.data"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.data</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.data_names"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.data_names</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.generate_contents"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.generate_contents()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.input_file"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.input_file</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.lines"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.lines</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.nbr_of_ports"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.nbr_of_ports</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.normalization"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.normalization</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.output_file"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.output_file</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.output_file_extension"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.output_file_extension</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.parse_citi"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.parse_citi()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.var_data"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_data</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.var_format"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.var_name"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_name</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.var_nbr_of_points"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.var_nbr_of_points</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads/sections.html#ads.citi_to_touchstone.citi_to_touchstone.write_touchstone"><code class="docutils literal notranslate"><span class="pre">citi_to_touchstone.write_touchstone()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ads_template/sections.html">ADS template class</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ads_template/sections.html#ads-template">ads_template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ads_template/sections.html#ads_template.ads_template"><code class="docutils literal notranslate"><span class="pre">ads_template</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ads_template/sections.html#ads_template.ads_template.configure_ads"><code class="docutils literal notranslate"><span class="pre">ads_template.configure_ads()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads_template/sections.html#ads_template.ads_template.init"><code class="docutils literal notranslate"><span class="pre">ads_template.init()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads_template/sections.html#ads_template.ads_template.main"><code class="docutils literal notranslate"><span class="pre">ads_template.main()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ads_template/sections.html#ads_template.ads_template.run"><code class="docutils literal notranslate"><span class="pre">ads_template.run()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell_scripts.html">Shell scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shell_scripts.html#doc-shell">doc/shell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/doc/shell/bash2rst.html">bash2rst.sh</a></li>
 </ul>
 </li>
 </ul>

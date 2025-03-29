@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>spice.testbench &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
@@ -92,35 +90,35 @@
 <span class="sd">Testbench generation class for spice simulations.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">shlex</span>
-<span class="kn">import</span> <span class="nn">fileinput</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">spice.testbench_common</span> <span class="kn">import</span> <span class="n">testbench_common</span>
-<span class="kn">from</span> <span class="nn">spice.ngspice.ngspice_testbench</span> <span class="kn">import</span> <span class="n">ngspice_testbench</span>
-<span class="kn">from</span> <span class="nn">spice.eldo.eldo_testbench</span> <span class="kn">import</span> <span class="n">eldo_testbench</span>
-<span class="kn">from</span> <span class="nn">spice.spectre.spectre_testbench</span> <span class="kn">import</span> <span class="n">spectre_testbench</span>
-<span class="kn">from</span> <span class="nn">spice.spice_module</span> <span class="kn">import</span> <span class="n">spice_module</span>
-<span class="kn">import</span> <span class="nn">pdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shlex</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fileinput</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.testbench_common</span><span class="w"> </span><span class="kn">import</span> <span class="n">testbench_common</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.ngspice.ngspice_testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">ngspice_testbench</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.eldo.eldo_testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">eldo_testbench</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.spectre.spectre_testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">spectre_testbench</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.spice_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">spice_module</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-<span class="kn">import</span> <span class="nn">textwrap</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <div class="viewcode-block" id="testbench">
 <a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench">[docs]</a>
-<span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class generates all testbench contents.</span>
 <span class="sd">    This class is utilized by the main spice class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
 <span class="sd">        parameters.</span>
 
@@ -137,14 +135,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">DEBUG</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">DEBUG</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; This fixes DEBUG prints in spice_iofile, by propagating the DEBUG</span>
 <span class="sd">        flag of the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">DEBUG</span> 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">testbench_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">testbench_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; The simulator specific operation is defined with an instance of </span>
 <span class="sd">        simulator specific class. Properties and methods return values from that class.</span>
 
@@ -164,7 +162,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_testbench_simulator</span>
        
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Design under test</span>
 <span class="sd">        </span>
 <span class="sd">        :type: spice_module</span>
@@ -176,7 +174,7 @@
 
     <span class="c1"># Generating eldo/spectre parameters string</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Spice parameters string parsed from self.spiceparameters -dictionary in</span>
@@ -188,15 +186,15 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">parameter</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">parname</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">parval</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span>
     <span class="nd">@parameters</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@parameters</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">=</span><span class="kc">None</span>
 
     <span class="c1"># Generating eldo/spectre library inclusion string</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">libcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">libcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Library inclusion string. Parsed from self.spicecorner -dictionary in</span>
 <span class="sd">        the parent entity, as well as &#39;ELDOLIBFILE&#39; or &#39;SPECTRELIBFILE&#39; global</span>
 <span class="sd">        variables in TheSDK.config.</span>
@@ -205,12 +203,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">libcmd</span>
 
     <span class="nd">@libcmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">libcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">libcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">libcmd</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="c1"># Generating netlist inclusion string</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Subcircuit inclusion string pointing to generated subckt_* -file.</span>
@@ -220,15 +218,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_includecmd</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spice_simulator</span><span class="o">.</span><span class="n">include</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_subcktfile</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_includecmd</span>
     <span class="nd">@includecmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_includecmd</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@includecmd</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">includecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_includecmd</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="testbench.copy_dspf">
 <a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.copy_dspf">[docs]</a>
-    <span class="k">def</span> <span class="nf">copy_dspf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy_dspf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">dspf</span><span class="p">:</span>
                 <span class="n">src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesrcpath</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.pex.dspf&#39;</span> <span class="o">%</span> <span class="n">cell</span><span class="p">)</span>
@@ -242,7 +240,7 @@
 
     <span class="c1"># DSPF include commands</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        DSPF-file inclusion string pointing to files corresponding to self.dspf</span>
@@ -303,14 +301,14 @@
                             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;No such file or directory </span><span class="si">%s</span><span class="s1">.&#39;</span><span class="o">%</span><span class="n">dspfpath</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dspfincludecmd</span>
     <span class="nd">@dspfincludecmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dspfincludecmd</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@dspfincludecmd</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dspfincludecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dspfincludecmd</span><span class="o">=</span><span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Miscellaneous command string corresponding to self.spicemisc -list in</span>
@@ -323,14 +321,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span> <span class="o">+=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span>
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dcsourcestr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dcsourcestr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;str : DC source definitions parsed from spice_dcsource objects instantiated</span>
 <span class="sd">        in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -338,11 +336,26 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">dcsourcestr</span>
 
     <span class="nd">@dcsourcestr</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">dcsourcestr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dcsourcestr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">dcsourcestr</span> <span class="o">=</span> <span class="n">value</span>
 
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">inputsignals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">portsrcstr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Documentation for parameter portsrcstr</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_portsrcstr&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_portsrcstr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">portsrcstr</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_portsrcstr</span>
+
+    <span class="nd">@portsrcstr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">portsrcstr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_portsrcstr</span><span class="o">=</span><span class="n">val</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inputsignals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Input signal definitions parsed from spice_iofile objects instantiated</span>
 <span class="sd">        in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -350,7 +363,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">testbench_simulator</span><span class="o">.</span><span class="n">inputsignals</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">simcmdstr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simcmdstr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulation command definition parsed from spice_simcmd object</span>
 <span class="sd">        instantiated in the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -359,7 +372,7 @@
 
     <span class="c1"># Generating plot and print commands</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">plotcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plotcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;str : All output IOs are mapped to plot or print statements in the testbench.</span>
 <span class="sd">        Also manual plot commands through `spice_simcmd.plotlist` are handled here.</span>
 
@@ -369,7 +382,7 @@
 
 <div class="viewcode-block" id="testbench.export">
 <a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.export">[docs]</a>
-    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to write the testbench to a file.</span>
 
@@ -400,7 +413,7 @@
 
 <div class="viewcode-block" id="testbench.generate_contents">
 <a class="viewcode-back" href="../../spice/sections.html#spice.testbench.testbench.generate_contents">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally called function to generate testbench contents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -414,6 +427,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">dut</span><span class="o">.</span><span class="n">instance</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">misccmd</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">dcsourcestr</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">portsrcstr</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">inputsignals</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">simcmdstr</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">plotcmd</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>

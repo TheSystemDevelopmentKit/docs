@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rtl.questasim.questasim &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../documentation_instructions.html">Documentation instructions</a></li>
@@ -85,79 +83,96 @@
              
   <h1>Source code for rtl.questasim.questasim</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">=========</span>
+<span class="sd">Questasim</span>
+<span class="sd">=========</span>
 <span class="sd">Questasim is a mixin class it is used to provide simulator specific</span>
 <span class="sd">properties and methods for RTL class</span>
 
 <span class="sd">Initially written by Marko kosunen 20221030</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <div class="viewcode-block" id="questasim">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.questasim.questasim.questasim">[docs]</a>
-<span class="k">class</span> <span class="nc">questasim</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">questasim</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">questasim_rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_sim_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Preset dictionary for running optimization on the simulation.</span>
+
+<span class="sd">        - &#39;no-opt&#39; - no optimizations, full visibility to signals</span>
+<span class="sd">        - &#39;full-opt&#39; - fully optimized, might lose visibility to a lot of signals. Simulation may not work.</span>
+<span class="sd">        - &#39;default&#39; - not optimized simulation for interactive sims,</span>
+<span class="sd">        optimized with full visibility for non-interactive sims</span>
+<span class="sd">        - &#39;top-visible&#39; - optimized while keeping top level (testbench) signals.</span>
+<span class="sd">        - &#39;top-dut-visible&#39; - optimized while keeping top level (testbench) and DUT signals on the first hierarchy level</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_sim_opt_dict&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_questasim_sim_opt_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;no-opt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;-novopt&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;opt-visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;-vopt&#39;</span><span class="p">,</span> <span class="s1">&#39;-voptargs=+acc&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;full-opt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;-vopt&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;top-visible&#39;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s1">&#39;-vopt&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;-voptargs=&quot;+acc=bcglnprst+tb_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;top-dut-visible&#39;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s1">&#39;-vopt&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;-voptargs=&quot;+acc=bcglnprst+tb_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> +acc=bcglnprst+</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_questasim_sim_opt_dict</span>
+    <span class="nd">@questasim_sim_opt_dict</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_sim_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_questasim_sim_opt_dict</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">submission</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lsf_submission</span>
         <span class="n">rtllibcmd</span> <span class="o">=</span>  <span class="s1">&#39;vlib &#39;</span> <span class="o">+</span>  <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
         <span class="n">rtllibmapcmd</span> <span class="o">=</span> <span class="s1">&#39;vmap work &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
          
-        <span class="n">vlogmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vloglibfilemodules</span> <span class="o">+</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
-            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span> <span class="p">])</span>
-        <span class="n">vhdlmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdllibfileentities</span> <span class="o">+</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
-            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlentityfiles</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_tb_timescale</span><span class="p">:</span>
             <span class="n">timescalestring</span> <span class="o">=</span> <span class="s1">&#39; -t &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">timescalestring</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-        <span class="c1"># The following cases are possible</span>
-        <span class="c1"># Testbench is sv OR testbench is vhdl, identified with &#39;lang&#39;</span>
-        <span class="c1"># source is verilog OR source is vhdl, identified by &#39;model</span>
-        <span class="c1"># Has additional source files in the &#39;other&#39; language, identified by &#39;cosim&#39;</span>
-        <span class="c1"># In total, 8 cases</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
-            <span class="c1">#We need to compile verilog testbench and simdut anyway.</span>
-            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
-                <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogcompargs</span><span class="p">))</span>
-            <span class="c1"># Define hdll compcmd, if we have cosim</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vhdlmodulesstring</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="s1">&#39; echo &#39;&#39; &gt; /dev/null &#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vcom -2008 -work work &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> 
-                               <span class="o">+</span> <span class="n">vhdlmodulesstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vhdlcompargs</span><span class="p">))</span>
+        <span class="c1"># Produce a list of compile commands from self.rtlfiles</span>
+        <span class="c1"># They are compiled in order</span>
+        <span class="c1"># Consecutive, same language modules are grouped into one compile command</span>
+        <span class="n">comp_cmds</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
-            <span class="c1">#We need to compile vhdl sources anyway, but no testbench</span>
-            <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vcom -2008 -work work &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
-                       <span class="n">vhdlmodulesstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrc</span> <span class="p">)</span>
-            <span class="c1">#We need to compile verilog testbench anyway, but simdut is in vhdl</span>
-            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
-                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
-            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
-                <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogcompargs</span><span class="p">))</span>
+        <span class="n">vlog_start</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;vlog&quot;</span><span class="p">,</span><span class="s2">&quot;-sv&quot;</span><span class="p">,</span><span class="s2">&quot;-work&quot;</span><span class="p">,</span><span class="s2">&quot;work&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogcompargs</span><span class="p">)</span>
+        <span class="n">vhdl_start</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;vcom&quot;</span><span class="p">,</span><span class="s2">&quot;-2008&quot;</span><span class="p">,</span><span class="s2">&quot;-work&quot;</span><span class="p">,</span><span class="s2">&quot;work&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlcompargs</span><span class="p">)</span>
+        <span class="n">comp_group</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">group_lang</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlfiles</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">file_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+            <span class="n">lang</span> <span class="o">=</span> <span class="s2">&quot;vlog&quot;</span> <span class="k">if</span> <span class="n">file_ext</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.v&quot;</span><span class="p">,</span> <span class="s2">&quot;.sv&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;vhdl&quot;</span>
+            <span class="k">if</span> <span class="n">group_lang</span> <span class="o">!=</span> <span class="n">lang</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">first</span><span class="p">:</span>
+                <span class="c1"># Finish compilation group as language changes</span>
+                <span class="n">comp_cmds</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">comp_group</span><span class="p">)]</span>
+                <span class="n">comp_group</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">comp_group</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="n">group_lang</span> <span class="o">=</span> <span class="n">lang</span>
+                <span class="c1"># Add compile command</span>
+                <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;vlog&quot;</span><span class="p">:</span>
+                    <span class="n">comp_group</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vlog_start</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">comp_group</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vhdl_start</span><span class="p">]</span>
+            <span class="n">comp_group</span> <span class="o">+=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span><span class="p">,</span> <span class="n">module</span><span class="p">)]</span>
+        <span class="c1"># Append the last group</span>
+        <span class="n">comp_cmds</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">comp_group</span><span class="p">)]</span>
 
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;sv&#39;</span><span class="p">:</span>
-            <span class="c1"># We need to compile VHDL testbench anyway, but not the source</span>
-            <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vcom -2008 -work work &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span>
-                       <span class="n">vhdlmodulesstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
-            <span class="c1">#We need to compile verilog simdut anyway.</span>
-            <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> 
-                <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogcompargs</span><span class="p">))</span>
-
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">==</span><span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
-            <span class="c1"># We need to compile VHDL source and testbench anyway</span>
-            <span class="n">vhdlcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vcom -2008 -work work &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vhdlmodulesstring</span> 
-                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlsrc</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="p">)</span>
-            <span class="c1"># Define vlog compcmd, if we have cosim</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vlogmodulesstring</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="s1">&#39; echo &#39;&#39; &gt; /dev/null &#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vlog -sv -work work &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span> <span class="p">)</span>
-
-        <span class="n">gstring</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> 
-                                <span class="p">(</span><span class="s1">&#39;-g &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;=&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> 
-                                <span class="k">for</span> <span class="n">param</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlparameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
+        <span class="n">gstring</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                                <span class="p">(</span><span class="s1">&#39;-g &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;=&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                                <span class="k">for</span> <span class="n">param</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlparameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                             <span class="p">])</span>
+
         <span class="n">vlogsimargs</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlogsimargs</span><span class="p">)</span>
 
         <span class="n">fileparams</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
@@ -180,34 +195,29 @@
             <span class="n">interactive_string</span><span class="o">=</span><span class="s1">&#39; -do &quot;run -all; quit;&quot;&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;No interactive control file set.&#39;</span><span class="p">)</span>
 
-        <span class="c1"># Choose command </span>
+        <span class="c1"># Choose command</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
-            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch&#39;</span> <span class="o">+</span> <span class="n">timescalestring</span> <span class="o">+</span> <span class="s1">&#39; -voptargs=+acc &#39;</span> 
+            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 -batch&#39;</span> <span class="o">+</span> <span class="n">timescalestring</span>
                     <span class="o">+</span> <span class="n">fileparams</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span>
-                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogsimargs</span> <span class="o">+</span> <span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>  
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogsimargs</span> <span class="o">+</span> <span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
                     <span class="o">+</span> <span class="n">controlstring</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">submission</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="c1">#Local execution</span>
-            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 &#39;</span> <span class="o">+</span> <span class="n">timescalestring</span> <span class="o">+</span> <span class="s1">&#39; -novopt &#39;</span> <span class="o">+</span> <span class="n">fileparams</span> 
-                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogsimargs</span> <span class="o">+</span> <span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> 
+            <span class="n">rtlsimcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;vsim -64 &#39;</span> <span class="o">+</span> <span class="n">timescalestring</span> <span class="o">+</span> <span class="n">fileparams</span>
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">gstring</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogsimargs</span> <span class="o">+</span> <span class="s1">&#39; work.tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
                          <span class="o">+</span> <span class="n">interactive_string</span> <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">=</span>  <span class="n">rtllibcmd</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">rtllibmapcmd</span>
-        <span class="c1"># Commpile dependencies first.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vhdlcompcmd</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vlogcompcmd</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span> <span class="o">==</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vlogcompcmd</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">vhdlcompcmd</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; sync &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">submission</span> 
+        <span class="k">for</span> <span class="n">comp_cmd</span> <span class="ow">in</span> <span class="n">comp_cmds</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">comp_cmd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; sync &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span> <span class="o">+</span> <span class="n">submission</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span> <span class="o">+=</span>  <span class="n">rtlsimcmd</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">questasim_simdut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_simdut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Source file for Device Under Test in simulations directory</span>
 
 <span class="sd">            Returns</span>
@@ -224,7 +234,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simdut</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">questasim_simtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_simtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Questasim testbench source file in simulations directory.</span>
 
 <span class="sd">        This file and it&#39;s format is dependent on the language(s)</span>
@@ -238,7 +248,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simtb</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">questasim_dofilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_dofilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dofiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/modelsim&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
         <span class="n">dofile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dofile.do&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span>
         <span class="n">obsoletefile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/Simulations/rtlsim/dofile.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
@@ -246,7 +256,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">dofiledir</span><span class="p">,</span> <span class="n">dofile</span><span class="p">,</span> <span class="n">obsoletefile</span><span class="p">,</span> <span class="n">generateddofile</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">questasim_controlfilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">questasim_controlfilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">controlfiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/modelsim&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
         <span class="n">controlfile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/control.do&#39;</span> <span class="o">%</span> <span class="n">controlfiledir</span>
         <span class="n">generatedcontrolfile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/control.do&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>

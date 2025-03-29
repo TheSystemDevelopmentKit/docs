@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>spice.spice_common &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
@@ -89,21 +87,21 @@
 <span class="sd">Spice Common</span>
 <span class="sd">============</span>
 
-<span class="sd">Mix-in class of ommon properties and methods for spice simulator classes</span>
+<span class="sd">Mix-in class of common properties and methods for spice simulator classes</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">shlex</span>
-<span class="kn">import</span> <span class="nn">fileinput</span>
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">spice.spice_methods</span> <span class="kn">import</span> <span class="n">spice_methods</span>
-<span class="kn">import</span> <span class="nn">pdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shlex</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fileinput</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.spice_methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">spice_methods</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span>
 
 <div class="viewcode-block" id="spice_common">
 <a class="viewcode-back" href="../../spice/sections.html#spice.spice_common.spice_common">[docs]</a>
-<span class="k">class</span> <span class="nc">spice_common</span><span class="p">(</span><span class="n">spice_methods</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">spice_common</span><span class="p">(</span><span class="n">spice_methods</span><span class="p">,</span><span class="n">thesdk</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Common properties and methods for spice simulator tool classes.</span>
 <span class="sd">    Most of these are overloaded in __init__.py</span>
@@ -111,7 +109,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Bundle</span>
 
 <span class="sd">        A thesdk.Bundle containing extracted quantities.</span>
@@ -120,14 +118,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_extracts</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracts</span>
     <span class="nd">@extracts</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extracts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_extracts</span><span class="o">=</span><span class="n">value</span>
 
     <span class="c1">#### [TODO] To be relocated</span>
     <span class="c1"># Strobing related stuff should not be in this class. Maybe spice_iofile or </span>
     <span class="c1"># testbench also suposedly these are spectre specific</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internally set list of indices corresponding to time,amplitude pairs</span>
 <span class="sd">        whose time value of is a multiple of the strobeperiod (see spice_simcmd).</span>
@@ -137,14 +135,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span>
 
     <span class="nd">@strobe_indices</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">strobe_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_strobe_indices</span><span class="o">=</span><span class="n">val</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Cannot set strobe_indices to be of type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_strobed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_strobed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Check if simulation was strobed or not</span>
 <span class="sd">        &#39;&#39;&#39;</span>

@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rtl.icarus.icarus &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../documentation_instructions.html">Documentation instructions</a></li>
@@ -85,32 +83,35 @@
              
   <h1>Source code for rtl.icarus.icarus</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">======</span>
+<span class="sd">Icarus</span>
+<span class="sd">======</span>
 <span class="sd">Icarus is a mixin class used to provide simulator specific</span>
 <span class="sd">properties and methods for RTL class</span>
 
-<span class="sd">Initially written by Marko kosunen 20221030</span>
+<span class="sd">Initially written by Marko Kosunen 20221030</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span>
 
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">pdb</span>
 <div class="viewcode-block" id="icarus">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.icarus.icarus.icarus">[docs]</a>
-<span class="k">class</span> <span class="nc">icarus</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">icarus</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">icarus_rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icarus_rtlcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">submission</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lsf_submission</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span><span class="p">)</span>
         <span class="n">vlogmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vloglibfilemodules</span> <span class="o">+</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
-            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vlogmodulefiles</span> <span class="p">])</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_vlogfiles</span><span class="p">()</span> <span class="p">])</span>
         <span class="n">vhdlmodulesstring</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> 
-            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlentityfiles</span><span class="p">])</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_vhdlfiles</span><span class="p">()])</span>
 
         <span class="k">if</span> <span class="n">vhdlmodulesstring</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Icarus does not support Verilog+VHDL cosimulation, ignoring additional VHDL files.&quot;</span><span class="p">)</span>
 
         <span class="n">vlogcompcmd</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;iverilog -Wall -v -g2012 -o &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlworkpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-    	            <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simtb</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">simdut</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vlogmodulesstring</span><span class="p">)</span>
         <span class="n">gstring</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> 
                                 <span class="p">(</span><span class="s1">&#39;-g &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;=&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> 
                                 <span class="k">for</span> <span class="n">param</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlparameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
@@ -144,7 +145,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">icarus_simdut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icarus_simdut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Source file for Device Under Test in simulations directory</span>
 
 <span class="sd">            Returns</span>
@@ -160,7 +161,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simdut</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">icarus_simtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icarus_simtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Icarus Testbench source file in simulations directory.</span>
 
 <span class="sd">        This file and it&#39;s format is dependent on the language(s)</span>
@@ -171,7 +172,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simtb</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">icarus_dofilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icarus_dofilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dofiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/gtkwave&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
         <span class="n">dofile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/general.tcl&#39;</span> <span class="o">%</span> <span class="n">dofiledir</span>
         <span class="n">obsoletedofile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/Simulations/rtlsim/general.tcl&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
@@ -179,7 +180,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">dofiledir</span><span class="p">,</span> <span class="n">dofile</span><span class="p">,</span> <span class="n">obsoletedofile</span><span class="p">,</span><span class="n">generateddofile</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">icarus_controlfilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icarus_controlfilepaths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">controlfiledir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/interactive_control_files/icarus&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">entitypath</span>
         <span class="n">controlfile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/control.tcl&#39;</span> <span class="o">%</span> <span class="n">controlfiledir</span>
         <span class="n">generatedcontrolfile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/control.tcl&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">simpath</span>

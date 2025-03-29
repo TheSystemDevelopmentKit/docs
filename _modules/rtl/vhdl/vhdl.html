@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rtl.vhdl.vhdl &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../documentation_instructions.html">Documentation instructions</a></li>
@@ -95,14 +93,14 @@
 <span class="sd">Initially written by Marko Kosunen 30.10.20200, marko.kosunen@aalto.fi </span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">rtl.rtl_iofile</span> <span class="kn">import</span> <span class="n">rtl_iofile</span> <span class="k">as</span> <span class="n">rtl_iofile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.rtl_iofile</span><span class="w"> </span><span class="kn">import</span> <span class="n">rtl_iofile</span> <span class="k">as</span> <span class="n">rtl_iofile</span>
 
 <div class="viewcode-block" id="vhdl">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.vhdl.vhdl.vhdl">[docs]</a>
-<span class="k">class</span> <span class="nc">vhdl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">vhdl</span><span class="p">(</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlsimtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlsimtb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Name of the VHDL testbench</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/tb_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vhdlext</span>
@@ -110,7 +108,7 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlsrcpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; VHDL search path</span>
 <span class="sd">            self.entitypath/vhdl</span>
 
@@ -124,7 +122,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrcpath</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlsrc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;VHDL source file</span>
 <span class="sd">           self.vhdlsrcpath/self.name.vhd&#39;</span>
 
@@ -138,7 +136,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsrc</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; File extension for verilog files</span>
 
 <span class="sd">            Default is &#39;.vhd&#39;, but this can be overridden.</span>
@@ -149,11 +147,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlext</span>
 
     <span class="nd">@vhdlext</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlext</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; List of arguments passed to the simulator</span>
 <span class="sd">        during VHDL compilation</span>
 <span class="sd">        </span>
@@ -162,11 +160,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlcompargs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlcompargs</span>
     <span class="nd">@vhdlcompargs</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">vhdlcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlcompargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlcompargs</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;List of VHDL entity files to be compiled in addition to DUT</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -174,14 +172,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span><span class="nb">list</span><span class="p">([])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span>
     <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span> 
             <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="n">value</span>
     <span class="nd">@vhdlentityfiles</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlentityfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
             <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlentityfiles</span> <span class="o">=</span> <span class="kc">None</span> 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Custom parameters for VHDL simulation</span>
 <span class="sd">        Provide as a list of strings</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -189,7 +187,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsimargs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsimargs</span>
     <span class="nd">@vhdlsimargs</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simparam</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vhdlsimargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simparam</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_vhdlsimargs</span> <span class="o">=</span> <span class="n">simparam</span></div>
 
 

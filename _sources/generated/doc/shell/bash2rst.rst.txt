@@ -1,0 +1,40 @@
+bash2rst.sh
+===========
+Script to parse BASH comments that contain Sphinx-type comment block
+start and stop indicator """. This commment block is an example of that.
+
+Example
+-------
+Running this script on itself will output this comment block.
+
+Created by Marko Kosunen on 18.07.2014
+
+Example2
+--------
+Here we parse again
+and continue doing it.
+
+.. code-block::
+
+  bash2rst.sh Release 1.0 (03.08.2024)
+   Utility script to parse BASH comments that contain Sphinx-type comment block
+   start and stop indicator """.
+  
+   Written by Marko Pikkis Kosunen
+  
+   SYNOPSIS
+     bash2rst.sh [OPTIONS] [SOURCE_FILE]
+   DESCRIPTION
+     Parses the source file and outputs the lines that are between lines
+     starting with #""". Revoves the first # in the beginning of the line.
+     It is assumed that everything following the first '#' is written proper
+     RST syntax. Output is produced to stdout.
+  
+   SOURCE_FILE
+       The file you wish to operate on.
+  
+   OPTIONS
+     -h
+         Show this help.
+  
+

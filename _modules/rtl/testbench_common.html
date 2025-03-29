@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rtl.testbench_common &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
@@ -94,22 +92,22 @@
 <span class="sd">Refactored from &#39;testbench&#39; by Marko Kosunen 20221119, marko.kosunen@aalto.fi</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">rtl.module</span> <span class="kn">import</span> <span class="n">module</span>
-<span class="kn">from</span> <span class="nn">rtl.sv.verilog_module</span> <span class="kn">import</span> <span class="n">verilog_module</span>
-<span class="kn">from</span> <span class="nn">rtl.vhdl.vhdl_entity</span> <span class="kn">import</span> <span class="n">vhdl_entity</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.module</span><span class="w"> </span><span class="kn">import</span> <span class="n">module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.sv.verilog_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">verilog_module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.vhdl.vhdl_entity</span><span class="w"> </span><span class="kn">import</span> <span class="n">vhdl_entity</span>
 
 <div class="viewcode-block" id="testbench_common">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench_common.testbench_common">[docs]</a>
-<span class="k">class</span> <span class="nc">testbench_common</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">testbench_common</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Testbench class. Extends `module`</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Parameters</span>
 <span class="sd">           ----------</span>
 <span class="sd">           parent: object, None (mandatory to define). TheSyDeKick parent entity object for this testbench.</span>
@@ -133,65 +131,76 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">=</span><span class="n">Bundle</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rtl_timescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timescale</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">rtl_timeprecision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rtl_timeprecision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timeprecision</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rtl_timescale_num</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timescale_num</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rtl_timeprecision_num</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtl_timeprecision_num</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_lang&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lang</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">lang</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lang</span>
     <span class="nd">@lang</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lang</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_connectors&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_connectors</span><span class="o">=</span><span class="n">rtl_connector_bundle</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connectors</span>
     <span class="nd">@connectors</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_connectors</span> <span class="o">=</span> <span class="n">val</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_assignment_matchlist&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_assignment_matchlist</span><span class="o">=</span><span class="p">[]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assignment_matchlist</span>
     <span class="nd">@assignment_matchlist</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assignment_matchlist</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;RTL module parsed from the verilog or VHDL file of the parent depending on `parent.model`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_dut_instance&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">verilog_module</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;sv&#39;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">verilog_module</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;vhdl&#39;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">vhdl_entity</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;ghdl&#39;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">vhdl_entity</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;verilator&#39;</span><span class="p">:</span>
+                    <span class="c1"># We handle the instantiation in module_common</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">verilog_module</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_dutfile</span><span class="p">})</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Mpdel </span><span class="si">%s</span><span class="s1"> not supported&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Model </span><span class="si">%s</span><span class="s1"> not supported&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span>
 
     
     <span class="c1">#We should not need this, but it is wise to enable override</span>
     <span class="nd">@dut_instance</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dut_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dut_instance</span><span class="o">=</span><span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verilog_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verilog instances Bundle to be added to tesbench</span>
 <span class="sd">        </span>
 <span class="sd">        Todo </span>
@@ -204,7 +213,7 @@
 
 <div class="viewcode-block" id="testbench_common.verilog_instance_add">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench_common.testbench_common.verilog_instance_add">[docs]</a>
-    <span class="k">def</span> <span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add verilog instance to the Bundle fro a file</span>
 
 <span class="sd">        Parameters</span>
@@ -225,16 +234,16 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dumpfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dumpfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
-<span class="sd">        Code that generates a VCD dumpfile when running the testbench with icarus verilog.</span>
+<span class="sd">        Code that generates a VCD dumpfile when running the testbench with Icarus or Verilator verilog.</span>
 <span class="sd">        This dumpfile can be used with gtkwave. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
-            <span class="n">dump_str</span><span class="o">=</span><span class="s2">&quot;// Generates dumpfile with iverilog</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;icarus&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;verilator&#39;</span> <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">interactive_rtl</span><span class="p">:</span>
+            <span class="n">dump_str</span><span class="o">=</span><span class="s2">&quot;// Generates dumpfile</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="n">dump_str</span> <span class="o">+=</span> <span class="s2">&quot;initial begin</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="n">dump_str</span> <span class="o">+=</span> <span class="s1">&#39;  $dumpfile(&quot;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rtlsimpath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dump.vcd&quot;);</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="n">dump_str</span> <span class="o">+=</span> <span class="s2">&quot;  $dumpvars(0, tb_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;);</span><span class="se">\n</span><span class="s2">end </span><span class="se">\n</span><span class="s2">&quot;</span>

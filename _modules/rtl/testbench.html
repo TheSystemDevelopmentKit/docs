@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rtl.testbench &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation_instructions.html">Documentation instructions</a></li>
@@ -98,21 +96,21 @@
 <span class="sd">Initially written by Marko Kosunen 20190108, marko.kosunen@aalto.fi</span>
 <span class="sd">Refactored from &#39;testbench&#39; by Marko Kosunen 20221119, marko.kosunen@aalto.fi</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">pdb</span>
-<span class="kn">from</span> <span class="nn">rtl.testbench_common</span> <span class="kn">import</span> <span class="n">testbench_common</span>
-<span class="kn">from</span> <span class="nn">rtl.sv.verilog_testbench</span> <span class="kn">import</span> <span class="n">verilog_testbench</span>
-<span class="kn">from</span> <span class="nn">rtl.vhdl.vhdl_testbench</span> <span class="kn">import</span> <span class="n">vhdl_testbench</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.testbench_common</span><span class="w"> </span><span class="kn">import</span> <span class="n">testbench_common</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.sv.verilog_testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">verilog_testbench</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.vhdl.vhdl_testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">vhdl_testbench</span>
 
 <div class="viewcode-block" id="testbench">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench">[docs]</a>
-<span class="k">class</span> <span class="nc">testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Testbench class. Extends `module` through &#39;testbench_commom&#39;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
 <span class="sd">        parameters.</span>
 
@@ -127,7 +125,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">langmodule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">langmodule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The language specific operation is defined with an instance of </span>
 <span class="sd">        language specific class. Properties and methods return values from that class.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -144,46 +142,46 @@
                         <span class="n">instname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instname</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_langmodule</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">iofiles</span>
     <span class="nd">@iofiles</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iofiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">iofiles</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Overload to pass values to langmodule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="p">,</span><span class="s1">&#39;_connectors&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">connectors</span><span class="o">=</span><span class="n">rtl_connector_bundle</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">connectors</span>
     <span class="nd">@connectors</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">connectors</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="p">,</span><span class="s1">&#39;_assignment_matchlist&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">assignment_matchlist</span><span class="o">=</span><span class="p">[]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">assignment_matchlist</span>
     <span class="nd">@assignment_matchlist</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assignment_matchlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">assignment_matchlist</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parameters used inside the testbench</span>
 <span class="sd">            </span>
 <span class="sd">            Dict of name: (type,value)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">content_parameters</span>
     <span class="nd">@content_parameters</span><span class="o">.</span><span class="n">setter</span>    
-    <span class="k">def</span> <span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">content_parameters</span><span class="o">=</span><span class="n">val</span>
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">verilog_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verilog_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verilog instances Bundle to be added to tesbench</span>
 <span class="sd">        </span>
 <span class="sd">        Todo </span>
@@ -196,7 +194,7 @@
 
 <div class="viewcode-block" id="testbench.verilog_instance_add">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.verilog_instance_add">[docs]</a>
-    <span class="k">def</span> <span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verilog_instance_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add verilog instance to the Bundle fro a file</span>
 
 <span class="sd">        Parameters</span>
@@ -217,7 +215,7 @@
 
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parameter  and variable definition strings of the testbench</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -225,7 +223,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">parameter_definitions</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">connector_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connector_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verilog register and wire definition, VHDL signal strings.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -233,7 +231,7 @@
 
 <div class="viewcode-block" id="testbench.assignments">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.assignments">[docs]</a>
-    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Wire/signal assingment strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -241,14 +239,14 @@
 
      
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;IOfile definition strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">iofile_definitions</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">clock_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clock_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Clock definition string</span>
 
 <span class="sd">        Todo</span>
@@ -258,24 +256,24 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">clock_definitions</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">iofile_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iofile_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;File close procedure for all IO files.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">iofile_close</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; RTL structure that sets the thesdk_simulation_completed to true.</span>
 <span class="sd">        Default for VHDL: &#39;thesdk_simulation_completed &lt;= thesdk_file_io_completed;&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodle</span><span class="o">.</span><span class="n">_end_condition</span>
     <span class="nd">@end_condition</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">_end_condition</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
 <span class="sd">        </span>
 <span class="sd">        Miscellaneous command string corresponding to self.rtlmisc -list in</span>
@@ -284,16 +282,16 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">misccmd</span>
     
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">misccmd</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">misccmd</span><span class="o">=</span><span class="kc">None</span>
 
     <span class="c1"># This method </span>
 <div class="viewcode-block" id="testbench.define_testbench">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.define_testbench">[docs]</a>
-    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -302,7 +300,7 @@
     
 <div class="viewcode-block" id="testbench.connect_inputs">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.connect_inputs">[docs]</a>
-    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Define connections to DUT inputs.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -335,17 +333,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
 
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;Entity definition part extracted for the file. Contains generics and </span>
-<span class="sd">        IO definitions.</span>
+    <span class="c1">#@property</span>
+    <span class="c1">#def definition(self):</span>
+    <span class="c1">#    &#39;&#39;&#39;Entity definition part extracted for the file. Contains generics and </span>
+    <span class="c1">#    IO definitions.</span>
 
-<span class="sd">        Overloads the property inherited from &#39;module&#39;, as wish to control whan we generate the headers.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+    <span class="c1">#    Overloads the property inherited from &#39;module&#39;, as wish to control whan we generate the headers.</span>
+    <span class="c1">#    &#39;&#39;&#39;</span>
 
 <div class="viewcode-block" id="testbench.generate_contents">
 <a class="viewcode-back" href="../../rtl/sections.html#rtl.testbench.testbench.generate_contents">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Call language specific contents generator.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">langmodule</span><span class="o">.</span><span class="n">generate_contents</span><span class="p">()</span></div>

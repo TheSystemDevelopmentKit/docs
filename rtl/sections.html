@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,19 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RTL interface classes &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -63,6 +61,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.delete_rtlsimpath"><code class="docutils literal notranslate"><span class="pre">rtl.delete_rtlsimpath()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.delete_rtlworkpath"><code class="docutils literal notranslate"><span class="pre">rtl.delete_rtlworkpath()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.execute_rtl_sim"><code class="docutils literal notranslate"><span class="pre">rtl.execute_rtl_sim()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.extract_vhdlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.extract_vhdlfiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.extract_vlogfiles"><code class="docutils literal notranslate"><span class="pre">rtl.extract_vlogfiles()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.format_ios"><code class="docutils literal notranslate"><span class="pre">rtl.format_ios()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_control_contents"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_control_contents</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.interactive_controlfile"><code class="docutils literal notranslate"><span class="pre">rtl.interactive_controlfile</span></code></a></li>
@@ -73,14 +73,19 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.preserve_rtlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.preserve_rtlfiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.read_outfile"><code class="docutils literal notranslate"><span class="pre">rtl.read_outfile()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtl_timeprecision"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timeprecision</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtl_timeprecision_num"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timeprecision_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtl_timescale"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timescale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtl_timescale_num"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timescale_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtl_timeunit"><code class="docutils literal notranslate"><span class="pre">rtl.rtl_timeunit</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlcmd"><code class="docutils literal notranslate"><span class="pre">rtl.rtlcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlfiles"><code class="docutils literal notranslate"><span class="pre">rtl.rtlfiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlmisc"><code class="docutils literal notranslate"><span class="pre">rtl.rtlmisc</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlparameters"><code class="docutils literal notranslate"><span class="pre">rtl.rtlparameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlsimpath"><code class="docutils literal notranslate"><span class="pre">rtl.rtlsimpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.rtlworkpath"><code class="docutils literal notranslate"><span class="pre">rtl.rtlworkpath</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.run_rtl"><code class="docutils literal notranslate"><span class="pre">rtl.run_rtl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.sim_opt_dict"><code class="docutils literal notranslate"><span class="pre">rtl.sim_opt_dict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.sim_optimization"><code class="docutils literal notranslate"><span class="pre">rtl.sim_optimization</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simdut"><code class="docutils literal notranslate"><span class="pre">rtl.simdut</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simtb"><code class="docutils literal notranslate"><span class="pre">rtl.simtb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.simulator_control_contents"><code class="docutils literal notranslate"><span class="pre">rtl.simulator_control_contents</span></code></a></li>
@@ -89,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vhdllibfileentities"><code class="docutils literal notranslate"><span class="pre">rtl.vhdllibfileentities</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vloglibfilemodules"><code class="docutils literal notranslate"><span class="pre">rtl.vloglibfilemodules</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.vlogmodulefiles"><code class="docutils literal notranslate"><span class="pre">rtl.vlogmodulefiles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.workdir"><code class="docutils literal notranslate"><span class="pre">rtl.workdir</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.rtl.write_infile"><code class="docutils literal notranslate"><span class="pre">rtl.write_infile()</span></code></a></li>
 </ul>
 </li>
@@ -125,7 +131,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.dut_instance"><code class="docutils literal notranslate"><span class="pre">testbench_common.dut_instance</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.lang"><code class="docutils literal notranslate"><span class="pre">testbench_common.lang</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.rtl_timeprecision"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timeprecision</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.rtl_timeprecision_num"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timeprecision_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.rtl_timescale"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timescale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.rtl_timescale_num"><code class="docutils literal notranslate"><span class="pre">testbench_common.rtl_timescale_num</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.verilog_instance_add"><code class="docutils literal notranslate"><span class="pre">testbench_common.verilog_instance_add()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench_common.testbench_common.verilog_instances"><code class="docutils literal notranslate"><span class="pre">testbench_common.verilog_instances</span></code></a></li>
 </ul>
@@ -140,7 +148,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.connectors"><code class="docutils literal notranslate"><span class="pre">testbench.connectors</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.content_parameters"><code class="docutils literal notranslate"><span class="pre">testbench.content_parameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.define_testbench"><code class="docutils literal notranslate"><span class="pre">testbench.define_testbench()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.definition"><code class="docutils literal notranslate"><span class="pre">testbench.definition</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.end_condition"><code class="docutils literal notranslate"><span class="pre">testbench.end_condition</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.generate_contents"><code class="docutils literal notranslate"><span class="pre">testbench.generate_contents()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.testbench.testbench.iofile_close"><code class="docutils literal notranslate"><span class="pre">testbench.iofile_close</span></code></a></li>
@@ -255,6 +262,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.vhdl.vhdl_entity.vhdl_entity.parameters"><code class="docutils literal notranslate"><span class="pre">vhdl_entity.parameters</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#icarus">Icarus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rtl.icarus.icarus.icarus"><code class="docutils literal notranslate"><span class="pre">icarus</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.icarus.icarus.icarus.icarus_controlfilepaths"><code class="docutils literal notranslate"><span class="pre">icarus.icarus_controlfilepaths</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.icarus.icarus.icarus.icarus_dofilepaths"><code class="docutils literal notranslate"><span class="pre">icarus.icarus_dofilepaths</span></code></a></li>
@@ -263,10 +271,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#rtl.icarus.icarus.icarus.icarus_simtb"><code class="docutils literal notranslate"><span class="pre">icarus.icarus_simtb</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#questasim">Questasim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rtl.questasim.questasim.questasim"><code class="docutils literal notranslate"><span class="pre">questasim</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.questasim.questasim.questasim.questasim_controlfilepaths"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_controlfilepaths</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.questasim.questasim.questasim.questasim_dofilepaths"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_dofilepaths</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.questasim.questasim.questasim.questasim_rtlcmd"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_rtlcmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtl.questasim.questasim.questasim.questasim_sim_opt_dict"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_sim_opt_dict</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.questasim.questasim.questasim.questasim_simdut"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_simdut</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rtl.questasim.questasim.questasim.questasim_simtb"><code class="docutils literal notranslate"><span class="pre">questasim.questasim_simtb</span></code></a></li>
 </ul>
@@ -277,8 +287,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
@@ -376,8 +386,8 @@ otherwise, copy the file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to source file</p></li>
-<li><p><strong>dst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path to destination file.</p></li>
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Path to source file</p></li>
+<li><p><strong>dst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Path to destination file.</p></li>
 </ul>
 </dd>
 </dl>
@@ -423,6 +433,18 @@ the property.</p>
 <dt class="sig sig-object py" id="rtl.rtl.execute_rtl_sim">
 <span class="sig-name descname"><span class="pre">execute_rtl_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.execute_rtl_sim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.execute_rtl_sim" title="Link to this definition"></a></dt>
 <dd><p>Runs the rtl simulation in external simulator</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtl.rtl.extract_vhdlfiles">
+<span class="sig-name descname"><span class="pre">extract_vhdlfiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.extract_vhdlfiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.extract_vhdlfiles" title="Link to this definition"></a></dt>
+<dd><p>Return extracted vhdl files from <code class="docutils literal notranslate"><span class="pre">self.rtlfiles</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtl.rtl.extract_vlogfiles">
+<span class="sig-name descname"><span class="pre">extract_vlogfiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.extract_vlogfiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.extract_vlogfiles" title="Link to this definition"></a></dt>
+<dd><p>Return extracted verilog files from <code class="docutils literal notranslate"><span class="pre">self.rtlfiles</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -478,7 +500,7 @@ read from this file path. Default path is
 Default vhdl | sv (default)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,10 +542,24 @@ This should be less than equal to <code class="docutils literal notranslate"><sp
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.rtl_timeprecision_num">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_timeprecision_num</span></span><a class="headerlink" href="#rtl.rtl.rtl_timeprecision_num" title="Link to this definition"></a></dt>
+<dd><p>Returns rtl_timeprecision as a floating point number. Determined from rtl_timeprecision.
+No setter.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="rtl.rtl.rtl_timescale">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_timescale</span></span><a class="headerlink" href="#rtl.rtl.rtl_timescale" title="Link to this definition"></a></dt>
-<dd><p>Defines the rtl timescal. This is the time unit shown by the simulator
+<dd><p>Defines the rtl timescale. This is the time unit shown by the simulator
 and used in testbench delays. Default ‘1ps’</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.rtl_timescale_num">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_timescale_num</span></span><a class="headerlink" href="#rtl.rtl.rtl_timescale_num" title="Link to this definition"></a></dt>
+<dd><p>Returns rtl_timescale as a floating point number. Determined from rtl_timescale.
+No setter.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -542,6 +578,14 @@ and used in testbench delays. Default ‘1ps’</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtlcmd</span></span><a class="headerlink" href="#rtl.rtl.rtlcmd" title="Link to this definition"></a></dt>
 <dd><p>Command used for simulation invocation
 Compiled from various parameters. See source for details.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.rtlfiles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtlfiles</span></span><a class="headerlink" href="#rtl.rtl.rtlfiles" title="Link to this definition"></a></dt>
+<dd><p>List of VHDL and Verilog files to be compiled.
+File suffices should be ‘.vhd’, ‘.vhdl’, ‘.sv’, or ‘.v’.
+Order determines compile order.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -617,6 +661,32 @@ and debugging the testbench.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.sim_opt_dict">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sim_opt_dict</span></span><a class="headerlink" href="#rtl.rtl.sim_opt_dict" title="Link to this definition"></a></dt>
+<dd><p>Preset abstraction dictionary for running optimization on the simulation.
+The actual dictionary is implemented in the simulator class.  Returns
+Dict with empty strings for simulators that do not use this property’
+Valid values:
+- ‘no-opt’ - no optimizations, full visibility to signals
+- ‘opt-visible’ - optimized with full visibility.
+- ‘full-opt’ - fully optimized, might lose visibility to a lot of signals. Simulation may not work.
+- ‘top-visible’ - optimized while keeping top level (testbench) signals.
+- ‘top-dut-visible’ - optimized while keeping top level (testbench) and DUT signals on the first
+hierarchy level</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.sim_optimization">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sim_optimization</span></span><a class="headerlink" href="#rtl.rtl.sim_optimization" title="Link to this definition"></a></dt>
+<dd><p>Simulation optimization option. The value in this property
+is used to fetch the simulator-specific simulation parameters from
+sim_opt_dict and use it for self.velogsimargs.
+Default: ‘opt-visible’ for non-interactive simulations, ‘no-opt’
+for interactive simulations.
+Set to ‘None’ is you wish to set self.vlogsimargs manually.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="rtl.rtl.simdut">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simdut</span></span><a class="headerlink" href="#rtl.rtl.simdut" title="Link to this definition"></a></dt>
 <dd><p>Source file for Device Under Test in simulations directory</p>
@@ -636,7 +706,7 @@ and debugging the testbench.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simtb</span></span><a class="headerlink" href="#rtl.rtl.simtb" title="Link to this definition"></a></dt>
 <dd><p>Testbench source file in simulations directory.</p>
 <p>This file and it’s format is dependent on the language(s)
-supported by the simulator. Currently we have support only for verilog testbenches.</p>
+supported by the simulator.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -695,6 +765,23 @@ provided in a file given by the ‘VLOGLIBFILE’ global variable in TheSDK.conf
 <dd><p>List of verilog modules to be compiled in addition of DUT</p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.rtl.workdir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workdir</span></span><a class="headerlink" href="#rtl.rtl.workdir" title="Link to this definition"></a></dt>
+<dd><p>Directory where to run the external simulation command.
+If set, we cd to this directory before execution. If not, the
+simulator specific default is used.</p>
+<section id="default">
+<h2>Default<a class="headerlink" href="#default" title="Link to this heading"></a></h2>
+<p>None</p>
+<dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="rtl.rtl.write_infile">
 <span class="sig-name descname"><span class="pre">write_infile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl.html#rtl.write_infile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.rtl.write_infile" title="Link to this definition"></a></dt>
@@ -726,7 +813,7 @@ file io routines, file io format strings and read/write conditions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a>) – The parent object initializing the
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><em>object</em></a>) – The parent object initializing the
 rtl_iofile instance. Default None</p></li>
 <li><p><strong>**kwargs</strong> – <dl>
 <dt>name<span class="classifier">str</span></dt><dd><p>Name of the file. Appended with
@@ -810,13 +897,13 @@ Used in event type file IO.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.rtl_iofile.rtl_iofile.rtl_io">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_io</span></span><a class="headerlink" href="#rtl.rtl_iofile.rtl_iofile.rtl_io" title="Link to this definition"></a></dt>
-<dd><p>Verilog  write/read construct for file IO depending on the direction and file type (event/sample).</p>
+<dd><p>File IO  write/read construct for file IO depending on the direction and file type (event/sample).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Verilog code for file IO to read/write the IO file.</p>
+<dd class="field-odd"><p>Language specific code for file IO to read/write the IO file.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -843,7 +930,7 @@ See langmodules for details.</p>
 <dt class="sig sig-object py" id="rtl.rtl_iofile.rtl_iofile.rtl_io_sync">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_io_sync</span></span><a class="headerlink" href="#rtl.rtl_iofile.rtl_iofile.rtl_io_sync" title="Link to this definition"></a></dt>
 <dd><p>File io synchronization condition for sample type input.
-Default: <cite>&#64;(posedge clock)</cite></p>
+Defaults to positive edge.`</p>
 </dd></dl>
 
 <dl class="py property">
@@ -917,7 +1004,7 @@ Refactored from ‘testbench’ by Marko Kosunen 20221119, <a class="reference e
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this testbench.</em>) – </p></li>
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><em>object</em></a><em>, </em><em>None</em><em> (</em><em>mandatory to define</em><em>)</em><em>. TheSyDeKick parent entity object for this testbench.</em>)</p></li>
 <li><p><strong>**kwargs</strong> – None</p></li>
 </ul>
 </dd>
@@ -936,7 +1023,7 @@ Refactored from ‘testbench’ by Marko Kosunen 20221119, <a class="reference e
 <dt class="sig sig-object py" id="rtl.testbench_common.testbench_common.dumpfile">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dumpfile</span></span><a class="headerlink" href="#rtl.testbench_common.testbench_common.dumpfile" title="Link to this definition"></a></dt>
 <dd><p>String</p>
-<p>Code that generates a VCD dumpfile when running the testbench with icarus verilog.
+<p>Code that generates a VCD dumpfile when running the testbench with Icarus or Verilator verilog.
 This dumpfile can be used with gtkwave.</p>
 </dd></dl>
 
@@ -959,8 +1046,18 @@ This dumpfile can be used with gtkwave.</p>
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench_common.testbench_common.rtl_timeprecision_num">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_timeprecision_num</span></span><a class="headerlink" href="#rtl.testbench_common.testbench_common.rtl_timeprecision_num" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="rtl.testbench_common.testbench_common.rtl_timescale">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_timescale</span></span><a class="headerlink" href="#rtl.testbench_common.testbench_common.rtl_timescale" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.testbench_common.testbench_common.rtl_timescale_num">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rtl_timescale_num</span></span><a class="headerlink" href="#rtl.testbench_common.testbench_common.rtl_timescale_num" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1058,14 +1155,6 @@ Create append mechanism to add more clocks.</p>
 <dt class="sig sig-object py" id="rtl.testbench.testbench.define_testbench">
 <span class="sig-name descname"><span class="pre">define_testbench</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtl/testbench.html#testbench.define_testbench"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.testbench.testbench.define_testbench" title="Link to this definition"></a></dt>
 <dd><p>Defines the tb connectivity, creates reset and clock, and initializes them to zero</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rtl.testbench.testbench.definition">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">definition</span></span><a class="headerlink" href="#rtl.testbench.testbench.definition" title="Link to this definition"></a></dt>
-<dd><p>Entity definition part extracted for the file. Contains generics and
-IO definitions.</p>
-<p>Overloads the property inherited from ‘module’, as wish to control whan we generate the headers.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1244,7 +1333,7 @@ that all signals are connectors.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.module_common.module_common.vhdl_instance">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vhdl_instance</span></span><a class="headerlink" href="#rtl.module_common.module_common.vhdl_instance" title="Link to this definition"></a></dt>
-<dd><p>Instantioation string of the module/entity for use inside of vhdl entities.</p>
+<dd><p>Instantiation string of the module/entity for use inside of vhdl entities.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1391,7 +1480,7 @@ Provide as a list of strings</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.sv.sv.sv.vlogsimtb">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlogsimtb</span></span><a class="headerlink" href="#rtl.sv.sv.sv.vlogsimtb" title="Link to this definition"></a></dt>
-<dd><p>Name of the VHDL testbench</p>
+<dd><p>Name of the Verilog testbench</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1849,9 +1938,12 @@ that all signals are connectors.</p>
 
 </dd></dl>
 
-<p id="module-rtl.icarus.icarus">Icarus is a mixin class used to provide simulator specific
+<section id="icarus">
+<span id="module-rtl.icarus.icarus"></span><h2>Icarus<a class="headerlink" href="#icarus" title="Link to this heading"></a></h2>
+<p>Icarus is a mixin class used to provide simulator specific
 properties and methods for RTL class</p>
-<p>Initially written by Marko kosunen 20221030</p>
+<p>Initially written by Marko Kosunen 20221030</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.icarus.icarus.icarus">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.icarus.icarus.</span></span><span class="sig-name descname"><span class="pre">icarus</span></span><a class="reference internal" href="../_modules/rtl/icarus/icarus.html#icarus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.icarus.icarus.icarus" title="Link to this definition"></a></dt>
@@ -1895,9 +1987,12 @@ supported by the simulator. Currently we have support only for verilog testbench
 
 </dd></dl>
 
-<p id="module-rtl.questasim.questasim">Questasim is a mixin class it is used to provide simulator specific
+<section id="questasim">
+<span id="module-rtl.questasim.questasim"></span><h2>Questasim<a class="headerlink" href="#questasim" title="Link to this heading"></a></h2>
+<p>Questasim is a mixin class it is used to provide simulator specific
 properties and methods for RTL class</p>
 <p>Initially written by Marko kosunen 20221030</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="rtl.questasim.questasim.questasim">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtl.questasim.questasim.</span></span><span class="sig-name descname"><span class="pre">questasim</span></span><a class="reference internal" href="../_modules/rtl/questasim/questasim.html#questasim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtl.questasim.questasim.questasim" title="Link to this definition"></a></dt>
@@ -1915,6 +2010,20 @@ properties and methods for RTL class</p>
 <dt class="sig sig-object py" id="rtl.questasim.questasim.questasim.questasim_rtlcmd">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">questasim_rtlcmd</span></span><a class="headerlink" href="#rtl.questasim.questasim.questasim.questasim_rtlcmd" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtl.questasim.questasim.questasim.questasim_sim_opt_dict">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">questasim_sim_opt_dict</span></span><a class="headerlink" href="#rtl.questasim.questasim.questasim.questasim_sim_opt_dict" title="Link to this definition"></a></dt>
+<dd><p>Preset dictionary for running optimization on the simulation.</p>
+<ul class="simple">
+<li><p>‘no-opt’ - no optimizations, full visibility to signals</p></li>
+<li><p>‘full-opt’ - fully optimized, might lose visibility to a lot of signals. Simulation may not work.</p></li>
+<li><p>‘default’ - not optimized simulation for interactive sims,</p></li>
+</ul>
+<p>optimized with full visibility for non-interactive sims
+- ‘top-visible’ - optimized while keeping top level (testbench) signals.
+- ‘top-dut-visible’ - optimized while keeping top level (testbench) and DUT signals on the first hierarchy level</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="rtl.questasim.questasim.questasim.questasim_simdut">

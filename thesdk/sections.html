@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,19 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thesdk core classes &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -68,6 +66,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.preserve_iofiles"><code class="docutils literal notranslate"><span class="pre">thesdk.preserve_iofiles</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.pickle_excludes"><code class="docutils literal notranslate"><span class="pre">thesdk.pickle_excludes</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.copy_propval"><code class="docutils literal notranslate"><span class="pre">thesdk.copy_propval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.copy_propval_verbosity"><code class="docutils literal notranslate"><span class="pre">thesdk.copy_propval_verbosity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.supress_output"><code class="docutils literal notranslate"><span class="pre">thesdk.supress_output</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.print_log"><code class="docutils literal notranslate"><span class="pre">thesdk.print_log()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.timer"><code class="docutils literal notranslate"><span class="pre">thesdk.timer()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#thesdk.thesdk.silence"><code class="docutils literal notranslate"><span class="pre">thesdk.silence()</span></code></a></li>
@@ -115,8 +115,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
@@ -173,7 +173,7 @@ and in every way we are getting better and better :).</p>
 thesdkclass. Used as a reference point for other locations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -184,7 +184,7 @@ thesdkclass. Used as a reference point for other locations</p>
 <dd><p>HOME/TheSDK.config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -196,7 +196,7 @@ thesdkclass. Used as a reference point for other locations</p>
 Appended to sys.path to locate TheSyDeKick system modules</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -208,7 +208,7 @@ Appended to sys.path to locate TheSyDeKick system modules</p>
 Override with initlog if you want something else</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -219,7 +219,7 @@ Override with initlog if you want something else</p>
 <dd><p>List of global parameters to be read to GLOBALS dictionary from CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>)</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -231,7 +231,7 @@ Override with initlog if you want something else</p>
 values defined in CONFIGFILE</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -251,7 +251,7 @@ values defined in CONFIGFILE</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.print_relative_path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_relative_path</span></span><a class="headerlink" href="#thesdk.thesdk.print_relative_path" title="Link to this definition"></a></dt>
-<dd><p>True (default) | False</p>
+<dd><p>True (default) | False</p>
 <p>If True, print all paths relative to the entity path. If False, paths
 are printed as is (typically absolute paths).</p>
 </dd></dl>
@@ -274,7 +274,7 @@ classfile.</p>
 <dt class="sig sig-object py" id="thesdk.thesdk.model">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#thesdk.thesdk.model" title="Link to this definition"></a></dt>
 <dd><p>Simulation model to be used</p>
-<p>‘py’ |  ‘sv’ |  ‘vhdl’ |  ‘eldo’ |  ‘spectre’ | ‘ngspice’ | ‘hw’ | ‘icarus’ | ‘ghdl’</p>
+<p>‘py’ |  ‘sv’ |  ‘vhdl’ |  ‘eldo’ |  ‘spectre’ | ‘ngspice’ | ‘hw’ | ‘icarus’ | ‘ghdl’ | ‘verilator’ | ‘ads’ | ‘emx’</p>
 </dd></dl>
 
 <dl class="py property">
@@ -297,7 +297,7 @@ to relocate.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="thesdk.thesdk.has_lsf">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_lsf</span></span><a class="headerlink" href="#thesdk.thesdk.has_lsf" title="Link to this definition"></a></dt>
-<dd><p>True | False (default)</p>
+<dd><p>True | False (default)</p>
 <p>True if LSFINTERACTIVE and LSFSUBMISSION global veriables are defined
 in TheSDK.config.</p>
 </dd></dl>
@@ -321,7 +321,7 @@ Useful for filtering out e.g. lambdas and other non-serializable objects.</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -344,6 +344,26 @@ of every entity:</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span><span class="n">parent</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>If you feel that this fill in your log with garbage, you can reduce the verbosity
+level by setting self.copy_propval_verbosity = ‘D’</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.copy_propval_verbosity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy_propval_verbosity</span></span><a class="headerlink" href="#thesdk.thesdk.copy_propval_verbosity" title="Link to this definition"></a></dt>
+<dd><p>Controls the verbosity (i.e. severity) level of ‘copy_propval’ method</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="thesdk.thesdk.supress_output">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">supress_output</span></span><a class="headerlink" href="#thesdk.thesdk.supress_output" title="Link to this definition"></a></dt>
+<dd><p>Optional flag to supress all print_log output to stdout</p>
+<p>Defaul: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -378,10 +398,10 @@ thesdk to the logfile.</p>
 &#64;thesdk.timer. For example, calling a function
 calculate_something() belonging to an example class
 calculator(thesdk), would print the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">calculator</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">calculator</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
 
     <span class="nd">@thesdk</span><span class="o">.</span><span class="n">timer</span>
-    <span class="k">def</span> <span class="nf">calculate_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Time-consuming calculations here</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
@@ -677,7 +697,7 @@ Accessible as iofile_bundle.Members[‘name’].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><em>object</em></a><em>, </em><em>None</em>) – The parent object initializing the iofile instance. Default None</p></li>
 <li><p><strong>**kwargs</strong> – <dl class="simple">
 <dt>name: str</dt><dd><p>Name of the file. Appended with
 random string during the simulation.</p>

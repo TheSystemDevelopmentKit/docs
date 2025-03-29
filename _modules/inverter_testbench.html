@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>inverter_testbench &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation_instructions.html">Documentation instructions</a></li>
@@ -96,31 +94,31 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">))</span>
 
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
-<span class="kn">from</span> <span class="nn">inverter</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">inverter.controller</span> <span class="kn">import</span> <span class="n">controller</span> <span class="k">as</span> <span class="n">inverter_controller</span>
-<span class="kn">from</span> <span class="nn">inverter.signal_source</span> <span class="kn">import</span> <span class="n">signal_source</span>
-<span class="kn">from</span> <span class="nn">inverter.signal_plotter</span> <span class="kn">import</span> <span class="n">signal_plotter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inverter</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inverter.controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">controller</span> <span class="k">as</span> <span class="n">inverter_controller</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inverter.signal_source</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inverter.signal_plotter</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal_plotter</span>
 
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <div class="viewcode-block" id="inverter_testbench">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench">[docs]</a>
-<span class="k">class</span> <span class="nc">inverter_testbench</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">inverter_testbench</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_classfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="vm">__name__</span>
 
 <div class="viewcode-block" id="inverter_testbench.__init__">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Inititalizing </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="vm">__name__</span><span class="p">))</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">proplist</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;Rs&#39;</span> <span class="p">];</span>    <span class="c1"># Properties that can be propagated from parent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Rs</span> <span class="o">=</span>  <span class="mf">100e6</span><span class="p">;</span>            <span class="c1"># Sampling frequency</span>
@@ -142,13 +140,13 @@
 
 <div class="viewcode-block" id="inverter_testbench.init">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.init">[docs]</a>
-    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span> <span class="c1">#Currently nohing to add</span></div>
 
 
 <div class="viewcode-block" id="inverter_testbench.parallel">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.parallel">[docs]</a>
-    <span class="k">def</span> <span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Implements a configuration with a signal source, parallel inverters and plotters</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -207,6 +205,10 @@
         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">duts</span><span class="p">:</span>
             <span class="n">d</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
             <span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">:</span>
+                <span class="c1"># To prevent warning from empty return dict</span>
+                <span class="n">ret_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Run status&#39;</span><span class="p">:</span><span class="s1">&#39;OK&#39;</span><span class="p">}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">ret_dict</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plotters</span><span class="p">:</span>
             <span class="n">p</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
             <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
@@ -214,7 +216,7 @@
 
 <div class="viewcode-block" id="inverter_testbench.serial">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.serial">[docs]</a>
-    <span class="k">def</span> <span class="nf">serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Configuration for inverter chain according to self.models</span>
 <span class="sd">        Plots from intermediate outputs</span>
 
@@ -255,6 +257,10 @@
         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">duts</span><span class="p">:</span>
             <span class="n">d</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
             <span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">:</span>
+                <span class="c1"># To prevent warning from empty return dict</span>
+                <span class="n">ret_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Run status&#39;</span><span class="p">:</span><span class="s1">&#39;OK&#39;</span><span class="p">}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">ret_dict</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plotters</span><span class="p">:</span>
             <span class="n">p</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
             <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
@@ -263,7 +269,7 @@
 
 <div class="viewcode-block" id="inverter_testbench.main">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.main">[docs]</a>
-    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Chooses the model to construct</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -277,7 +283,7 @@
 
 <div class="viewcode-block" id="inverter_testbench.run">
 <a class="viewcode-back" href="../inverter_testbench/sections.html#inverter_testbench.inverter_testbench.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Guideline: Define model depencies of executions in `run` method.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -290,8 +296,8 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">from</span>  <span class="nn">inverter_testbench</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">import</span> <span class="nn">pdb</span>
+    <span class="kn">from</span><span class="w">  </span><span class="nn">inverter_testbench</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span>
     <span class="n">tb</span><span class="o">=</span><span class="n">inverter_testbench</span><span class="p">()</span>
     <span class="n">tb</span><span class="o">.</span><span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;icarus&#39;</span><span class="p">,</span><span class="s1">&#39;ghdl&#39;</span><span class="p">,</span><span class="s1">&#39;ngspice&#39;</span><span class="p">]</span>
     <span class="c1">#tb.configuration=&#39;parallel&#39;</span>

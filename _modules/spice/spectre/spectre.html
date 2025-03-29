@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>spice.spectre.spectre &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../documentation_instructions.html">Documentation instructions</a></li>
@@ -92,17 +90,21 @@
 
 <span class="sd">Initially written by Okko Järvinen, 2019</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span> 
-<span class="kn">from</span> <span class="nn">thesdk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">spice.spice_common</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spice.spice_common</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psf_utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">psfu</span>
 
 <div class="viewcode-block" id="spectre">
 <a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre">[docs]</a>
-<span class="k">class</span> <span class="nc">spectre</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is used as instance in spice_simulatormodule property of </span>
+<span class="k">class</span><span class="w"> </span><span class="nc">spectre</span><span class="p">(</span><span class="n">spice_common</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is used as instance in spice_simulatormodule property of</span>
 <span class="sd">    spice class. Contains simulator dependent definitions.</span>
 
 <span class="sd">    Parameters</span>
@@ -112,17 +114,19 @@
 <span class="sd">    **kwargs :</span>
 <span class="sd">       None</span>
 
-<span class="sd">    </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">parent</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Parent of simulator module not given&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; dict : Internally used dictionary for syntax conversions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Syntaxdict is obsoleted. Access properties directly&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_syntaxdict</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s2">&quot;cmdfile_ext&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdfile_ext</span><span class="p">,</span>
@@ -130,7 +134,7 @@
                 <span class="s2">&quot;commentchar&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">commentchar</span><span class="p">,</span>
                 <span class="s2">&quot;commentline&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">commentline</span><span class="p">,</span>
                 <span class="s2">&quot;nprocflag&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nprocflag</span><span class="p">,</span>
-                <span class="s2">&quot;simulatorcmd&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulatorcmd</span><span class="p">,</span> 
+                <span class="s2">&quot;simulatorcmd&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulatorcmd</span><span class="p">,</span>
                 <span class="s2">&quot;dcsource_declaration&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcsource_declaration</span><span class="p">,</span>
                 <span class="s2">&quot;parameter&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">,</span>
                 <span class="s2">&quot;option&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">option</span><span class="p">,</span>
@@ -143,116 +147,119 @@
                 <span class="p">}</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_syntaxdict</span>
     <span class="nd">@syntaxdict</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">syntaxdict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_syntaxdict</span><span class="o">=</span><span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cmdfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extension of the command file : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cmdfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Extension of the command file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.scs&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">resultfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extension of the result file : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resultfile_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Extension of the result file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;.raw&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">commentchar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Comment character of the simulator : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commentchar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Comment character of the simulator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;//&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">commentline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Comment line for the simulator : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commentline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Comment line for the simulator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;///////////////////////</span><span class="se">\n</span><span class="s1">&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">nprocflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;String for defining multithread execution : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nprocflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : String for defining multithread execution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;+mt=&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">simulatorcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulator execution command : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulatorcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulator execution command</span>
+<span class="sd">            (Default: &#39;ngspice&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;spectre -64 +lqtimeout=0 ++aps=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errpreset</span><span class="p">)</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dcsource_declaration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;DC source declaration : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dcsource_declaration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : DC source declaration</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1">#self.print_log(type=&#39;F&#39;, msg=&#39;DC source declaration not defined for ngspice&#39;)</span>
         <span class="k">return</span> <span class="s1">&#39;vsource type=dc dc=&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Netlist parameter definition string : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist parameter definition string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;parameters&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Netlist option definition string : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist option definition string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;options&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">include</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Netlist include string : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">include</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist include string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;include&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dspfinclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Netlist dspf-file include string : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dspfinclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Netlist dspf-file include string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;dspf_include&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subcircuit include string : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">subckt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Subcircuit include string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;subckt&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">lastline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Last line of the simulator command file : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lastline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Last line of the simulator command file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;///&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">eventoutdelim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delimiter for the events : str</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eventoutdelim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Delimiter for the events</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;,&#39;</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">csvskip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">csvskip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Needs documentation. Lines skipped in result file : int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">0</span>
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">plflag_simcmd_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plflag_simcmd_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulator specific prefix for enabling postlayout optimization</span>
 <span class="sd">        Postfix comes from self.plflag (user defined)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plflag_simcmd_prefix&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag_simcmd_prefix</span><span class="o">=</span><span class="s2">&quot;+postlayout=&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag_simcmd_prefix</span><span class="o">=</span><span class="s2">&quot;+postlayout&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plflag_simcmd_prefix</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Postlayout simulation accuracy/RC reduction flag.</span>
-<span class="sd">        See: https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance </span>
+<span class="sd">        See: https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-optimizing-spectre-aps-performance</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plflag&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;upa&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;=upa&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span>
 
     <span class="nd">@plflag</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;upa&quot;</span><span class="p">,</span> <span class="s2">&quot;hpa&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="n">val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">elif</span> <span class="n">val</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plflag</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported postlayout flag: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">errpreset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">errpreset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; String</span>
-<span class="sd">        </span>
+
 <span class="sd">        Global accuracy parameter for Spectre simulations. Options include</span>
 <span class="sd">        &#39;liberal&#39;, &#39;moderate&#39; and &#39;conservative&#39;, in order of rising accuracy.</span>
 <span class="sd">        You can set this by accesssing spice langmodule</span>
@@ -266,32 +273,31 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_errpreset</span><span class="o">=</span><span class="s1">&#39;moderate&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errpreset</span>
     <span class="nd">@errpreset</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">errpreset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">errpreset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_errpreset</span><span class="o">=</span><span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; String</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; str : Sets the program to be used for visualizing waveform databases.</span>
 
-<span class="sd">        Sets the program to be used for visualizing waveform databases.</span>
 <span class="sd">        Options are ezwave (default) or viva.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_plotprogram&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="s1">&#39;plotprogram&#39;</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">plotprogram</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span><span class="o">=</span><span class="s1">&#39;ezwave&#39;</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span><span class="o">=</span><span class="s1">&#39;ezwave&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span>
     <span class="nd">@plotprogram</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span>  <span class="p">[</span> <span class="s1">&#39;ezwave&#39;</span><span class="p">,</span> <span class="s1">&#39;viva&#39;</span> <span class="p">]:</span>  
-            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span>  <span class="p">[</span> <span class="s1">&#39;ezwave&#39;</span><span class="p">,</span> <span class="s1">&#39;viva&#39;</span> <span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
                     <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> not supported for plotprogram, only ezvave and viva are supported&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogram</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; str : Command to be run for interactive simulations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span> <span class="o">==</span> <span class="s1">&#39;ezwave&#39;</span><span class="p">:</span>
@@ -304,15 +310,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Unsupported plot program </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span>
     <span class="nd">@plotprogcmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plotprogcmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_plotprogcmd</span><span class="o">=</span><span class="n">value</span>
 
-
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
-
-<span class="sd">        Simulation command string to be executed on the command line.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">spicecmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str : Simulation command string to be executed on the command line.</span>
 <span class="sd">        Automatically generated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_spicecmd&#39;</span><span class="p">):</span>
@@ -328,7 +331,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">plflag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-            <span class="n">spicesimcmd</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulatorcmd</span> <span class="o">+</span> <span class="s2">&quot; </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> -outdir </span><span class="si">%s</span><span class="s2"> &quot;</span> 
+            <span class="n">spicesimcmd</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">simulatorcmd</span> <span class="o">+</span> <span class="s2">&quot; </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> -outdir </span><span class="si">%s</span><span class="s2"> &quot;</span>
                     <span class="o">%</span> <span class="p">(</span><span class="n">plflag</span><span class="p">,</span><span class="n">nprocflag</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_spicecmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spice_submission</span><span class="o">+</span><span class="n">spicesimcmd</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicetbsrc</span>
 
@@ -336,11 +339,13 @@
 
 <div class="viewcode-block" id="spectre.run_plotprogram">
 <a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.run_plotprogram">[docs]</a>
-    <span class="k">def</span> <span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_plotprogram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Starting a parallel process for waveform viewer program.</span>
 
 <span class="sd">        The plotting program command can be set with &#39;plotprogram&#39; property.</span>
+<span class="sd">        Tested for spectre and eldo.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Wait for database to appear.</span>
         <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="n">tries</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="p">):</span>
@@ -361,14 +366,353 @@
             <span class="n">ret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> returned with exit status </span><span class="si">%d</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">,</span> <span class="n">ret</span><span class="p">))</span>
-        <span class="k">except</span><span class="p">:</span> 
+        <span class="k">except</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while launcing </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotprogram</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span></div>
 
 
+<div class="viewcode-block" id="spectre.read_sp_result">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_sp_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_sp_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the S-parameter simulation results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">read_type</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;read_type&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;sp&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">read_type</span><span class="p">:</span> <span class="p">{}})</span>
+                <span class="n">sweep</span><span class="o">=</span><span class="kc">False</span>
+                <span class="c1"># Get sp simulation file name</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">mc</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">mc</span>
+                    <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="s1">&#39;sp&#39;</span><span class="p">:</span>
+                        <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)):</span>
+                                <span class="n">sweep</span><span class="o">=</span><span class="kc">True</span>
+                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;Sweep</span><span class="si">%d</span><span class="s1">-*_&#39;</span> <span class="o">%</span> <span class="n">i</span>
+                            <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
+                                <span class="c1"># TODO: implement.</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                                        <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Monte carlo currently not supported for </span><span class="se">\</span>
+<span class="s2">                                                S-parameter simulations.&quot;</span><span class="p">)</span>
+                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;mc_oppoint.dc&#39;</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="s1">&#39;sparams&#39;</span> <span class="ow">in</span> <span class="n">read_type</span><span class="p">:</span>
+                                    <span class="n">fname</span><span class="o">+=</span><span class="sa">f</span><span class="s1">&#39;SPanalysis.sp&#39;</span>
+                                <span class="k">elif</span> <span class="s1">&#39;sprobe&#39;</span> <span class="ow">in</span> <span class="n">read_type</span><span class="p">:</span>
+                                    <span class="n">fname</span><span class="o">+=</span><span class="sa">f</span><span class="s1">&#39;SPanalysis.sprobe.sp&#39;</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
+                                <span class="c1"># TODO: implement.</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                                        <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Monte carlo currently not supported for </span><span class="se">\</span>
+<span class="s2">                                                S-parameter simulations.&quot;</span><span class="p">)</span>
+                                <span class="n">fname</span><span class="o">+=</span><span class="s1">&#39;mc_oppoint.dc&#39;</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="s1">&#39;sparams&#39;</span> <span class="ow">in</span> <span class="n">read_type</span><span class="p">:</span>
+                                    <span class="n">fname</span><span class="o">+=</span><span class="sa">f</span><span class="s1">&#39;SPanalysis.sp&#39;</span>
+                                <span class="k">elif</span> <span class="s1">&#39;sprobe&#39;</span> <span class="ow">in</span> <span class="n">read_type</span><span class="p">:</span>
+                                    <span class="n">fname</span><span class="o">+=</span><span class="sa">f</span><span class="s1">&#39;SPanalysis.sprobe.sp&#39;</span>
+                        <span class="k">break</span>
+                <span class="c1"># For distributed runs</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
+                    <span class="c1"># TODO: check functionality and implement</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                            <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Distributed runs not currently supported for </span><span class="se">\</span>
+<span class="s2">                                    S-parameter analyses.&quot;</span><span class="p">)</span>
+                    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;[0-9]*&#39;</span><span class="p">,</span>
+                            <span class="n">fname</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                            <span class="n">fname</span><span class="p">)</span>
+                <span class="c1"># Sort files such that the sweeps are in correct order.</span>
+                <span class="k">if</span> <span class="n">sweep</span><span class="p">:</span>
+                    <span class="n">num_sweeps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)</span>
+                    <span class="n">files</span><span class="o">=</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_sweeps</span><span class="p">):</span>
+                        <span class="n">files</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">rd</span><span class="p">,</span> <span class="n">fileptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_nested_sweepresult_dict</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;sweeps_ran&#39;</span><span class="p">],</span><span class="n">files</span><span class="p">,</span>
+                                <span class="n">read_type</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">files</span><span class="o">=</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># This should not happen</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                                <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;S-parameter analysis was not a sweep, but for </span><span class="se">\</span>
+<span class="s2">                                        some reason multiple output files were found. </span><span class="se">\</span>
+<span class="s2">                                        results may be in wrong order!&quot;</span><span class="p">)</span>
+                    <span class="n">result</span><span class="o">=</span><span class="p">{}</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">psf</span> <span class="o">=</span> <span class="n">psfu</span><span class="o">.</span><span class="n">PSF</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">psfsweep</span><span class="o">=</span><span class="n">psf</span><span class="o">.</span><span class="n">get_sweep</span><span class="p">()</span>
+                        <span class="k">for</span> <span class="n">signal</span> <span class="ow">in</span> <span class="n">psf</span><span class="o">.</span><span class="n">all_signals</span><span class="p">():</span>
+                            <span class="n">result</span><span class="p">[</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">psfsweep</span><span class="o">.</span><span class="n">abscissa</span><span class="p">,</span>
+                                <span class="n">psf</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ordinate</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+                    <span class="n">rd</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:{</span><span class="s1">&#39;param&#39;</span><span class="p">:</span><span class="s1">&#39;nosweep&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">read_type</span><span class="p">:</span><span class="n">result</span><span class="p">}}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">read_type</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;results&#39;</span><span class="p">:</span><span class="n">rd</span><span class="p">})</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                    <span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                    <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Something went wrong while extracting S-parameters&quot;</span><span class="p">)</span></div>
+
+               
+
+<div class="viewcode-block" id="spectre.read_stb_result">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_stb_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_stb_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Internally called function to read the stb simulation results</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;stb&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;STB_analysis.margin.stb&#39;</span>
+                <span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                <span class="n">valbegin</span><span class="o">=</span> <span class="s1">&#39;VALUE</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">eof</span> <span class="o">=</span> <span class="s1">&#39;END</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">parsevals</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">valbegin</span> <span class="o">==</span> <span class="n">line</span><span class="p">:</span>
+                            <span class="n">parsevals</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="k">if</span> <span class="n">parsevals</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="s1">&#39;gainMarginInfo&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                                <span class="n">info</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                                <span class="n">gain_margin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;margin&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+                                <span class="n">gain_margin_freq</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+                            <span class="k">if</span> <span class="s1">&#39;phaseMarginInfo&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                                <span class="n">info</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                                <span class="n">phase_margin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;margin&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+                                <span class="n">phase_margin_freq</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+                            <span class="k">if</span> <span class="s1">&#39;stb_state&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="s1">&#39;is stable&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                                    <span class="n">stable</span> <span class="o">=</span> <span class="kc">True</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">stable</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">if</span> <span class="n">eof</span> <span class="o">==</span> <span class="n">line</span><span class="p">:</span>
+                            <span class="n">parsevals</span><span class="o">=</span><span class="kc">False</span>
+                
+                <span class="n">analysis</span> <span class="o">=</span> <span class="s1">&#39;stb_analysis&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">analysis</span><span class="p">:</span> <span class="p">{}})</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                    <span class="sa">f</span><span class="s1">&#39;gain_margin&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">gain_margin_freq</span><span class="p">,</span> <span class="n">gain_margin</span><span class="p">),</span>
+                    <span class="sa">f</span><span class="s1">&#39;phase_margin&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">phase_margin_freq</span><span class="p">,</span> <span class="n">phase_margin</span><span class="p">),</span>
+                    <span class="sa">f</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">stable</span>
+                    <span class="p">})</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">analysis</span> <span class="o">=</span> <span class="s1">&#39;stb_analysis&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">analysis</span><span class="p">:</span> <span class="p">{}})</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                    <span class="sa">f</span><span class="s1">&#39;gain_margin&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Nan&#39;</span><span class="p">,</span> <span class="s1">&#39;Nan&#39;</span><span class="p">),</span>
+                    <span class="sa">f</span><span class="s1">&#39;phase_margin&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Nan&#39;</span><span class="p">,</span> <span class="s1">&#39;Nan&#39;</span><span class="p">),</span>
+                    <span class="sa">f</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Gain margin and Phase margin could not be read, the circuit is unstable!&#39;</span> 
+                    <span class="p">})</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ocean_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                openResults(&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="si">}</span><span class="s2">&quot;)</span>
+<span class="s2">                selectResult(&#39;stb)</span>
+<span class="s2">                ocnPrint(?output &quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_loopGain_phase&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot; ?numberNotation &#39;scientific phase(getData(&quot;loopGain&quot;)))</span>
+<span class="s2">                ocnPrint(?output &quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_loopGain_db20&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot; ?numberNotation &#39;scientific db20(getData(&quot;loopGain&quot;)))</span>
+<span class="s2">                exit</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+                        <span class="p">[</span><span class="s2">&quot;ocean&quot;</span><span class="p">,</span> <span class="s2">&quot;-nograph&quot;</span><span class="p">],</span>
+                        <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                        <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                        <span class="n">text</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="p">)</span>
+                <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">ocean_command</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">stderr</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+                <span class="n">freq</span><span class="p">,</span> <span class="n">loopGain_db20</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ocnPrint_data</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_loopGain_db20&#39;</span><span class="p">)</span>
+                <span class="n">freq</span><span class="p">,</span> <span class="n">loopGain_phase</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ocnPrint_data</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_loopGain_phase&#39;</span><span class="p">)</span>
+                <span class="n">analysis</span> <span class="o">=</span> <span class="s1">&#39;stb_analysis_waveforms&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">analysis</span><span class="p">:</span> <span class="p">{}})</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                    <span class="sa">f</span><span class="s1">&#39;loopGain_db20&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">freq</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">loopGain_db20</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                    <span class="sa">f</span><span class="s1">&#39;loopGain_phase&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">freq</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">loopGain_phase</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                    <span class="p">})</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span></div>
+
+    
+<div class="viewcode-block" id="spectre.get_ocnPrint_data">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.get_ocnPrint_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ocnPrint_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file_name</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">file_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">return</span> <span class="n">freq</span><span class="p">,</span> <span class="n">vals</span> </div>
+
+    
+<div class="viewcode-block" id="spectre.get_input_noise_data">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.get_input_noise_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_input_noise_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_in&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">]</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">in_noise</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="k">return</span> <span class="n">freq</span><span class="p">,</span> <span class="n">in_noise</span></div>
+
+    
+<div class="viewcode-block" id="spectre.get_output_noise_data">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.get_output_noise_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_output_noise_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_out&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;out&#39;</span><span class="p">]</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">out_noise</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="k">return</span> <span class="n">freq</span><span class="p">,</span> <span class="n">out_noise</span></div>
+
+
+<div class="viewcode-block" id="spectre.read_noise_result">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_noise_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_noise_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the noise simulation results</span>
+<span class="sd">            TODO: Implement for Eldo as well.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;noise&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">ocean_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                openResults(&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="si">}</span><span class="s2">&quot;)</span>
+<span class="s2">                selectResult(&#39;noise)</span>
+<span class="s2">                ocnPrint(?output &quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_nf&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot; ?numberNotation &#39;scientific getData(&quot;NF&quot;))</span>
+<span class="s2">                ocnPrint(?output &quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_in&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot; ?numberNotation &#39;scientific getData(&quot;in&quot;))</span>
+<span class="s2">                ocnPrint(?output &quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_out&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot; ?numberNotation &#39;scientific getData(&quot;out&quot;))</span>
+<span class="s2">                noiseSummary(&#39;integrated ?resultsDir &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicedbpath</span><span class="si">}</span><span class="s2">&quot; ?result &#39;noise ?output &quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_noisesum&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot; ?sort &#39;(name) ?noiseUnit &quot;V&quot;)</span>
+<span class="s2">                exit</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+                        <span class="p">[</span><span class="s2">&quot;ocean&quot;</span><span class="p">,</span> <span class="s2">&quot;-nograph&quot;</span><span class="p">],</span>
+                        <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                        <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                        <span class="n">text</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="p">)</span>
+                <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">ocean_command</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">stderr</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_nf&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;NF&#39;</span><span class="p">]</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+                <span class="n">NF</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;NF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+                <span class="n">freq</span><span class="p">,</span> <span class="n">in_noise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_noise_data</span><span class="p">()</span>
+                
+                <span class="n">freq</span><span class="p">,</span> <span class="n">out_noise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_output_noise_data</span><span class="p">()</span>
+
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_noisesum&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skipinitialspace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+                <span class="n">noise_data</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">current_device</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                    <span class="c1"># Device row</span>
+                    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">notna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]))</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">])):</span>
+                        <span class="n">current_device</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">noise_data</span><span class="p">[</span><span class="n">current_device</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                                <span class="s1">&#39;Contribution_percentage&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                <span class="s1">&#39;Input_referred&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                                <span class="s1">&#39;Param&#39;</span><span class="p">:</span> <span class="p">{}</span>
+                                <span class="p">}</span>
+                        <span class="n">noise_data</span><span class="p">[</span><span class="n">current_device</span><span class="p">][</span><span class="s1">&#39;Param&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                    <span class="c1"># Device param row</span>
+                    <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">notna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">])):</span>
+                        <span class="n">param_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">param_name</span><span class="p">:</span>
+                            <span class="n">noise_data</span><span class="p">[</span><span class="n">current_device</span><span class="p">][</span><span class="s1">&#39;Param&#39;</span><span class="p">][</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+                <span class="n">analysis</span><span class="o">=</span><span class="s1">&#39;noise&#39;</span>
+                <span class="n">nodes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span>
+                <span class="n">mc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">mc</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">analysis</span><span class="p">:</span> <span class="p">{}})</span>
+                <span class="c1"># Get simulation result file name</span>
+                <span class="n">fnames</span><span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">mc</span><span class="p">:</span>
+                        <span class="c1"># TODO: implement.</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                                <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Monte carlo currently not yet supported for </span><span class="se">\</span>
+<span class="s2">                                        </span><span class="si">{</span><span class="n">analysis</span><span class="si">}</span><span class="s2"> simulations. Please implement.&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="s1">&#39;noise&#39;</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">:</span>
+                            <span class="n">fnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;noise_analysis_</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s1">.noise&#39;</span><span class="p">)</span>
+
+                <span class="c1"># For distributed runs</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fnames</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
+                        <span class="c1"># TODO: check functionality and implement</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                                <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Distributed runs not currently supported for </span><span class="se">\</span>
+<span class="s2">                                        PSF file read analyses.&quot;</span><span class="p">)</span>
+                        <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;[0-9]*&#39;</span><span class="p">,</span>
+                                <span class="n">fnames</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                <span class="n">fnames</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">files</span><span class="o">=</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s1">&#39;noise&#39;</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">_freq&#39;</span><span class="p">:</span><span class="n">freq</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">_NF&#39;</span><span class="p">:</span><span class="n">NF</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">_input_ref_noise&#39;</span><span class="p">:</span><span class="n">in_noise</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">_output_ref_noise&#39;</span><span class="p">:</span><span class="n">out_noise</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">_noise_contributions&#39;</span><span class="p">:</span><span class="n">noise_data</span><span class="p">,</span>
+                            <span class="p">})</span>
+
+                <span class="c1"># Read total input referred noise</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_noisesum&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="s1">&#39;Total Input Referred Noise&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                                <span class="n">total_input_ref_noise</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                        <span class="s1">&#39;total_input_ref_noise&#39;</span><span class="p">:</span><span class="n">total_input_ref_noise</span>
+                        <span class="p">})</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">total_input_ref_noise</span> <span class="o">=</span> <span class="s1">&#39;NaN&#39;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">analysis</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                        <span class="s1">&#39;total_input_ref_noise&#39;</span><span class="p">:</span><span class="n">total_input_ref_noise</span>
+                        <span class="p">})</span>
+
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                    <span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span>
+                    <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Something went wrong while extracting S-parameters&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="spectre.create_nested_sweepresult_dict">
+<a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.create_nested_sweepresult_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_nested_sweepresult_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">fileptr</span><span class="p">,</span> <span class="n">sweeps_ran_dict</span><span class="p">,</span>
+            <span class="n">files</span><span class="p">,</span><span class="n">read_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Documentation missing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rd</span><span class="o">=</span><span class="p">{}</span> <span class="c1"># Return this to upper level</span>
+        <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sweeps_ran_dict</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sweeps_ran_dict</span><span class="p">[</span><span class="n">level</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">])):</span>
+                <span class="n">result</span><span class="o">=</span><span class="p">{}</span>
+                <span class="n">psf</span> <span class="o">=</span> <span class="n">psfu</span><span class="o">.</span><span class="n">PSF</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">fileptr</span><span class="p">])</span>
+                <span class="n">fileptr</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">psfsweep</span><span class="o">=</span><span class="n">psf</span><span class="o">.</span><span class="n">get_sweep</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">signal</span> <span class="ow">in</span> <span class="n">psf</span><span class="o">.</span><span class="n">all_signals</span><span class="p">():</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">psfsweep</span><span class="o">.</span><span class="n">abscissa</span><span class="p">,</span>
+                        <span class="n">psf</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">signal</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ordinate</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+                    <span class="n">rd</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">v</span><span class="p">:{</span><span class="s1">&#39;param&#39;</span><span class="p">:</span><span class="n">sweeps_ran_dict</span><span class="p">[</span><span class="n">level</span><span class="p">][</span><span class="s1">&#39;param&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;value&#39;</span><span class="p">:</span><span class="n">sweeps_ran_dict</span><span class="p">[</span><span class="n">level</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">][</span><span class="n">v</span><span class="p">],</span>
+                        <span class="n">read_type</span><span class="p">:</span><span class="n">result</span><span class="p">}})</span>
+        <span class="k">return</span> <span class="n">rd</span><span class="p">,</span> <span class="n">fileptr</span></div>
+
+
 <div class="viewcode-block" id="spectre.read_oppts">
 <a class="viewcode-back" href="../../../spice/sections.html#spice.spectre.spectre.spectre.read_oppts">[docs]</a>
-    <span class="k">def</span> <span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_oppts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Internally called function to read the DC operating points of the circuit</span>
 <span class="sd">            TODO: Implement for Eldo as well.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -405,8 +749,9 @@
                 <span class="c1"># Sort files so that sweeps are in correct order</span>
                 <span class="k">if</span> <span class="n">sweep</span><span class="p">:</span>
                     <span class="n">num_sweeps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">sweep</span><span class="p">)</span>
+                    <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_sweeps</span><span class="p">):</span>
-                        <span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                        <span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span><span class="c1"># This shoudln&#39;t happen</span>
@@ -430,13 +775,58 @@
                                         <span class="n">param</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                                     <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
                                     <span class="k">if</span> <span class="n">dev</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;oppts&#39;</span><span class="p">]:</span> <span class="c1"># Found new device</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;oppts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dev</span> <span class="p">:</span> <span class="p">{}})</span> 
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;oppts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dev</span> <span class="p">:</span> <span class="p">{}})</span>
                                     <span class="k">if</span> <span class="n">param</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;oppts&#39;</span><span class="p">][</span><span class="n">dev</span><span class="p">]:</span> <span class="c1"># Found new parameter for device</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;oppts&#39;</span><span class="p">][</span><span class="n">dev</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">param</span> <span class="p">:</span> <span class="p">[</span><span class="n">val</span><span class="p">]})</span>
                                     <span class="k">else</span><span class="p">:</span> <span class="c1"># Parameter already existed, just append value. This can occur in e.g. sweeps</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;oppts&#39;</span><span class="p">][</span><span class="n">dev</span><span class="p">][</span><span class="n">param</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
                             <span class="k">elif</span> <span class="n">line</span> <span class="o">==</span> <span class="n">eof</span><span class="p">:</span>
                                 <span class="n">parsevals</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">elif</span> <span class="s1">&#39;pz&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;pz&#39;</span> <span class="p">:</span> <span class="p">{}})</span>
+                <span class="c1"># Get pz simulation file name</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">simcmd_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;pz&#39;</span><span class="p">:</span>
+                        <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;PZ_analysis.pz&#39;</span>
+                <span class="c1"># For distributed runs</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">distributed_run</span><span class="p">:</span>
+                    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;[0-9]*&#39;</span><span class="p">,</span>
+                            <span class="n">fname</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">spicesimpath</span><span class="p">,</span><span class="s1">&#39;tb_</span><span class="si">%s</span><span class="s1">.raw&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                <span class="n">valbegin</span> <span class="o">=</span> <span class="s1">&#39;VALUE</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">eof</span> <span class="o">=</span> <span class="s1">&#39;END</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">parsevals</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">valueline_grep</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;grep -n </span><span class="se">\&quot;</span><span class="s1">VALUE</span><span class="se">\&quot;</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">path</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">valueline</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">valueline_grep</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">eofline_grep</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;grep -n </span><span class="se">\&quot;</span><span class="s1">END</span><span class="se">\&quot;</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">path</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">eofline</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">eofline_grep</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+
+                <span class="n">values_sed</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;sed -n </span><span class="se">\&#39;</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1"> p</span><span class="se">\&#39;</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">valueline</span><span class="p">,</span> <span class="n">eofline</span><span class="p">,</span> <span class="n">path</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">values_listed</span> <span class="o">=</span> <span class="n">values_sed</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values_listed</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                        <span class="n">dev</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;pz&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dev</span><span class="p">:</span> <span class="n">val</span><span class="p">})</span>
+                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                        <span class="n">pz</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">real</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                        <span class="n">imag</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+                        <span class="n">q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="p">[</span><span class="n">real</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">imag</span><span class="p">,</span> <span class="n">q</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">extracts</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="s1">&#39;pz&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">pz</span> <span class="p">:</span> <span class="n">val</span><span class="p">})</span>
+
         <span class="k">except</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_log</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Something went wrong while extracting DC operating points.&#39;</span><span class="p">)</span></div>

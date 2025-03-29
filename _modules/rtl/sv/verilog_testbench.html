@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rtl.sv.verilog_testbench &mdash; TheSyDeKick 1.12_RC documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d8314b78"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -50,8 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_testbench/sections.html">Inverter testbench class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter_tests/sections.html">Inverter tests class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads/sections.html">ADS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ads_template/sections.html">ADS template class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../momem/sections.html">ADS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shell_scripts.html">Shell scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bootcamp/bootcamp.html">Bootcamp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../documentation_instructions.html">Documentation instructions</a></li>
@@ -96,28 +94,28 @@
 <span class="sd">Initially written by Marko Kosunen 20190108, marko.kosunen@aalto.fi</span>
 <span class="sd">Refactored from &#39;testbench&#39; by Marko Kosunen 20221119, marko.kosunen@aalto.fi</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">pdb</span>
-<span class="kn">from</span> <span class="nn">rtl</span> <span class="kn">import</span> <span class="n">indent</span>
-<span class="kn">from</span> <span class="nn">rtl.connector</span> <span class="kn">import</span> <span class="n">rtl_connector</span>
-<span class="kn">from</span> <span class="nn">rtl.testbench_common</span> <span class="kn">import</span> <span class="n">testbench_common</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pdb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl</span><span class="w"> </span><span class="kn">import</span> <span class="n">indent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.connector</span><span class="w"> </span><span class="kn">import</span> <span class="n">rtl_connector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtl.testbench_common</span><span class="w"> </span><span class="kn">import</span> <span class="n">testbench_common</span>
 
 <div class="viewcode-block" id="verilog_testbench">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench">[docs]</a>
-<span class="k">class</span> <span class="nc">verilog_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">verilog_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Verilog testbench class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and </span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Executes init of testbench_common, thus having the same attributes and</span>
 <span class="sd">        parameters.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">            **kwargs :</span>
 <span class="sd">               See module module_common</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">add_tb_timescale</span><span class="p">:</span>
@@ -130,24 +128,24 @@
     <span class="c1">#def header(self):</span>
     <span class="c1">#    &quot;&quot;&quot; str : Header line of the verilog testbench file.</span>
     <span class="c1">#    Default: If self.add_tb_timescale = True, adds the timescale directive to the testbench top.</span>
-    <span class="c1">#    according ot self.rtl_timescale attribute.   </span>
+    <span class="c1">#    according ot self.rtl_timescale attribute.</span>
     <span class="c1">#    &quot;&quot;&quot;</span>
-    <span class="c1">#    </span>
+    <span class="c1">#</span>
     <span class="c1">#    if not hasattr (self, &#39;_header&#39;):</span>
     <span class="c1">#        if self.parent.add_tb_timescale:</span>
     <span class="c1">#            self._defheader=&#39;`timescale &#39; + self.rtl_timescale + &#39; / &#39;+ self.rtl_timescale+&#39;\n&#39;</span>
     <span class="c1">#        else:</span>
     <span class="c1">#            self._defheader=&#39;&#39;</span>
-    <span class="c1">#        return self._defheader    </span>
+    <span class="c1">#        return self._defheader</span>
     <span class="c1">#    else:</span>
     <span class="c1">#        return self._header</span>
 
     <span class="c1">#@header.setter</span>
     <span class="c1">#def header(self,val):</span>
     <span class="c1">#    self._header = val</span>
-        
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameter_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parameter  and variable definition strings of the testbench</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -157,28 +155,28 @@
         <span class="k">return</span> <span class="n">definitions</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Parameters used inside the testbench</span>
-<span class="sd">            </span>
+
 <span class="sd">            Dict :  {name: (type,value)}</span>
-<span class="sd">            </span>
+
 <span class="sd">            Example</span>
 <span class="sd">            -------</span>
 
 <span class="sd">                ::</span>
 
-<span class="sd">                {&#39;c_Ts&#39;: (&#39;integer&#39;,&#39;1/(g_Rs*1e-12)&#39;)} </span>
+<span class="sd">                {&#39;c_Ts&#39;: (&#39;integer&#39;,&#39;1/(g_Rs*1e-12)&#39;)}</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;_content_parameters&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_content_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c_Ts&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span><span class="s1">&#39;1/(g_Rs*1e-12)&#39;</span><span class="p">)}</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_content_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c_Ts&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;1/(g_Rs*</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rtl_timescale_num</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)}</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_content_parameters</span>
-    <span class="nd">@content_parameters</span><span class="o">.</span><span class="n">setter</span>    
-    <span class="k">def</span> <span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="nd">@content_parameters</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">content_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_content_parameters</span><span class="o">=</span><span class="n">val</span>
-    
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">connector_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connector_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verilog register and wire definition strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -200,7 +198,7 @@
 
 <div class="viewcode-block" id="verilog_testbench.assignments">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.assignments">[docs]</a>
-    <span class="k">def</span> <span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Wire assingment strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -210,9 +208,9 @@
             <span class="n">assigns</span><span class="o">=</span><span class="n">assigns</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">match</span><span class="o">=</span><span class="n">match</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">assigns</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></div>
 
-     
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iofile_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;IOfile definition strings</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -221,10 +219,10 @@
             <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">rtl_statdef</span>
             <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">rtl_fopen</span>
         <span class="n">iofile_defs</span><span class="o">=</span><span class="n">iofile_defs</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">return</span> <span class="n">iofile_defs</span> 
+        <span class="k">return</span> <span class="n">iofile_defs</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">clock_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clock_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Clock definition string</span>
 
 <span class="sd">        Todo</span>
@@ -235,7 +233,7 @@
         <span class="k">return</span> <span class="n">clockdef</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">iofile_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iofile_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;File close procedure for all IO files.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -243,10 +241,10 @@
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">rtl_fclose</span>
         <span class="n">iofile_close</span><span class="o">=</span><span class="n">iofile_close</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">return</span> <span class="n">iofile_close</span> 
+        <span class="k">return</span> <span class="n">iofile_close</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Verilog structure for custom finish of the simulation.</span>
 <span class="sd">        Default: &#39;&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -258,13 +256,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end_condition</span>
 
     <span class="nd">@end_condition</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">end_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_end_condition</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;String</span>
-<span class="sd">        </span>
+
 <span class="sd">        Miscellaneous command string corresponding to self.rtlmisc -list in</span>
 <span class="sd">        the parent entity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -274,17 +272,17 @@
             <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">mcmd</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span> <span class="o">+=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span>
-    
+
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="n">value</span>
     <span class="nd">@misccmd</span><span class="o">.</span><span class="n">deleter</span>
-    <span class="k">def</span> <span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">misccmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="verilog_testbench.define_testbench">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.define_testbench">[docs]</a>
-    <span class="k">def</span> <span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -313,11 +311,11 @@
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">cls</span><span class="o">==</span><span class="s1">&#39;input&#39;</span><span class="p">:</span>
                 <span class="n">val</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">b0&#39;</span></div>
 
-    
+
     <span class="c1"># Automate this based in dir</span>
 <div class="viewcode-block" id="verilog_testbench.connect_inputs">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.connect_inputs">[docs]</a>
-    <span class="k">def</span> <span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Define connections to DUT inputs.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -327,18 +325,18 @@
             <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">iotype</span> <span class="o">!=</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="o">=</span>\
                         <span class="bp">self</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">ionames</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span>
                     <span class="c1"># Data must be properly shaped</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span>
             <span class="k">elif</span> <span class="n">val</span><span class="o">.</span><span class="n">iotype</span> <span class="o">==</span> <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="c1">#If the type is file, the Data is a bundle</span>
                 <span class="k">for</span> <span class="n">bname</span><span class="p">,</span><span class="n">bval</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span> 
+                    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">dir</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span><span class="p">:</span>
                         <span class="c1"># Adoption transfers parenthood of the files to this instance</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">IOS</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">ioname</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">bname</span><span class="p">]</span><span class="o">.</span><span class="n">adopt</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">connector</span> <span class="ow">in</span> <span class="n">bval</span><span class="o">.</span><span class="n">rtl_connectors</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">connector</span>
                         <span class="c1"># Connect them to DUT</span>
-                        <span class="k">try</span><span class="p">:</span> 
+                        <span class="k">try</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">dut</span><span class="o">.</span><span class="n">ios</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="o">=</span><span class="n">connector</span>
                         <span class="k">except</span><span class="p">:</span>
                             <span class="k">pass</span>
@@ -346,17 +344,17 @@
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">rtlparam</span><span class="p">)</span>
         <span class="c1"># Define the iofiles of the testbench. &#39;</span>
-        <span class="c1"># Needed for creating file io routines </span>
+        <span class="c1"># Needed for creating file io routines</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">iofiles</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iofile_bundle</span></div>
 
 
 <div class="viewcode-block" id="verilog_testbench.generate_contents">
 <a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.generate_contents">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; This is the method to generate testbench contents. Override if needed</span>
-<span class="sd">            Contents of the testbench is constructed from attributes in the </span>
+<span class="sd">            Contents of the testbench is constructed from attributes in the</span>
 <span class="sd">            following order ::</span>
-<span class="sd">            </span>
+
 <span class="sd">                self.parameter_definitions</span>
 <span class="sd">                self.connector_definitions</span>
 <span class="sd">                self.assignments()</span>
@@ -369,7 +367,7 @@
 <span class="sd">                self.iofiles.Members.items().rtl_io (for all members)</span>
 <span class="sd">                self.iofile.close (for all members)</span>
 
-<span class="sd">             Addtional code may be currently injected by appending desired </span>
+<span class="sd">             Addtional code may be currently injected by appending desired</span>
 <span class="sd">             strings (Verilog sytax) to the relevant string attributes.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -409,7 +407,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    // Sequences enabled by initdone</span>
-<span class="sd">    $display(&quot;Ready to read&quot;); </span>
+<span class="sd">    $display(&quot;Ready to read&quot;);</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iofiles</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
