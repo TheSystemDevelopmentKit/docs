@@ -43,7 +43,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../thesdk/sections.html">Thesdk core classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl/sections.html">RTL Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../spice/interface_classes.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../inverter/sections.html">Inverter class</a></li>
@@ -100,16 +100,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shlex</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
+<span class="c1">#TheSyDeKick modules</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../../thesdk&#39;</span><span class="p">))</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.connector</span><span class="w"> </span><span class="kn">import</span> <span class="n">indent</span><span class="p">,</span> <span class="n">rtl_connector_bundle</span><span class="p">,</span> <span class="n">verilog_connector_bundle</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.testbench</span><span class="w"> </span><span class="kn">import</span> <span class="n">testbench</span> <span class="k">as</span> <span class="n">vtb</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.rtl_iofile</span><span class="w"> </span><span class="kn">import</span> <span class="n">rtl_iofile</span> <span class="k">as</span> <span class="n">rtl_iofile</span>
+<span class="c1"># Simulator modules</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.sv.sv</span><span class="w"> </span><span class="kn">import</span> <span class="n">sv</span> <span class="k">as</span> <span class="n">sv</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.vhdl.vhdl</span><span class="w"> </span><span class="kn">import</span> <span class="n">vhdl</span> <span class="k">as</span> <span class="n">vhdl</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.icarus.icarus</span><span class="w"> </span><span class="kn">import</span> <span class="n">icarus</span> <span class="k">as</span> <span class="n">icarus</span>
@@ -118,7 +122,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.verilator.verilator</span><span class="w"> </span><span class="kn">import</span> <span class="n">verilator</span> <span class="k">as</span> <span class="n">verilator</span>
 
 <div class="viewcode-block" id="rtl">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">rtl</span><span class="p">(</span><span class="n">questasim</span><span class="p">,</span><span class="n">icarus</span><span class="p">,</span><span class="n">verilator</span><span class="p">,</span><span class="n">ghdl</span><span class="p">,</span><span class="n">vhdl</span><span class="p">,</span><span class="n">sv</span><span class="p">,</span><span class="n">thesdk</span><span class="p">,</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adding this class as a superclass enforces the definitions</span>
 <span class="sd">    for rtl simulations in the subclasses.</span>
@@ -407,7 +411,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlsimpath</span>
 
 <div class="viewcode-block" id="rtl.delete_rtlsimpath">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.delete_rtlsimpath">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.delete_rtlsimpath">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delete_rtlsimpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Deletes all files in rtlsimpath</span>
 
@@ -493,7 +497,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rtlworkpath</span>
 
 <div class="viewcode-block" id="rtl.delete_rtlworkpath">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.delete_rtlworkpath">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.delete_rtlworkpath">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delete_rtlworkpath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Deletes compilation directory</span>
 <span class="sd">            Not a deleter decorator, because does not delete</span>
@@ -847,7 +851,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlcmd</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="rtl.create_connectors">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.create_connectors">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.create_connectors">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Creates connector definitions from</span>
 <span class="sd">           1) From a iofile that is provided in the Data</span>
@@ -860,7 +864,7 @@
 
 
 <div class="viewcode-block" id="rtl.connect_inputs">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.connect_inputs">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.connect_inputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Assigns all IOS.Members[name].Data to</span>
 <span class="sd">           self.iofile_bundle.Members[ioname].Data</span>
@@ -877,7 +881,7 @@
 
 
 <div class="viewcode-block" id="rtl.extract_vlogfiles">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.extract_vlogfiles">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.extract_vlogfiles">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extract_vlogfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return extracted verilog files from ``self.rtlfiles``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -890,7 +894,7 @@
 
 
 <div class="viewcode-block" id="rtl.extract_vhdlfiles">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.extract_vhdlfiles">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.extract_vhdlfiles">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extract_vhdlfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return extracted vhdl files from ``self.rtlfiles``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -905,7 +909,7 @@
     <span class="c1"># Define if the signals are signed or not</span>
     <span class="c1"># Can these be deducted?</span>
 <div class="viewcode-block" id="rtl.format_ios">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.format_ios">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.format_ios">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">format_ios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Verilog module does not contain information if</span>
 <span class="sd">        the bus is signed or not.</span>
@@ -926,7 +930,7 @@
 
 
 <div class="viewcode-block" id="rtl.copy_or_relink">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.copy_or_relink">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.copy_or_relink">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">copy_or_relink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; If the source is a symlink, create the target as a link to original target.</span>
 <span class="sd">        otherwise, copy the file.</span>
@@ -951,7 +955,7 @@
 
 
 <div class="viewcode-block" id="rtl.copy_rtl_sources">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.copy_rtl_sources">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.copy_rtl_sources">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">copy_rtl_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Copy rtl sources to self.rtlsimpath</span>
 
@@ -1002,7 +1006,7 @@
 
 
 <div class="viewcode-block" id="rtl.execute_rtl_sim">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.execute_rtl_sim">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.execute_rtl_sim">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">execute_rtl_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Runs the rtl simulation in external simulator</span>
 
@@ -1090,7 +1094,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_custom_connectors</span> <span class="o">=</span> <span class="n">bundle</span>
 
 <div class="viewcode-block" id="rtl.add_connectors">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.add_connectors">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.add_connectors">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_connectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Adds custom connectors to the testbench.</span>
 <span class="sd">        Also connects rtl matchlist to testbench matchlist.</span>
@@ -1102,7 +1106,7 @@
 
 
 <div class="viewcode-block" id="rtl.run_rtl">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.run_rtl">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.run_rtl">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_rtl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;1) Copies rtl sources to a temporary simulation directory</span>
 <span class="sd">           2) Creates a testbench</span>
@@ -1155,7 +1159,7 @@
 
     <span class="c1">#This writes all infile</span>
 <div class="viewcode-block" id="rtl.write_infile">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.write_infile">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.write_infile">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">write_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Writes the input files</span>
 
@@ -1167,7 +1171,7 @@
 
     <span class="c1">#This reads all outfiles</span>
 <div class="viewcode-block" id="rtl.read_outfile">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.read_outfile">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.read_outfile">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Reads the oputput files</span>
 
@@ -1178,7 +1182,7 @@
 
 
 <div class="viewcode-block" id="rtl.connect_outputs">
-<a class="viewcode-back" href="../rtl/sections.html#rtl.rtl.connect_outputs">[docs]</a>
+<a class="viewcode-back" href="../rtl/interface_classes.html#rtl.rtl.connect_outputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Connects the ouput data from files to corresponding output IOs</span>
 

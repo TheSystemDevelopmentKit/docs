@@ -43,7 +43,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../thesdk/sections.html">Thesdk core classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../spice/interface_classes.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
@@ -103,7 +103,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">rtl.testbench_common</span><span class="w"> </span><span class="kn">import</span> <span class="n">testbench_common</span>
 
 <div class="viewcode-block" id="verilog_testbench">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_testbench.verilog_testbench">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">verilog_testbench</span><span class="p">(</span><span class="n">testbench_common</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Verilog testbench class.</span>
 
@@ -198,7 +198,7 @@
         <span class="k">return</span> <span class="n">definitions</span>
 
 <div class="viewcode-block" id="verilog_testbench.assignments">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.assignments">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_testbench.verilog_testbench.assignments">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">assignments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Wire assingment strings</span>
 
@@ -282,7 +282,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_misccmd</span><span class="o">=</span><span class="kc">None</span>
 
 <div class="viewcode-block" id="verilog_testbench.define_testbench">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.define_testbench">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_testbench.verilog_testbench.define_testbench">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">define_testbench</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines the tb connectivity, creates reset and clock, and initializes them to zero</span>
 
@@ -315,7 +315,7 @@
 
     <span class="c1"># Automate this based in dir</span>
 <div class="viewcode-block" id="verilog_testbench.connect_inputs">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.connect_inputs">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_testbench.verilog_testbench.connect_inputs">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Define connections to DUT inputs.</span>
 
@@ -350,7 +350,7 @@
 
 
 <div class="viewcode-block" id="verilog_testbench.generate_contents">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_testbench.verilog_testbench.generate_contents">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_testbench.verilog_testbench.generate_contents">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; This is the method to generate testbench contents. Override if needed</span>
 <span class="sd">            Contents of the testbench is constructed from attributes in the</span>

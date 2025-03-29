@@ -43,7 +43,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../thesdk/sections.html">Thesdk core classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../spice/interface_classes.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
@@ -95,7 +95,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="verilog_connector">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_connector.verilog_connector">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_connector.verilog_connector">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">verilog_connector</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Executes init of connector_common, thus having the same attributes and</span>
@@ -189,7 +189,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span>
 
 <div class="viewcode-block" id="verilog_connector.nbassign">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_connector.verilog_connector.nbassign">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_connector.verilog_connector.nbassign">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">nbassign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">time</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -200,7 +200,7 @@
 
 
 <div class="viewcode-block" id="verilog_connector.bassign">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.sv.verilog_connector.verilog_connector.bassign">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.sv.verilog_connector.verilog_connector.bassign">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">bassign</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">time</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>

@@ -43,7 +43,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction to TheSyDeKick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../thesdk/sections.html">Thesdk core classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL interface classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rtl/sections.html">RTL Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../spice/interface_classes.html">Spice simulator interface classess</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../spice/examples.html">Spice simulation examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../inverter/sections.html">Inverter class</a></li>
@@ -95,7 +95,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">thesdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <div class="viewcode-block" id="questasim">
-<a class="viewcode-back" href="../../../rtl/sections.html#rtl.questasim.questasim.questasim">[docs]</a>
+<a class="viewcode-back" href="../../../rtl/interface_classes.html#rtl.questasim.questasim.questasim">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">questasim</span><span class="p">(</span><span class="n">thesdk</span><span class="p">):</span>
 
     <span class="nd">@property</span>
@@ -104,10 +104,11 @@
 
 <span class="sd">        - &#39;no-opt&#39; - no optimizations, full visibility to signals</span>
 <span class="sd">        - &#39;full-opt&#39; - fully optimized, might lose visibility to a lot of signals. Simulation may not work.</span>
-<span class="sd">        - &#39;default&#39; - not optimized simulation for interactive sims,</span>
-<span class="sd">        optimized with full visibility for non-interactive sims</span>
+<span class="sd">        - &#39;default&#39; - not optimized simulation for interactive sims, </span>
+<span class="sd">           optimized with full visibility for non-interactive sims</span>
 <span class="sd">        - &#39;top-visible&#39; - optimized while keeping top level (testbench) signals.</span>
 <span class="sd">        - &#39;top-dut-visible&#39; - optimized while keeping top level (testbench) and DUT signals on the first hierarchy level</span>
+
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_sim_opt_dict&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_questasim_sim_opt_dict</span> <span class="o">=</span> <span class="p">{</span>
